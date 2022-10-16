@@ -1,0 +1,141 @@
+.editor-editor-container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  background: grey;
+}
+
+.editor-editor-toolbar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 25vw;
+  background: #eeeeee;
+}
+
+.editor-toolbar-item {
+  padding: 15px;
+}
+
+.editor-item-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  padding: 5px 8px;
+  background: green;
+  width: 50px;
+  color: white;
+  border-radius: 20px;
+}
+
+.editor-item-button-checked {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  padding: 5px 8px;
+  border-radius: 20px;
+  background: #cc3131;
+  width: 50px;
+  color: black;
+  font-weight: bold;
+}
+
+.editor-brush-colors-container {
+  padding: 15px;
+  grid-template-columns: 30px 30px 30px 30px 30px 30px 30px 30px;
+  display: grid;
+  row-gap: 20px;
+  column-gap: 20px;
+}
+
+.editor-text-tools-container {
+  display: flex;
+  width: 100%;
+  padding: 15px;
+}
+
+.editor-text-tools-container input {
+  display: flex;
+  padding: 15px;
+}
+
+.editor-editor-image {
+  flex-grow: 1;
+  padding: 20px;
+  background: #555555;
+}
+
+.editor-item-accessories {
+  width: 25vw;
+  background: #dddddd;
+}
+
+.editor-brush-black {
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  background: black;
+}
+
+.editor-brush-gray {
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  background: gray;
+}
+
+.editor-brush-red {
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  background: red;
+}
+
+.editor-brush-orange {
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  background: orange;
+}
+
+.editor-brush-yellow {
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  background: yellow;
+}
+
+.editor-brush-green {
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  background: green;
+}
+
+.editor-brush-blue {
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  background: blue;
+}
+
+.editor-brush-purple {
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  background: purple;
+}
+
+.editor-d-none {
+  display: flex;
+  width: 50px;
+  height: 50px;
+  border: none;
+}
+
+#canvas {
+  max-width: 100%;
+  max-height: 100%;
+}

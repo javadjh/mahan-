@@ -1,0 +1,33 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    direction: rtl;
+
+}
+.flex-parent{
+   
+    display: flex;
+}
+.flex-first{
+    flex: 3;
+    background-color: #3f3f3f;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.flex-second{
+    flex: 1;
+    height: 100vh;
+    background-color: whitesmoke;
+}
+.page-cover{
+    background-color: #444444;
+    z-index: 10000;
+    width: 100%;
+    height: 100vh;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-top: 25%;
+}
