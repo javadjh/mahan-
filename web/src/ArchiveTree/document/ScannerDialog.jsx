@@ -22,9 +22,6 @@ const ScannerDialog = ({ history, getDocData }) => {
       startScanning();
     }
   }, [isScanning]);
-  useEffect(() => {
-    getData();
-  }, []);
 
   const getData = async () => {
     try {
@@ -44,7 +41,16 @@ const ScannerDialog = ({ history, getDocData }) => {
   const startScanning = async () => {
     setIsScanning(true);
     setIsScanned(false);
-    const res = await fetch("http://localhost:2000/scanner/scan");
+    const res = await fetch("http://localhost:8080/api/Scanner/GetDevices", {
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+        "access-control-allow-headers": "*",
+        "access-control-allow-methods":
+          "GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS",
+        "access-control-allow-origin": "*",
+        "access-control-expose-headers": "*",
+      },
+    });
     const imageBlob = await res.blob();
 
     let blobsFile = new File([imageBlob], "scanned-file-" + uuidv4() + ".png");
