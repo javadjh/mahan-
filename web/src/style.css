@@ -1,0 +1,20 @@
+@font-face {
+  font-family: sans-iran;
+  src: url("/assets/iran-sans-300.woff");
+  font-weight: 100;
+}
+@font-face {
+  font-family: iran-nastaliq;
+  src: url("/assets/IranNastaliq-Web.woff2");
+  font-weight: 100;
+}
+* {
+  font-family: sans-iran;
+  font-weight: 100 !important;
+}
+.ant-input {
+  background: #f9fafc !important;
+  border-radius: 8px !important;
+  border: none !important;
+  padding: 20px !important;
+}

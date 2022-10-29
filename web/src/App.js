@@ -90,16 +90,16 @@ const App = ({ location }) => {
   };
   return (
     <>
-      <AppSettingDialog />
+      {/* <AppSettingDialog /> */}
 
-      <ResetPasswordDialog />
+      {/* <ResetPasswordDialog /> */}
 
       <Loading
         loading={loading}
         background={"rgba(255, 255, 255, 0.81)"}
         loaderColor="#3b5de7"
       />
-      <FileDrop
+      {/* <FileDrop
         onDragOver={() => {
           window.$("#uploadFileDialog").modal("show");
         }}
@@ -273,7 +273,8 @@ const App = ({ location }) => {
         </div>
 
         <PanelRootComponent />
-      </FileDrop>
+      </FileDrop> */}
+      <PanelRootComponent />
     </>
   );
 };

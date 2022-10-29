@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@agjs/react-right-click-menu": "^0.0.8",
+    "@ant-design/icons": "^4.7.0",
     "@ant-design/pro-components": "^1.1.16",
     "@babel/core": "^7.17.5",
     "@babel/preset-env": "^7.16.11",
@@ -100,6 +101,7 @@
     "sass-loader": "^10.0.5",
     "semver": "7.3.2",
     "simple-react-validator": "^1.6.0",
+    "styled-components": "^5.3.6",
     "uuid": "^8.3.2"
   },
   "scripts": {

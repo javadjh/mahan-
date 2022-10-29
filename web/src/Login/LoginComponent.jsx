@@ -14,6 +14,28 @@ import { useCookies } from "react-cookie";
 import { appStatusService } from "../service/AppSettingService";
 import { doneToast, errorToast } from "../utility/ShowToast";
 import axiosConfig from "../service/axiosConfig";
+import LoadingComponent from "../RootComponent/LoadingComponent";
+import {
+  BlueBackground,
+  CardStyled,
+  CenterStyled,
+  CenterVerticalStyled,
+  SpaceStyled,
+} from "../styled/global";
+import { Col, Form, Image, Input, Row } from "antd";
+import { BackgroundWave, LeftSideStyled } from "../styled/login";
+import CustomText from "../styled/components/CustomText";
+import CustomInput from "../styled/components/CustomInput";
+import CustomButton from "../styled/components/CustomButton";
+import { CaretLeftOutlined } from "@ant-design/icons";
+import { darkBlueColor, lightGreenColor, whiteColor } from "../app/appColor";
+import CustomNasq from "../styled/components/CustomNasq";
+import {
+  maxForm,
+  minForm,
+  passwordRule,
+  requiredForm,
+} from "../config/formValidator";
 const LoginComponent = () => {
   const formValidator = useRef(validatorSP());
   const [isInitState, setIsInitState] = useState(true);
@@ -27,19 +49,11 @@ const LoginComponent = () => {
   const [inputType, setInputType] = useState("password");
   const [cookies, setCookie] = useCookies(["isLogin"]);
   const dispatch = useDispatch();
-  const sendData = async () => {
-    if (formValidator.current.allValid()) {
-      if (isForgetPassword)
-        await dispatch(userForgetPasswordAction({ userName, email }));
-      else if (!password || !userName) {
-        errorToast("نام کاربری و یا رمز عبور را وارد کنید");
-        return;
-      }
-      await dispatch(loginAction({ password, userName }, setCookie));
-    } else {
-      formValidator.current.showMessages();
-      setValidationReload(1);
-    }
+  const sendData = async (formData) => {
+    if (isForgetPassword)
+      await dispatch(userForgetPasswordAction({ userName, email }));
+
+    await dispatch(loginAction(formData, setCookie));
   };
   useEffect(() => {
     isInit();
@@ -63,204 +77,92 @@ const LoginComponent = () => {
     }
   };
   return (
-    <div className="account-pages my-5 ">
-      {isLoadData ? (
-        <div className="container">
-          <div className="row justify-content-center">
-            <div className="col-md-8 col-lg-6 col-xl-5">
-              <div className="card overflow-hidden">
-                <div className="bg-login text-center">
-                  <div className="bg-login-overlay"></div>
-                  <div className="position-relative">
-                    <h5 className="text-white font-size-20">
-                      سامانه مدیریت اسناد ماهان
-                    </h5>
-                    <p className="text-white-50 mb-0">
-                      شرکت لیلو هوشمندسازان اروند
-                    </p>
-                    <a href="index.html" className="logo logo-admin mt-4">
-                      <img src="./assets/images/logo.png" alt="" height="50" />
-                    </a>
-                  </div>
-                </div>
-                <div className="card-body pt-5 text-left">
-                  {isInitState ? (
-                    <div className="p-2">
-                      <div className="form-group">
-                        <label htmlFor="username">نام کاربری</label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          value={userName}
-                          onChange={(e) => {
-                            if (just_english_and_digit(e.target.value)) {
-                              setUserName(e.target.value);
-                              formValidator.current.showMessageFor("userName");
-                            } else {
-                              setUserName(userName);
-                            }
-                          }}
-                          id="username"
-                          placeholder="نام کاربری را وارد کنید"
-                        />
-                        {formValidator.current.message(
-                          "userName",
-                          userName,
-                          "required|min:3|max:80"
-                        )}
-                      </div>
-                      {isForgetPassword ? (
-                        <>
-                          <div className="form-group">
-                            <label htmlFor="userpassword">ایمیل</label>
-                            <input
-                              type="text"
-                              className="form-control"
-                              value={email}
-                              id="userpassword"
-                              onChange={(e) => {
-                                formValidator.current.showMessageFor("email");
-                                setEmail(e.target.value);
-                              }}
-                              placeholder="رمز عبور را وارد کنید"
+    <LoadingComponent isLoaded={isLoadData}>
+      <div style={{ width: "100%" }}>
+        <Row>
+          <Col span={17}>
+            <BackgroundWave>
+              <Row justify="center" align="middle">
+                <Col>
+                  <CustomNasq size={60} color={darkBlueColor}>
+                    ماهان
+                  </CustomNasq>
+                </Col>
+                <Col>
+                  <SpaceStyled right={20} top={-20}>
+                    <CustomText>سامــانــه</CustomText>
+                    <CustomText>مدیریت اسناد</CustomText>
+                  </SpaceStyled>
+                </Col>
+              </Row>
+              <CardStyled style={{ minWidth: 500 }}>
+                <SpaceStyled vertical={20} horizontal={20}>
+                  <Row justify="space-between">
+                    <Col>
+                      <CustomText size={17}>فرم حساب کاربری</CustomText>
+                    </Col>
+                    <Col>
+                      <CustomText>
+                        برای ورود اطلاعات خود را وارد کنید
+                      </CustomText>
+                    </Col>
+                  </Row>
+                  <SpaceStyled vertical={20}>
+                    <span>
+                      <Form onFinish={sendData}>
+                        <SpaceStyled vertical={15}>
+                          <Form.Item
+                            name={"userName"}
+                            rules={[maxForm(11), minForm(3)]}
+                          >
+                            <Input
+                              placeholder={"نام کاربری خود را وارد کنید"}
                             />
-                            {formValidator.current.message(
-                              "email",
-                              email,
-                              "email"
-                            )}
-                          </div>
-                        </>
-                      ) : (
-                        <>
-                          <div className="form-group">
-                            <label htmlFor="userpassword">رمز عبور</label>
-                            {/*<input type="password" value={password} className="form-control" id="userpassword"
-                                                       onChange={(e)=>{
-                                                           formValidator.current.showMessageFor("password")
-                                                           setPassword(e.target.value)
-                                                       }}
-                                                       placeholder="رمز عبور را وارد کنید"/>
-                                                {formValidator.current.message("password",password,"min:8|max:32")}*/}
-                            <div className={"row"}>
-                              <div className={"col-lg-12"}>
-                                <div className="input-group">
-                                  <input
-                                    type={inputType}
-                                    onChange={(e) => {
-                                      if (
-                                        !just_persian(
-                                          e.target.value.substr(
-                                            e.target.value.length - 1,
-                                            e.target.value.length
-                                          )
-                                        ) ||
-                                        e.target.value.length === 0
-                                      ) {
-                                        formValidator.current.showMessageFor(
-                                          "password"
-                                        );
-                                        setPassword(e.target.value);
-                                      }
-                                    }}
-                                    aria-describedby="validationTooltipUsernamePrepend"
-                                    value={password}
-                                    className="form-control "
-                                    id="validationCustom05"
-                                    placeholder="کلمه عبور را وارد کنید..."
-                                    required
-                                  />
-                                  <div
-                                    className="input-group-prepend"
-                                    style={{ marginRight: -1 }}
-                                  >
-                                    <span
-                                      className="input-group-text"
-                                      id="validationTooltipUsernamePrepend"
-                                    >
-                                      <i
-                                        className="mdi mdi-eye "
-                                        style={{
-                                          fontSize: 14,
-                                          color: "#7c7c7c",
-                                          cursor: "pointer",
-                                        }}
-                                        onClick={() => {
-                                          setInputType(
-                                            inputType === "text"
-                                              ? "password"
-                                              : "text"
-                                          );
-                                        }}
-                                      />
-                                    </span>
-                                  </div>
-                                </div>
-
-                                {formValidator.current.message(
-                                  "password",
-                                  password,
-                                  "min:6|max:32|password"
-                                )}
-                              </div>
-                            </div>
-                          </div>
-                        </>
-                      )}
-
-                      <div className="mt-3">
-                        <button
-                          onClick={sendData}
-                          className="btn btn-primary btn-block waves-effect waves-light"
-                        >
-                          {isForgetPassword ? "ارسال ایمیل" : "ورود"}
-                        </button>
-                        <p
-                          style={{ color: "royalblue" }}
-                          className={"custom-cursor mt-2 mb-0"}
-                          onClick={() => {
-                            setIsForgetPassword(!isForgetPassword);
-                          }}
-                        >
-                          {isForgetPassword ? "بازگشت" : "فراموشی رمز عبور"}
-                        </p>
-                      </div>
-                    </div>
-                  ) : (
-                    <>
-                      <div className="form-group">
-                        <label htmlFor="username">کد لایسنس</label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          value={license}
-                          onChange={(e) => {
-                            setLicense(e.target.value);
-                          }}
-                          id="username"
-                          placeholder="کد لایسنس را وارد نمایید..."
-                        />
-                        {formValidator.current.message(
-                          "userName",
-                          userName,
-                          "required|min:3|max:80"
-                        )}
-                      </div>
-                      <button
-                        onClick={checkLicenseCode}
-                        className="btn btn-primary btn-block waves-effect waves-light"
-                      >
-                        ثبت
-                      </button>
-                    </>
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      ) : null}
-    </div>
+                          </Form.Item>
+                        </SpaceStyled>
+                        <SpaceStyled vertical={15}>
+                          <Form.Item
+                            name={"password"}
+                            rules={[maxForm(80), minForm(6)]}
+                          >
+                            <Input
+                              type={"password"}
+                              placeholder={"گذرواژه خود را وارد کنید"}
+                            />
+                          </Form.Item>
+                        </SpaceStyled>
+                        <Row>
+                          <Col span={17}>
+                            <CustomButton htmlType={"submit"} block>
+                              ورود به حساب کاربری
+                            </CustomButton>
+                          </Col>
+                          <Col span={7}>
+                            <SpaceStyled right={10}>
+                              <CustomButton block color={lightGreenColor}>
+                                <CaretLeftOutlined />
+                              </CustomButton>
+                            </SpaceStyled>
+                          </Col>
+                        </Row>
+                      </Form>
+                    </span>
+                    <SpaceStyled top={10}>
+                      <CustomButton block color={whiteColor}>
+                        فراموشی رمز عبور
+                      </CustomButton>
+                    </SpaceStyled>
+                  </SpaceStyled>
+                </SpaceStyled>
+              </CardStyled>
+            </BackgroundWave>
+          </Col>
+          <Col span={7}>
+            <LeftSideStyled></LeftSideStyled>
+          </Col>
+        </Row>
+      </div>
+    </LoadingComponent>
   );
 };
 export default LoginComponent;
