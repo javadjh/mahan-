@@ -1,9 +1,9 @@
 import { Typography } from "antd";
 import React from "react";
 import { lightBlueColor } from "../../app/appColor";
-const CustomText = ({ children, props, size }) => {
+const CustomText = ({ children, props, size, color }) => {
   let style = {
-    color: lightBlueColor,
+    color: color ? color : lightBlueColor,
     padding: "5px !important",
     margin: "0px ",
   };

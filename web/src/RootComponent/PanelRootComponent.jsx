@@ -75,141 +75,155 @@ const PanelRootComponent = ({ history, location }) => {
       ) : (
         <>
           <div>
-            <AdminLayoutComponent />
-            {/* <Switch>
-              {!localStorage.getItem("token") ? (
-                <Route path={"/"} component={LoginComponent} />
-              ) : (
-                <>
-                  <Route path={"/users"} component={UsersRootComponent} exact />
-                  <Route
-                    path={"/upsert-user"}
-                    render={() => (
-                      <UpsertUserContextProvider>
-                        <UpsertUserRootComponent />
-                      </UpsertUserContextProvider>
-                    )}
-                    exact
-                  />
-                  <Route path={"/roles"} component={RolesRootComponent} exact />
-                  <Route
-                    path={"/upsert-role"}
-                    render={() => (
-                      <UpsertRoleContextProvider>
-                        <InsertRoleRootComponent />
-                      </UpsertRoleContextProvider>
-                    )}
-                    exact
-                  />
-                  <Route path={"/forms"} component={FormsRootComponent} exact />
-                  <Route
-                    path={"/upsert-form"}
-                    render={() => (
-                      <UpsertFormContextProvider>
-                        <InsertFormRootComponent />
-                      </UpsertFormContextProvider>
-                    )}
-                    exact
-                  />
-                  <Route
-                    path={"/people"}
-                    component={PeopleRootComponent}
-                    exact
-                  />
-                  <Route
-                    path={"/legal-people"}
-                    component={LegalPeopleRootComponent}
-                    exact
-                  />
-                  <Route
-                    path={"/archives"}
-                    component={ArchivesRootComponent}
-                    exact
-                  />
-                  <Route
-                    path={"/archive-trees"}
-                    component={ArchiveTreeRoot}
-                    exact
-                  />
-                  <Route path={"/logs"} component={LogRootComponent} exact />
-                  <Route
-                    path={"/upsert-document"}
-                    render={() => (
-                      <UpsertDocumentContextProvider>
+            <AdminLayoutComponent>
+              <Switch>
+                {!localStorage.getItem("token") ? (
+                  <Route path={"/"} component={LoginComponent} />
+                ) : (
+                  <>
+                    <Route
+                      path={"/users"}
+                      component={UsersRootComponent}
+                      exact
+                    />
+                    <Route
+                      path={"/upsert-user"}
+                      render={() => (
+                        <UpsertUserContextProvider>
+                          <UpsertUserRootComponent />
+                        </UpsertUserContextProvider>
+                      )}
+                      exact
+                    />
+                    <Route
+                      path={"/roles"}
+                      component={RolesRootComponent}
+                      exact
+                    />
+                    <Route
+                      path={"/upsert-role"}
+                      render={() => (
+                        <UpsertRoleContextProvider>
+                          <InsertRoleRootComponent />
+                        </UpsertRoleContextProvider>
+                      )}
+                      exact
+                    />
+                    <Route
+                      path={"/forms"}
+                      component={FormsRootComponent}
+                      exact
+                    />
+                    <Route
+                      path={"/upsert-form"}
+                      render={() => (
+                        <UpsertFormContextProvider>
+                          <InsertFormRootComponent />
+                        </UpsertFormContextProvider>
+                      )}
+                      exact
+                    />
+                    <Route
+                      path={"/people"}
+                      component={PeopleRootComponent}
+                      exact
+                    />
+                    <Route
+                      path={"/legal-people"}
+                      component={LegalPeopleRootComponent}
+                      exact
+                    />
+                    <Route
+                      path={"/archives"}
+                      component={ArchivesRootComponent}
+                      exact
+                    />
+                    <Route
+                      path={"/archive-trees"}
+                      component={ArchiveTreeRoot}
+                      exact
+                    />
+                    <Route path={"/logs"} component={LogRootComponent} exact />
+                    <Route
+                      path={"/upsert-document"}
+                      render={() => (
+                        <UpsertDocumentContextProvider>
+                          <LibraryContextProvider>
+                            <UpsertDocumentRoot />
+                          </LibraryContextProvider>
+                        </UpsertDocumentContextProvider>
+                      )}
+                      exact
+                    />
+                    <Route
+                      path={"/library"}
+                      render={() => (
                         <LibraryContextProvider>
-                          <UpsertDocumentRoot />
+                          <LibraryRootComponent />
                         </LibraryContextProvider>
-                      </UpsertDocumentContextProvider>
-                    )}
-                    exact
-                  />
-                  <Route
-                    path={"/library"}
-                    render={() => (
-                      <LibraryContextProvider>
-                        <LibraryRootComponent />
-                      </LibraryContextProvider>
-                    )}
-                    exact
-                  />
+                      )}
+                      exact
+                    />
 
-                  <Route
-                    render={() => (
-                      <ArchiveTreeLineProvider>
-                        <ArchiveTreeLineRoot />
-                      </ArchiveTreeLineProvider>
-                    )}
-                    path={"/archive-line"}
-                  />
+                    <Route
+                      render={() => (
+                        <ArchiveTreeLineProvider>
+                          <ArchiveTreeLineRoot />
+                        </ArchiveTreeLineProvider>
+                      )}
+                      path={"/archive-line"}
+                    />
 
-                  <Route component={LendsRoot} path={"/lends"} />
-                  <Route component={ApplicantRoot} path={"/applicants"} />
-                  <Route
-                    component={LoginEmailsUserComponent}
-                    path={"/email-:id"}
-                  />
-                  <Route
-                    component={SupervisorsFileRootComponent}
-                    path={"/supervisor"}
-                  />
-                  <Route
-                    component={UsersDashboardRoot}
-                    exact={true}
-                    path={"/"}
-                  />
-                  <Route
-                    component={ProfileRootComponent}
-                    exact={true}
-                    path={"/profile"}
-                  />
-                  <Route
-                    component={ReportingRootComponent}
-                    exact={true}
-                    path={"/reporting"}
-                  />
-                  <Route
-                    component={FilesAlertsRoot}
-                    exact={true}
-                    path={"/files-alerts"}
-                  />
-                  <Route
-                    component={GuardSystemRoot}
-                    exact={true}
-                    path={"/guard-system"}
-                  />
-                  <Route
-                    component={FilesGuardSystemRoot}
-                    exact={true}
-                    path={"/files-guard-system"}
-                  />
-                  <Route
-                    component={TextComponent}
-                    exact={true}
-                    path={"/text"}
-                  />
-                </>
-              )}
-            </Switch> */}
+                    <Route component={LendsRoot} path={"/lends"} />
+                    <Route component={ApplicantRoot} path={"/applicants"} />
+                    <Route
+                      component={LoginEmailsUserComponent}
+                      path={"/email-:id"}
+                    />
+                    <Route
+                      component={SupervisorsFileRootComponent}
+                      path={"/supervisor"}
+                    />
+                    <Route
+                      component={UsersDashboardRoot}
+                      exact={true}
+                      path={"/"}
+                    />
+                    <Route
+                      component={ProfileRootComponent}
+                      exact={true}
+                      path={"/profile"}
+                    />
+                    <Route
+                      component={ReportingRootComponent}
+                      exact={true}
+                      path={"/reporting"}
+                    />
+                    <Route
+                      component={FilesAlertsRoot}
+                      exact={true}
+                      path={"/files-alerts"}
+                    />
+                    <Route
+                      component={GuardSystemRoot}
+                      exact={true}
+                      path={"/guard-system"}
+                    />
+                    <Route
+                      component={FilesGuardSystemRoot}
+                      exact={true}
+                      path={"/files-guard-system"}
+                    />
+                    <Route
+                      component={TextComponent}
+                      exact={true}
+                      path={"/text"}
+                    />
+                  </>
+                )}
+              </Switch>
+            </AdminLayoutComponent>
+
             <FooterRootComponent />
           </div>
         </>
