@@ -17,6 +17,9 @@ import {
 import { Pie } from "react-chartjs-2";
 import { Bar } from "react-chartjs-2";
 import PdfPreviewComponent from "../dialog/PdfPreviewComponent";
+import { Col, Row } from "antd";
+import CustomCard from "../styled/components/CustomCard";
+import { SpaceStyled } from "../styled/global";
 ChartJS.register(
   ArcElement,
   Tooltip,
@@ -111,33 +114,29 @@ const UsersDashboardRoot = () => {
 
   return (
     <StickyContainer>
-      <PdfPreviewComponent />
-      <MainLayout title={"داشبورد"} isMain={true}>
-        {/*<embed src={'http://www.africau.edu/images/default/sample.pdf'} type="application/pdf"/>*/}
-        {/*<iframe src={pdf} title="testPdf" height="100%" width="100%" />*/}
-
-        <div className={"row mx-1"}>
-          <div className={"col-lg-5"}>
-            <div className={"card card-body"}>
-              <div className={"row"}>
-                <div className={"col-lg-4"}>
+      <Row>
+        <Col span={9}>
+          <SpaceStyled left={10} bottom={10}>
+            <CustomCard>
+              <Row>
+                <Col span={12}>
                   <p>
                     <b style={{ fontSize: 15 }}>اسناد در یک نگاه</b>
                   </p>
-                  <p className={"my-1"}>
+                  <p>
                     <b> تعداد اسناد : </b>
                     {adminDashboard.totalDocuments}
                   </p>
-                  <p className={"my-1"}>
+                  <p>
                     <b>تعداد اسناد کازیو : </b>
                     {adminDashboard.totalLibrariesDocument}
                   </p>
-                  <p className={"my-1"}>
+                  <p>
                     <b> حجم اسناد : </b>
                     <span dir={"ltr"}>{adminDashboard.totalSize}</span>
                   </p>
-                </div>
-                <div className={"col-lg-4"}>
+                </Col>
+                <Col span={12}>
                   <p>
                     <b style={{ fontSize: 15 }}>تعداد اسناد به تفکیک</b>
                   </p>
@@ -153,109 +152,97 @@ const UsersDashboardRoot = () => {
                     <b>آمار 30 روز قبل : </b>
                     {adminDashboard.last30DayDocuments}
                   </p>
-                </div>
-                <div className={"col-lg-4"}>
+                </Col>
+                <Col span={12}>
                   <p>
                     <b style={{ fontSize: 15 }}>حجم اسناد به تفکیک</b>
                   </p>
-                  <p className={"my-1"}>
+                  <p>
                     <b>آمار امروز : </b>
                     <span dir={"ltr"}>{adminDashboard.totalTodaySize}</span>
                   </p>
-                  <p className={"my-1"}>
+                  <p>
                     <b>آمار 7 روز قبل : </b>
                     <span dir={"ltr"}>{adminDashboard.total7DaySize}</span>
                   </p>
-                  <p className={"my-1"}>
+                  <p>
                     <b>آمار 30 روز قبل : </b>
                     <span dir={"ltr"}>{adminDashboard.total30DaySize}</span>
                   </p>
-                </div>
-              </div>
-            </div>
-            <div className={"card card-body"}>
-              <div className={"col-lg-13"}>
-                <>
-                  <h6
-                    onClick={() => {
-                      window.$("#updateAppSettingDialog").modal("show");
-                    }}
-                  >
-                    پرونده های سامانه
-                  </h6>
-                  {pieData.labels ? (
-                    <div className={"col-lg-13"}>
-                      <div className={"mx-5"}>
-                        <div className={"mx-4"}>
-                          <Pie type={"pie"} data={pieData} />
-                        </div>
-                      </div>
-                    </div>
-                  ) : null}
-                </>
-              </div>
-            </div>
-          </div>
-          <div className={"col-lg-5"}>
-            <div className={"card card-body "}>
-              <div className={"row"}>
-                <div className={"col-lg-4"}>
+                </Col>
+              </Row>
+            </CustomCard>
+          </SpaceStyled>
+          <SpaceStyled left={10} bottom={10}>
+            <CustomCard>
+              <h3>پرونده های سامانه</h3>
+              {pieData.labels ? <Pie type={"pie"} data={pieData} /> : null}
+            </CustomCard>
+          </SpaceStyled>
+        </Col>
+        <Col span={9}>
+          <SpaceStyled left={10} bottom={10}>
+            <CustomCard>
+              <Row>
+                <Col span={12}>
                   <p>
                     <b style={{ fontSize: 15 }}>پرونده در یک نگاه</b>
                   </p>
-                  <p className={"my-1"}>
+                  <p>
                     <b> تعداد پرونده : </b>
                     {adminDashboard.totalFileCount}
                   </p>
-                  <p className={"my-1"}>
+                  <p>
                     <b>پرونده های در انتظار : </b>
                     {adminDashboard.totalWaitingForConfirmCount}
                   </p>
-                  <p className={"my-1"}>
+                  <p>
                     <b> پرونده های رد شده : </b>
                     {adminDashboard.totalFileRejectCount}
                   </p>
-                </div>
-                <div className={"col-lg-4"}>
+                </Col>
+                <Col span={12}>
                   <p>
                     <b style={{ fontSize: 15 }}>تعداد پرونده به تفکیک</b>
                   </p>
-                  <p className={"my-1"}>
+                  <p>
                     <b>آمار امروز : </b>
                     {adminDashboard.fileTodayCount}
                   </p>
-                  <p className={"my-1"}>
+                  <p>
                     <b>آمار 7 روز پیش : </b>
                     {adminDashboard.file7DaysCount}
                   </p>
-                  <p className={"my-1"}>
+                  <p>
                     <b>آمار 30 روز پیش : </b>
                     {adminDashboard.file30DaysCount}
                   </p>
-                </div>
-                <div className={"col-lg-4"}>
+                </Col>
+                <Col span={12}>
                   <p>
                     <b style={{ fontSize: 15 }}>نوع پرونده ها</b>
                   </p>
-                  <p className={"my-1"}>
+                  <p>
                     <b>پرونده مختومه : </b>
                     {adminDashboard.makhtomeCount}
                   </p>
-                  <p className={"my-1"}>
+                  <p>
                     <b>پرونده نیمه جاری : </b>
                     {adminDashboard.nimeJari}
                   </p>
-                  <p className={"my-1"}>
+                  <p>
                     <b>پرونده جاری : </b>
                     {adminDashboard.jari}
                   </p>
-                </div>
-              </div>
-            </div>
-            <div className={"card card-body"}>
-              <div className={"col-lg-13"}>
+                </Col>
+              </Row>
+            </CustomCard>
+          </SpaceStyled>
+          <SpaceStyled left={10} bottom={10}>
+            <CustomCard>
+              <Col span={24}>
                 <>
-                  <h6>تعداد پرونده های ایجاد شده در 7 روز اخیر</h6>
+                  <h3>تعداد پرونده های ایجاد شده در 7 روز اخیر</h3>
                   {pieData.labels ? (
                     <Bar
                       height={200}
@@ -265,39 +252,36 @@ const UsersDashboardRoot = () => {
                     />
                   ) : null}
                 </>
+              </Col>
+            </CustomCard>
+          </SpaceStyled>
+        </Col>
+        <Col span={6}>
+          <CustomCard>
+            <h6>پنج پرونده ی اخیر</h6>
+            {adminDashboard.lastFileName.map((f, index) => (
+              <div
+                style={{
+                  backgroundColor: index % 2 === 0 ? "#f5f5f5" : "white",
+                }}
+              >
+                <p>• {f.title}</p>
+                <p>{f.createDate}</p>
               </div>
-            </div>
-          </div>
-          <div className={"col-lg-2"}>
-            <div className={"card"}>
-              <h6 className={"p-2"}>پنج پرونده ی اخیر</h6>
-              {adminDashboard.lastFileName.map((f, index) => (
-                <div
-                  className={"mb-2 px-2"}
-                  style={{
-                    backgroundColor: index % 2 === 0 ? "#f5f5f5" : "white",
-                  }}
-                >
-                  <p className={"p-0 m-0"}>• {f.title}</p>
-                  <p className={"align-right text-right p-0 m-0"}>
-                    {f.createDate}
-                  </p>
-                </div>
-              ))}
-            </div>
-            <div className={"card card-body"}>
-              <h6>تعداد پرونده بایگانی ها</h6>
-              {adminDashboard.archives.map((a) => (
-                <div className={"my-1"}>
-                  <span>• </span>
-                  <span>{a.title}</span>
-                  <span>({a.fileCount})</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </MainLayout>
+            ))}
+          </CustomCard>
+          <CustomCard>
+            <h3>تعداد پرونده بایگانی ها</h3>
+            {adminDashboard.archives.map((a) => (
+              <div>
+                <span>• </span>
+                <span>{a.title}</span>
+                <span>({a.fileCount})</span>
+              </div>
+            ))}
+          </CustomCard>
+        </Col>
+      </Row>
     </StickyContainer>
   );
 };

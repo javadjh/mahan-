@@ -1,5 +1,5 @@
 import { BlueHeader } from "./style";
-import React from "react";
+import React, { useEffect } from "react";
 import { Col, Image, Row } from "antd";
 import CustomCard from "../styled/components/CustomCard";
 import { SpaceStyled } from "../styled/global";
@@ -20,14 +20,18 @@ import {
   UnorderedListOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-const AdminLayoutComponent = ({ children }) => {
+const AdminLayoutComponent = ({ children, location }) => {
+  useEffect(() => {
+    console.log(location?.pathname);
+    console.log(location);
+  }, [location]);
   return (
     <div style={{ backgroundColor: "#F7F9FB", minHeight: "100vh" }}>
       <BlueHeader>
         <Image src="/assets/logo.png" preview={false} />
       </BlueHeader>
       <Row>
-        <Col span={7}>
+        <Col span={6}>
           <SpaceStyled top={-90} right={30}>
             <CustomCard>
               <Row justify="space-between">
@@ -89,16 +93,23 @@ const AdminLayoutComponent = ({ children }) => {
                 title={"بخش مدیریت سامانه"}
               />
               <CustomMenuItem
-                href={"/1"}
+                onClick={() => {
+                  localStorage.clear();
+                  window.location.reload();
+                }}
                 icon={<LoginOutlined />}
                 title={"خروج"}
               />
             </CustomCard>
           </SpaceStyled>
         </Col>
-        <Col span={17}>
+        <Col span={18}>
           <SpaceStyled top={-90} horizontal={20}>
-            <CustomCard>{children}</CustomCard>
+            {location?.pathname === "/" ? (
+              <>{children}</>
+            ) : (
+              <CustomCard>{children}</CustomCard>
+            )}
           </SpaceStyled>
         </Col>
       </Row>

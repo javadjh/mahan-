@@ -6,7 +6,7 @@ import { darkBlueColor, whiteColor } from "../../app/appColor";
 import { SpaceStyled } from "../global";
 import CustomText from "./CustomText";
 import { Link, useLocation } from "react-router-dom";
-const CustomMenuItem = ({ title, icon, href }) => {
+const CustomMenuItem = ({ title, icon, href, onClick }) => {
   const location = useLocation();
   let MenuItemContainer = styled.div`
     background-color: ${location.pathname === href ? darkBlueColor : "white"};
@@ -17,8 +17,8 @@ const CustomMenuItem = ({ title, icon, href }) => {
     cursor: pointer;
     margin: 5px;
   `;
-  return (
-    <Link to={href}>
+  let render = (
+    <>
       <MenuItemContainer>
         <Row align="middle" justify="space-between">
           <Col>
@@ -36,12 +36,21 @@ const CustomMenuItem = ({ title, icon, href }) => {
             </Row>
           </Col>
           <Col>
-            <CaretLeftOutlined />
+            <CaretLeftOutlined style={{ color: "#DBE5EC" }} />
           </Col>
         </Row>
       </MenuItemContainer>
       <Divider style={{ margin: 0, padding: 0 }}></Divider>
-    </Link>
+    </>
+  );
+  return (
+    <>
+      {href ? (
+        <Link to={href}>{render}</Link>
+      ) : (
+        <div onClick={onClick}>{render}</div>
+      )}
+    </>
   );
 };
 export default CustomMenuItem;

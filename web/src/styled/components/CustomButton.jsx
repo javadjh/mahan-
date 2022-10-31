@@ -7,8 +7,8 @@ const CustomButton = (props) => {
   const CustomButtonStyled = styled(Button)`
     background-color: ${props.color ? props.color : darkBlueColor} !important;
     color: ${props.color === "#fff" ? "#92A2B0" : "white"} !important;
-    padding: 20px 30px !important;
-    min-height: 65px !important;
+    padding: 0px 30px !important;
+    min-height: 50px !important;
     border-radius: 8px !important;
     text-align: center !important;
     border: ${props.color === "#fff" ? "2px solid #EEF2F5" : "none"} !important;

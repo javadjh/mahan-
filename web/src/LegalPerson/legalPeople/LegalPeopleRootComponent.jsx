@@ -1,94 +1,131 @@
-import React, {useContext, useEffect, useState} from 'react'
+import React, { useContext, useEffect, useState } from "react";
 import AlertDialog from "../../utility/AlertDialog";
+import { Col, Input, Row } from "antd";
 import UpsertPersonDialog from "../../Person/insertPerson/UpsertPersonDialog";
 import PagingComponent from "../../utility/PagingComponent";
 import MainLayout from "../../RootComponent/MainLayout";
-import LegalPeopleTableComponent from "./LegalPeopleTableComponent";
-import {useDispatch, useSelector} from "react-redux";
-import {deleteLegalPeopleAction, getLegalPeopleAction} from "../../stateManager/actions/LegalPeopleAction";
+
+import { useDispatch, useSelector } from "react-redux";
+import CustomDialog from "../../styled/components/CustomDialog";
+import CustomButton from "../../styled/components/CustomButton";
+import { lightGreenColor, orangeColor } from "../../app/appColor";
+
+import {
+  deleteLegalPeopleAction,
+  getLegalPeopleAction,
+} from "../../stateManager/actions/LegalPeopleAction";
 import UpsertLegalPersonDialog from "../insertLegalPerson/UpsertLegalPersonDialog";
-import {RootContext} from "../../RootComponent/RootContext";
+import { SpaceStyled } from "../../styled/global";
+import { RootContext } from "../../RootComponent/RootContext";
 import InsertLegalPeopleFromExcelDialog from "../insertLegalPerson/InsertLegalPeopleFromExcelDialog";
-const LegalPeopleRootComponent = ()=>{
-    const {handleHide} = useContext(RootContext)
-    const dispatch = useDispatch()
-    const legalPeople = useSelector(state => state.legalPeople)
-    const [singleLegalPerson,setSingleLegalPerson] = useState({})
-    const [searchValue,setSearchValue] = useState('')
-    const [singleId,setSingleId] = useState('')
-    const [pageId,setPageId] = useState(1)
+import LegalPeopleTableComponent from "../../components/legalPeople/LegalPeopleTableComponent";
 
-    useEffect(()=>{
-        getData()
-    },[pageId,searchValue])
+const LegalPeopleRootComponent = () => {
+  const [isUploadExcelDialogShow, setIsUploadExcelDialogShow] = useState(false);
+  const [isUpsertDialogShow, setIsUpsertDialogShow] = useState(false);
+  const { handleHide } = useContext(RootContext);
+  const dispatch = useDispatch();
+  const legalPeople = useSelector((state) => state.legalPeople);
+  const [singleLegalPerson, setSingleLegalPerson] = useState({});
+  const [searchValue, setSearchValue] = useState("");
+  const [singleId, setSingleId] = useState("");
+  const [pageId, setPageId] = useState(1);
 
-    const getData = async ()=>{
-        await dispatch(getLegalPeopleAction({
-            pageId,
-            eachPerPage:12,
-            searchValue
-        }))
-    }
+  useEffect(() => {
+    getData();
+  }, [pageId, searchValue]);
 
-    const onClickEditLegalPerson = (legalPerson)=>{
-        setSingleLegalPerson(legalPerson)
-        window.$('#upsertLegalPersonDialog').modal('show')
-    }
+  const getData = async () => {
+    await dispatch(
+      getLegalPeopleAction({
+        pageId,
+        eachPerPage: 12,
+        searchValue,
+      })
+    );
+  };
 
-    const deleteLegalPerson = async ()=>{
-        await dispatch(deleteLegalPeopleAction(singleId))
-    }
+  const onClickEditLegalPerson = (legalPerson) => {
+    setSingleLegalPerson(legalPerson);
+    setIsUpsertDialogShow(true);
+  };
 
-    const onClickDeleteLegalPerson = (id)=>{
-        setSingleId(id)
-        window.$('#alertDialog').modal('show')
-    }
+  const deleteLegalPerson = async (id) => {
+    await dispatch(deleteLegalPeopleAction(id));
+  };
 
-    const handlePaging = (page)=>{
-        setPageId(page)
-    }
-    return(
-        <MainLayout title={"لیست اشخاص حقوقی"}>
-            <AlertDialog title={"آیا از حذف این شخص حقوقی مطمعن هستید؟"} deleteHandle={deleteLegalPerson} />
-            <UpsertLegalPersonDialog singleLegalPerson={singleLegalPerson} />
-            <InsertLegalPeopleFromExcelDialog/>
-            <div className="row">
-                <div className="col-12">
-                    <div className="card">
-                        <div className="card-body">
+  const onClickDeleteLegalPerson = (id) => {
+    setSingleId(id);
+  };
 
-                            <div className={"row"}>
-                                <div className={"col-lg-8"}>
-                                    <div className={"row mb-1"}>
-                                        <button
-                                            hidden={handleHide("مدیریت اشخاص حقوقی")}
-                                            onClick={()=>{
-                                                onClickEditLegalPerson({})
-                                            }}
-                                            type="button" className="btn btn-success ml-3 waves-effect waves-light"
-                                            data-toggle="button" aria-pressed="false">افزودن شخص حقوقی جدید</button>
-                                        <button
-                                            onClick={()=>{
-                                                window.$('#insertLegalPeopleFromExcelDialog').modal('show')
-                                            }}
-                                            className="btn btn-primary ml-3 waves-effect waves-light">بارگذاری اکسل</button>
-                                    </div>
-                                    <p className="card-title-desc">تمامی اشخاص حقوقی سامانه را می توانید در لیست زیر مشاهده و مدیریت نمایید</p>
-                                </div>
-                                <input className="form-control col-lg-4" type="text" value={searchValue}
-                                       placeholder={"جستجو..."}
-                                       onChange={(e)=>{
-                                           setSearchValue(e.target.value)
-                                       }}
-                                />
-                            </div>
-                            <LegalPeopleTableComponent legalPeople={legalPeople.legalPeople} onClickEditLegalPerson={onClickEditLegalPerson} onClickDeleteLegalPerson={onClickDeleteLegalPerson}/>
-                            <PagingComponent handlePaging={handlePaging} pageId={legalPeople.pageId} eachPerPage={legalPeople.eachPerPage} total={legalPeople.total}/>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </MainLayout>
-    )
-}
-export default LegalPeopleRootComponent
+  return (
+    <>
+      <Row justify="space-between" align="middle">
+        <Col span={12}>
+          <Input
+            block
+            placeholder="جستجو در اشحاص حقیقی"
+            onChange={(e) => setSearchValue(e.target.value)}
+          />
+        </Col>
+        <Col span={11} offset={1}>
+          <Row justify="end" align="middle">
+            <Col>
+              <CustomDialog
+                title={"بارگذاری از طریق اکسل"}
+                render={
+                  <InsertLegalPeopleFromExcelDialog
+                    setIsUploadExcelDialogShow={setIsUploadExcelDialogShow}
+                  />
+                }
+                actionRender={
+                  <CustomButton style={{ marginLeft: 10 }} color={orangeColor}>
+                    بارگذاری از طریق اکسل
+                  </CustomButton>
+                }
+                isShow={isUploadExcelDialogShow}
+              />
+            </Col>
+            <Col>
+              <CustomDialog
+                title={"شخص حقوقی"}
+                render={
+                  <UpsertLegalPersonDialog
+                    setIsUpsertDialogShow={setIsUpsertDialogShow}
+                    singleLegalPerson={singleLegalPerson}
+                  />
+                }
+                actionRender={
+                  <CustomButton
+                    onClick={() => {
+                      setSingleLegalPerson({
+                        companyName: "",
+                      });
+                      setIsUpsertDialogShow(true);
+                    }}
+                    color={lightGreenColor}
+                  >
+                    افزودن شخص حقوقی
+                  </CustomButton>
+                }
+                isShow={isUpsertDialogShow}
+              />
+            </Col>
+          </Row>
+        </Col>
+      </Row>
+
+      <SpaceStyled top={20}>
+        <LegalPeopleTableComponent
+          total={legalPeople.total}
+          pageId={legalPeople.pageId}
+          setPageId={setPageId}
+          legalPeople={legalPeople.legalPeople}
+          deleteLegalPerson={deleteLegalPerson}
+          onClickEditLegalPerson={onClickEditLegalPerson}
+        />
+      </SpaceStyled>
+    </>
+  );
+};
+export default LegalPeopleRootComponent;
