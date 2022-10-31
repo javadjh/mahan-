@@ -11,6 +11,7 @@ import {
   upsertUserDataAction,
 } from "../../stateManager/actions/UsersAction";
 import { useHistory } from "react-router";
+import { Row } from "antd";
 const UpsertUserRootComponent = () => {
   let history = useHistory();
   const dispatch = useDispatch();
@@ -113,24 +114,16 @@ const UpsertUserRootComponent = () => {
     }
   };
   return (
-    <MainLayout title={singleUser._id ? "ویرایش کاربر" : "افزودن کاربر جدید"}>
-      <div className="btn-group-fab" role="group" aria-label="FAB Menu">
-        <div>
-          {/*<button onClick={sendData} type="button" className="btn btn-main btn-success has-tooltip" data-placement="left"
-                            title="افزودن کاربر"><i className="mdi mdi-plus-thick" style={{fontSize:29}}></i></button>*/}
-        </div>
-      </div>
-      <div>
-        <div className={"row ml-2"}>
-          <BaseInformationUpsertUserComponent />
-          <SecondInformationUpsertUserComponent
-            getData={getData}
-            upsertUserData={upsertUserData}
-            sendData={sendData}
-          />
-        </div>
-      </div>
-    </MainLayout>
+    <div>
+      <Row>
+        <BaseInformationUpsertUserComponent />
+        <SecondInformationUpsertUserComponent
+          getData={getData}
+          upsertUserData={upsertUserData}
+          sendData={sendData}
+        />
+      </Row>
+    </div>
   );
 };
 export default UpsertUserRootComponent;
