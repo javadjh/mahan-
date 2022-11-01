@@ -40,3 +40,6 @@ export const CenterVerticalStyled = styled.div`
   align-items: center;
   height: 100%;
 `;
+export const CustomCursor = styled.span`
+  cursor: pointer;
+`;

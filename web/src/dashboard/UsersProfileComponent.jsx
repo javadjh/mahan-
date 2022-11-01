@@ -1,12 +1,26 @@
+import { Col, Form, Image, Input, Row } from "antd";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { darkBlueColor, redColor } from "../app/appColor";
 import {
   setUsersProfileImageAction,
   updateProfileAction,
   usersProfileAction,
 } from "../stateManager/actions/UsersAction";
+import CustomCard from "../styled/components/CustomCard";
+import CustomText from "../styled/components/CustomText";
+import CustomButton from "../styled/components/CustomButton";
+import { CenterStyled, CustomCursor, SpaceStyled } from "../styled/global";
 import { validatorSP } from "../utility/formValidator";
 import { just_persian } from "../utility/inputValidators";
+import ResetPasswordDialog from "../dialog/ResetPasswordDialog";
+import CustomDialog from "../styled/components/CustomDialog";
+import {
+  emailForm,
+  maxForm,
+  minForm,
+  requiredForm,
+} from "../config/formValidator";
 const centerStyle = {
   color: "white",
   position: "absolute",
@@ -22,6 +36,7 @@ const imageStyle = {
   borderRadius: 200,
 };
 const UsersProfileComponent = () => {
+  const [form] = Form.useForm();
   const dispatch = useDispatch();
   const formValidatorProfile = useRef(validatorSP());
   const [firstName, setFirstName] = useState("");
@@ -31,29 +46,26 @@ const UsersProfileComponent = () => {
   const [isEditable, setIsEditable] = useState(false);
   const [, setReload] = useState();
   const userProfile = useSelector((state) => state.userProfile);
+  const [isFormDisable, setIsFormDisable] = useState(true);
+  const [isResetPasswordDialogShow, setIsResetPasswordDialogShow] =
+    useState(false);
 
   useEffect(() => {
     setFirstName(userProfile.firstName);
     setLastName(userProfile.lastName);
     setEmail(userProfile.email);
     setPhoneNumber(userProfile.phoneNumber);
+    form.setFieldsValue(userProfile);
   }, [userProfile, isEditable]);
 
-  const onUpdateProfileHandle = async () => {
-    if (formValidatorProfile.current.allValid()) {
-      await dispatch(
-        updateProfileAction({
-          firstName,
-          lastName,
-          email,
-          phoneNumber,
-        })
-      );
-      setIsEditable(false);
-    } else {
-      formValidatorProfile.current.showMessages();
-      setReload(1);
-    }
+  const onUpdateProfileHandle = async (formData) => {
+    await dispatch(
+      updateProfileAction({
+        ...formData,
+        ...{ userName: undefined, createDate: undefined },
+      })
+    );
+    setIsFormDisable(true);
   };
 
   const setUsersProfileImage = async (files) => {
@@ -62,193 +74,121 @@ const UsersProfileComponent = () => {
     await dispatch(setUsersProfileImageAction(file));
   };
   return (
-    <div className={"card card-body"}>
-      <div className={"text-center mb-4"}>
-        <div style={{ position: "relative" }}>
-          <img
+    <CustomCard>
+      <CenterStyled>
+        <label htmlFor="input-url-profile">
+          <Image
+            preview={false}
+            style={{
+              borderRadius: 1000,
+              aspectRatio: "1/1",
+              objectFit: "cover",
+            }}
+            width={256}
             src={
               userProfile.profileImage
                 ? `http://localhost:5000/${userProfile._id}/${userProfile.profileImage}`
-                : "./assets/images/profile.png"
+                : "./assets/avatar.png"
             }
-            style={imageStyle}
-            alt="Cinque Terre"
-            width="100"
-            height="100"
           />
-          <label
-            htmlFor="input-url-profile"
-            style={centerStyle}
-            className={"custom-cursor"}
-          >
-            <div style={{ height: "3.0rem", width: "3.0rem" }}>
-              <span className="avatar-title rounded-circle">
-                <i className="mdi mdi-image-edit" style={{ fontSize: 20 }} />
-              </span>
-            </div>
-          </label>
-        </div>
-        <div>
-          <p
-            className={"m-0 custom-cursor"}
-            style={{ color: "red" }}
-            onClick={() => {
-              window.$("#resetPasswordDialog").modal("show");
-            }}
-          >
-            ویرایش کلمه عبور
-          </p>
-          {!isEditable ? (
-            <div>
-              <p
-                className={"m-0 custom-cursor"}
-                style={{ color: "royalblue" }}
-                onClick={() => {
-                  setIsEditable(true);
-                }}
-              >
-                ویرایش
-              </p>
-              {/*<p className={"m-0 custom-cursor"} style={{color:"red"}} onClick={()=>{
-                                window.$('#resetPasswordDialog').modal('show')
-                            }}>ویرایش کلمه عبور</p>*/}
-            </div>
-          ) : null}
-        </div>
-      </div>
-      {isEditable ? (
-        <>
-          <div className={"row mx-2 col-lg-13"}>
-            <p className={"mt-1 col-lg-4"}>نام : </p>
-            <input
-              value={firstName}
-              onChange={(e) => {
-                if (
-                  just_persian(e.target.value) ||
-                  e.target.value.length === 0
-                ) {
-                  formValidatorProfile.current.showMessageFor("firstName");
-                  setFirstName(e.target.value);
-                }
-              }}
-              className={"col-lg-8 form-control"}
-            />
-          </div>
-          {formValidatorProfile.current.message(
-            "firstName",
-            firstName,
-            "required|min:2|max:80"
-          )}
-          <div className={"row mx-2 col-lg-13"}>
-            <p className={"mt-1 col-lg-4"}>نام خانوادگی : </p>
-            <input
-              className={"col-lg-8 form-control"}
-              onChange={(e) => {
-                if (
-                  just_persian(e.target.value) ||
-                  e.target.value.length === 0
-                ) {
-                  formValidatorProfile.current.showMessageFor("lastName");
-                  setLastName(e.target.value);
-                }
-              }}
-              value={lastName}
-            />
-          </div>
-          {formValidatorProfile.current.message(
-            "lastName",
-            lastName,
-            "required|min:2|max:80"
-          )}
-          <div className={"row mx-2 col-lg-13"}>
-            <p className={"mt-1 col-lg-4"}>ایمیل : </p>
-            <input
-              className={"col-lg-8 form-control"}
-              onChange={(e) => {
-                formValidatorProfile.current.showMessageFor("email");
-                setEmail(e.target.value);
-              }}
-              value={email}
-            />
-          </div>
-          {formValidatorProfile.current.message(
-            "email",
-            email,
-            "required|email"
-          )}
-          <div className={"row mx-2 col-lg-13"}>
-            <p className={"mt-1 col-lg-4"}>شماره تماس : </p>
-            <input
-              type={"number"}
-              className={"col-lg-8 form-control"}
-              onChange={(e) => {
-                if (e.target.value.length <= 11) {
-                  formValidatorProfile.current.showMessageFor("phoneNumber");
-                  setPhoneNumber(e.target.value);
-                }
-              }}
-              value={phoneNumber}
-            />
-          </div>
-          {formValidatorProfile.current.message(
-            "phoneNumber",
-            phoneNumber,
-            "required|max:11|min:11"
-          )}
-        </>
-      ) : (
-        <>
-          <div className={"row mx-2 col-lg-13"}>
-            <p className={"mt-1 col-lg-4"}>نام : </p>
-            <p>{firstName}</p>
-          </div>
-          <div className={"row mx-2 col-lg-13"}>
-            <p className={"mt-1 col-lg-4"}>نام خانوادگی : </p>
-            <p>{lastName}</p>
-          </div>
-          <div className={"row mx-2 col-lg-13"}>
-            <p className={"mt-1 col-lg-4"}>ایمیل : </p>
-            <p>{email}</p>
-          </div>
-          <div className={"row mx-2 col-lg-13"}>
-            <p className={"mt-1 col-lg-4"}>شماره تماس : </p>
-            <p>{phoneNumber}</p>
-          </div>
-        </>
-      )}
-
-      <div className={"row mx-2 col-lg-13"}>
-        <p className={"mt-1 col-lg-4"}>نام کاربری : </p>
-        <p>{userProfile.userName}</p>
-      </div>
-      <div className={"row mx-2 col-lg-13"}>
-        <p className={"mt-1 col-lg-4"}>تاریخ ثبت : </p>
-        <p>{userProfile.createDate}</p>
-      </div>
-
-      {isEditable ? (
-        <div className={"row"}>
-          <div className={"col-lg-8"}>
-            <button
-              className={"btn btn-success mb-4 btn-block"}
-              onClick={onUpdateProfileHandle}
+        </label>
+        <SpaceStyled vertical={10}>
+          <CustomDialog
+            title={"تغییر کلمه ی عبور"}
+            render={
+              <ResetPasswordDialog
+                setIsResetPasswordDialogShow={setIsResetPasswordDialogShow}
+              />
+            }
+            actionRender={
+              <CustomCursor>
+                <CustomText color={redColor}>تغییر رمز عبور</CustomText>
+              </CustomCursor>
+            }
+            isShow={isResetPasswordDialogShow}
+          />
+          <CenterStyled>
+            {isFormDisable ? (
+              <SpaceStyled vertical={20}>
+                <CustomCursor
+                  onClick={() => {
+                    setIsFormDisable(false);
+                  }}
+                >
+                  <CustomText color={darkBlueColor}>ویرایش پروفایل</CustomText>
+                </CustomCursor>
+              </SpaceStyled>
+            ) : (
+              <SpaceStyled vertical={20}>
+                <CustomCursor
+                  onClick={() => {
+                    form.setFieldsValue(userProfile);
+                    setIsFormDisable(true);
+                  }}
+                >
+                  <CustomText color={redColor}>انصراف</CustomText>
+                </CustomCursor>
+              </SpaceStyled>
+            )}
+          </CenterStyled>
+        </SpaceStyled>
+      </CenterStyled>
+      <Form
+        form={form}
+        onFinish={onUpdateProfileHandle}
+        disabled={isFormDisable}
+      >
+        <Row>
+          <Col span={11} offset={1}>
+            <Form.Item
+              rules={[requiredForm, minForm(2), maxForm(50)]}
+              name={"firstName"}
             >
-              ثبت
-            </button>
-          </div>
-          <div className={"col-lg-4"}>
-            <button
-              className={"btn btn-danger mb-4 btn-block"}
-              onClick={() => {
-                setIsEditable(false);
-              }}
-            >
-              انصراف
-            </button>
-          </div>
-        </div>
-      ) : null}
+              <Input placeholder="نام را وارد کنید" />
+            </Form.Item>
+          </Col>
 
+          <Col span={11} offset={1}>
+            <Form.Item
+              rules={[requiredForm, minForm(2), maxForm(50)]}
+              name={"lastName"}
+            >
+              <Input placeholder="نام خانوادگی را وارد کنید" />
+            </Form.Item>
+          </Col>
+          <Col span={11} offset={1}>
+            <Form.Item
+              rules={[requiredForm, emailForm("email")]}
+              name={"email"}
+            >
+              <Input placeholder="ایمیل را وارد کنید" />
+            </Form.Item>
+          </Col>
+          <Col span={11} offset={1}>
+            <Form.Item
+              rules={[requiredForm, minForm(11), maxForm(11)]}
+              name={"phoneNumber"}
+            >
+              <Input placeholder="شماره تماس را وارد کنید" />
+            </Form.Item>
+          </Col>
+          <Col span={11} offset={1}>
+            <Form.Item name={"userName"} disabled>
+              <Input placeholder="نام کاربری را وارد کنید" />
+            </Form.Item>
+          </Col>
+          <Col span={11} offset={1}>
+            <Form.Item name={"createDate"} disabled>
+              <Input placeholder="تاریخ ثبت را وارد کنید" />
+            </Form.Item>
+          </Col>
+          {!isFormDisable && (
+            <Col span={11} offset={1}>
+              <CustomButton htmlType={"submit"}>ثبت</CustomButton>
+            </Col>
+          )}
+        </Row>
+      </Form>
       <input
         type="file"
         id="input-url-profile"
@@ -260,7 +200,7 @@ const UsersProfileComponent = () => {
         style={{ visibility: "hidden" }}
         aria-describedby="imageUrl"
       />
-    </div>
+    </CustomCard>
   );
 };
 export default UsersProfileComponent;

@@ -1,22 +1,23 @@
+import { EditOutlined } from "@ant-design/icons";
 import React, { Fragment } from "react";
+import { useState } from "react";
 import UsersProfileComponent from "../dashboard/UsersProfileComponent";
+import CustomDialog from "../styled/components/CustomDialog";
+import { CustomCursor } from "../styled/global";
 const UserProfileDialog = () => {
+  const [isProfileDialogShow, setIsProfileDialogShow] = useState(false);
   return (
     <Fragment>
-      <div
-        className="modal fade"
-        id="userProfileDialog"
-        tabIndex="-1"
-        role="dialog"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog" role="document">
-          <div className="modal-content p-4">
-            {/* <UsersProfileComponent/> */}
-          </div>
-        </div>
-      </div>
+      <CustomDialog
+        title={"پروفایل"}
+        render={<UsersProfileComponent />}
+        actionRender={
+          <CustomCursor onClick={() => setIsProfileDialogShow(true)}>
+            <EditOutlined />
+          </CustomCursor>
+        }
+        isShow={isProfileDialogShow}
+      />
     </Fragment>
   );
 };

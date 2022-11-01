@@ -1,8 +1,8 @@
 import { BlueHeader } from "./style";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Image, Row } from "antd";
 import CustomCard from "../styled/components/CustomCard";
-import { SpaceStyled } from "../styled/global";
+import { CustomCursor, SpaceStyled } from "../styled/global";
 import CustomText from "../styled/components/CustomText";
 import { darkBlueColor } from "../app/appColor";
 import CustomMenuItem from "../styled/components/CustomMenuItem";
@@ -11,6 +11,7 @@ import {
   CaretLeftOutlined,
   DashboardOutlined,
   DatabaseOutlined,
+  EditOutlined,
   FolderOutlined,
   FundProjectionScreenOutlined,
   LoginOutlined,
@@ -20,31 +21,59 @@ import {
   UnorderedListOutlined,
   UserOutlined,
 } from "@ant-design/icons";
+import UserProfileDialog from "../Profile/UserProfileDialog";
+import { useSelector } from "react-redux";
+import AppSettingDialog from "../dialog/AppSettingDialog";
+import CustomDialog from "../styled/components/CustomDialog";
 const AdminLayoutComponent = ({ children, location }) => {
+  const [isShowAppSetting, setIsShowAppSetting] = useState(false);
   useEffect(() => {
     console.log(location?.pathname);
     console.log(location);
   }, [location]);
+  const userProfile = useSelector((state) => state.userProfile);
   return (
     <div style={{ backgroundColor: "#F7F9FB", minHeight: "100vh" }}>
       <BlueHeader>
         <Image src="/assets/logo.png" preview={false} />
       </BlueHeader>
       <Row>
-        <Col span={6}>
-          <SpaceStyled top={-90} right={30}>
+        <Col span={5}>
+          <SpaceStyled top={-90} right={15}>
             <CustomCard>
               <Row justify="space-between">
                 <Col>
                   <CustomText size={20} color={"#BFCED8"}>
                     مدیریت سامانه
                   </CustomText>
-                  <CustomText color={darkBlueColor}>
-                    ویرایش اطلاعات کاربری
-                  </CustomText>
+                  <Row>
+                    <Col>
+                      <CustomText color={darkBlueColor}>
+                        ویرایش اطلاعات کاربری
+                      </CustomText>
+                    </Col>
+                    <Col>
+                      <SpaceStyled right={10}>
+                        <UserProfileDialog />
+                      </SpaceStyled>
+                    </Col>
+                  </Row>
                 </Col>
                 <Col>
-                  <Image src="./assets/avatar.png" />
+                  <Image
+                    width={50}
+                    style={{
+                      borderRadius: 100,
+                      aspectRatio: "1/1",
+                      objectFit: "cover",
+                    }}
+                    preview={false}
+                    src={
+                      userProfile.profileImage
+                        ? `http://localhost:5000/${userProfile._id}/${userProfile.profileImage}`
+                        : "./assets/avatar.png"
+                    }
+                  />
                 </Col>
               </Row>
               <CustomMenuItem
@@ -87,10 +116,19 @@ const AdminLayoutComponent = ({ children, location }) => {
                 icon={<DatabaseOutlined />}
                 title={"بخش اطلاعات پایه"}
               />
-              <CustomMenuItem
-                href={"/2"}
-                icon={<SettingOutlined />}
-                title={"بخش مدیریت سامانه"}
+              <CustomDialog
+                title={"تنظیمات برنامه"}
+                render={
+                  <AppSettingDialog setIsShowAppSetting={setIsShowAppSetting} />
+                }
+                actionRender={
+                  <CustomMenuItem
+                    onClick={() => setIsShowAppSetting(true)}
+                    icon={<SettingOutlined />}
+                    title={"بخش مدیریت سامانه"}
+                  />
+                }
+                isShow={isShowAppSetting}
               />
               <CustomMenuItem
                 onClick={() => {
@@ -103,8 +141,8 @@ const AdminLayoutComponent = ({ children, location }) => {
             </CustomCard>
           </SpaceStyled>
         </Col>
-        <Col span={18}>
-          <SpaceStyled top={-90} horizontal={20}>
+        <Col span={19}>
+          <SpaceStyled top={-90} horizontal={10}>
             {location?.pathname === "/" ? (
               <>{children}</>
             ) : (

@@ -90,9 +90,9 @@ const App = ({ location }) => {
   };
   return (
     <>
-      {/* <AppSettingDialog /> */}
+      {/*  */}
 
-      {/* <ResetPasswordDialog /> */}
+      {/*  */}
 
       <Loading
         loading={loading}

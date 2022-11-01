@@ -1,64 +1,58 @@
-import React, {useContext} from "react";
-import {UpsertRoleContext} from "./UpsertRoleContext";
-const BaseInformationUpsertRoleComponent = ({insertRoleHandle})=>{
-    const {
-        title,setTitle,
-        description,setDescription,
-        formValidator
-    } = useContext(UpsertRoleContext)
+import { Col, Form, Input, Row } from "antd";
+import React, { useContext } from "react";
+import CustomCard from "../../styled/components/CustomCard";
+import CustomButton from "../../styled/components/CustomButton";
+import { SpaceStyled } from "../../styled/global";
+import { UpsertRoleContext } from "./UpsertRoleContext";
+import { maxForm, minForm, requiredForm } from "../../config/formValidator";
+const BaseInformationUpsertRoleComponent = ({ insertRoleHandle }) => {
+  const { title, setTitle, description, setDescription, formValidator, form } =
+    useContext(UpsertRoleContext);
 
-    return(
-        <div className="card" style={{height:450}}>
-            <div className="card-body">
-                <h4 className="card-title">اطلاعات پایه</h4>
-                <p className="card-title-desc">در این قسمت باید اطلاعات کلی نقش را وارد نمایید</p>
-                <form className="needs-validation" noValidate>
-                    <div >
-                        <div className="form-group">
-                            <label htmlFor="txtFirstNameBilling" className="col-lg-3 col-form-label">عنوان</label>
-                            <div className="col-lg-12">
-                                <input id="txtFirstNameBilling"
-                                       value={title}
-                                       onChange={(e)=>{
-                                           formValidator.current.showMessageFor("title")
-                                           setTitle(e.target.value)
-                                       }}
-                                       name={"title"}
-                                       type="text"
-                                       placeholder={"عنوان نقش را وارد کنید..."}
-                                       className="form-control"/>
-                                {formValidator.current.message("title",title,"required|min:2|max:80")}
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <label htmlFor="txtAddress1Billing" className="col-lg-3 col-form-label">توضیحات</label>
-                        <div className="col-lg-12">
-                            <textarea id="txtAddress1Billing"
-                                      name="description"
-                                      value={description}
-                                      onChange={(e)=>{
-                                          formValidator.current.showMessageFor("description")
-                                          setDescription(e.target.value)
-                                      }}
-                                      rows="4"
-                                      placeholder={"توضیحات نقش را وارد کنید..."}
-                                      className="form-control"/>
-                            {formValidator.current.message("description",description,"min:2|max:255")}
-                            <div className={"row"}>
-                                <div className={"col-lg-9"}></div>
-                                <div className={"col-lg-3"}>
-                                    <button type="button" className="btn btn-success btn-block mt-4"
-                                            onClick={insertRoleHandle}>ثبت</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </form>
-
+  return (
+    <div style={{ height: 450 }}>
+      <CustomCard>
+        <h4>اطلاعات پایه</h4>
+        <p>در این قسمت باید اطلاعات کلی نقش را وارد نمایید</p>
+        <Form form={form} onFinish={insertRoleHandle}>
+          <div>
+            <div>
+              <Col span={24}>
+                <Form.Item
+                  name={"title"}
+                  rules={[minForm(2), maxForm(150), requiredForm]}
+                >
+                  <Input placeholder={"عنوان نقش را وارد کنید..."} />
+                </Form.Item>
+              </Col>
             </div>
-        </div>
-    )
-}
-export default BaseInformationUpsertRoleComponent
+          </div>
+          <SpaceStyled top={20}>
+            <Col span={24}>
+              <Form.Item
+                name={"description"}
+                rules={[minForm(2), maxForm(500)]}
+              >
+                <Input.TextArea
+                  rows="4"
+                  placeholder={"توضیحات نقش را وارد کنید..."}
+                />
+              </Form.Item>
+
+              <SpaceStyled top={30}>
+                <Row justify="end">
+                  <Col span={8}>
+                    <CustomButton block type="button" htmlType={"submit"}>
+                      ثبت
+                    </CustomButton>
+                  </Col>
+                </Row>
+              </SpaceStyled>
+            </Col>
+          </SpaceStyled>
+        </Form>
+      </CustomCard>
+    </div>
+  );
+};
+export default BaseInformationUpsertRoleComponent;

@@ -83,7 +83,7 @@ const SecondInformationUpsertUserComponent = ({
                 </Select>
               </Form.Item>
             </Col>
-            <Col span={12}>
+            <Col span={18}>
               <CenterVerticalStyled>
                 <Checkbox
                   checked={fileAccess.includes("محرمانه")}
@@ -111,7 +111,7 @@ const SecondInformationUpsertUserComponent = ({
                 </Checkbox>
               </CenterVerticalStyled>
             </Col>
-            <Col span={12}>
+            <Col span={6}>
               <CustomButton
                 block
                 onClick={() => {

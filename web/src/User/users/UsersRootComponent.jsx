@@ -51,11 +51,6 @@ const UsersRootComponent = ({ history }) => {
   };
   return (
     <Fragment>
-      {/* <AlertDialog
-        title={"آیا از حذف این کاربر مطمعن هستید؟"}
-        deleteHandle={deleteHandle}
-      /> */}
-
       <Row justify="space-between" align="middle">
         <Col span={12}>
           <Input
@@ -77,7 +72,6 @@ const UsersRootComponent = ({ history }) => {
           </Row>
         </Col>
       </Row>
-
       <SpaceStyled top={20}>
         <UsersTableComponent
           users={users}
@@ -87,55 +81,6 @@ const UsersRootComponent = ({ history }) => {
           onOpenAlertDialogHandle={onOpenAlertDialogHandle}
         />
       </SpaceStyled>
-
-      {/* <div className="row">
-        <div className="col-12">
-          <div className="card">
-            <div className="card-body">
-              <div className={"row"}>
-                <div className={"col-lg-8"}>
-                  <div className={"row mb-1"}>
-                    <button
-                      hidden={handleHide("تعریف کاربر")}
-                      onClick={() => upsertIntent({})}
-                      type="button"
-                      className="btn btn-success ml-3 waves-effect waves-light"
-                      data-toggle="button"
-                      aria-pressed="false"
-                    >
-                    </button>
-                  </div>
-                  <p className="card-title-desc">
-                    تمامی کاربران سامانه را می توانید در لیست زیر مشاهده و
-                    مدیریت نمایید
-                  </p>
-                </div>
-                <div className={"col-lg-4"}>
-                  <div className={"row"}>
-                    <input
-                      className="form-control col-lg-12"
-                      type="text"
-                      value={searchValue}
-                      placeholder={"جستجو..."}
-                      onChange={(e) => {
-                        setSearchValue(e.target.value);
-                      }}
-                    />
-                  </div>
-                </div>
-              </div>
-              <UsersTableComponent
-                users={users}
-                upsertIntent={upsertIntent}
-                onOpenAlertDialogHandle={onOpenAlertDialogHandle}
-                changeUsersPasswordAdminHandler={
-                  changeUsersPasswordAdminHandler
-                }
-              />
-            </div>
-          </div>
-        </div>
-      </div> */}
     </Fragment>
   );
 };
