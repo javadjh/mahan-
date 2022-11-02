@@ -1,15 +1,27 @@
-const express = require('express')
-const {deleteApplicant} = require("../handler/applicant/command/DeleteApplicantCommand");
-const {insertApplicant} = require("../handler/applicant/command/InsertApplicantCommand");
-const {getApplicants} = require("../handler/applicant/query/GetApplicantsQuery");
-const {deleteCompanyChart} = require("../handler/applicant/command/DeleteApplicantCommand");
-const {insertCompanyChart} = require("../handler/applicant/command/InsertApplicantCommand");
-const {firstGuard} = require("../authUtilities/Auth");
-const {getCompanyChart} = require("../handler/applicant/query/GetApplicantsQuery");
-const router = express.Router()
-
-
-
+const express = require("express");
+const {
+  deleteApplicant,
+} = require("../handler/applicant/command/DeleteApplicantCommand");
+const {
+  insertApplicant,
+} = require("../handler/applicant/command/InsertApplicantCommand");
+const {
+  getApplicants,
+} = require("../handler/applicant/query/GetApplicantsQuery");
+const {
+  deleteCompanyChart,
+} = require("../handler/applicant/command/DeleteApplicantCommand");
+const {
+  insertCompanyChart,
+} = require("../handler/applicant/command/InsertApplicantCommand");
+const { firstGuard } = require("../authUtilities/Auth");
+const {
+  getCompanyChart,
+} = require("../handler/applicant/query/GetApplicantsQuery");
+const {
+  getApplicantsAuto,
+} = require("../handler/applicant/query/GetApplicantsAutoQuery");
+const router = express.Router();
 
 /*
 @GET
@@ -17,10 +29,13 @@ const router = express.Router()
     مدیریت سمت سازمانی
 }
 */
-router.get('/applicants',[firstGuard],getApplicants)
+router.get("/applicants", [firstGuard], getApplicants);
 
+/*
+@GET
 
-
+*/
+router.get("/applicants/auto", getApplicantsAuto);
 
 /*
 @POST
@@ -29,10 +44,7 @@ router.get('/applicants',[firstGuard],getApplicants)
     مدیریت سمت سازمانی
 }
 */
-router.post('/insert/applicant',[firstGuard],insertApplicant)
-
-
-
+router.post("/insert/applicant", [firstGuard], insertApplicant);
 
 /*
 @DELETE
@@ -41,7 +53,6 @@ router.post('/insert/applicant',[firstGuard],insertApplicant)
     مدیریت سمت سازمانی
 }
 */
-router.delete('/applicants/:id',[firstGuard],deleteApplicant)
+router.delete("/applicants/:id", [firstGuard], deleteApplicant);
 
-
-module.exports = router
+module.exports = router;

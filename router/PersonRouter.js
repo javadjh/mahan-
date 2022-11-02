@@ -1,23 +1,32 @@
-const express = require('express')
-const {updatePerson} = require("../handler/person/command/UpdatePersonCommand");
-const {deletePerson} = require("../handler/person/command/DeletePersonCommand");
-const {insertPerson} = require("../handler/person/command/InsertPersonCommand");
-const {getPeople} = require("../handler/person/query/getPeopleQuery");
-const {firstGuard} = require("../authUtilities/Auth");
+const express = require("express");
+const {
+  updatePerson,
+} = require("../handler/person/command/UpdatePersonCommand");
+const {
+  deletePerson,
+} = require("../handler/person/command/DeletePersonCommand");
+const {
+  insertPerson,
+} = require("../handler/person/command/InsertPersonCommand");
+const { getPeople } = require("../handler/person/query/getPeopleQuery");
+const { firstGuard } = require("../authUtilities/Auth");
 const multer = require("multer");
-const {insertPeopleFromExcel} = require("../handler/utilityHandler/excelHandler/InsertPeopleFromExcel");
-const router = express.Router()
+const {
+  insertPeopleFromExcel,
+} = require("../handler/utilityHandler/excelHandler/InsertPeopleFromExcel");
+const { getPeopleAuto } = require("../handler/person/query/GetPeopleAutoQuery");
+const router = express.Router();
 
 //آپلود سند
 const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'config/')
-    },
-    filename: function (req, file, cb) {
-        cb(null,  Date.now()+"-"+file.originalname)
-    }
-})
-const upload = multer({ storage: storage })
+  destination: function (req, file, cb) {
+    cb(null, "config/");
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + "-" + file.originalname);
+  },
+});
+const upload = multer({ storage: storage });
 
 /*
 @GET
@@ -26,7 +35,7 @@ const upload = multer({ storage: storage })
     مدیریت اشخاص حقیقی
 }
 */
-router.get('/people',firstGuard,getPeople)
+router.get("/people", firstGuard, getPeople);
 
 /*
 @POST
@@ -35,7 +44,7 @@ router.get('/people',firstGuard,getPeople)
     مدیریت اشخاص حقیقی
 }
 */
-router.post('/insert/person',firstGuard,insertPerson)
+router.post("/insert/person", firstGuard, insertPerson);
 
 /*
 @PUT
@@ -45,8 +54,7 @@ router.post('/insert/person',firstGuard,insertPerson)
     مدیریت اشخاص حقیقی
 }
 */
-router.put('/update/person/:id',firstGuard,updatePerson)
-
+router.put("/update/person/:id", firstGuard, updatePerson);
 
 /*
 @DELETE
@@ -55,16 +63,21 @@ router.put('/update/person/:id',firstGuard,updatePerson)
     مدیریت اشخاص حقیقی
 }
 */
-router.delete('/person/:id',firstGuard,deletePerson)
-
-
-
-
+router.delete("/person/:id", firstGuard, deletePerson);
 
 /*
 @POST
 @form-data:file (Excel)
 */
-router.post('/insert/people/from/excel',[firstGuard,upload.single("file")],insertPeopleFromExcel)
+router.post(
+  "/insert/people/from/excel",
+  [firstGuard, upload.single("file")],
+  insertPeopleFromExcel
+);
 
-module.exports = router
+/*
+@GET
+*/
+router.get("/people/auto", getPeopleAuto);
+
+module.exports = router;

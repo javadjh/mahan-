@@ -1,6 +1,6 @@
 import { BlueHeader } from "./style";
 import React, { useEffect, useState } from "react";
-import { Col, Image, Input, Row } from "antd";
+import { Button, Col, Dropdown, Image, Input, Row } from "antd";
 import CustomCard from "../styled/components/CustomCard";
 import { CustomCursor, SpaceStyled } from "../styled/global";
 import CustomText from "../styled/components/CustomText";
@@ -9,9 +9,11 @@ import CustomMenuItem from "../styled/components/CustomMenuItem";
 import {
   AlertOutlined,
   CaretLeftOutlined,
+  ClusterOutlined,
   DashboardOutlined,
   DatabaseOutlined,
   EditOutlined,
+  FileProtectOutlined,
   FolderOutlined,
   FundProjectionScreenOutlined,
   LoginOutlined,
@@ -19,6 +21,7 @@ import {
   SettingOutlined,
   ShareAltOutlined,
   UnorderedListOutlined,
+  UsergroupAddOutlined,
   UserOutlined,
 } from "@ant-design/icons";
 import UserProfileDialog from "../Profile/UserProfileDialog";
@@ -26,6 +29,7 @@ import { useSelector } from "react-redux";
 import AppSettingDialog from "../dialog/AppSettingDialog";
 import CustomDialog from "../styled/components/CustomDialog";
 import SearchInputComponent from "../styled/components/SearchInputComponent";
+
 const AdminLayoutComponent = ({ children, location }) => {
   const [isShowAppSetting, setIsShowAppSetting] = useState(false);
   useEffect(() => {
@@ -46,7 +50,7 @@ const AdminLayoutComponent = ({ children, location }) => {
         </Row>
       </BlueHeader>
       <Row>
-        <Col span={5}>
+        <Col span={6}>
           <SpaceStyled top={-90} right={15}>
             <CustomCard>
               <SpaceStyled bottom={30}>
@@ -122,9 +126,37 @@ const AdminLayoutComponent = ({ children, location }) => {
                 title={"بخش هشدار ها"}
               />
               <CustomMenuItem
-                href={"/3"}
                 icon={<DatabaseOutlined />}
                 title={"بخش اطلاعات پایه"}
+                dropdown={
+                  <>
+                    <CustomMenuItem
+                      href={"/users"}
+                      icon={<UserOutlined />}
+                      title={"مدیریت کاربران"}
+                    />
+                    <CustomMenuItem
+                      href={"/roles"}
+                      icon={<FileProtectOutlined />}
+                      title={"مدیریت نقش ها"}
+                    />
+                    <CustomMenuItem
+                      href={"/people"}
+                      icon={<UsergroupAddOutlined />}
+                      title={"مدیریت اشخاص حقیقی"}
+                    />
+                    <CustomMenuItem
+                      href={"/legal-people"}
+                      icon={<UsergroupAddOutlined />}
+                      title={"مدیریت اشخاص حقوقی"}
+                    />
+                    <CustomMenuItem
+                      href={"/applicants"}
+                      icon={<ClusterOutlined />}
+                      title={"سمت سازمانی"}
+                    />
+                  </>
+                }
               />
               <CustomDialog
                 title={"تنظیمات برنامه"}
@@ -151,7 +183,7 @@ const AdminLayoutComponent = ({ children, location }) => {
             </CustomCard>
           </SpaceStyled>
         </Col>
-        <Col span={19}>
+        <Col span={18}>
           <SpaceStyled top={-90} horizontal={10}>
             {location?.pathname === "/" ? (
               <>{children}</>

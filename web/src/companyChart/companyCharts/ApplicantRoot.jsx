@@ -15,6 +15,7 @@ import { lightGreenColor } from "../../app/appColor";
 import CustomDialog from "../../styled/components/CustomDialog";
 import { SpaceStyled } from "../../styled/global";
 import ApplicantTableComponent from "../../components/applicant/ApplicantTableComponent";
+import { Col, Row } from "antd";
 
 const ApplicantRoot = () => {
   const dispatch = useDispatch();
@@ -39,16 +40,20 @@ const ApplicantRoot = () => {
   };
   return (
     <Fragment>
-      <CustomDialog
-        title={"سمت سازمانی"}
-        render={<InsertApplicantDialog sendData={sendData} />}
-        actionRender={
-          <CustomButton color={lightGreenColor}>
-            افزودن سمت سازمانی
-          </CustomButton>
-        }
-        isShow={isUpsertDialogShow}
-      />
+      <Row justify="end" align="end">
+        <Col>
+          <CustomDialog
+            title={"سمت سازمانی"}
+            render={<InsertApplicantDialog sendData={sendData} />}
+            actionRender={
+              <CustomButton color={lightGreenColor}>
+                افزودن سمت سازمانی
+              </CustomButton>
+            }
+            isShow={isUpsertDialogShow}
+          />
+        </Col>
+      </Row>
       <SpaceStyled top={30}>
         <ApplicantTableComponent
           applicants={applicants}

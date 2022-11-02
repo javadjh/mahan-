@@ -124,5 +124,8 @@
   "getSupervisors": "/supervisors",
   "getGuardSystem": "/archive/guard/system/",
   "setArchiveGuardSystem": "/archive/guard/system",
-  "getArchivesFilesGuardSystem": "/archives/files/guard/system"
+  "getArchivesFilesGuardSystem": "/archives/files/guard/system",
+  "getPeopleAuto": "/people/auto",
+  "getLegalPeopleAuto": "/legal/people/auto",
+  "getApplicantsAuto": "/applicants/auto"
 }

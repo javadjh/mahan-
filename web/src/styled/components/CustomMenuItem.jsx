@@ -1,14 +1,20 @@
 import { CaretLeftOutlined, DashboardOutlined } from "@ant-design/icons";
-import { Col, Divider, Row } from "antd";
-import React from "react";
+import { Button, Col, Divider, Dropdown, Row } from "antd";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { darkBlueColor, whiteColor } from "../../app/appColor";
 import { SpaceStyled } from "../global";
 import CustomText from "./CustomText";
 import { Link, useLocation } from "react-router-dom";
-const CustomMenuItem = ({ title, icon, href, onClick }) => {
+
+const CustomMenuItem = ({ title, icon, href, onClick, dropdown }) => {
+  const [isOpenDropdown, setIsOpenDropdown] = useState(false);
   const location = useLocation();
   let MenuItemContainer = styled.div`
+    ${location.pathname === href
+      ? `background-image: url("http://localhost:3000/assets/btn-hover.png");`
+      : ""};
+
     background-color: ${location.pathname === href ? darkBlueColor : "white"};
     color: ${location.pathname === href ? "white" : darkBlueColor};
     width: 100%;
@@ -45,11 +51,23 @@ const CustomMenuItem = ({ title, icon, href, onClick }) => {
   );
   return (
     <>
-      {href ? (
-        <Link to={href}>{render}</Link>
+      {dropdown ? (
+        <>
+          <div onClick={() => setIsOpenDropdown(!isOpenDropdown)}>{render}</div>
+        </>
       ) : (
-        <div onClick={onClick}>{render}</div>
+        <>
+          {href ? (
+            <Link to={href}>{render}</Link>
+          ) : (
+            <>
+              <div onClick={onClick}>{render}</div>
+            </>
+          )}
+        </>
       )}
+
+      {isOpenDropdown && <SpaceStyled right={30}>{dropdown}</SpaceStyled>}
     </>
   );
 };

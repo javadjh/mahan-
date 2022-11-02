@@ -1,12 +1,14 @@
 @font-face {
   font-family: sans-iran;
-  src: url("/assets/iran-sans-300.woff");
-  font-weight: 100;
+  src: url("/assets/KalamehWeb(FaNum)-Regular.woff2");
+  font-style: normal;
+  font-weight: 500;
 }
 @font-face {
   font-family: iran-nastaliq;
   src: url("/assets/IranNastaliq-Web.woff2");
-  font-weight: 100;
+  font-style: normal;
+  font-weight: 500;
 }
 * {
   font-family: sans-iran;
@@ -94,4 +96,23 @@
   width: 350px;
   padding: 20px !important;
   color: white;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  /* //height: 5px;
+  //background: #15113c; */
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  /* //box-shadow: inset 0 0 5px #999;
+  //border-radius: 10px; */
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #ddd;
+  border-radius: 2px;
+}
+.ant-select-selection-placeholder {
+  z-index: 10000;
 }

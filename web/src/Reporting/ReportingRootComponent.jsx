@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import LogsTableComponent from "../Log/LogsTableComponent";
 import PagingComponent from "../utility/PagingComponent";
 import MainLayout from "../RootComponent/MainLayout";
-import ReportingTableComponent from "./ReportingTableComponent";
 import { useDispatch, useSelector } from "react-redux";
 import { getReportingFilterFileService } from "../service/FileService";
 import {
@@ -15,7 +14,13 @@ import PersianDatePickerComponent from "../utility/PersianDatePickerComponent";
 import { saveAs } from "file-saver";
 import { Col, Row, Select } from "antd";
 import CustomCard from "../styled/components/CustomCard";
-import { SpaceStyled } from "../styled/global";
+import { CenterVerticalStyled, SpaceStyled } from "../styled/global";
+import PeopleSelectorComponent from "../components/share/PeopleSelectorComponent";
+import LegalPeopleSelectorComponent from "../components/share/LegalPeopleSelectorComponent";
+import ApplicantsSelectorComponent from "../components/share/ApplicantsSelectorComponent";
+import CustomButton from "../styled/components/CustomButton";
+import { orangeColor } from "../app/appColor";
+import ReportTableComponent from "../components/report/ReportTableComponent";
 
 const animatedComponents = makeAnimated();
 const ReportingRootComponent = () => {
@@ -25,7 +30,7 @@ const ReportingRootComponent = () => {
   const [pageId, setPageId] = useState(1);
   const [legalPeople, setLegalPeople] = useState([]);
   const [people, setPeople] = useState([]);
-  const [applicants, setApplicants] = useState([]);
+  const [applicants, setApplicants] = useState();
   const [startDate, setStartDate] = useState(undefined);
   const [endDate, setEndDate] = useState(undefined);
   const [isDes, setIsDes] = useState(-1);
@@ -62,17 +67,13 @@ const ReportingRootComponent = () => {
       finalLegalPeople.push(l.value);
     });
 
-    let finalApplicant = [];
-    applicants.map((a) => {
-      finalApplicant.push(a.value);
-    });
     await dispatch(
       getReportingAction({
         pageId,
         eachPerPage: 12,
         legalPeople: finalLegalPeople,
         people: finalPeople,
-        applicants: finalApplicant,
+        applicants,
         startDate,
         endDate,
         isDes,
@@ -97,16 +98,12 @@ const ReportingRootComponent = () => {
       finalLegalPeople.push(l.value);
     });
 
-    let finalApplicant = [];
-    applicants.map((a) => {
-      finalApplicant.push(a.value);
-    });
     const { data, status } = await getReportingFilterFileService({
       pageId,
       eachPerPage: 12,
       legalPeople: finalLegalPeople,
       people: finalPeople,
-      applicants: finalApplicant,
+      applicants,
       startDate,
       endDate,
       isDes,
@@ -122,64 +119,31 @@ const ReportingRootComponent = () => {
     <Row>
       <Col span={24}>
         <CustomCard>
-          <Row>
-            <Col span={17}>
-              <h4 className="card-title ml-3 mt-1">گزارش های سامانه</h4>
-              <p>
-                در این قسمت میتوانید گزارش های مربوط به پرونده های سامانه را
-                مشاهده کنید
-              </p>
-            </Col>
-          </Row>
           <SpaceStyled top={10}>
             <Row>
               <Col span={8}>
-                <SpaceStyled left={5}>
-                  <RSelect
-                    onChange={(e) => {
-                      setLegalPeople(e);
-                    }}
-                    noOptionsMessage={() => "یافت نشد"}
-                    placeholder={"جست و جو در اشخاص..."}
-                    closeMenuOnSelect={false}
-                    components={animatedComponents}
-                    isMulti
-                    options={reportingFilterData.legalPeople}
+                <SpaceStyled left={7} bottom={7}>
+                  <LegalPeopleSelectorComponent
+                    onLegalPersonSelect={(value) => setLegalPeople(value)}
                   />
                 </SpaceStyled>
               </Col>
               <Col span={8}>
-                <SpaceStyled left={5}>
-                  <RSelect
-                    onChange={(e) => {
-                      setPeople(e);
-                    }}
-                    noOptionsMessage={() => "یافت نشد"}
-                    placeholder={"جست و جو در اشخاص..."}
-                    closeMenuOnSelect={false}
-                    components={animatedComponents}
-                    isMulti
-                    options={reportingFilterData.people}
+                <SpaceStyled left={7} bottom={7}>
+                  <PeopleSelectorComponent
+                    onPersonSelect={(value) => setPeople(value)}
                   />
                 </SpaceStyled>
               </Col>
               <Col span={8}>
-                <SpaceStyled left={5}>
-                  <RSelect
-                    onChange={(e) => {
-                      setApplicants(e);
-                    }}
-                    noOptionsMessage={() => "یافت نشد"}
-                    placeholder={"جست و جو در گیرنده ها..."}
-                    closeMenuOnSelect={false}
-                    components={animatedComponents}
-                    isMulti
-                    options={reportingFilterData.applicant}
+                <SpaceStyled left={7} bottom={7}>
+                  <ApplicantsSelectorComponent
+                    onApplicantSelect={(e) => setApplicants(e)}
                   />
                 </SpaceStyled>
               </Col>
               <Col span={8}>
-                <SpaceStyled left={5}>
+                <SpaceStyled left={7} bottom={7}>
                   <Select defaultValue="null" style={{ width: "100%" }}>
                     <Select.Option value="null"> بر اساس</Select.Option>
                     <Select.Option value="-1">صعودی</Select.Option>
@@ -201,7 +165,7 @@ const ReportingRootComponent = () => {
                 </SpaceStyled>
               </Col>
               <Col span={8}>
-                <SpaceStyled left={5}>
+                <SpaceStyled left={7} bottom={7}>
                   <PersianDatePickerComponent
                     value={startDate}
                     onSelect={(moment) => {
@@ -215,7 +179,7 @@ const ReportingRootComponent = () => {
                 </SpaceStyled>
               </Col>
               <Col span={8}>
-                <SpaceStyled>
+                <SpaceStyled bottom={7} left={7}>
                   <PersianDatePickerComponent
                     value={endDate}
                     onSelect={(moment) => {
@@ -228,80 +192,87 @@ const ReportingRootComponent = () => {
                   />
                 </SpaceStyled>
               </Col>
+              <Col span={8}>
+                <SpaceStyled bottom={7} left={7}>
+                  <Select
+                    style={{ width: "100%" }}
+                    placeholder="وضعیت پرونده"
+                    onChange={(e) => {
+                      console.log(e);
+                      setFileStatus(e === "وضعیت پرونده" ? undefined : e);
+                    }}
+                  >
+                    <Select.Option value={"وضعیت پرونده"} name={"وضعیت پرونده"}>
+                      وضعیت پرونده
+                    </Select.Option>
+                    <Select.Option value={"جاری"} name={"جاری"}>
+                      جاری
+                    </Select.Option>
+                    <Select.Option value={"نیمه جاری"} name={"نیمه جاری"}>
+                      نیمه جاری
+                    </Select.Option>
+                    <Select.Option
+                      value={"به کل محرمانه"}
+                      name={"به کل محرمانه"}
+                    >
+                      به کل محرمانه
+                    </Select.Option>
+                  </Select>
+                </SpaceStyled>
+              </Col>
+              <Col span={8}>
+                <SpaceStyled bottom={7} left={7}>
+                  <Select
+                    placeholder="نوع پرونده"
+                    style={{ width: "100%" }}
+                    onChange={(e) => {
+                      setType(e === "نوع پرونده" ? undefined : e);
+                    }}
+                  >
+                    <Select.Option value={"نوع پرونده"} name={"نوع پرونده"}>
+                      نوع پرونده
+                    </Select.Option>
+                    <Select.Option value={"عادی"} name={"عادی"}>
+                      عادی
+                    </Select.Option>
+                    <Select.Option value={"محرمانه"} name={"محرمانه"}>
+                      محرمانه
+                    </Select.Option>
+                    <Select.Option
+                      value={"به کل محرمانه"}
+                      name={"به کل محرمانه"}
+                    >
+                      به کل محرمانه
+                    </Select.Option>
+                  </Select>
+                </SpaceStyled>
+              </Col>
+              <Col span={8} align={"middle"}>
+                <CenterVerticalStyled style={{ width: "100%" }}>
+                  <SpaceStyled bottom={7} left={7} style={{ width: "100%" }}>
+                    <CustomButton
+                      color={orangeColor}
+                      onClick={getReportingFile}
+                    >
+                      دریافت خروجی excel
+                    </CustomButton>
+                  </SpaceStyled>
+                </CenterVerticalStyled>
+              </Col>
             </Row>
           </SpaceStyled>
-          <div className={"row mb-4"}>
-            <div className={"col-lg-3"}>
-              <label htmlFor="validationCustom04">وضعیت پرونده</label>
-              <select
-                className="custom-select mx-1"
-                onChange={(e) => {
-                  setFileStatus(
-                    e.target.value === "وضعیت پرونده"
-                      ? undefined
-                      : e.target.value
-                  );
-                }}
-              >
-                <option value={undefined} name={undefined}>
-                  وضعیت پرونده
-                </option>
-                <option value={"جاری"} name={"جاری"}>
-                  جاری
-                </option>
-                <option value={"نیمه جاری"} name={"نیمه جاری"}>
-                  نیمه جاری
-                </option>
-                <option value={"به کل محرمانه"} name={"به کل محرمانه"}>
-                  به کل محرمانه
-                </option>
-              </select>
-            </div>
-            <div className={"col-lg-3"}>
-              <label htmlFor="validationCustom04">نوع پرونده</label>
-              <select
-                className="custom-select mx-1"
-                onChange={(e) => {
-                  setType(
-                    e.target.value === "نوع پرونده" ? undefined : e.target.value
-                  );
-                }}
-              >
-                <option value={undefined} name={undefined}>
-                  نوع پرونده
-                </option>
-                <option value={"عادی"} name={"عادی"}>
-                  عادی
-                </option>
-                <option value={"محرمانه"} name={"محرمانه"}>
-                  محرمانه
-                </option>
-                <option value={"به کل محرمانه"} name={"به کل محرمانه"}>
-                  به کل محرمانه
-                </option>
-              </select>
-            </div>
-          </div>
-          <div className={" align-right text-right"}>
-            <button
-              className="btn btn-primary waves-effect waves-light mb-3 align-right text-right"
-              onClick={getReportingFile}
-            >
-              <i className="fas fa-file-excel font-size-16 align-middle mr-2"></i>{" "}
-              دریافت خروجی excel
-            </button>
-          </div>
-          <ReportingTableComponent
-            sortBy={sortBy}
-            files={reporting.files}
-            setSortBy={setSortBy}
-          />
-          <PagingComponent
-            handlePaging={handlePaging}
-            pageId={reporting.pageId}
-            eachPerPage={reporting.eachPerPage}
-            total={reporting.total}
-          />
+
+          <SpaceStyled top={20}>
+            <ReportTableComponent
+              sortBy={sortBy}
+              files={reporting.files}
+              setSortBy={setSortBy}
+              pageId={reporting.pageId}
+              eachPerPage={reporting.eachPerPage}
+              total={reporting.total}
+              setPageId={setPageId}
+            />
+          </SpaceStyled>
         </CustomCard>
       </Col>
     </Row>

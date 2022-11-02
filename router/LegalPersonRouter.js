@@ -1,23 +1,38 @@
-const express = require('express')
-const {deleteLegalPerson} = require("../handler/legalPerson/command/DeleteLegalPersonCommand");
-const {updateLegalPerson} = require("../handler/legalPerson/command/UpdateLegalPersonCommand");
-const {insertLegalPerson} = require("../handler/legalPerson/command/InsertLegalPersonCommand");
-const {firstGuard} = require("../authUtilities/Auth");
-const {getLegalPeople} = require("../handler/legalPerson/query/getLegalPeopleQuery");
-const {insertPeopleFromExcel} = require("../handler/utilityHandler/excelHandler/InsertPeopleFromExcel");
+const express = require("express");
+const {
+  deleteLegalPerson,
+} = require("../handler/legalPerson/command/DeleteLegalPersonCommand");
+const {
+  updateLegalPerson,
+} = require("../handler/legalPerson/command/UpdateLegalPersonCommand");
+const {
+  insertLegalPerson,
+} = require("../handler/legalPerson/command/InsertLegalPersonCommand");
+const { firstGuard } = require("../authUtilities/Auth");
+const {
+  getLegalPeople,
+} = require("../handler/legalPerson/query/getLegalPeopleQuery");
+const {
+  getLegalPeopleAuto,
+} = require("../handler/legalPerson/query/GetLegalPeopleAutoQuery");
+const {
+  insertPeopleFromExcel,
+} = require("../handler/utilityHandler/excelHandler/InsertPeopleFromExcel");
 const multer = require("multer");
-const {insertLegalPeopleFromExcel} = require("../handler/utilityHandler/excelHandler/InsertLegalPeopleFormExcel");
-const router = express.Router()
+const {
+  insertLegalPeopleFromExcel,
+} = require("../handler/utilityHandler/excelHandler/InsertLegalPeopleFormExcel");
+const router = express.Router();
 //آپلود سند
 const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'config/')
-    },
-    filename: function (req, file, cb) {
-        cb(null,  Date.now()+"-"+file.originalname)
-    }
-})
-const upload = multer({ storage: storage })
+  destination: function (req, file, cb) {
+    cb(null, "config/");
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + "-" + file.originalname);
+  },
+});
+const upload = multer({ storage: storage });
 
 /*
 @GET
@@ -26,8 +41,7 @@ const upload = multer({ storage: storage })
     مدیریت اشخاص حقوقی
 }
 */
-router.get('/legal/people',firstGuard,getLegalPeople)
-
+router.get("/legal/people", firstGuard, getLegalPeople);
 
 /*
 @POST
@@ -36,8 +50,7 @@ router.get('/legal/people',firstGuard,getLegalPeople)
     مدیریت اشخاص حقوقی
 }
 */
-router.post('/insert/legal/person',firstGuard,insertLegalPerson)
-
+router.post("/insert/legal/person", firstGuard, insertLegalPerson);
 
 /*
 @PUT
@@ -47,9 +60,7 @@ router.post('/insert/legal/person',firstGuard,insertLegalPerson)
     مدیریت اشخاص حقوقی
 }
 */
-router.put('/update/legal/person/:id',firstGuard,updateLegalPerson)
-
-
+router.put("/update/legal/person/:id", firstGuard, updateLegalPerson);
 
 /*
 @DELETE
@@ -58,18 +69,21 @@ router.put('/update/legal/person/:id',firstGuard,updateLegalPerson)
     مدیریت اشخاص حقوقی
 }
 */
-router.delete('/legal/person/:id',firstGuard,deleteLegalPerson)
-
-
-
-
-
+router.delete("/legal/person/:id", firstGuard, deleteLegalPerson);
 
 /*
 @POST
 @form-data:file (Excel)
 */
-router.post('/insert/legal/people/from/excel',[firstGuard,upload.single("file")],insertLegalPeopleFromExcel)
+router.post(
+  "/insert/legal/people/from/excel",
+  [firstGuard, upload.single("file")],
+  insertLegalPeopleFromExcel
+);
 
+/*
+@Get
+*/
+router.get("/legal/people/auto", getLegalPeopleAuto);
 
-module.exports = router
+module.exports = router;

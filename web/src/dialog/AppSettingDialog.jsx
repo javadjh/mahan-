@@ -80,6 +80,9 @@ export const AppSettingDialog = ({
   };
   useEffect(() => {
     getData();
+    return () => {
+      setIsShowAppSetting(false);
+    };
   }, []);
 
   useEffect(() => {
