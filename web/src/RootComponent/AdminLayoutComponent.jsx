@@ -1,6 +1,6 @@
 import { BlueHeader } from "./style";
 import React, { useEffect, useState } from "react";
-import { Col, Image, Row } from "antd";
+import { Col, Image, Input, Row } from "antd";
 import CustomCard from "../styled/components/CustomCard";
 import { CustomCursor, SpaceStyled } from "../styled/global";
 import CustomText from "../styled/components/CustomText";
@@ -25,6 +25,7 @@ import UserProfileDialog from "../Profile/UserProfileDialog";
 import { useSelector } from "react-redux";
 import AppSettingDialog from "../dialog/AppSettingDialog";
 import CustomDialog from "../styled/components/CustomDialog";
+import SearchInputComponent from "../styled/components/SearchInputComponent";
 const AdminLayoutComponent = ({ children, location }) => {
   const [isShowAppSetting, setIsShowAppSetting] = useState(false);
   useEffect(() => {
@@ -35,7 +36,14 @@ const AdminLayoutComponent = ({ children, location }) => {
   return (
     <div style={{ backgroundColor: "#F7F9FB", minHeight: "100vh" }}>
       <BlueHeader>
-        <Image src="/assets/logo.png" preview={false} />
+        <Row justify="space-between">
+          <Col>
+            <Image src="/assets/logo.png" preview={false} />
+          </Col>
+          <Col>
+            <SearchInputComponent placeholder="موتور جستجو..." />
+          </Col>
+        </Row>
       </BlueHeader>
       <Row>
         <Col span={5}>

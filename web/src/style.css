@@ -87,3 +87,11 @@
   justify-content: center !important;
   padding: 1rem;
 }
+.ant-search-custom {
+  background: rgb(18, 76, 131) !important;
+  border-radius: 8px !important;
+  border: none !important;
+  width: 350px;
+  padding: 20px !important;
+  color: white;
+}
