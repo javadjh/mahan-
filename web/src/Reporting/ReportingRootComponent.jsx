@@ -28,8 +28,8 @@ const ReportingRootComponent = () => {
   const reporting = useSelector((state) => state.reporting);
   const reportingFilterData = useSelector((state) => state.reportingFilterData);
   const [pageId, setPageId] = useState(1);
-  const [legalPeople, setLegalPeople] = useState([]);
-  const [people, setPeople] = useState([]);
+  const [legalPeople, setLegalPeople] = useState();
+  const [people, setPeople] = useState();
   const [applicants, setApplicants] = useState();
   const [startDate, setStartDate] = useState(undefined);
   const [endDate, setEndDate] = useState(undefined);
@@ -57,22 +57,12 @@ const ReportingRootComponent = () => {
   ]);
 
   const getData = async () => {
-    let finalPeople = [];
-    people.map((p) => {
-      finalPeople.push(p.value);
-    });
-
-    let finalLegalPeople = [];
-    legalPeople.map((l) => {
-      finalLegalPeople.push(l.value);
-    });
-
     await dispatch(
       getReportingAction({
         pageId,
         eachPerPage: 12,
-        legalPeople: finalLegalPeople,
-        people: finalPeople,
+        legalPeople,
+        people,
         applicants,
         startDate,
         endDate,
@@ -88,21 +78,11 @@ const ReportingRootComponent = () => {
     setPageId(page);
   };
   const getReportingFile = async () => {
-    let finalPeople = [];
-    people.map((p) => {
-      finalPeople.push(p.value);
-    });
-
-    let finalLegalPeople = [];
-    legalPeople.map((l) => {
-      finalLegalPeople.push(l.value);
-    });
-
     const { data, status } = await getReportingFilterFileService({
       pageId,
       eachPerPage: 12,
-      legalPeople: finalLegalPeople,
-      people: finalPeople,
+      legalPeople,
+      people,
       applicants,
       startDate,
       endDate,

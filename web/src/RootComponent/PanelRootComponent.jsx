@@ -230,7 +230,7 @@ const PanelRootComponent = ({ history, location }) => {
                   </Switch>
                 </AdminLayoutComponent>
 
-                <FooterRootComponent />
+                {/* <FooterRootComponent /> */}
               </div>
             </>
           )}

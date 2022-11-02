@@ -30,9 +30,9 @@ module.exports.FilterReportingFilesHandler = async (filterAction) => {
     isActive: true,
   };
 
-  if (legalPeople) filter.push({ "contacts.value": { $in: legalPeople } });
+  if (legalPeople) filter.push({ "contacts.value": legalPeople });
 
-  if (people) filter.push({ "contacts.value": { $in: people } });
+  if (people) filter.push({ "contacts.value": people });
 
   if (applicants) findFilter.applicantId = applicants;
   if (type) findFilter.type = type;

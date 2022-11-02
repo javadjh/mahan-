@@ -50,10 +50,8 @@ const LoginComponent = () => {
   const [cookies, setCookie] = useCookies(["isLogin"]);
   const dispatch = useDispatch();
   const sendData = async (formData) => {
-    if (isForgetPassword)
-      await dispatch(userForgetPasswordAction({ userName, email }));
-
-    await dispatch(loginAction(formData, setCookie));
+    if (isForgetPassword) await dispatch(userForgetPasswordAction(formData));
+    else await dispatch(loginAction(formData, setCookie));
   };
   useEffect(() => {
     isInit();
@@ -108,48 +106,96 @@ const LoginComponent = () => {
                     </Col>
                   </Row>
                   <SpaceStyled vertical={20}>
-                    <span>
-                      <Form onFinish={sendData}>
-                        <SpaceStyled vertical={15}>
-                          <Form.Item
-                            name={"userName"}
-                            rules={[maxForm(11), minForm(3)]}
-                          >
-                            <Input
-                              placeholder={"نام کاربری خود را وارد کنید"}
-                            />
-                          </Form.Item>
-                        </SpaceStyled>
-                        <SpaceStyled vertical={15}>
-                          <Form.Item
-                            name={"password"}
-                            rules={[maxForm(80), minForm(6)]}
-                          >
-                            <Input
-                              type={"password"}
-                              placeholder={"گذرواژه خود را وارد کنید"}
-                            />
-                          </Form.Item>
-                        </SpaceStyled>
-                        <Row>
-                          <Col span={17}>
-                            <CustomButton htmlType={"submit"} block>
-                              ورود به حساب کاربری
-                            </CustomButton>
-                          </Col>
-                          <Col span={7}>
-                            <SpaceStyled right={10}>
-                              <CustomButton block color={lightGreenColor}>
-                                <CaretLeftOutlined />
+                    {isForgetPassword ? (
+                      <span>
+                        <Form onFinish={sendData}>
+                          <SpaceStyled vertical={15}>
+                            <Form.Item
+                              name={"userName"}
+                              rules={[maxForm(11), minForm(3)]}
+                            >
+                              <Input
+                                placeholder={"نام کاربری خود را وارد کنید"}
+                              />
+                            </Form.Item>
+                          </SpaceStyled>
+                          <SpaceStyled vertical={15}>
+                            <Form.Item
+                              name={"email"}
+                              rules={[maxForm(80), minForm(6)]}
+                            >
+                              <Input
+                                type={"email"}
+                                placeholder={"ایمیل خود را وارد کنید"}
+                              />
+                            </Form.Item>
+                          </SpaceStyled>
+                          <Row>
+                            <Col span={17}>
+                              <CustomButton htmlType={"submit"} block>
+                                ارسال ایمیل
                               </CustomButton>
-                            </SpaceStyled>
-                          </Col>
-                        </Row>
-                      </Form>
-                    </span>
+                            </Col>
+                            <Col span={7}>
+                              <SpaceStyled right={10}>
+                                <CustomButton block color={lightGreenColor}>
+                                  <CaretLeftOutlined />
+                                </CustomButton>
+                              </SpaceStyled>
+                            </Col>
+                          </Row>
+                        </Form>
+                      </span>
+                    ) : (
+                      <span>
+                        <Form onFinish={sendData}>
+                          <SpaceStyled vertical={15}>
+                            <Form.Item
+                              name={"userName"}
+                              rules={[maxForm(11), minForm(3)]}
+                            >
+                              <Input
+                                placeholder={"نام کاربری خود را وارد کنید"}
+                              />
+                            </Form.Item>
+                          </SpaceStyled>
+                          <SpaceStyled vertical={15}>
+                            <Form.Item
+                              name={"password"}
+                              rules={[maxForm(80), minForm(6)]}
+                            >
+                              <Input
+                                type={"password"}
+                                placeholder={"گذرواژه خود را وارد کنید"}
+                              />
+                            </Form.Item>
+                          </SpaceStyled>
+                          <Row>
+                            <Col span={17}>
+                              <CustomButton htmlType={"submit"} block>
+                                ورود به حساب کاربری
+                              </CustomButton>
+                            </Col>
+                            <Col span={7}>
+                              <SpaceStyled right={10}>
+                                <CustomButton block color={lightGreenColor}>
+                                  <CaretLeftOutlined />
+                                </CustomButton>
+                              </SpaceStyled>
+                            </Col>
+                          </Row>
+                        </Form>
+                      </span>
+                    )}
                     <SpaceStyled top={10}>
-                      <CustomButton block color={whiteColor}>
-                        فراموشی رمز عبور
+                      <CustomButton
+                        onClick={() => setIsForgetPassword(!isForgetPassword)}
+                        block
+                        color={whiteColor}
+                      >
+                        {isForgetPassword
+                          ? "کلمه ی عبور یادم اومد"
+                          : "رمز عبورم رو فراموش کردم"}
                       </CustomButton>
                     </SpaceStyled>
                   </SpaceStyled>

@@ -29,6 +29,7 @@ import { useSelector } from "react-redux";
 import AppSettingDialog from "../dialog/AppSettingDialog";
 import CustomDialog from "../styled/components/CustomDialog";
 import SearchInputComponent from "../styled/components/SearchInputComponent";
+import FooterRootComponent from "./FooterRootComponent";
 
 const AdminLayoutComponent = ({ children, location }) => {
   const [isShowAppSetting, setIsShowAppSetting] = useState(false);
@@ -54,41 +55,49 @@ const AdminLayoutComponent = ({ children, location }) => {
           <SpaceStyled top={-90} right={15}>
             <CustomCard>
               <SpaceStyled bottom={30}>
-                <Row justify="space-between">
-                  <Col>
-                    <CustomText size={20} color={"#BFCED8"}>
+                <SpaceStyled horizontal={30}>
+                  <Row justify="space-between" align="middle">
+                    <Col>
+                      {/* <CustomText size={20} color={"#BFCED8"}>
                       مدیریت سامانه
-                    </CustomText>
-                    <Row>
-                      <Col>
-                        <CustomText color={darkBlueColor}>
-                          ویرایش اطلاعات کاربری
-                        </CustomText>
-                      </Col>
-                      <Col>
-                        <SpaceStyled right={10}>
-                          <UserProfileDialog />
-                        </SpaceStyled>
-                      </Col>
-                    </Row>
-                  </Col>
-                  <Col>
-                    <Image
-                      width={50}
-                      style={{
-                        borderRadius: 100,
-                        aspectRatio: "1/1",
-                        objectFit: "cover",
-                      }}
-                      preview={false}
-                      src={
-                        userProfile.profileImage
-                          ? `http://localhost:5000/${userProfile._id}/${userProfile.profileImage}`
-                          : "./assets/avatar.png"
-                      }
-                    />
-                  </Col>
-                </Row>
+                    </CustomText> */}
+                      <SpaceStyled bottom={10}>
+                        <Image
+                          src="http://localhost:3000/assets/mahan-typography.png"
+                          preview={false}
+                        />
+                      </SpaceStyled>
+                      <Row>
+                        <Col>
+                          <CustomText color={darkBlueColor}>
+                            ویرایش اطلاعات کاربری
+                          </CustomText>
+                        </Col>
+                        <Col>
+                          <SpaceStyled right={10}>
+                            <UserProfileDialog />
+                          </SpaceStyled>
+                        </Col>
+                      </Row>
+                    </Col>
+                    <Col>
+                      <Image
+                        width={60}
+                        style={{
+                          borderRadius: 100,
+                          aspectRatio: "1/1",
+                          objectFit: "cover",
+                        }}
+                        preview={false}
+                        src={
+                          userProfile.profileImage
+                            ? `http://localhost:5000/${userProfile._id}/${userProfile.profileImage}`
+                            : "./assets/avatar.png"
+                        }
+                      />
+                    </Col>
+                  </Row>
+                </SpaceStyled>
               </SpaceStyled>
               <CustomMenuItem
                 href={"/"}
@@ -191,6 +200,7 @@ const AdminLayoutComponent = ({ children, location }) => {
               <CustomCard>{children}</CustomCard>
             )}
           </SpaceStyled>
+          <FooterRootComponent />
         </Col>
       </Row>
     </div>

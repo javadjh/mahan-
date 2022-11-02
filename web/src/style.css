@@ -93,7 +93,7 @@
   background: rgb(18, 76, 131) !important;
   border-radius: 8px !important;
   border: none !important;
-  width: 350px;
+  width: 450px;
   padding: 20px !important;
   color: white;
 }
@@ -114,5 +114,5 @@
   border-radius: 2px;
 }
 .ant-select-selection-placeholder {
-  z-index: 10000;
+  z-index: 2;
 }

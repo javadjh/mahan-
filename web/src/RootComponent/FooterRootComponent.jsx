@@ -1,34 +1,40 @@
-import React, {useEffect} from 'react'
-import {useDispatch, useSelector} from "react-redux";
-import {getAppInfoAction} from "../stateManager/actions/AppSettingAction";
-import {store} from "../stateManager/Store";
-const FooterRootComponent = ()=>{
-    const dispatch = useDispatch()
-    const appInfo = useSelector(state => state.appInfo)
-    useEffect(()=>{
-        dispatch(getAppInfoAction())
-    },[])
-    return(
-        <footer className="footer text-center" style={{
-            display:"block",
-            position: "fixed",
-            bottom:0,
-            zIndex:100,
-        }}>
-
-            <div className="container-fluid">
-                <div className="row">
-                    <span className="col-sm-8">
-                        تمام حقوق این سامانه متعلق به شرکت لیلو هوشمند سازان اروند می باشد - 1401 © lilooco.com
-                    </span>
-                    <span className="col-sm-4">
-
-                            سامانه مدیریت اسناد ماهان ({appInfo.version})
-
-                    </span>
-                </div>
-            </div>
-        </footer>
-    )
-}
-export default FooterRootComponent
+import { Col, Row } from "antd";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { hightlightColor } from "../app/appColor";
+import { getAppInfoAction } from "../stateManager/actions/AppSettingAction";
+import { store } from "../stateManager/Store";
+import CustomNasq from "../styled/components/CustomNasq";
+import { SpaceStyled } from "../styled/global";
+const FooterRootComponent = () => {
+  const dispatch = useDispatch();
+  const appInfo = useSelector((state) => state.appInfo);
+  useEffect(() => {
+    dispatch(getAppInfoAction());
+  }, []);
+  return (
+    <footer>
+      <Row justify="space-between" align="middle">
+        <Col span={17}>
+          <span style={{ color: hightlightColor, fontSize: 12 }}>
+            {" "}
+            تمام حقوق این سامانه متعلق به شرکت{" "}
+            <b>
+              <u>لیلو هوشمند سازان اروند</u>
+            </b>{" "}
+            می باشد و کپی برداری از آن پیگرد قانونی دارد . کپی رایت ۱۴۰۱
+          </span>
+        </Col>
+        <Col span={7}>
+          <span style={{ color: hightlightColor, fontSize: 12 }}>
+            سامانه قدرتمند مدیریت اسناد <b>ماهان</b> نسخه ({appInfo.version}){" "}
+          </span>
+          <CustomNasq color={hightlightColor} size={30}>
+            ماهان
+          </CustomNasq>
+        </Col>
+      </Row>
+    </footer>
+  );
+};
+export default FooterRootComponent;

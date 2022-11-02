@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { darkBlueColor } from "../../app/appColor";
 
 const CustomNasq = (props) => {
-  let CustomNasqStyled = styled(Typography.Paragraph)`
+  let CustomNasqStyled = styled(Typography.Text)`
     font-size: ${props.size ? props.size : 12}px;
     font-family: iran-nastaliq;
     color: ${props.color ? props.color : darkBlueColor} !important;
