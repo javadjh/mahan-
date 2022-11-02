@@ -41,41 +41,43 @@ const AdminLayoutComponent = ({ children, location }) => {
         <Col span={5}>
           <SpaceStyled top={-90} right={15}>
             <CustomCard>
-              <Row justify="space-between">
-                <Col>
-                  <CustomText size={20} color={"#BFCED8"}>
-                    مدیریت سامانه
-                  </CustomText>
-                  <Row>
-                    <Col>
-                      <CustomText color={darkBlueColor}>
-                        ویرایش اطلاعات کاربری
-                      </CustomText>
-                    </Col>
-                    <Col>
-                      <SpaceStyled right={10}>
-                        <UserProfileDialog />
-                      </SpaceStyled>
-                    </Col>
-                  </Row>
-                </Col>
-                <Col>
-                  <Image
-                    width={50}
-                    style={{
-                      borderRadius: 100,
-                      aspectRatio: "1/1",
-                      objectFit: "cover",
-                    }}
-                    preview={false}
-                    src={
-                      userProfile.profileImage
-                        ? `http://localhost:5000/${userProfile._id}/${userProfile.profileImage}`
-                        : "./assets/avatar.png"
-                    }
-                  />
-                </Col>
-              </Row>
+              <SpaceStyled bottom={30}>
+                <Row justify="space-between">
+                  <Col>
+                    <CustomText size={20} color={"#BFCED8"}>
+                      مدیریت سامانه
+                    </CustomText>
+                    <Row>
+                      <Col>
+                        <CustomText color={darkBlueColor}>
+                          ویرایش اطلاعات کاربری
+                        </CustomText>
+                      </Col>
+                      <Col>
+                        <SpaceStyled right={10}>
+                          <UserProfileDialog />
+                        </SpaceStyled>
+                      </Col>
+                    </Row>
+                  </Col>
+                  <Col>
+                    <Image
+                      width={50}
+                      style={{
+                        borderRadius: 100,
+                        aspectRatio: "1/1",
+                        objectFit: "cover",
+                      }}
+                      preview={false}
+                      src={
+                        userProfile.profileImage
+                          ? `http://localhost:5000/${userProfile._id}/${userProfile.profileImage}`
+                          : "./assets/avatar.png"
+                      }
+                    />
+                  </Col>
+                </Row>
+              </SpaceStyled>
               <CustomMenuItem
                 href={"/"}
                 icon={<DashboardOutlined />}

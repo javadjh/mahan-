@@ -21,6 +21,7 @@ const CustomDialog = (props) => {
         backdropFilter: "blur(3px)",
         backgroundColor: "#21212199",
       },
+      onCancel: () => setVisible(false),
     },
   });
   useEffect(() => {

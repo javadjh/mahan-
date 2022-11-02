@@ -31,7 +31,6 @@ export const insertArchiveAction = (archive) => {
     if (status === 200) {
       doneToast("با موفقیت ثبت شد");
       await dispatch(getAllArchivesAction());
-      window.$("#upsertArchiveDialog").modal("hide");
     }
   };
 };
@@ -54,7 +53,6 @@ export const updateArchiveAction = (id, archive) => {
     if (status === 200) {
       doneToast("با موفقیت ثبت شد");
       await dispatch(getAllArchivesAction());
-      window.$("#upsertArchiveDialog").modal("hide");
       window.location.reload();
     }
   };
