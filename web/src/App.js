@@ -6,7 +6,7 @@ import { insertDocumentService } from "./service/DocumentService";
 import ReactTooltip from "react-tooltip";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router";
-import Loading from "react-fullscreen-loading";
+// import Loading from "react-fullscreen-loading";
 import { getLibraryAction } from "./stateManager/actions/LibraryAction";
 import RootContextProvider from "./RootComponent/RootContextProvider";
 import { RootContext } from "./RootComponent/RootContext";
@@ -94,11 +94,11 @@ const App = ({ location }) => {
 
       {/*  */}
 
-      <Loading
+      {/* <Loading
         loading={loading}
         background={"rgba(255, 255, 255, 0.81)"}
         loaderColor="#3b5de7"
-      />
+      /> */}
       {/* <FileDrop
         onDragOver={() => {
           window.$("#uploadFileDialog").modal("show");

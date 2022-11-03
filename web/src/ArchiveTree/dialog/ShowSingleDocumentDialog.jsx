@@ -1,7 +1,6 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ReactPlayer from "react-player";
-import FilerobotImageEditor from "filerobot-image-editor";
 import { insertDocumentService } from "../../service/DocumentService";
 import {
   addVideoFlagAction,

@@ -18,7 +18,7 @@ const CustomCheckbox = (props) => {
         props.onChange(!checked);
       }}
     >
-      <SpaceStyled left={20}>
+      <SpaceStyled left={5}>
         <span>{props.children}</span>
       </SpaceStyled>
       {checked ? (

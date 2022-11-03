@@ -10,7 +10,7 @@ import { Provider } from "react-redux";
 import { store } from "./stateManager/Store";
 import "react-toastify/dist/ReactToastify.css";
 import "react-datepicker/dist/react-datepicker.css";
-import "tui-image-editor/dist/tui-image-editor.css";
+
 import { ConfigProvider } from "antd";
 import RootContextProvider from "./RootComponent/RootContextProvider";
 

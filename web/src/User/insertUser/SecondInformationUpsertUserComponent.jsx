@@ -10,6 +10,7 @@ import {
   lightBlueColor,
   lightGreenColor,
 } from "../../app/appColor";
+import CustomCheckbox from "../../styled/components/CustomCheckbox";
 const SecondInformationUpsertUserComponent = ({
   upsertUserData,
   sendData,
@@ -85,35 +86,35 @@ const SecondInformationUpsertUserComponent = ({
                 </Select>
               </Form.Item>
             </Col>
-            <Col span={18}>
+            <Col span={24}>
               <CenterVerticalStyled>
-                <Checkbox
+                <CustomCheckbox
                   checked={fileAccess.includes("محرمانه")}
                   onChange={(e) => {
-                    fileAccessManager("محرمانه", e.target.checked);
+                    fileAccessManager("محرمانه", e);
                   }}
                 >
                   محرمانه
-                </Checkbox>
-                <Checkbox
+                </CustomCheckbox>
+                <CustomCheckbox
                   checked={fileAccess.includes("عادی")}
                   onChange={(e) => {
-                    fileAccessManager("عادی", e.target.checked);
+                    fileAccessManager("عادی", e);
                   }}
                 >
                   عادی
-                </Checkbox>
-                <Checkbox
+                </CustomCheckbox>
+                <CustomCheckbox
                   checked={fileAccess.includes("به کل محرمانه")}
                   onChange={(e) => {
-                    fileAccessManager("به کل محرمانه", e.target.checked);
+                    fileAccessManager("به کل محرمانه", e);
                   }}
                 >
                   به کل محرمانه
-                </Checkbox>
+                </CustomCheckbox>
               </CenterVerticalStyled>
             </Col>
-            <Col span={6}>
+            <Col span={24}>
               <CustomButton
                 block
                 onClick={() => {
