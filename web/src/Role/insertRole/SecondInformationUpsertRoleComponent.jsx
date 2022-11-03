@@ -1,6 +1,7 @@
 import { Checkbox, Col, Divider, Input } from "antd";
 import React, { useContext } from "react";
 import CustomCard from "../../styled/components/CustomCard";
+import CustomCheckbox from "../../styled/components/CustomCheckbox";
 import { CenterVerticalStyled } from "../../styled/global";
 import { UpsertRoleContext } from "./UpsertRoleContext";
 const SecondInformationUpsertRoleComponent = ({ access }) => {
@@ -56,15 +57,15 @@ const SecondInformationUpsertRoleComponent = ({ access }) => {
                   <p>{titleBlock(index)}</p>
                 </div>
                 <div>
-                  <Checkbox
-                    onClick={(e) => {
+                  <CustomCheckbox
+                    onChange={(e) => {
                       addAccessListHandle(a);
                     }}
                     checked={a.isSelected}
                     id={a.title}
                   >
                     {a.title}
-                  </Checkbox>
+                  </CustomCheckbox>
                 </div>
                 {/*<p>{a.description}</p>*/}
               </div>

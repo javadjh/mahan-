@@ -39,6 +39,7 @@ const SecondInformationUpsertUserComponent = ({
             <Col span={11}>
               <Form.Item name={"archive"}>
                 <Select
+                  placeholder={"انتخاب بایگانی"}
                   onChange={(e) => {
                     setArchive(e);
                   }}
@@ -61,6 +62,7 @@ const SecondInformationUpsertUserComponent = ({
             <Col span={12} offset={1}>
               <Form.Item name={"role"}>
                 <Select
+                  placeholder={"انتخاب نقش"}
                   style={{ width: "100%" }}
                   // onClick={() => {
                   //   getData();

@@ -14,26 +14,28 @@ const FooterRootComponent = () => {
   }, []);
   return (
     <footer>
-      <Row justify="space-between" align="middle">
-        <Col span={17}>
-          <span style={{ color: hightlightColor, fontSize: 12 }}>
-            {" "}
-            تمام حقوق این سامانه متعلق به شرکت{" "}
-            <b>
-              <u>لیلو هوشمند سازان اروند</u>
-            </b>{" "}
-            می باشد و کپی برداری از آن پیگرد قانونی دارد . کپی رایت ۱۴۰۱
-          </span>
-        </Col>
-        <Col span={7}>
-          <span style={{ color: hightlightColor, fontSize: 12 }}>
-            سامانه قدرتمند مدیریت اسناد <b>ماهان</b> نسخه ({appInfo.version}){" "}
-          </span>
-          <CustomNasq color={hightlightColor} size={30}>
-            ماهان
-          </CustomNasq>
-        </Col>
-      </Row>
+      <SpaceStyled top={40} horizontal={20}>
+        <Row justify="space-between" align="middle">
+          <Col span={17}>
+            <span style={{ color: hightlightColor, fontSize: 12 }}>
+              {" "}
+              تمام حقوق این سامانه متعلق به شرکت{" "}
+              <b>
+                <u>لیلو هوشمند سازان اروند</u>
+              </b>{" "}
+              می باشد و کپی برداری از آن پیگرد قانونی دارد . کپی رایت ۱۴۰۱
+            </span>
+          </Col>
+          <Col span={7}>
+            <span style={{ color: hightlightColor, fontSize: 12 }}>
+              سامانه قدرتمند مدیریت اسناد <b>ماهان</b> نسخه ({appInfo.version}){" "}
+            </span>
+            <CustomNasq color={hightlightColor} size={30}>
+              ماهان
+            </CustomNasq>
+          </Col>
+        </Row>
+      </SpaceStyled>
     </footer>
   );
 };
