@@ -8,7 +8,10 @@ import {
   setArchiveGuardSystemAction,
   setGuardSystemAction,
 } from "../stateManager/actions/ArchiveAction";
-import { Checkbox } from "antd";
+import { Button, Checkbox, Col, Row } from "antd";
+import { colourStyles, SpaceStyled } from "../styled/global";
+import CustomButton from "../styled/components/CustomButton";
+import CustomSmallButton from "../styled/components/CustomSmallButton";
 const animatedComponents = makeAnimated();
 
 const cycle = [
@@ -25,6 +28,7 @@ const cycle = [
     label: "سه مرحله",
   },
 ];
+
 const GuardSystemRoot = ({ archiveId }) => {
   const dispatch = useDispatch();
   const supervisors = useSelector((state) => state.usersAutocomplete);
@@ -130,6 +134,7 @@ const GuardSystemRoot = ({ archiveId }) => {
         <div className={"card card-body mx-3"}>
           <div className={"row"}>
             <Select
+              styles={colourStyles}
               className={"mb-3 col-lg-4"}
               onChange={(e) => {
                 setCycleValue(e.value);
@@ -145,6 +150,7 @@ const GuardSystemRoot = ({ archiveId }) => {
             <div className={"col-lg-6 row"}>
               <label className={"mt-2 col-lg-3"}>تصویب کننده</label>
               <Select
+                styles={colourStyles}
                 onChange={(e) => {
                   setFinallyUser(e.value);
                 }}
@@ -162,6 +168,7 @@ const GuardSystemRoot = ({ archiveId }) => {
               <div className={"col-lg-6 row"}>
                 <label className={"mt-2 col-lg-3"}>تایید اولیه</label>
                 <Select
+                  styles={colourStyles}
                   onChange={(e) => {
                     setPrimitiveUser(e.value);
                   }}
@@ -181,6 +188,7 @@ const GuardSystemRoot = ({ archiveId }) => {
               <div className={"col-lg-6 row"}>
                 <label className={"mt-2 col-lg-3"}>ممیزی</label>
                 <Select
+                  styles={colourStyles}
                   onChange={(e) => {
                     setAuditUser(e.value);
                   }}
@@ -197,15 +205,21 @@ const GuardSystemRoot = ({ archiveId }) => {
         </div>
       )}
 
-      <button
-        hidden={!archiveId}
-        onClick={() => {
-          sendData();
-        }}
-        className={"btn btn-success btn-block mt-3 mx-3 col-lg-1 "}
-      >
-        ثبت
-      </button>
+      {archiveId && (
+        <SpaceStyled top={10}>
+          <Row justify="end">
+            <Col>
+              <CustomSmallButton
+                onClick={() => {
+                  sendData();
+                }}
+              >
+                ثبت
+              </CustomSmallButton>
+            </Col>
+          </Row>
+        </SpaceStyled>
+      )}
     </div>
   );
 };

@@ -46,6 +46,7 @@ import GuardSystemRoot from "../guardSystem/GuardSystemRoot";
 import FilesGuardSystemRoot from "../guardSystem/FilesGuardSystemRoot";
 import TextComponent from "../TextComponent";
 import AdminLayoutComponent from "./AdminLayoutComponent";
+import ArchiveViewerRoot from "../newArchive/ArchiveViewerRoot";
 const PanelRootComponent = ({ history, location }) => {
   const [cookies] = useCookies(["isLogin"]);
 
@@ -142,7 +143,7 @@ const PanelRootComponent = ({ history, location }) => {
                         />
                         <Route
                           path={"/archive-trees"}
-                          component={ArchiveTreeRoot}
+                          component={ArchiveViewerRoot}
                           exact
                         />
                         <Route

@@ -41,7 +41,6 @@ export const getSingleArchiveAction = (id) => {
     const { status, data } = await getSingleArchiveService(id);
     if (status === 200) {
       await dispatch({ type: "INIT_SINGLE_ARCHIVE", payload: data });
-      window.$("#insertMoreSetting").modal("show");
     }
   };
 };

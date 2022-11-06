@@ -8,3 +8,4 @@ export const lightColor = "#EEF2F5";
 export const orangeColor = "#F3A100";
 export const redColor = "#D21B26";
 export const darkBlueOpacityColor = "rgba(6, 67, 124, 0.9)";
+export const titleColor = "#313E49";

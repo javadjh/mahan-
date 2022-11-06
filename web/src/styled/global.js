@@ -43,3 +43,16 @@ export const CenterVerticalStyled = styled.div`
 export const CustomCursor = styled.span`
   cursor: pointer;
 `;
+export const colourStyles = {
+  control: (styles) => ({
+    ...styles,
+    ...{
+      background: "#f9fafc ",
+      borderRadius: "8px",
+      border: "none ",
+      padding: "10px ",
+      color: "black ",
+      marginTop: 10,
+    },
+  }),
+};

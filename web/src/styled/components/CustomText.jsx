@@ -1,21 +1,21 @@
 import { Typography } from "antd";
 import React from "react";
 import { lightBlueColor } from "../../app/appColor";
-const CustomText = ({ children, props, size, color }) => {
+const CustomText = (props) => {
   let style = {
-    color: color ? color : lightBlueColor,
+    color: props.color ? props.color : lightBlueColor,
     padding: "5px !important",
     margin: "0px ",
   };
   if (props?.color) {
     style = { ...style, ...{ color: props.color } };
   }
-  if (size) {
-    style = { ...style, ...{ fontSize: size } };
+  if (props.size) {
+    style = { ...style, ...{ fontSize: props.size } };
   }
   return (
     <Typography.Paragraph style={style} {...props}>
-      {children}
+      {props.children}
     </Typography.Paragraph>
   );
 };
