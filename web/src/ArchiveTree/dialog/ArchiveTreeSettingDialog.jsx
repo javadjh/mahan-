@@ -1,24 +1,27 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
 import { ArchiveTreeContext } from "../ArchiveTreeContext";
 import { ArchiveTreeLineContext } from "../archiveTreeLine/ArchiveTreeLineContext";
-import { mainArchiveTreesFormAction } from "../../stateManager/actions/ArchiveTreeAction";
+import {
+  mainArchiveTreesFormAction,
+  settingArchiveTreesAction,
+} from "../../stateManager/actions/ArchiveTreeAction";
 import { useDispatch, useSelector } from "react-redux";
 import { RootContext } from "../../RootComponent/RootContext";
 import { getAllFormsAction } from "../../stateManager/actions/FormAction";
+import { Checkbox, Col, Radio, Row, Select, Space } from "antd";
+import CustomButton from "../../styled/components/CustomButton";
+import { SpaceStyled } from "../../styled/global";
 
-const ArchiveTreeSettingDialog = ({ inTree = true, currentArchiveTree }) => {
-  const { singleTreeData, changeArchiveTreeSettingHandle } = useContext(
-    inTree ? ArchiveTreeContext : ArchiveTreeLineContext
-  );
+const ArchiveTreeSettingDialog = ({ tree, reload }) => {
   const [lang, setLang] = useState("both");
 
   useEffect(() => {
-    if (singleTreeData.title) {
-      setLang(singleTreeData.lang ? singleTreeData.lang : "both");
+    if (tree.title) {
+      setLang(tree.lang ? tree.lang : "both");
     } else {
       setLang("both");
     }
-  }, [singleTreeData]);
+  }, [tree]);
 
   const dispatch = useDispatch();
   const { handleHide } = useContext(RootContext);
@@ -31,149 +34,110 @@ const ArchiveTreeSettingDialog = ({ inTree = true, currentArchiveTree }) => {
   const [isFormRequired, setIsFormRequired] = useState(false);
   useEffect(() => {
     getData();
-    if (currentArchiveTree)
-      if (currentArchiveTree._id) {
-        setForm(currentArchiveTree.form);
-        setIsFormRequired(currentArchiveTree.isFormRequired);
+    if (tree)
+      if (tree._id) {
+        setForm(tree.form);
+        setIsFormRequired(tree.isFormRequired);
       } else {
         setForm(``);
         setIsFormRequired(false);
       }
-  }, [singleArchive, currentArchiveTree, reloadMainParentArchiveTree]);
+  }, [singleArchive, tree, reloadMainParentArchiveTree]);
   const getData = async () => {
     if (!handleHide("انتخاب فرم برای بایگانی"))
       await dispatch(getAllFormsAction());
   };
 
   const onSubmitClickListener = async () => {
-    await changeArchiveTreeSettingHandle({ lang });
-    if (currentArchiveTree)
-      if (currentArchiveTree.isMain)
+    await dispatch(settingArchiveTreesAction(tree._id, { lang }));
+    if (tree)
+      if (tree.isMain)
         await dispatch(
-          mainArchiveTreesFormAction(currentArchiveTree._id, {
+          mainArchiveTreesFormAction(tree._id, {
             formSelected: form,
             isFormRequired,
           })
         );
+    reload(Date.now());
   };
 
   return (
     <Fragment>
-      <div>
-        <h6 className={"mb-0 mt-3"}>انتخاب زبان قفسه</h6>
-        <div className={"row"}>
-          <div className={"col-lg-9"}>
-            <div className="custom-control custom-radio mx-2 mt-1">
-              <input
-                type="radio"
-                id={`en`}
-                onClick={() => {
-                  setLang("en");
-                }}
-                checked={lang === "en"}
-                name={`customRadio`}
-                className="custom-control-input"
-              />
-              <label className="custom-control-label" htmlFor={`en`}>
-                انگلیسی (en)
-              </label>
-            </div>
-            <div className="custom-control custom-radio mx-2 mt-1">
-              <input
-                type="radio"
-                id={`fa`}
-                onClick={() => {
-                  setLang("fa");
-                }}
-                checked={lang === "fa"}
-                name={`customRadio`}
-                className="custom-control-input"
-              />
-              <label className="custom-control-label" htmlFor={`fa`}>
-                فارسی (fa)
-              </label>
-            </div>
-          </div>
+      <h2>انتخاب زبان قفسه</h2>
+      <Radio.Group
+        value={lang}
+        onChange={(e) => {
+          console.log(e);
+          setLang(e?.target?.value);
+        }}
+      >
+        <Space direction="vertical">
+          <Radio value={"en"} key={"en"}>
+            انگلیسی (en)
+          </Radio>
+          <Radio value={"fa"} key={"fa"}>
+            فارسی (fa)
+          </Radio>
+        </Space>
+      </Radio.Group>
+      {tree ? (
+        <>
+          {tree.isMain ? (
+            <span hidden={handleHide("انتخاب فرم برای بایگانی")}>
+              <h2>انتخاب روکش اسناد زیر مجموعه</h2>
+              <Row justify="center" align="middle">
+                <Col span={12}>
+                  <Checkbox
+                    checked={isFormRequired}
+                    value={isFormRequired}
+                    onChange={(e) => {
+                      console.log(e?.target?.checked);
+                      setIsFormRequired(e?.target?.checked);
+                    }}
+                  >
+                    روکش سند برای این قفسه فعال شود.
+                  </Checkbox>
+                </Col>
 
-          {/*<div className={"col-lg-3"} onClick={()=>{
+                <Col span={12}>
+                  {isFormRequired ? (
+                    <Select
+                      defaultValue={form}
+                      onChange={(e) => {
+                        setForm(e);
+                      }}
+                      style={{ width: "100%" }}
+                    >
+                      <Select.Option value={``} key={``}>
+                        انتخاب کنید
+                      </Select.Option>
+                      {forms.map((f) => (
+                        <Select.Option
+                          selected={form === f._id}
+                          value={f._id}
+                          key={f._id}
+                        >
+                          {f.title}
+                        </Select.Option>
+                      ))}
+                    </Select>
+                  ) : null}
+                </Col>
+              </Row>
+            </span>
+          ) : null}
+        </>
+      ) : null}
 
-                                }}>
-                                    <button className={"btn btn-success btn-block"}>ثبت</button>
-                                </div>*/}
-        </div>
-
-        {currentArchiveTree ? (
-          <>
-            {currentArchiveTree.isMain ? (
-              <span hidden={handleHide("انتخاب فرم برای بایگانی")}>
-                <h6 className={"mb-0 mt-5"}>انتخاب روکش اسناد زیر مجموعه</h6>
-                <div>
-                  <div className="col-md-12">
-                    <div className="form-group">
-                      <div className={"row "}>
-                        <div className={"col-lg-6 mt-4"}>
-                          <div className="custom-control custom-checkbox">
-                            <input
-                              type="checkbox"
-                              className="custom-control-input"
-                              onClick={() => {
-                                setIsFormRequired(!isFormRequired);
-                              }}
-                              checked={isFormRequired}
-                              id={"isFormRequired"}
-                            />
-                            <label
-                              className="custom-control-label mt-2"
-                              htmlFor={"isFormRequired"}
-                            >
-                              روکش سند برای این قفسه فعال شود.
-                            </label>
-                          </div>
-                        </div>
-                        {isFormRequired ? (
-                          <div className="col-md-6">
-                            <div className="form-group">
-                              <label htmlFor="validationCustom04">
-                                انتخاب فرم
-                              </label>
-                              <select
-                                className="custom-select"
-                                onChange={(e) => {
-                                  setForm(e.target.value);
-                                }}
-                              >
-                                <option value={``} name={``}>
-                                  انتخاب کنید
-                                </option>
-                                {forms.map((f) => (
-                                  <option
-                                    selected={form === f._id}
-                                    value={f._id}
-                                    name={f._id}
-                                  >
-                                    {f.title}
-                                  </option>
-                                ))}
-                              </select>
-                            </div>
-                          </div>
-                        ) : null}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </span>
-            ) : null}
-          </>
-        ) : null}
-
-        <div className={"row"}>
-          <div className={"col-lg-9"}></div>
-          <div className={"col-lg-3"} onClick={onSubmitClickListener}>
-            <button className={"btn btn-success btn-block"}>ثبت</button>
-          </div>
-        </div>
-      </div>
+      <SpaceStyled top={20}>
+        <Row justify="end">
+          <Col span={8}>
+            <CustomButton block onClick={onSubmitClickListener}>
+              ثبت
+            </CustomButton>
+          </Col>
+        </Row>
+      </SpaceStyled>
     </Fragment>
   );
 };

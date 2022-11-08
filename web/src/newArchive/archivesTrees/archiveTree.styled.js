@@ -3,17 +3,12 @@ import { lightGreenColor } from "../../app/appColor";
 
 export const ArchiveTreeItem = styled.div`
   box-sizing: border-box;
-  background: white;
-  box-shadow: 0px 8px 21px rgba(6, 67, 124, 0.07);
-  border-radius: 6px;
-  padding: 15px 20px;
+
+  border: 1.2px solid #eef2f5;
   margin-bottom: 10px;
 
-  background: rgb(14, 197, 164);
-  background: linear-gradient(
-    90deg,
-    rgba(14, 197, 164, 1) 0%,
-    rgba(15, 110, 147, 1) 50%,
-    rgba(6, 67, 124, 1) 100%
-  );
+  background: #ffffff;
+  border: 1.2px solid #eef2f5;
+  box-shadow: 0px 14px 23px -14px rgba(40, 66, 90, 0.05);
+  border-radius: 8px;
 `;

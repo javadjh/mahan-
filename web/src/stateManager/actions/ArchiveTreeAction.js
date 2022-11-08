@@ -52,7 +52,6 @@ export const settingArchiveTreesAction = (id, setting) => {
         type: "INIT_RELOAD_MAIN_PARENT_ARCHIVE_TREE",
         payload: { mainParent: data.mainParent },
       });
-      window.$("#archiveTreeSettingDialog").modal("hide");
       doneToast("با موفقیت ثبت شد");
     }
   };
@@ -128,8 +127,6 @@ export const mainArchiveTreesFormAction = (archiveTreeId, bodyData) => {
         type: "INIT_RELOAD_MAIN_PARENT_ARCHIVE_TREE",
         payload: { date: Date.now() },
       });
-      window.$("#upsertMainArchiveTreesForm").modal("hide");
-      window.$("#archiveTreeSettingDialog").modal("hide");
     }
   };
 };

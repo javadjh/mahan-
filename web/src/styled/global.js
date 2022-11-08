@@ -56,3 +56,10 @@ export const colourStyles = {
     },
   }),
 };
+export const HorizontalScroll = styled.div`
+  overflow-x: scroll;
+  width: 100%;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+`;

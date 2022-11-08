@@ -50,14 +50,14 @@ export const insertFileAction = (id, history) => {
     const { status, data } = await insertFileService(id);
     if (status === 200) {
       doneToast("با موفقیت ثبت شد");
-      history.push({
-        pathname: "/upsert-document",
-        state: {
-          archiveId: data.archiveId,
-          fileId: data._id,
-          hasForm: false,
-        },
-      });
+      // history.push({
+      //   pathname: "/upsert-document",
+      //   state: {
+      //     archiveId: data.archiveId,
+      //     fileId: data._id,
+      //     hasForm: false,
+      //   },
+      // });
     }
   };
 };

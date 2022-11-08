@@ -4,26 +4,55 @@ import {
   deleteArchiveTreeService,
   getArchiveTreesService,
 } from "../../service/ArchiveTreeService";
+import { getArchiveTreesFileService } from "../../service/FileService";
 import { doneToast } from "../../utility/ShowToast";
 import { ArchiveTreeContext } from "./ArchiveTreesContext";
 const ArchiveTreeContextProvider = ({ children }) => {
   let archiveId = localStorage.getItem("archive");
   const [mainParent, setMainParent] = useState();
+  const [mainTree, setMainTree] = useState();
   const [archiveTrees, setArchiveTrees] = useState([]);
-  const [parentArchiveTree, setParentArchiveTree] = useState();
+  const [files, setFiles] = useState({});
+  const [isLoad, reload] = useState();
+  const [fileFilter, setFileFilter] = useState({
+    pageId: 1,
+    eachPerPage: 12,
+    searchValue: "",
+  });
+  const [routes, setRoutes] = useState([
+    {
+      label: "شاخه ی اصلی",
+    },
+  ]);
   const [documents, setDocuments] = useState({});
+
   useEffect(() => {
     getData();
-  }, [mainParent]);
+    if (mainParent) getFiles();
+  }, [mainParent, isLoad]);
+  useEffect(() => {
+    if (mainParent) getFiles();
+  }, [fileFilter, isLoad]);
+
+  const getFiles = async () => {
+    const { status, data } = await getArchiveTreesFileService(
+      mainParent._id,
+      fileFilter
+    );
+    if (status === 200) setFiles(data);
+  };
 
   const getData = async () => {
     const { data, status } = await getArchiveTreesService({
       isMain: mainParent ? false : true,
-      mainParent,
+      mainParent: mainParent?._id,
       archiveId,
     });
     console.log(data);
-    if (status === 200) setArchiveTrees(data);
+
+    if (status === 200) {
+      setArchiveTrees(data);
+    }
   };
   const changeTreeTitle = async (id, newTitle) => {
     console.log(newTitle);
@@ -45,12 +74,19 @@ const ArchiveTreeContextProvider = ({ children }) => {
   return (
     <ArchiveTreeContext.Provider
       value={{
+        reload,
+        mainTree,
+        setMainTree,
+        routes,
+        files,
+        fileFilter,
+        setFileFilter,
+        setFiles,
+        setRoutes,
         mainParent,
         setMainParent,
         archiveTrees,
         setArchiveTrees,
-        parentArchiveTree,
-        setParentArchiveTree,
         documents,
         setDocuments,
         getData,
