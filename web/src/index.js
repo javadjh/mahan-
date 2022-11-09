@@ -13,9 +13,10 @@ import "react-datepicker/dist/react-datepicker.css";
 
 import { ConfigProvider } from "antd";
 import RootContextProvider from "./RootComponent/RootContextProvider";
+import fa_IR from "antd/es/locale/fa_IR";
 
 ReactDOM.render(
-  <ConfigProvider direction={"rtl"}>
+  <ConfigProvider direction={"rtl"} locale={fa_IR}>
     <Provider store={store}>
       <React.StrictMode>
         <BrowserRouter>
