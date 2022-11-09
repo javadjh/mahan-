@@ -18,7 +18,6 @@ import InsertFileComponent from "../../ArchiveTree/files/InsertFileComponent";
 const TreeItem = ({ tree, addTree }) => {
   const { changeTreeTitle, deleteArchiveTree, reload, setMainTree, mainTree } =
     useContext(ArchiveTreeContext);
-  const [isTreeSettingDialogShow, setIsTreeSettingDialogShow] = useState(false);
   return (
     <ArchiveTreeItem>
       <Row justify="space-between" align="middle">
@@ -76,6 +75,7 @@ const TreeItem = ({ tree, addTree }) => {
                       mainTree={mainTree}
                     />
                   }
+                  width={"60%"}
                   actionRender={
                     <CustomSmallButton
                       color={lightGreenColor}
@@ -89,7 +89,6 @@ const TreeItem = ({ tree, addTree }) => {
                       افزودن پرونده به قفسه
                     </CustomSmallButton>
                   }
-                  isShow={isTreeSettingDialogShow}
                 />
               </SpaceStyled>
             </Col>
@@ -116,6 +115,7 @@ const TreeItem = ({ tree, addTree }) => {
             <Col>
               <SpaceStyled left={5}>
                 <CustomDialog
+                  width={"60%"}
                   title={"تنظیمات قفسه"}
                   render={
                     <ArchiveTreeSettingDialog tree={tree} reload={reload} />
@@ -133,7 +133,6 @@ const TreeItem = ({ tree, addTree }) => {
                       تنظیمات قفسه
                     </CustomSmallButton>
                   }
-                  isShow={isTreeSettingDialogShow}
                 />
               </SpaceStyled>
             </Col>

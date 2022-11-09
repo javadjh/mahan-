@@ -1,63 +1,42 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
-import { ArchiveTreeContext } from "../ArchiveTreeContext";
-import { ArchiveTreeLineContext } from "../archiveTreeLine/ArchiveTreeLineContext";
-import { errorToast } from "../../utility/ShowToast";
+import { Col, Form, Input, Row } from "antd";
+import CustomButton from "../../styled/components/CustomButton";
+import { maxForm, minForm, requiredForm } from "../../config/formValidator";
+import { ArchiveTreeContext } from "../../context/ArchiveTree/ArchiveTreesContext";
+import { CenterVerticalStyled, SpaceStyled } from "../../styled/global";
 
-const AddTreeDialog = ({ inTree = true }) => {
-  const { addNewTree, singleTreeData } = useContext(
-    inTree ? ArchiveTreeContext : ArchiveTreeLineContext
-  );
-  const [title, setTitle] = useState("");
-  const [id, setId] = useState();
-  useEffect(() => {
-    if (singleTreeData.title) {
-      setTitle(singleTreeData.title);
-      setId(singleTreeData._id);
-    } else {
-      setTitle("");
-      setId("");
-    }
-  }, [singleTreeData]);
+const AddTreeDialog = ({ setIsShowInsertTreeDialog }) => {
+  const { insertTree } = useContext(ArchiveTreeContext);
   return (
     <Fragment>
-      <div
-        className="modal fade"
-        id="addTreeDialog"
-        tabIndex="-1"
-        role="dialog"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
+      <Form
+        onFinish={(formData) => {
+          setIsShowInsertTreeDialog(false);
+          insertTree(formData);
+        }}
       >
-        <div className="modal-dialog" role="document">
-          <div className="modal-content p-4">
-            <div className={"text-center"}>
-              <input
-                id="txtFirstNameBilling"
-                type="text"
-                value={title}
-                onChange={(e) => {
-                  setTitle(e.target.value);
-                }}
-                placeholder={"عنوان قفسه را وارد کنید..."}
-                className="form-control col-lg-12"
-              />
-              <button
-                type="button"
-                onClick={() => {
-                  if (title.length < 1) {
-                    errorToast("لطفا عنوان را وارد کنید");
-                    return;
-                  }
-                  addNewTree(title);
-                }}
-                className="btn btn-primary btn-lg btn-block waves-effect waves-light mb-1 mt-2"
-              >
+        <Row>
+          <Col span={17}>
+            <Form.Item
+              name={"title"}
+              rules={[requiredForm, minForm(1), maxForm(250)]}
+            >
+              <Input placeholder={"عنوان قفسه را وارد کنید..."} />
+            </Form.Item>
+          </Col>
+          <Col span={6} offset={1}>
+            <SpaceStyled top={10}>
+              <CustomButton block htmlType="submit">
                 ثبت
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+              </CustomButton>
+            </SpaceStyled>
+          </Col>
+        </Row>
+        <Form.Item
+          name={"id"}
+          style={{ width: 0, height: 0, margin: 0, padding: 0 }}
+        ></Form.Item>
+      </Form>
     </Fragment>
   );
 };

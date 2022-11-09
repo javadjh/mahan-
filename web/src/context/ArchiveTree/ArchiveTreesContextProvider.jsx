@@ -3,6 +3,7 @@ import {
   changeArchiveTreesNameService,
   deleteArchiveTreeService,
   getArchiveTreesService,
+  insertArchiveTreeService,
 } from "../../service/ArchiveTreeService";
 import { getArchiveTreesFileService } from "../../service/FileService";
 import { doneToast } from "../../utility/ShowToast";
@@ -64,6 +65,19 @@ const ArchiveTreeContextProvider = ({ children }) => {
       getData();
     }
   };
+  const insertTree = async (formData) => {
+    const { data, status } = await insertArchiveTreeService({
+      ...formData,
+      ...{
+        isMain: mainParent ? false : true,
+        mainParent: mainParent,
+        archiveId,
+      },
+    });
+    if (status === 200) {
+      reload(Date.now());
+    }
+  };
   const deleteArchiveTree = async (id) => {
     const { data, status } = await deleteArchiveTreeService(id);
     if (status === 200) {
@@ -92,6 +106,7 @@ const ArchiveTreeContextProvider = ({ children }) => {
         getData,
         changeTreeTitle,
         deleteArchiveTree,
+        insertTree,
       }}
     >
       {children}

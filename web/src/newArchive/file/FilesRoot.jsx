@@ -6,8 +6,10 @@ import FilesTableComponent from "./FilesTableComponent";
 import CustomText from "../../styled/components/CustomText";
 import CustomButton from "../../styled/components/CustomButton";
 import { CenterVerticalStyled, SpaceStyled } from "../../styled/global";
+import CustomDialog from "../../styled/components/CustomDialog";
+import InsertFileComponent from "../../ArchiveTree/files/InsertFileComponent";
 const FilesRoot = () => {
-  const { files, mainParent, setFileFilter, fileFilter } =
+  const { files, setFileFilter, fileFilter, mainParent, mainTree } =
     useContext(ArchiveTreeContext);
   return (
     <>
@@ -32,7 +34,20 @@ const FilesRoot = () => {
               <Col span={12}>
                 <Row justify="end">
                   <Col>
-                    <CustomButton>افزودن پرونده ی جدید</CustomButton>
+                    <CustomDialog
+                      width={"60%"}
+                      title={"پرونده"}
+                      render={
+                        <InsertFileComponent
+                          inTree={false}
+                          tree={mainParent}
+                          mainTree={mainTree}
+                        />
+                      }
+                      actionRender={
+                        <CustomButton>افزودن پرونده ی جدید</CustomButton>
+                      }
+                    />
                   </Col>
                 </Row>
               </Col>

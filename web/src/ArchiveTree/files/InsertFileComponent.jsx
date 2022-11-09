@@ -24,8 +24,11 @@ import { maxForm, minForm, requiredForm } from "../../config/formValidator";
 const animatedComponents = makeAnimated();
 
 const InsertFileComponent = ({ tree, mainTree }) => {
+  console.log(tree);
+  console.log(mainTree);
   const [form] = Form.useForm();
   const history = useHistory();
+  const [reload, setReload] = useState();
   const formValidator = useRef(validatorSP());
   const dispatch = useDispatch();
   const insertFileData = useSelector((state) => state.insertFileData);
@@ -37,6 +40,10 @@ const InsertFileComponent = ({ tree, mainTree }) => {
   useEffect(() => {
     getData();
   }, []);
+
+  useEffect(() => {
+    console.log(form.getFieldsValue());
+  }, [reload]);
 
   const getData = async () => {
     await dispatch(getInsertFileInsertDataAction());
@@ -61,14 +68,19 @@ const InsertFileComponent = ({ tree, mainTree }) => {
           initialValues={{
             enDate: new Date().toISOString(),
             faDate: new Date().toISOString(),
-            hasSpecialForm: false,
           }}
           onFinish={sendData}
         >
           <Row align="middle">
             <Col span={12}>
               <Form.Item valuePropName="checked" name={"hasSpecialForm"}>
-                <Checkbox>فرم روکش سند برای این پرونده متفاوت باشد</Checkbox>
+                <Checkbox
+                  onChange={() => {
+                    setReload(Date.now());
+                  }}
+                >
+                  فرم روکش سند برای این پرونده متفاوت باشد
+                </Checkbox>
               </Form.Item>
             </Col>
 
@@ -93,12 +105,12 @@ const InsertFileComponent = ({ tree, mainTree }) => {
             ) : null}
           </Row>
           <SpaceStyled vertical={10}>
-            <Row>
+            <Row align="middle">
               {tree.archive.availablePattern === "one" ||
               tree.archive.availablePattern === "two" ||
               tree.archive.availablePattern === "five" ? (
                 <Col span={8} dir={"ltr"}>
-                  <Row>
+                  <Row align="middle">
                     {tree.archive.availablePattern === "five" ? null : (
                       <Col span={8}>
                         {tree.archive.availablePattern === "two"
@@ -111,32 +123,37 @@ const InsertFileComponent = ({ tree, mainTree }) => {
                           : `${tree.archive.firstStringOfPattern}-`}
                       </Col>
                     )}
-                    <Form.Item name={"fileCodeType"}></Form.Item>
-                    <Form.Item
-                      name={"fileCode"}
-                      rules={[
-                        ...[minForm(3), maxForm(20)],
-                        ...[
-                          tree.archive.availablePattern === "one" ||
-                          tree.archive.availablePattern === "two" ||
-                          tree.archive.availablePattern === "four"
-                            ? requiredForm
-                            : {},
-                        ],
-                      ]}
-                    >
-                      <Input
-                        onChange={(e) => {
-                          form.setFieldsValue({
-                            ...form.getFieldsValue,
-                            ...{
-                              fileCodeType: e.target.value,
-                            },
-                          });
-                        }}
-                        placeholder="شماره پرونده"
-                      />
-                    </Form.Item>
+                    <Col span={15}>
+                      <Form.Item
+                        style={{ margin: 0, padding: 0, width: 0, height: 0 }}
+                        name={"fileCodeType"}
+                      ></Form.Item>
+                      <Form.Item
+                        name={"fileCode"}
+                        rules={[
+                          ...[minForm(3), maxForm(20)],
+                          ...[
+                            tree.archive.availablePattern === "one" ||
+                            tree.archive.availablePattern === "two" ||
+                            tree.archive.availablePattern === "four"
+                              ? requiredForm
+                              : {},
+                          ],
+                        ]}
+                      >
+                        <Input
+                          onChange={(e) => {
+                            form.setFieldsValue({
+                              ...form.getFieldsValue,
+                              ...{
+                                fileCodeType: e.target.value,
+                              },
+                            });
+                          }}
+                          placeholder="شماره پرونده"
+                        />
+                      </Form.Item>
+                    </Col>
                   </Row>
                 </Col>
               ) : null}
@@ -202,7 +219,10 @@ const InsertFileComponent = ({ tree, mainTree }) => {
               <Col span={8}>
                 <SpaceStyled left={10}>
                   <Form.Item rules={[requiredForm]} name={"fileStatus"}>
-                    <Select style={{ width: "100%" }}>
+                    <Select
+                      placeholder="وضعیت پرونده را مشخص کنید"
+                      style={{ width: "100%" }}
+                    >
                       <Select.Option value={undefined} key={undefined}>
                         انتخاب کنید
                       </Select.Option>

@@ -1,5 +1,9 @@
 import { Table } from "antd";
 import React from "react";
+import { lightGreenColor } from "../../app/appColor";
+import CustomButton from "../../styled/components/CustomButton";
+import CustomText from "../../styled/components/CustomText";
+import { BsArrowLeftShort } from "react-icons/bs";
 const FilesTableComponent = (props) => {
   const columns = [
     {
@@ -10,7 +14,14 @@ const FilesTableComponent = (props) => {
     {
       title: "عنوان پرونده",
       key: "title",
-      dataIndex: "title",
+      render: (item) => (
+        <span>
+          {item.title}{" "}
+          <span style={{ color: lightGreenColor }}>
+            ( {item.documentCount} )
+          </span>
+        </span>
+      ),
     },
     {
       title: "نوع",
@@ -31,6 +42,13 @@ const FilesTableComponent = (props) => {
       title: "تاریخ",
       key: "fileDate",
       dataIndex: "fileDate",
+    },
+    {
+      title: "عملیات",
+      key: "action",
+      render: (item) => (
+        <CustomButton color={lightGreenColor}>نمایش</CustomButton>
+      ),
     },
   ];
   return (
