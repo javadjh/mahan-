@@ -47,6 +47,7 @@ import FilesGuardSystemRoot from "../guardSystem/FilesGuardSystemRoot";
 import TextComponent from "../TextComponent";
 import AdminLayoutComponent from "./AdminLayoutComponent";
 import ArchiveViewerRoot from "../newArchive/ArchiveViewerRoot";
+import FileRoot from "../newFile/FileRoot";
 const PanelRootComponent = ({ history, location }) => {
   const [cookies] = useCookies(["isLogin"]);
 
@@ -151,7 +152,8 @@ const PanelRootComponent = ({ history, location }) => {
                           component={LogRootComponent}
                           exact
                         />
-                        <Route
+                        <Route path={"/file/:id"} component={FileRoot} exact />
+                        {/* <Route
                           path={"/upsert-document"}
                           render={() => (
                             <UpsertDocumentContextProvider>
@@ -161,7 +163,7 @@ const PanelRootComponent = ({ history, location }) => {
                             </UpsertDocumentContextProvider>
                           )}
                           exact
-                        />
+                        /> */}
                         <Route
                           path={"/library"}
                           render={() => (

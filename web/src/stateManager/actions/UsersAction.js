@@ -103,7 +103,7 @@ export const loginAction = (user, setCookie) => {
       localStorage.setItem("userId", decoded.userId);
       setTimeout(() => {
         window.location.reload();
-      }, 2000);
+      }, 500);
     }
   };
 };

@@ -4,6 +4,7 @@ import { lightGreenColor } from "../../app/appColor";
 import CustomButton from "../../styled/components/CustomButton";
 import CustomText from "../../styled/components/CustomText";
 import { BsArrowLeftShort } from "react-icons/bs";
+import { Link } from "react-router-dom";
 const FilesTableComponent = (props) => {
   const columns = [
     {
@@ -47,7 +48,9 @@ const FilesTableComponent = (props) => {
       title: "عملیات",
       key: "action",
       render: (item) => (
-        <CustomButton color={lightGreenColor}>نمایش</CustomButton>
+        <Link to={`/file/${item._id}`}>
+          <CustomButton color={lightGreenColor}>نمایش</CustomButton>
+        </Link>
       ),
     },
   ];
