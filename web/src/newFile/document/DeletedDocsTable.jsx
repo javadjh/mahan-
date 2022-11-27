@@ -3,13 +3,13 @@ import { Table } from "antd";
 import { useSelector } from "react-redux";
 import { useContext } from "react";
 import { FileContext } from "../../context/file/FileContext";
-import CustomPopConfirm from "../../styled/components/CustomPopConfirm";
+import { darkBlueColor } from "../../app/appColor";
 import CustomButton from "../../styled/components/CustomButton";
-import { redColor } from "../../app/appColor";
+import CustomPopConfirm from "../../styled/components/CustomPopConfirm";
+const DeletedDocsTable = () => {
+  const { documentsFilterHandle, restoreDocHandler } = useContext(FileContext);
+  const deActivateDocuments = useSelector((state) => state.deActivateDocuments);
 
-const DocumentsTable = () => {
-  const { documentsFilterHandle, deleteDocHandler } = useContext(FileContext);
-  const documents = useSelector((state) => state.documents);
   const columns = [
     {
       title: "شماره",
@@ -45,9 +45,11 @@ const DocumentsTable = () => {
         <>
           <CustomPopConfirm
             onDelete={() => {
-              deleteDocHandler(item._id);
+              restoreDocHandler(item._id);
             }}
-            render={<CustomButton color={redColor}>حذف</CustomButton>}
+            render={
+              <CustomButton color={darkBlueColor}>بازگردانی</CustomButton>
+            }
           />
           {/* <CustomButton
             style={{ marginRight: 5 }}
@@ -63,17 +65,17 @@ const DocumentsTable = () => {
   return (
     <Table
       columns={columns}
-      dataSource={documents.documents}
+      dataSource={deActivateDocuments.documents}
       pagination={{
         onChange: (page) => {
           documentsFilterHandle({ pageId: page });
         },
-        defaultCurrent: documents.pageId,
-        total: documents.total,
-        current: documents.pageId,
-        pageSize: documents.eachPerPage,
+        defaultCurrent: deActivateDocuments.pageId,
+        total: deActivateDocuments.total,
+        current: deActivateDocuments.pageId,
+        pageSize: deActivateDocuments.eachPerPage,
       }}
     />
   );
 };
-export default DocumentsTable;
+export default DeletedDocsTable;

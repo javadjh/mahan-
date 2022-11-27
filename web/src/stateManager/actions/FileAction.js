@@ -145,7 +145,6 @@ export const deleteFileAction = (id, history) => {
     const { status } = await deleteFileService(id);
     if (status === 200) {
       doneToast("با موفقیت حذف شد");
-      history.goBack();
       await dispatch(getUsersFileAlertsAction());
     }
   };
