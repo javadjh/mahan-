@@ -1,7 +1,8 @@
-import { Button } from "antd";
+import { Button, Col, Row } from "antd";
 import React from "react";
 import styled from "styled-components";
 import { darkBlueColor, lightColor } from "../../app/appColor";
+import { SpaceStyled } from "../global";
 const CustomButton = (props) => {
   console.log(props.color);
   const CustomButtonStyled = styled(Button)`
@@ -14,6 +15,20 @@ const CustomButton = (props) => {
     border: ${props.color === "#fff" ? "2px solid #EEF2F5" : "none"} !important;
     box-shadow: 0px 15px 24px rgba(6, 67, 124, 0.08) !important;
   `;
-  return <CustomButtonStyled {...props}>{props.children}</CustomButtonStyled>;
+  let editProps = { ...props, ...{ icon: undefined } };
+  return (
+    <CustomButtonStyled {...editProps}>
+      <Row>
+        <Col>{props.children}</Col>
+        <Col>
+          {props.icon && (
+            <SpaceStyled right={5} top={5}>
+              {props.icon}
+            </SpaceStyled>
+          )}
+        </Col>
+      </Row>
+    </CustomButtonStyled>
+  );
 };
 export default CustomButton;

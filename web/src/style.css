@@ -116,3 +116,21 @@
 .ant-select-selection-placeholder {
   z-index: 2;
 }
+.ant-collapse {
+  box-shadow: 0px 7px 17px -3px rgba(77, 89, 107, 0.05);
+  border-radius: 10px;
+  border: 1.1px dashed #dde5ec !important;
+}
+.ant-collapse-item {
+  border: none !important;
+}
+.ant-collapse-content-box {
+  border: none !important;
+}
+.ant-collapse-content {
+  border: none !important;
+}
+
+.ant-collapse-content-active {
+  border: none !important;
+}

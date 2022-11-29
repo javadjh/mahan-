@@ -48,6 +48,8 @@ import TextComponent from "../TextComponent";
 import AdminLayoutComponent from "./AdminLayoutComponent";
 import ArchiveViewerRoot from "../newArchive/ArchiveViewerRoot";
 import FileRoot from "../newFile/FileRoot";
+import FormsRoot from "../newForm/forms/FormsRoot";
+import UpsertFormRoot from "../newForm/upsert/UpsertFormRoot";
 const PanelRootComponent = ({ history, location }) => {
   const [cookies] = useCookies(["isLogin"]);
 
@@ -113,18 +115,15 @@ const PanelRootComponent = ({ history, location }) => {
                           )}
                           exact
                         />
-                        <Route
+                        {/* <Route
                           path={"/forms"}
                           component={FormsRootComponent}
                           exact
-                        />
+                        /> */}
+                        <Route path={"/forms"} component={FormsRoot} exact />
                         <Route
-                          path={"/upsert-form"}
-                          render={() => (
-                            <UpsertFormContextProvider>
-                              <InsertFormRootComponent />
-                            </UpsertFormContextProvider>
-                          )}
+                          path={"/forms/upsert/form/:id"}
+                          component={UpsertFormRoot}
                           exact
                         />
                         <Route

@@ -1,6 +1,7 @@
 export const darkBlueColor = "#06437C";
 export const blueColor = "#0F508D";
 export const transeparentColor = "rgba(0, 0, 0, 0)";
+export const borderColor = "rgba(0, 0, 0,0.2)";
 export const lightGreenColor = "#0EC5A4";
 export const lightBlueColor = "#BFCED8";
 export const grayColor = "#96AABC";

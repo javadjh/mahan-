@@ -164,6 +164,11 @@ const AdminLayoutComponent = ({ children, location }) => {
                       icon={<ClusterOutlined />}
                       title={"سمت سازمانی"}
                     />
+                    <CustomMenuItem
+                      href={"/forms"}
+                      icon={<ClusterOutlined />}
+                      title={"فرم ساز"}
+                    />
                   </>
                 }
               />

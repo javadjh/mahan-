@@ -56,48 +56,6 @@ const RolesRootComponent = ({ history }) => {
     history.push("/upsert-user");
   };
   return (
-    // <MainLayout title={"لیست نقش های سامانه"}>
-    //
-    //   <AlertDialog
-    //     title={"آیا از حذف این نقش مطمعن هستید؟"}
-    //     deleteHandle={deleteHandle}
-    //   />
-    //   <div className="row">
-    //     <div className="col-12">
-    //       <div className="card">
-    //         <div className="card-body">
-    //           <div className={"row"}>
-    //             <div className={"col-lg-8"}>
-    //               <div className={"row mb-1"}>
-    //                 <button
-    //                   hidden={handleHide("الگوی دسترسی")}
-    //                   onClick={() => {
-    //                     upsertRoleHandle({});
-    //                   }}
-    //                   type="button"
-    //                   className="btn btn-success ml-3 waves-effect waves-light"
-    //                   data-toggle="button"
-    //                   aria-pressed="false"
-    //                 >
-    //                   افزودن نقش جدید
-    //                 </button>
-    //               </div>
-    //               <p className="card-title-desc">
-    //                 تمامی نقش های سامانه را می توانید در لیست زیر مشاهده و
-    //                 مدیریت نمایید
-    //               </p>
-    //             </div>
-    //           </div>
-    //           <RolesTableComponent
-    //             onOpenAlertDialogHandle={onOpenAlertDialogHandle}
-    //             roles={roles}
-    //             upsertRoleHandle={upsertRoleHandle}
-    //           />
-    //         </div>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </MainLayout>
     <Fragment>
       <CustomDialog
         title={"کاربران"}
