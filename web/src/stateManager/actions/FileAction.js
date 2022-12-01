@@ -97,7 +97,6 @@ export const setFileFormAction = (fileId, form) => {
     const { status, data } = await setFileFormService(fileId, form);
     if (status === 200) {
       doneToast("با موفقیت ثبت شد");
-      window.$("#upsertArchivesForm").modal("hide");
     }
   };
 };

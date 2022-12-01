@@ -6,10 +6,34 @@ import { useContext } from "react";
 import { FileContext } from "../../context/file/FileContext";
 import FileStatisticComponent from "./FileStatisticComponent";
 import DeletedDocsTable from "../document/DeletedDocsTable";
+import FilesFormComponent from "./FilesFormComponent";
+import MergeAlertComponent from "./MergeAlertComponent";
+import CustomText from "../../styled/components/CustomText";
+import {
+  darkBlueColor,
+  lightGreenColor,
+  orangeColor,
+  redColor,
+} from "../../app/appColor";
+import CorrespondenceRoot from "./CorrespondenceRoot";
 const TabsComponent = () => {
-  const { setTabState } = useContext(FileContext);
+  const { setTabState, fileStatistic } = useContext(FileContext);
+  const nazerTab = () => {
+    console.log(fileStatistic?.file?.isConfirm);
+    console.log(fileStatistic?.file?.isReject);
+    console.log(fileStatistic?.file?.isWaiting);
+    if (fileStatistic?.file?.isConfirm)
+      return <CustomText color={lightGreenColor}>ناظر (تایید شده)</CustomText>;
+    if (fileStatistic?.file?.isReject)
+      return <CustomText color={redColor}>ناظر (مرجوع شده)</CustomText>;
+    if (fileStatistic?.file?.isWaiting)
+      return <CustomText color={orangeColor}>ناظر (در انتظار)</CustomText>;
+
+    return <CustomText color={darkBlueColor}>ناظر (بدون عملیات)</CustomText>;
+  };
   return (
     <Tabs
+      defaultActiveKey="alert"
       onChange={(e) => {
         setTabState(e);
       }}
@@ -26,7 +50,15 @@ const TabsComponent = () => {
       <Tabs.TabPane tab="اسناد حذف شده " key={"deleted"}>
         <DeletedDocsTable />
       </Tabs.TabPane>
-      <Tabs.TabPane tab="روکش پرونده" key={"form"}></Tabs.TabPane>
+      <Tabs.TabPane tab="روکش پرونده" key={"form"}>
+        <FilesFormComponent />
+      </Tabs.TabPane>
+      <Tabs.TabPane tab="هشدار ها" key={"alerts"}>
+        <MergeAlertComponent />
+      </Tabs.TabPane>
+      <Tabs.TabPane tab={nazerTab()} key={"nazer"}>
+        <CorrespondenceRoot />
+      </Tabs.TabPane>
     </Tabs>
   );
 };

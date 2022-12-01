@@ -68,7 +68,8 @@ module.exports.getFileDocuments = async (req, res) => {
   for (let i = 0; i < documents.length; i++) {
     const item = documents[i];
 
-    if (item.createDate) item.createDate = convertToShamsi(item.createDate);
+    if (item.createDate)
+      documents[i].createDate = convertToShamsi(item.createDate);
     item.documentSize = byteToSize(item.documentSize);
 
     documents[i].lastDocumentId = item._id;

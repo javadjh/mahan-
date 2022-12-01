@@ -119,6 +119,9 @@ const DocumentSchema = new mongoose.Schema({
   documentOCR: {
     type: String,
   },
+  txt: {
+    type: String,
+  },
 });
 const DocumentModel = mongoose.model("document", DocumentSchema);
 module.exports = DocumentModel;

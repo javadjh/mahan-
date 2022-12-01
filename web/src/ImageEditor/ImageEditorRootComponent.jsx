@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-
+import { Col, Input, Row, Select } from "antd";
 import "./imageEdit.css";
 import { useEffect, useRef, useState } from "react";
 import ReactCrop from "react-image-crop";
@@ -20,6 +20,8 @@ import {
 } from "../service/DocumentService";
 import { errorToast } from "../utility/ShowToast";
 import { getImageDocumentService } from "../service/FileService";
+import CustomButton from "../styled/components/CustomButton";
+import CustomMediumButton from "../styled/components/CustomMediumButton";
 const ImageEditorRootComponent = ({ history, match }) => {
   let id = match?.params?.fileId;
   let lastdocument = match?.params?.lastdocument;
@@ -522,9 +524,22 @@ const ImageEditorRootComponent = ({ history, match }) => {
         <div className="editor-editor-toolbar">
           <div>
             <div className="editor-toolbar-item">
-              <label htmlFor="imgaeupload" className="btn btn-primary">
-                انتخاب تصویر
-              </label>
+              <label
+                htmlFor="imgaeupload"
+                id="ddfdfdfd"
+                className="btn btn-primary"
+              ></label>
+              <CustomButton>
+                <div
+                  onClick={() => {
+                    let label = document.getElementById(`ddfdfdfd`);
+                    label.click();
+                  }}
+                >
+                  انتخاب تصویر
+                </div>
+              </CustomButton>
+
               <input
                 hidden={true}
                 type="file"
@@ -584,17 +599,9 @@ const ImageEditorRootComponent = ({ history, match }) => {
               </div>
             </div>
           </div>
-          <div className="mx-4 ">
-            <div className="row ">
-              <textarea
-                value={note}
-                onChange={(e) => {
-                  setNote(e.target.value);
-                }}
-                className="form-control col-lg-12 mb-2"
-                placeholder="یادداشت را وارد کنید(اختیاری)"
-              />
-              <input
+          <div className="row ">
+            <div style={{ margin: 20 }}>
+              <Input
                 placeholder="نام سند را وارد کنید"
                 value={fileName}
                 onChange={(e) => {
@@ -602,15 +609,23 @@ const ImageEditorRootComponent = ({ history, match }) => {
                 }}
                 className="form-control col-lg-8"
               />
-              <button
-                className="btn btn-success col-lg-4"
+
+              <Input.TextArea
+                value={note}
+                onChange={(e) => {
+                  setNote(e.target.value);
+                }}
+                style={{ marginTop: 10 }}
+                placeholder="یادداشت را وارد کنید(اختیاری)"
+              />
+              <CustomButton
                 type="file"
-                style={{ width: "100%" }}
+                style={{ width: "100%", marginTop: 10 }}
                 id="imageFileOutput"
                 onClick={(e) => downloadImage(e)}
               >
                 ثبت سند
-              </button>
+              </CustomButton>
             </div>
           </div>
         </div>
@@ -687,52 +702,58 @@ const ImageEditorRootComponent = ({ history, match }) => {
           )}
           {selectedTool == 2 && (
             <div className="editor-text-tools-container">
-              <button onClick={cropImageNow}>Crop Image</button>
+              <CustomMediumButton onClick={cropImageNow}>
+                برش تصویر
+              </CustomMediumButton>
             </div>
           )}
           {selectedTool == 0 && (
             <div className="editor-brush-colors-container">
-              <select
-                style={{ width: "50px", height: "50px" }}
+              <Select
+                style={{ width: 150 }}
                 value={userlineWidth}
-                onChange={(e) => setUserlineWidth(e.target.value)}
+                onChange={(e) => setUserlineWidth(e)}
               >
-                <option value={5}>5</option>
-                <option value={10}>10</option>
-                <option value={15}>15</option>
-                <option value={20}>20</option>
-                <option value={25}>25</option>
-              </select>
+                <Select.Option value={5}>5</Select.Option>
+                <Select.Option value={10}>10</Select.Option>
+                <Select.Option value={15}>15</Select.Option>
+                <Select.Option value={20}>20</Select.Option>
+                <Select.Option value={25}>25</Select.Option>
+              </Select>
             </div>
           )}
           {selectedTool == 3 && (
-            <div className="editor-brush-colors-container">
-              <select
-                style={{ width: "50px", height: "50px" }}
-                value={userFontSize}
-                onChange={(e) => setUserFontSize(e.target.value)}
-              >
-                <option value="5">5</option>
-                <option value="10">10</option>
-                <option value="15">15</option>
-                <option value="20">20</option>
-                <option value="25">25</option>
-                <option value="30">30</option>
-                <option value="35">35</option>
-                <option value="40">40</option>
-                <option value="45">45</option>
-                <option value="50">50</option>
-              </select>
-              <select
-                style={{ width: "50px", height: "50px" }}
-                value={userFontFamily}
-                onChange={(e) => setUserFontFamily(e.target.value)}
-              >
-                <option value="Arial">Arial</option>
-                <option value="Georgia">Georgia</option>
-                <option value="Helvetica">Helvetica</option>
-              </select>
-            </div>
+            <Row>
+              <Col span={12}>
+                <Select
+                  style={{ width: 150 }}
+                  value={userFontSize}
+                  onChange={(e) => setUserFontSize(e)}
+                >
+                  <Select.Option value="5">5</Select.Option>
+                  <Select.Option value="10">10</Select.Option>
+                  <Select.Option value="15">15</Select.Option>
+                  <Select.Option value="20">20</Select.Option>
+                  <Select.Option value="25">25</Select.Option>
+                  <Select.Option value="30">30</Select.Option>
+                  <Select.Option value="35">35</Select.Option>
+                  <Select.Option value="40">40</Select.Option>
+                  <Select.Option value="45">45</Select.Option>
+                  <Select.Option value="50">50</Select.Option>
+                </Select>
+              </Col>
+              <Col span={12}>
+                <Select
+                  style={{ width: 150 }}
+                  value={userFontFamily}
+                  onChange={(e) => setUserFontFamily(e)}
+                >
+                  <Select.Option value="Arial">Arial</Select.Option>
+                  <Select.Option value="Georgia">Georgia</Select.Option>
+                  <Select.Option value="Helvetica">Helvetica</Select.Option>
+                </Select>
+              </Col>
+            </Row>
           )}
         </div>
       </div>

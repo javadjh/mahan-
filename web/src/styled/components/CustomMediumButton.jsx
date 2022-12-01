@@ -8,7 +8,6 @@ import {
 } from "../../app/appColor";
 import { SpaceStyled } from "../global";
 const CustomMediumButton = (props) => {
-  console.log(props.color);
   const CustomMediumButtonStyled = styled(Button)`
     background-color: ${props.color ? props.color : darkBlueColor} !important;
     color: ${props.color === "#fff" ? "#92A2B0" : "white"} !important;

@@ -16,6 +16,9 @@ import UpsertLibraryShelfDialog from "./dialog/UpsertLibraryShelfDialog";
 import { RootContext } from "../RootComponent/RootContext";
 import ShowFilePreviewLibraryDialog from "./dialog/ShowFilePreviewLibraryDialog";
 import MoveDocumentsToLibraryShelfDialog from "./dialog/MoveDocumentsToLibraryShelfDialog";
+import { Col, Row } from "antd";
+import LibraryItemComponent from "./LibraryItemComponent";
+import { SpaceStyled } from "../styled/global";
 const LibrariesDocumentsComponent = ({ isManage = true }) => {
   const { selectedDoc, setSelectedDoc, removeDoc, addDoc } =
     useContext(LibraryContext);
@@ -51,12 +54,12 @@ const LibrariesDocumentsComponent = ({ isManage = true }) => {
     }
   };
 
-  useEffect(() => {
-    if (libraryShelf._id) window.$("#upsertLibraryDialog").modal("show");
-    return () => {
-      setLibraryShelfContext({});
-    };
-  }, [libraryShelf]);
+  // useEffect(() => {
+  //   // if (libraryShelf._id) window.$("#upsertLibraryDialog").modal("show");
+  //   return () => {
+  //     setLibraryShelfContext({});
+  //   };
+  // }, [libraryShelf]);
 
   useEffect(() => {
     if (libraryShelfContext._id) getLibraryShelfDocument();
@@ -68,41 +71,20 @@ const LibrariesDocumentsComponent = ({ isManage = true }) => {
 
   const deleteShowDialog = (document) => {
     setSingleDocument(document);
-    window.$("#alertDialog").modal("show");
+    // window.$("#alertDialog").modal("show");
   };
-  const deleteDocument = async () => {
+  const deleteDocument = async (id) => {
     await dispatch(
-      deleteLibrariesDocumentAction(
-        singleDocument._id,
-        libraryShelfContext._id,
-        setReload
-      )
+      deleteLibrariesDocumentAction(id, libraryShelfContext._id, setReload)
     );
   };
   const showDeleteLibraryShelfDialogHandle = () => {
-    window.$("#deleteLibraryShelf").modal("show");
+    // window.$("#deleteLibraryShelf").modal("show");
   };
-  const deleteLibraryShelf = async () => {
-    await dispatch(deleteLibraryShelfAction(singleLibraryShelf._id));
+  const deleteLibraryShelf = async (id) => {
+    await dispatch(deleteLibraryShelfAction(id));
   };
-  useEffect(() => {
-    const handleEsc = (event) => {
-      if (event.keyCode === 46 && selectedDoc.length > 0) {
-        onDeleteGroupDocumentHandle();
-      } else if (event.keyCode === 77 && selectedDoc.length > 0) {
-        window.$("#moveDocumentsToLibraryShelfDialog").modal("show");
-      }
-    };
-    window.addEventListener("keydown", handleEsc);
 
-    return () => {
-      window.removeEventListener("keydown", handleEsc);
-    };
-  }, [selectedDoc]);
-
-  const onDeleteGroupDocumentHandle = () => {
-    window.$("#deleteGroupDocuments").modal("show");
-  };
   const showGroupAlertDialogDelete = async () => {
     console.log(selectedDoc);
     await dispatch(
@@ -126,7 +108,7 @@ const LibrariesDocumentsComponent = ({ isManage = true }) => {
   };
   return (
     <div className={"mt-0"}>
-      <AlertDialog
+      {/* <AlertDialog
         title={`آیا از حذف سند ${singleDocument.title} مطمعن هستید؟`}
         deleteHandle={deleteDocument}
       />
@@ -146,244 +128,30 @@ const LibrariesDocumentsComponent = ({ isManage = true }) => {
         destinationId={destinationId}
         setDestinationId={setDestinationId}
         moveDocumentHandel={moveDocumentHandel}
-      />
+      /> */}
       {libraryShelfContext._id ? (
         <div>
-          <div
-            className={"row  custom-cursor mb-2"}
+          <Row
             onClick={() => {
               setLibraryShelfContext({});
               reloadPage("");
             }}
           >
-            <i className={"mdi mdi-arrow-right"} style={{ fontSize: 20 }} />
-            <span style={{ marginTop: 5, marginRight: 2 }}>بازگشت</span>
-            <span style={{ marginTop: 5, marginRight: 2 }}>
-              ( {libraryShelfContext.title} )
-            </span>
-          </div>
-          <div className={"row"}>
+            <Col>
+              <i className={"mdi mdi-arrow-right"} style={{ fontSize: 20 }} />
+            </Col>
+            <Col>
+              <span style={{ marginTop: 5, marginRight: 2 }}>بازگشت</span>
+            </Col>
+            <Col>
+              <span style={{ marginTop: 5, marginRight: 2 }}>
+                ( {libraryShelfContext.title} )
+              </span>
+            </Col>
+          </Row>
+          <Row>
             {libraryShelfDocuments.map((l) => (
-              <span
-                className={"card py-2 px-3 mr-3 mt-0"}
-                style={{
-                  height: 220,
-                  backgroundColor: selectedDoc.includes(l._id)
-                    ? "royalblue"
-                    : "white",
-                }}
-                onClick={() => {
-                  /*if(selectedDoc.includes(l._id))
-                                    removeDoc(l._id)
-                                else
-                                    addDoc(l._id)*/
-                }}
-              >
-                <div className="form-group">
-                  <div className="custom-control custom-checkbox text-center p-0">
-                    <div>
-                      {/*<input type="checkbox" className="custom-control-input"
-                                                   checked={selectedDoc.includes(l._id)}
-                                                   id={l._id}/>
-                                            <label className="custom-control-label " htmlFor={l._id}/>*/}
-                      <span
-                        style={{
-                          width: 70,
-                          borderRadius: 5,
-                          padding: "0px 10px",
-                          backgroundColor: selectedDoc.includes(l._id)
-                            ? "white"
-                            : "royalblue",
-                          color: selectedDoc.includes(l._id)
-                            ? "royalblue"
-                            : "white",
-                        }}
-                        className={"custom-cursor"}
-                        onClick={() => {
-                          if (selectedDoc.includes(l._id)) removeDoc(l._id);
-                          else addDoc(l._id);
-                        }}
-                      >
-                        <i
-                          className={
-                            selectedDoc.includes(l._id)
-                              ? `mdi mdi-checkbox-marked mx-1`
-                              : `mdi mdi-checkbox-blank-outline mx-1`
-                          }
-                          style={{ fontSize: 20 }}
-                        />
-                      </span>
-                    </div>
-                    <div style={{ display: "flex", flexDirection: "column" }}>
-                      <img
-                        className={"mt-2"}
-                        width={90}
-                        height={90}
-                        src={`http://localhost:3000/assets/images/icons/${l.ex}.png`}
-                      />
-                      <span
-                        style={{ width: 90 }}
-                        className={"text-center pt-2"}
-                      >
-                        <span
-                          style={{
-                            color: selectedDoc.includes(l._id)
-                              ? "white"
-                              : "black",
-                          }}
-                          className={"custom-cursor"}
-                          data-tip={l.title}
-                        >
-                          {l.title.length > 7 ? l.title.substr(0, 7) : l.title}
-                        </span>
-                        <span
-                          style={{
-                            fontSize: 10,
-                            color: selectedDoc.includes(l._id)
-                              ? "white"
-                              : "red",
-                          }}
-                        >
-                          ({l.lastModify})
-                        </span>
-                        <ReactTooltip />
-                      </span>
-                      <span
-                        style={{
-                          width: 90,
-                          color: selectedDoc.includes(l._id) ? "white" : "gray",
-                        }}
-                        className={"text-center pt-2"}
-                      >
-                        {l.createDate}
-                      </span>
-                      <div
-                        style={{ display: "flex", justifyContent: "center" }}
-                        hidden={selectedDoc.includes(l._id)}
-                      >
-                        <i
-                          className={"mdi mdi-delete custom-cursor mx-1"}
-                          hidden={!isManage}
-                          style={{ fontSize: 17, color: "red" }}
-                          onClick={() => {
-                            removeDoc(l._id);
-                            deleteShowDialog(l);
-                          }}
-                        />
-                        <i
-                          data-tip={"دریافت سند"}
-                          className={"mdi mdi-file-download custom-cursor mx-1"}
-                          hidden={!isManage}
-                          style={{ fontSize: 17, color: "green" }}
-                          onClick={() => {
-                            if (
-                              l.ex === "png" ||
-                              l.ex === "jpg" ||
-                              l.ex === "jpge"
-                            ) {
-                              setSingleDocumentId(l._id);
-                              window
-                                .$("#showFilePreviewLibraryDialog")
-                                .modal("show");
-                            } else {
-                              getDocumentsFile(l._id, l.title, l.ex);
-                            }
-                            removeDoc(l._id);
-                          }}
-                        />
-                        <ReactTooltip />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </span>
-            ))}
-          </div>
-        </div>
-      ) : (
-        <div className={"row"}>
-          <div className={""}>
-            <div className={"row"}>
-              {library.libraryShelf.map((s) => (
-                <span className={"card py-2 px-3 mr-3 mt-0"} onClick={() => {}}>
-                  <i
-                    className={"mdi mdi-window-close custom-cursor"}
-                    style={{ color: "red", fontSize: 17 }}
-                    onClick={() => {
-                      setSingleLibraryShelf(s);
-                      showDeleteLibraryShelfDialogHandle();
-                    }}
-                  />
-                  <div className="form-group">
-                    <div className="custom-control custom-checkbox text-center p-0">
-                      {/*<i className={"mdi mdi-plus-thick custom-cursor"} onClick={()=>{
-                                            window.$('#upsertLibraryDialog').modal('show')
-                                        }} style={{fontSize:40,color:"green"}}/>*/}
-                      <div
-                        onClick={() => {
-                          setLibraryShelfContext(s);
-                          reloadPage(s._id);
-                        }}
-                        className={"custom-cursor"}
-                      >
-                        <img
-                          style={{
-                            marginTop: 15,
-                            marginRight: 20,
-                            marginLeft: 20,
-                          }}
-                          src={`./assets/images/folder.png`}
-                          width={70}
-                          height={70}
-                        />
-                      </div>
-
-                      <div
-                        style={{ display: "flex", justifyContent: "center" }}
-                      >
-                        <p className={"m-0 p-0 custom-cursor"}>
-                          {s.title.length > 10
-                            ? s.title.substr(0, 10) + "..."
-                            : s.title}
-                        </p>
-                        <i
-                          className={"mdi mdi-pencil-outline custom-cursor"}
-                          hidden={!isManage}
-                          onClick={() => {
-                            setLibraryShelf(s);
-                          }}
-                          style={{ color: "royalblue" }}
-                        />
-                      </div>
-                      <p className={"m-0 p-0"}>{s.createDate}</p>
-                    </div>
-                  </div>
-                </span>
-              ))}
-              <span
-                className={"card py-2 px-3 mr-3 mt-0"}
-                style={{ height: 220, backgroundColor: "#f6f6f6" }}
-                onClick={() => {}}
-              >
-                <div className="form-group">
-                  <div className="custom-control custom-checkbox text-center p-0">
-                    <div
-                      style={{ width: 100, marginTop: 65 }}
-                      data-tip={"افزودن پوشه"}
-                    >
-                      <i
-                        className={"mdi mdi-plus-thick custom-cursor"}
-                        onClick={() => {
-                          window.$("#upsertLibraryDialog").modal("show");
-                        }}
-                        style={{ fontSize: 40, color: "green" }}
-                      />
-                    </div>
-                    <ReactTooltip />
-                  </div>
-                </div>
-              </span>
-              {library.library.map((l) => (
+              <Col span={6}>
                 <span
                   className={"card py-2 px-3 mr-3 mt-0"}
                   style={{
@@ -394,9 +162,9 @@ const LibrariesDocumentsComponent = ({ isManage = true }) => {
                   }}
                   onClick={() => {
                     /*if(selectedDoc.includes(l._id))
-                                        removeDoc(l._id)
-                                    else
-                                        addDoc(l._id)*/
+                                    removeDoc(l._id)
+                                else
+                                    addDoc(l._id)*/
                   }}
                 >
                   <div className="form-group">
@@ -446,12 +214,12 @@ const LibrariesDocumentsComponent = ({ isManage = true }) => {
                           className={"text-center pt-2"}
                         >
                           <span
-                            className={"custom-cursor"}
                             style={{
                               color: selectedDoc.includes(l._id)
                                 ? "white"
                                 : "black",
                             }}
+                            className={"custom-cursor"}
                             data-tip={l.title}
                           >
                             {l.title.length > 7
@@ -508,9 +276,9 @@ const LibrariesDocumentsComponent = ({ isManage = true }) => {
                                 l.ex === "jpge"
                               ) {
                                 setSingleDocumentId(l._id);
-                                window
-                                  .$("#showFilePreviewLibraryDialog")
-                                  .modal("show");
+                                // window
+                                //   .$("#showFilePreviewLibraryDialog")
+                                //   .modal("show");
                               } else {
                                 getDocumentsFile(l._id, l.title, l.ex);
                               }
@@ -523,10 +291,115 @@ const LibrariesDocumentsComponent = ({ isManage = true }) => {
                     </div>
                   </div>
                 </span>
-              ))}
-            </div>
-          </div>
+              </Col>
+            ))}
+          </Row>
         </div>
+      ) : (
+        <Row>
+          <>
+            <Row>
+              {library.libraryShelf.map((s) => (
+                <Col span={4}>
+                  <div onClick={() => {}}>
+                    <i
+                      className={"mdi mdi-window-close custom-cursor"}
+                      style={{ color: "red", fontSize: 17 }}
+                      onClick={() => {
+                        setSingleLibraryShelf(s);
+                        showDeleteLibraryShelfDialogHandle();
+                      }}
+                    />
+                    <div className="form-group">
+                      <div className="custom-control custom-checkbox text-center p-0">
+                        {/*<i className={"mdi mdi-plus-thick custom-cursor"} onClick={()=>{
+                                            window.$('#upsertLibraryDialog').modal('show')
+                                        }} style={{fontSize:40,color:"green"}}/>*/}
+                        <div
+                          onClick={() => {
+                            setLibraryShelfContext(s);
+                            reloadPage(s._id);
+                          }}
+                          className={"custom-cursor"}
+                        >
+                          <img
+                            style={{
+                              marginTop: 15,
+                              marginRight: 20,
+                              marginLeft: 20,
+                            }}
+                            src={`./assets/images/folder.png`}
+                            width={70}
+                            height={70}
+                          />
+                        </div>
+
+                        <div
+                          style={{ display: "flex", justifyContent: "center" }}
+                        >
+                          <p className={"m-0 p-0 custom-cursor"}>
+                            {s.title.length > 10
+                              ? s.title.substr(0, 10) + "..."
+                              : s.title}
+                          </p>
+                          <i
+                            className={"mdi mdi-pencil-outline custom-cursor"}
+                            hidden={!isManage}
+                            onClick={() => {
+                              setLibraryShelf(s);
+                            }}
+                            style={{ color: "royalblue" }}
+                          />
+                        </div>
+                        <p className={"m-0 p-0"}>{s.createDate}</p>
+                      </div>
+                    </div>
+                  </div>
+                </Col>
+              ))}
+              <Col span={4}>
+                <span
+                  className={"card py-2 px-3 mr-3 mt-0"}
+                  style={{ height: 220, backgroundColor: "#f6f6f6" }}
+                  onClick={() => {}}
+                >
+                  <div className="form-group">
+                    <div className="custom-control custom-checkbox text-center p-0">
+                      <div
+                        style={{ width: 100, marginTop: 65 }}
+                        data-tip={"افزودن پوشه"}
+                      >
+                        <i
+                          className={"mdi mdi-plus-thick custom-cursor"}
+                          onClick={() => {
+                            // window.$("#upsertLibraryDialog").modal("show");
+                          }}
+                          style={{ fontSize: 40, color: "green" }}
+                        />
+                      </div>
+                      <ReactTooltip />
+                    </div>
+                  </div>
+                </span>
+              </Col>
+              {library.library.map((l) => (
+                <Col>
+                  <SpaceStyled horizontal={5}>
+                    <LibraryItemComponent
+                      item={l}
+                      selectedDoc={selectedDoc}
+                      addDoc={addDoc}
+                      removeDoc={removeDoc}
+                      deleteDocument={deleteDocument}
+                      setSingleDocument={setSingleDocument}
+                      getDocumentsFile={getDocumentsFile}
+                    />
+                  </SpaceStyled>
+                </Col>
+              ))}
+            </Row>
+          </>
+        </Row>
       )}
     </div>
   );

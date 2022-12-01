@@ -6,13 +6,14 @@ import { SpaceStyled } from "../../../../styled/global";
 import { validator } from "../validator";
 
 const SimpleInputViewer = ({ item }) => {
+  console.log(item);
   return (
     <Fragment>
       <SpaceStyled botton={8}>
         <CustomText color={darkBlueColor}>{item.label}</CustomText>
       </SpaceStyled>
       <Form.Item name={item.uiId} rules={validator(item)}>
-        <Input placeholder={`${item?.label || ""}...`} />
+        <Input value={item.answer} placeholder={`${item?.label || ""}...`} />
       </Form.Item>
     </Fragment>
   );

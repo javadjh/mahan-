@@ -106,6 +106,7 @@
   "getAdminDashboard": "/admin/dashboard",
   "getDocumentsFilePreviewLibrary": "/library/preview/document/file/",
   "getFormPreview": "/form/preview/",
+  "form": "/form/",
   "setUsersProfileImage": "/user/profile/image",
   "deleteGroupLibrariesDocuments": "/delete/group/libraries/documents",
   "getReporting": "/reporting",

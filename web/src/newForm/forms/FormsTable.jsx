@@ -1,6 +1,7 @@
 import { Table } from "antd";
+import CustomButton from "../../styled/components/CustomButton";
 import React from "react";
-const FormsTable = ({ forms }) => {
+const FormsTable = ({ forms, history }) => {
   forms.map((item) => {
     item.children = undefined;
   });
@@ -25,6 +26,19 @@ const FormsTable = ({ forms }) => {
       title: "تاریخ ایجاد",
       key: "createDate",
       dataIndex: "createDate",
+    },
+    {
+      title: "عملیات",
+      key: "action",
+      render: (item) => (
+        <CustomButton
+          onClick={() => {
+            history.push("/forms/upsert/form/" + item._id);
+          }}
+        >
+          ویرایش
+        </CustomButton>
+      ),
     },
   ];
   return (

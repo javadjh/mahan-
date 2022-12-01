@@ -8,19 +8,30 @@ import { saveAs } from "file-saver";
 import {
   deleteFileAction,
   getFileStatisticAction,
+  sendFileAction,
 } from "../../stateManager/actions/FileAction";
 import { useState } from "react";
 import {
+  addNewNoteForDocumentAction,
   deleteDocumentAction,
   getDeActivateDocumentsAction,
   getDocumentsAction,
+  removeNoteFromDocumentAction,
   restoreDocumentAction,
 } from "../../stateManager/actions/DocumentAction";
 import { getFileLogsAction } from "../../stateManager/actions/LogsAction";
 import {
+  addNewNoteForDocumentService,
   getGroupDocumentsFileService,
   insertDocumentService,
+  removeNoteFromDocumentService,
 } from "../../service/DocumentService";
+import {
+  fileAlertsAction,
+  getUsersFileAlertsAction,
+  getUsersFilesAlertsAction,
+  insertFileAlertAction,
+} from "../../stateManager/actions/FileAlertAction";
 
 const FileContextProvider = ({ children, match, history }) => {
   // redux utils
@@ -74,6 +85,14 @@ const FileContextProvider = ({ children, match, history }) => {
   //handlers funcs
 
   //query handlers
+  const getAlerts = async () => {
+    await dispatch(
+      fileAlertsAction({
+        archiveId: fileStatistic.file.archiveId,
+        fileId,
+      })
+    );
+  };
   const getDocuments = async () => {
     await dispatch(getDocumentsAction(documentFilter));
   };
@@ -100,12 +119,14 @@ const FileContextProvider = ({ children, match, history }) => {
     setIsTabsDataLoading(true);
     if (tabName == "log") getLogs();
     else if (tabName == "deleted") getDeletedDocs();
+    else if (tabName == "alerts") getAlerts();
   };
   const freshData = async () => {
     await getStatistic();
     if (currentTab == "log") getLogs();
     else if (currentTab == "deleted") getDeletedDocs();
     else if (currentTab == "docs") getDocuments();
+    else if (currentTab == "alerts") getAlerts();
   };
 
   //command handlers
@@ -121,6 +142,16 @@ const FileContextProvider = ({ children, match, history }) => {
     await dispatch(deleteFileAction(fileId));
     history.goBack();
   };
+  const insertFilesAlert = async (formData) => {
+    const data = {
+      ...formData,
+      ...{
+        archiveId: fileStatistic?.file?.archiveId,
+        fileId,
+      },
+    };
+    await dispatch(insertFileAlertAction(data));
+  };
 
   const downloadGroupDocuments = async () => {
     const { data, status } = await getGroupDocumentsFileService({
@@ -133,6 +164,22 @@ const FileContextProvider = ({ children, match, history }) => {
       filename = Date.now() + ".zip";
       saveAs(data, filename);
     }
+  };
+  const addNewNoteForDocument = async (note, id) => {
+    const { status, data } = await addNewNoteForDocumentService({
+      documentId: id,
+      description: note,
+    });
+
+    return data;
+  };
+  const removeNoteFromDocument = async (id, docId) => {
+    const { status, data } = await removeNoteFromDocumentService(docId, id);
+    return data;
+  };
+  const sendFileHandle = async (formData) => {
+    await dispatch(sendFileAction(fileId, formData));
+    freshData();
   };
 
   //utils
@@ -189,6 +236,7 @@ const FileContextProvider = ({ children, match, history }) => {
         currentTab,
         isTabsDataLoading,
         canUpload,
+        history,
         fileId,
         setTabState,
         documentsFilterHandle,
@@ -199,6 +247,10 @@ const FileContextProvider = ({ children, match, history }) => {
         onImageChange,
         deleteFileHandler,
         downloadGroupDocuments,
+        insertFilesAlert,
+        addNewNoteForDocument,
+        removeNoteFromDocument,
+        sendFileHandle,
       }}
     >
       {children}

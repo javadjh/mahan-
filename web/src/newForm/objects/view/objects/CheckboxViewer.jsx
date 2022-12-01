@@ -11,7 +11,7 @@ const CheckboxViewer = ({ item }) => {
         <CustomText color={darkBlueColor}>{item.label}</CustomText>
       </SpaceStyled>
       <Form.Item name={item.uiId} rules={validator(item)}>
-        <Checkbox.Group>
+        <Checkbox.Group value={item.answer}>
           {item?.values?.map((val) => (
             <Checkbox key={val} value={val}>
               {val}

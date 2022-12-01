@@ -115,20 +115,21 @@ module.exports.searchEngine = async (req, res) => {
 
   let documentsValues = [];
   documents.map((document) => {
-    if (document.title.includes(searchValue)) documentsValues.push("title");
-    if (document.documentOCR.includes(searchValue)) documentsValues.push("OCR");
-    if (document.documentName.includes(searchValue))
+    if (document?.title?.includes(searchValue)) documentsValues.push("title");
+    if (document?.documentOCR?.includes(searchValue))
+      documentsValues.push("OCR");
+    if (document?.documentName?.includes(searchValue))
       documentsValues.push("documentName");
 
     if (document.notes.length > 0)
-      document.notes.map((note) => {
-        if (note.description.includes(searchValue))
+      document?.notes?.map((note) => {
+        if (note?.description?.includes(searchValue))
           documentsValues.push("note");
       });
 
-    if (document.videoFlags.length > 0)
-      document.videoFlags.map((flag) => {
-        if (flag.description.includes(searchValue))
+    if (document?.videoFlags?.length > 0)
+      document?.videoFlags?.map((flag) => {
+        if (flag?.description?.includes(searchValue))
           documentsValues.push("flag");
       });
 

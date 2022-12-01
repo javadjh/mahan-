@@ -11,7 +11,11 @@ const SelectorViewer = ({ item }) => {
         <CustomText color={darkBlueColor}>{item.label}</CustomText>
       </SpaceStyled>
       <Form.Item name={item.uiId} rules={validator(item)}>
-        <Select placeholder={item.label} style={{ width: "100%" }}>
+        <Select
+          value={item.answer}
+          placeholder={item.label}
+          style={{ width: "100%" }}
+        >
           {item?.values?.map((val) => (
             <Select.Option key={val} value={val}>
               {val}

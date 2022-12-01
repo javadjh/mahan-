@@ -13,7 +13,7 @@ const DateViewer = ({ item }) => {
         <CustomText color={darkBlueColor}>{item.label}</CustomText>
       </SpaceStyled>
       <Form.Item name={item.uiId} rules={validator(item)}>
-        <CustomDatePicker />
+        <CustomDatePicker value={item.answer} />
       </Form.Item>
     </Fragment>
   );

@@ -37,25 +37,25 @@ const FileInformationComponent = () => {
         </Row>
       </FileNameBlock>
       <Row>
-        <Col span={6}>
+        <Col span={8}>
           <CardItemComponent
             title={"شماره پرونده"}
             value={fileStatistic?.file?.fileCode}
           />
         </Col>
-        <Col span={6}>
+        <Col span={8}>
           <CardItemComponent
             title={"تاریخ ایجاد"}
             value={fileStatistic?.file?.fileDate}
           />
         </Col>
-        <Col span={6}>
+        <Col span={8}>
           <CardItemComponent
             title={"تعداد پرونده"}
             value={fileStatistic?.totalCount}
           />
         </Col>
-        <Col span={6}>
+        <Col span={8}>
           <CardItemComponent
             title={"زبان پرونده"}
             value={
@@ -65,25 +65,25 @@ const FileInformationComponent = () => {
             }
           />
         </Col>
-        <Col span={6}>
+        <Col span={8}>
           <CardItemComponent
             title={"نوع پرونده"}
             value={fileStatistic?.file?.type}
           />
         </Col>
-        <Col span={6}>
+        <Col span={8}>
           <CardItemComponent
             title={"درخواست کننده"}
             value={fileStatistic?.file?.applicantId?.title}
           />
         </Col>
-        <Col span={6}>
+        <Col span={8}>
           <CardItemComponent
             title={"حجم پرونده"}
             value={fileStatistic?.totalSize}
           />
         </Col>
-        <Col span={6}>
+        <Col span={8}>
           <CardItemComponent
             title={"وضعیت پرونده"}
             value={fileStatistic?.file?.fileStatus}

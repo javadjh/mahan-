@@ -11,7 +11,7 @@ const RadioButtonViewer = ({ item }) => {
         <CustomText color={darkBlueColor}>{item.label}</CustomText>
       </SpaceStyled>
       <Form.Item name={item.uiId} rules={validator(item)}>
-        <Radio.Group>
+        <Radio.Group value={item.answer}>
           {item?.values?.map((val) => (
             <Radio key={val} value={val}>
               {val}

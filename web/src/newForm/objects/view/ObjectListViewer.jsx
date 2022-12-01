@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { useContext } from "react";
 import { Button, Col, Form, Row } from "antd";
 import { FormViewerContext } from "../../../context/form/FormViewerContext";
@@ -8,8 +8,10 @@ import RadioButtonViewer from "./objects/RadioButtonViewer";
 import CheckboxViewer from "./objects/CheckboxViewer";
 import SelectorViewer from "./objects/SelectorViewer";
 import DateViewer from "./objects/DateViewer";
+import CustomButton from "../../../styled/components/CustomButton";
 
 const ObjectListViewer = () => {
+  const [form] = Form.useForm();
   const { child, onFinishForm } = useContext(FormViewerContext);
   const itemSwitcher = (item) => {
     switch (item.type) {
@@ -27,18 +29,32 @@ const ObjectListViewer = () => {
         return <DateViewer item={item} />;
     }
   };
+  useEffect(() => {
+    let data = {};
+    child.map((itm) => {
+      console.log(itm.uiId);
+      console.log(itm);
+      data[itm.uiId] = itm.answer;
+    });
+    form.setFieldsValue(data);
+  }, []);
   return (
     <Fragment>
-      <Form onFinish={onFinishForm}>
+      <Form onFinish={onFinishForm} form={form}>
         <Row>
-          {child.map((item) => (
-            <Col span={12}>
+          {child.map((item, index) => (
+            <Col
+              span={index % 2 == 0 ? 12 : 11}
+              offset={index % 2 == 0 ? 0 : 1}
+            >
               <>{itemSwitcher(item)}</>
             </Col>
           ))}
         </Row>
 
-        <Button htmlType="submit">ssdcsd</Button>
+        <CustomButton block isLeft={true} htmlType="submit">
+          ثبت
+        </CustomButton>
       </Form>
     </Fragment>
   );

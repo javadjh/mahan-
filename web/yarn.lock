@@ -7603,9 +7603,9 @@ jalaali-js@^1.1.0:
   resolved "https://registry.npmjs.org/jalaali-js/-/jalaali-js-1.2.3.tgz"
   integrity sha512-irl0pXL59Xl0Oz6jyOiJed/NxrVeS6fSx6a8atQOH/LsPWPZwBCxwe5XVEIqjnwt69FRxvnCCwQn5dTMxwbazQ==
 
-jalali-moment@^3.3.10:
+jalali-moment@^3.3.11:
   version "3.3.11"
-  resolved "https://registry.npmjs.org/jalali-moment/-/jalali-moment-3.3.11.tgz"
+  resolved "https://registry.yarnpkg.com/jalali-moment/-/jalali-moment-3.3.11.tgz#caa306751d1382c8648571bca1743aabf27660c3"
   integrity sha512-tdSaRs9cjWjOIaWhcsGFZMhZQhfgok5J0TwqFpBIZPudZxxa6yjUPoLCOwuvbAtRpiZn7k/mvazAJh+vEN5suw==
   dependencies:
     commander "^7.0.0"

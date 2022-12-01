@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { darkBlueColor, lightColor } from "../../app/appColor";
 import { SpaceStyled } from "../global";
 const CustomButton = (props) => {
-  console.log(props.color);
   const CustomButtonStyled = styled(Button)`
     background-color: ${props.color ? props.color : darkBlueColor} !important;
     color: ${props.color === "#fff" ? "#92A2B0" : "white"} !important;
@@ -17,18 +16,40 @@ const CustomButton = (props) => {
   `;
   let editProps = { ...props, ...{ icon: undefined } };
   return (
-    <CustomButtonStyled {...editProps}>
-      <Row>
-        <Col>{props.children}</Col>
-        <Col>
-          {props.icon && (
-            <SpaceStyled right={5} top={5}>
-              {props.icon}
-            </SpaceStyled>
-          )}
-        </Col>
-      </Row>
-    </CustomButtonStyled>
+    <>
+      {props?.isLeft ? (
+        <Row justify="space-between">
+          <Col></Col>
+          <Col>
+            <CustomButtonStyled {...editProps}>
+              <Row>
+                <Col>{props.children}</Col>
+                <Col>
+                  {props.icon && (
+                    <SpaceStyled right={5} top={5}>
+                      {props.icon}
+                    </SpaceStyled>
+                  )}
+                </Col>
+              </Row>
+            </CustomButtonStyled>
+          </Col>
+        </Row>
+      ) : (
+        <CustomButtonStyled {...editProps}>
+          <Row>
+            <Col>{props.children}</Col>
+            <Col>
+              {props.icon && (
+                <SpaceStyled right={5} top={5}>
+                  {props.icon}
+                </SpaceStyled>
+              )}
+            </Col>
+          </Row>
+        </CustomButtonStyled>
+      )}
+    </>
   );
 };
 export default CustomButton;

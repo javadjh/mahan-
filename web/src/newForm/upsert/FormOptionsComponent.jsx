@@ -17,8 +17,9 @@ const FormOptionsComponent = () => {
     <Fragment>
       <div>
         <Row justify="space-between">
-          <Col span={12}>
+          <Col span={11}>
             <CustomButton
+              block
               onClick={() => {
                 if (child.length == 0) {
                   message.error("عناصر فرم را انتخاب کنید");
@@ -33,12 +34,13 @@ const FormOptionsComponent = () => {
               ثبت فرم
             </CustomButton>
           </Col>
-          <Col span={12}>
+          <Col span={12} offset={1}>
             <CustomDialog
               title={"پیشنمایش"}
               render={<FormViewerRoot onSubmit={() => {}} child={child} />}
               actionRender={
                 <CustomButton
+                  block
                   color={grayColor}
                   icon={<AiOutlineEye style={{ fontSize: 13 }} />}
                 >

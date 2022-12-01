@@ -12,7 +12,11 @@ const TextAreaViewer = ({ item }) => {
         <CustomText color={darkBlueColor}>{item.label}</CustomText>
       </SpaceStyled>
       <Form.Item name={item.uiId} rules={validator(item)}>
-        <Input.TextArea rows={4} placeholder={`${item?.label || ""}...`} />
+        <Input.TextArea
+          value={item.answer}
+          rows={4}
+          placeholder={`${item?.label || ""}...`}
+        />
       </Form.Item>
     </Fragment>
   );

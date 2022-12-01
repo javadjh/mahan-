@@ -1,7 +1,9 @@
 import { Form, message } from "antd";
 import React from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { formService } from "../../service/FormService";
 import {
   insertFormAction,
   updateFormAction,
@@ -13,6 +15,16 @@ const FormContextProvider = ({ children, match, history }) => {
   const dispatch = useDispatch();
   const [form] = Form.useForm();
   const [child, setChild] = useState([]);
+
+  useEffect(() => {
+    if (id != "0") getData();
+  }, [id]);
+  const getData = async () => {
+    const { data } = await formService(id);
+    form.setFieldsValue(data);
+    setChild(data.children);
+  };
+
   const addChildren = (obj) => {
     const childrenCopy = [...child];
     childrenCopy.push(obj);

@@ -1,3 +1,4 @@
+import { Col, Row } from "antd";
 import React from "react";
 import FileContextProvider from "../context/file/FileContextProvider";
 import FileGlobalActionsComponenets from "./general/FileGlobalActionsComponenets";

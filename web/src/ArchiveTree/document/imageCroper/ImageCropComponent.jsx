@@ -20,6 +20,23 @@ import {
 import { saveAs } from "file-saver";
 import useWindowDimensions from "../../../utility/useWindowDimensions";
 import { RootContext } from "../../../RootComponent/RootContext";
+import CustomSmallButton from "../../../styled/components/CustomSmallButton";
+import { Col, Divider, Input, Row, Slider } from "antd";
+import {
+  borderColor,
+  darkBlueOpacityColor,
+  lightGreenColor,
+} from "../../../app/appColor";
+import {
+  AiOutlineZoomIn,
+  AiOutlineZoomOut,
+  AiOutlineRotateRight,
+  AiOutlineRotateLeft,
+} from "react-icons/ai";
+import { FiDownloadCloud } from "react-icons/fi";
+import { CenterStyled, SpaceStyled } from "../../../styled/global";
+import { FileContext } from "../../../context/file/FileContext";
+
 const ImageCropComponent = ({
   documentId,
   history,
@@ -29,7 +46,13 @@ const ImageCropComponent = ({
   ex,
   documentSize,
 }) => {
-  const { handleHide } = useContext(RootContext);
+  const iconStyle = {
+    fontSize: 25,
+    color: borderColor,
+    marginLeft: 10,
+  };
+  const { fileId } = useContext(FileContext);
+  const { fileStatistic } = useContext(FileContext);
   history = useHistory();
   const dispatch = useDispatch();
   const { width: widthWindowDimensions } = useWindowDimensions();
@@ -146,8 +169,8 @@ const ImageCropComponent = ({
     fileData.append("file", file);
 
     const { data, status } = await insertDocumentService(
-      history.location.state.archiveId,
-      history.location.state.fileId,
+      fileStatistic.file.archiveId,
+      fileId,
       "uiId",
       fileData,
       documentId
@@ -157,7 +180,7 @@ const ImageCropComponent = ({
       await dispatch(getDocumentAction(documentId));
       await dispatch(
         getDocumentsAction({
-          fileId: history.location.state.fileId,
+          fileId: fileId,
           searchValue: "",
           pageId: 1,
           eachPerPage: 12,
@@ -181,8 +204,7 @@ const ImageCropComponent = ({
   };
 
   const handleScale = (e) => {
-    const scale = parseFloat(e.target.value);
-    setScale(scale);
+    setScale(e);
   };
 
   const downloadFileData = () => {
@@ -192,7 +214,7 @@ const ImageCropComponent = ({
     <div className="App">
       {versions.map((v) => (
         <>
-          <button
+          <CustomSmallButton
             onClick={() => {
               setInit(false);
               setLastVersion(v);
@@ -205,10 +227,10 @@ const ImageCropComponent = ({
               ({v.documentSize}) - توسط : {v.creator.firstName}{" "}
               {v.creator.lastName}
             </b>
-          </button>
+          </CustomSmallButton>
         </>
       ))}
-      <button
+      <CustomSmallButton
         onClick={() => {
           setInit(false);
           setLastVersion({});
@@ -218,113 +240,148 @@ const ImageCropComponent = ({
       >
         <span>ورژن 1 - </span>
         <b dir={"ltr"}>({documentSize})</b>
-      </button>
+      </CustomSmallButton>
 
-      <hr />
+      <Divider />
       <>
         <div
           className={"pt-1 px-2"}
           style={{ display: "flex", justifyContent: "space-between" }}
         >
-          <div className={"row"}>
+          <Row align="middle">
             {/*<input type="file" name="profilePicBtn" accept="image/png, image/jpeg" onChange={this.profilePicChange} />*/}
-            <i
-              className={"bx bx-zoom-in mt-2 mx-2"}
-              style={{ fontSize: 25 }}
-              onClick={() => {
-                setWZoom(wZoom + 1);
-                setHZoom(hZoom + 2);
-              }}
-            />
-            <i
-              className={"bx bx-zoom-out mt-2 mx-2"}
-              style={{ fontSize: 25 }}
-              onClick={() => {
-                setWZoom(wZoom - 1);
-                setHZoom(hZoom - 2);
-              }}
-            />
-            <i
-              className={"bx bx-rotate-right mt-2 mx-2"}
-              style={{ fontSize: 25 }}
-              onClick={() => {
-                setRotate(rotate + 1);
-              }}
-            />
-            <i
-              className={"bx bx-rotate-left mt-2 mx-2"}
-              style={{ fontSize: 25 }}
-              onClick={() => {
-                setRotate(rotate - 1);
-              }}
-            />
-            <span
-              className={"mx-2"}
-              style={{
-                border: "2px solid",
-                borderRadius: 4,
-                paddingTop: 2,
-                paddingRight: 6,
-                paddingLeft: 6,
-                marginTop: 6,
-                marginBottom: 5,
-              }}
-              onClick={() => {
-                setRotate(rotate + 90);
-              }}
-            >
-              90
-            </span>
-            <span
-              className={"mx-2"}
-              style={{
-                border: "2px solid",
-                borderRadius: 4,
-                paddingTop: 2,
-                paddingRight: 6,
-                paddingLeft: 6,
-                marginTop: 6,
-                marginBottom: 5,
-              }}
-              onClick={() => {
-                setRotate(rotate + 180);
-              }}
-            >
-              180
-            </span>
-            <span className={"mt-2 mx-1"}>طول</span>
-            <input
-              className="form-control mr-3"
-              type={"number"}
-              style={{ width: 80 }}
-              value={width}
-              onChange={(e) => {
-                setWidth(Number(e.target.value));
-              }}
-            />
-            <span className={"mt-2 mx-1"}>عرض</span>
-            <input
-              className="form-control mr-3"
-              value={height}
-              type={"number"}
-              style={{ width: 80 }}
-              onChange={(e) => {
-                setHeight(Number(e.target.value));
-              }}
-            />
-          </div>
-          <div hidden={handleHide("دریافت سند")} className={"mx-2 row"}>
-            <button onClick={onCrop} className={"btn btn-success"}>
-              ذخیره سازی
-            </button>
-            <i
-              onClick={downloadFileData}
-              className={"bx bx-cloud-download mt-1"}
-              style={{ fontSize: 30 }}
-            />
-          </div>
+            <Col>
+              <div
+                onClick={() => {
+                  setWZoom(wZoom + 1);
+                  setHZoom(hZoom + 2);
+                }}
+              >
+                <AiOutlineZoomIn style={iconStyle} />
+              </div>
+            </Col>
+            <Col>
+              <div>
+                <AiOutlineZoomOut
+                  style={iconStyle}
+                  onClick={() => {
+                    setWZoom(wZoom - 1);
+                    setHZoom(hZoom - 2);
+                  }}
+                />
+              </div>
+            </Col>
+            <Col>
+              <div
+                onClick={() => {
+                  setRotate(rotate + 1);
+                }}
+              >
+                <AiOutlineRotateRight style={iconStyle} />
+              </div>
+            </Col>
+            <Col>
+              <div
+                onClick={() => {
+                  setRotate(rotate - 1);
+                }}
+              >
+                <AiOutlineRotateLeft style={iconStyle} />
+              </div>
+            </Col>
+            <Col>
+              <span
+                style={{
+                  border: "2px solid " + borderColor,
+                  borderRadius: 7,
+                  paddingTop: 2,
+                  paddingRight: 6,
+                  marginLeft: 10,
+                  paddingLeft: 6,
+                  marginTop: 6,
+                  marginBottom: 5,
+                }}
+                onClick={() => {
+                  setRotate(rotate + 90);
+                }}
+              >
+                90
+              </span>
+            </Col>
+            <Col>
+              <span
+                style={{
+                  border: "2px solid " + borderColor,
+                  borderRadius: 7,
+                  paddingTop: 2,
+                  paddingRight: 6,
+                  marginLeft: 10,
+                  paddingLeft: 6,
+                  marginTop: 6,
+                  marginBottom: 5,
+                }}
+                onClick={() => {
+                  setRotate(rotate + 180);
+                }}
+              >
+                180
+              </span>
+            </Col>
+
+            <Col>
+              <Row align="middle">
+                <Col>
+                  <SpaceStyled horizontal={10}>
+                    <span className={"mt-2 mx-1"}>طول</span>
+                  </SpaceStyled>
+                </Col>
+                <Col>
+                  <Input
+                    className="form-control mr-3"
+                    type={"number"}
+                    style={{ width: 120 }}
+                    value={width}
+                    onChange={(e) => {
+                      setWidth(Number(e.target.value));
+                    }}
+                  />
+                </Col>
+              </Row>
+            </Col>
+
+            <Col>
+              <Row align="middle">
+                <Col>
+                  <SpaceStyled horizontal={10}>
+                    <span className={"mt-2 mx-1"}>عرض</span>
+                  </SpaceStyled>
+                </Col>
+                <Col>
+                  <Input
+                    value={height}
+                    type={"number"}
+                    style={{ width: 120 }}
+                    onChange={(e) => {
+                      setHeight(Number(e.target.value));
+                    }}
+                  />
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+          <Row align="middle">
+            <Col>
+              <FiDownloadCloud
+                style={{ ...iconStyle, ...{ color: lightGreenColor } }}
+                onClick={downloadFileData}
+              />
+            </Col>
+            <Col>
+              <CustomSmallButton onClick={onCrop}>ذخیره سازی</CustomSmallButton>
+            </Col>
+          </Row>
         </div>
-        <input
+        {/* <input
           className={"m-2"}
           name="scale"
           type="range"
@@ -334,18 +391,30 @@ const ImageCropComponent = ({
           max="30"
           step="0.01"
           defaultValue="1.1"
+        /> */}
+        <Slider
+          min={1}
+          max={30}
+          style={{ width: "99%" }}
+          onChange={(e) => {
+            handleScale(e);
+          }}
+          step="0.01"
+          defaultValue="1.1"
         />
         <div style={{ width: "680px !important" }}>
-          <AvatarEditor
-            image={selectedImage}
-            scale={scale}
-            ref={setEditorRef}
-            width={width}
-            height={height}
-            border={50}
-            color={[255, 255, 255, 0.6]} // RGBA
-            rotate={rotate}
-          />
+          <CenterStyled>
+            <AvatarEditor
+              image={selectedImage}
+              scale={scale}
+              ref={setEditorRef}
+              width={width}
+              height={height}
+              border={50}
+              color={[255, 255, 255, 0.6]} // RGBA
+              rotate={rotate}
+            />
+          </CenterStyled>
         </div>
       </>
     </div>

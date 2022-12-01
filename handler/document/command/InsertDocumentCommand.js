@@ -108,6 +108,14 @@ module.exports.insertDocument = async (req, res) => {
     docData.mainParent = mainParent;
   }
 
+  if (ex === "txt") {
+    try {
+      const data = fs.readFileSync(path, "utf8");
+      console.log(data.toString());
+      docData.txt = data;
+    } catch (err) {}
+  }
+
   newDocument = await new DocumentModel(docData);
 
   //تغییر نام سند
