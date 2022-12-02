@@ -6,7 +6,6 @@ import { SpaceStyled } from "../../../../styled/global";
 import { validator } from "../validator";
 
 const SimpleInputViewer = ({ item }) => {
-  console.log(item);
   return (
     <Fragment>
       <SpaceStyled botton={8}>

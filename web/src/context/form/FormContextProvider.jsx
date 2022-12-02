@@ -54,7 +54,6 @@ const FormContextProvider = ({ children, match, history }) => {
     let { itemIndex, childrenCopy } = findItem(uiId);
     childrenCopy[itemIndex].isRequired = isRequired;
     setChild(childrenCopy);
-    console.log(childrenCopy);
   };
   const setValues = (uiId, value) => {
     let { itemIndex, childrenCopy } = findItem(uiId);
@@ -62,20 +61,15 @@ const FormContextProvider = ({ children, match, history }) => {
     values.push(value);
     childrenCopy[itemIndex].values = values;
     setChild(childrenCopy);
-    console.log(childrenCopy);
   };
   const deleteValue = (uiId, value) => {
     let { itemIndex, childrenCopy } = findItem(uiId);
     let values = childrenCopy[itemIndex].values || [];
     values = values.filter((item) => item !== value);
-    console.log(values);
     childrenCopy[itemIndex].values = values;
     setChild(childrenCopy);
-    console.log(childrenCopy);
   };
   const onSortEnd = ({ oldIndex, newIndex }) => {
-    console.log(oldIndex);
-    console.log(newIndex);
     array_move(oldIndex, newIndex);
   };
 
@@ -90,7 +84,6 @@ const FormContextProvider = ({ children, match, history }) => {
     arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
     setChild([]);
     setChild(arr);
-    console.log(arr);
   }
 
   const deleteObject = (uiId) => {

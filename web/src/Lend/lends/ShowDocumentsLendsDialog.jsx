@@ -29,7 +29,6 @@ const ShowDocumentsLendsDialog = ({ dialogData }) => {
   }, [previewUrl]);
 
   const getSingleDocument = async () => {
-    console.log(singleDocument._id);
     if (singleDocument._id)
       await dispatch(getDocumentAction(singleDocument._id));
   };
@@ -42,7 +41,6 @@ const ShowDocumentsLendsDialog = ({ dialogData }) => {
   };
 
   const getCompleteFile = async () => {
-    console.log(dialogData);
     await dispatch(
       getDocumentsAction({
         pageId,
@@ -59,8 +57,6 @@ const ShowDocumentsLendsDialog = ({ dialogData }) => {
 
   const onGetFileHandle = async (id = "1", title, ex = undefined) => {
     await dispatch(setLoadingAction(true));
-    console.log(id);
-    console.log(title);
     const { data, status } = await getDocumentFileService(
       id === "1" ? document._id : id
     );

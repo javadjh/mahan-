@@ -32,8 +32,6 @@ const ObjectListViewer = () => {
   useEffect(() => {
     let data = {};
     child.map((itm) => {
-      console.log(itm.uiId);
-      console.log(itm);
       data[itm.uiId] = itm.answer;
     });
     form.setFieldsValue(data);

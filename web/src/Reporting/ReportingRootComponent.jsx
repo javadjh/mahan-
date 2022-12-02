@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import LogsTableComponent from "../Log/LogsTableComponent";
 import PagingComponent from "../utility/PagingComponent";
 import MainLayout from "../RootComponent/MainLayout";
 import { useDispatch, useSelector } from "react-redux";
@@ -132,7 +131,6 @@ const ReportingRootComponent = () => {
                   {/* <select
                 className="custom-select mx-1"
                 onChange={(e) => {
-                  console.log(e.target.value);
                   setIsDes(Number(e.target.value));
                 }}
               >
@@ -151,8 +149,7 @@ const ReportingRootComponent = () => {
                     onSelect={(moment) => {
                       const miladiDate = moment.format("MM/DD/YYYY");
                       const persianDate = moment.format("jYYYY/jMM/jDD");
-                      console.log(persianDate);
-                      console.log(miladiDate);
+
                       setStartDate(moment);
                     }}
                   />
@@ -165,8 +162,7 @@ const ReportingRootComponent = () => {
                     onSelect={(moment) => {
                       const miladiDate = moment.format("MM/DD/YYYY");
                       const persianDate = moment.format("jYYYY/jMM/jDD");
-                      console.log(persianDate);
-                      console.log(miladiDate);
+
                       setEndDate(moment);
                     }}
                   />
@@ -178,7 +174,6 @@ const ReportingRootComponent = () => {
                     style={{ width: "100%" }}
                     placeholder="وضعیت پرونده"
                     onChange={(e) => {
-                      console.log(e);
                       setFileStatus(e === "وضعیت پرونده" ? undefined : e);
                     }}
                   >

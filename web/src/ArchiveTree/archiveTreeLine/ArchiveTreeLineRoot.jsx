@@ -144,7 +144,6 @@ const ArchiveTreeLineRoot = ({ history }) => {
                     <i
                       className={"mdi mdi-settings custom-cursor"}
                       onClick={async () => {
-                        console.log(u.archiveId._id);
                         await dispatch(getSingleArchiveAction(u.archiveId._id));
                       }}
                       style={{

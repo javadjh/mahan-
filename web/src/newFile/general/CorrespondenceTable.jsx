@@ -1,11 +1,8 @@
-import { useContext } from "react";
 import React from "react";
 import { Table } from "antd";
-import { FileContext } from "../../context/file/FileContext";
 import { convertToJalali } from "../../utility/dateUtil";
 
-const CorrespondenceTable = () => {
-  const { fileStatistic } = useContext(FileContext);
+const CorrespondenceTable = ({ correspondence }) => {
   const columns = [
     {
       title: "شماره",
@@ -35,11 +32,7 @@ const CorrespondenceTable = () => {
     },
   ];
   return (
-    <Table
-      columns={columns}
-      dataSource={fileStatistic?.file?.correspondence}
-      pagination={false}
-    />
+    <Table columns={columns} dataSource={correspondence} pagination={false} />
   );
 };
 export default CorrespondenceTable;

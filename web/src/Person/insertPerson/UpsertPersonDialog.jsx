@@ -29,7 +29,6 @@ const UpsertPersonDialog = ({ singlePerson, setIsUpsertDialogShow }) => {
 
   const [form] = Form.useForm();
   useEffect(() => {
-    console.log(singlePerson);
     if (singlePerson?._id) {
       form.setFieldsValue({ ...singlePerson, ...{ id: singlePerson?._id } });
       setBirthday(singlePerson.birthdays);
@@ -37,7 +36,6 @@ const UpsertPersonDialog = ({ singlePerson, setIsUpsertDialogShow }) => {
       form.resetFields();
       form.setFieldsValue({ firstName: "" });
     }
-    console.log(form.getFieldsValue());
   }, [singlePerson]);
 
   const sendData = async (formData) => {
@@ -113,8 +111,7 @@ const UpsertPersonDialog = ({ singlePerson, setIsUpsertDialogShow }) => {
                     onSelect={(moment) => {
                       const miladiDate = moment.format("MM/DD/YYYY");
                       const persianDate = moment.format("jYYYY/jMM/jDD");
-                      console.log(persianDate);
-                      console.log(miladiDate);
+
                       setBirthday(persianDate);
                     }}
                   />

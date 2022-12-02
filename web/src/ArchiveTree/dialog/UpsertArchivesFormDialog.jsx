@@ -15,8 +15,6 @@ const UpsertArchivesFormDialog = ({ isPreview }) => {
   const formPreview = useSelector((state) => state.formPreview);
   const [form, setForm] = useState([]);
   useEffect(() => {
-    console.log("isPreview");
-    console.log(isPreview);
     if (isPreview) {
       setForm(formPreview);
     } else {

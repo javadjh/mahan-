@@ -63,7 +63,6 @@ export const insertMoreSettingArchiveAction = (id, info) => {
     const { status } = await insertMoreSettingArchiveService(id, info);
     if (status === 200) {
       doneToast("با موفقیت ثبت شد");
-      window.$("#insertMoreSetting").modal("hide");
     }
   };
 };

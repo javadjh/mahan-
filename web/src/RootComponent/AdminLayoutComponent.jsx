@@ -33,10 +33,7 @@ import FooterRootComponent from "./FooterRootComponent";
 
 const AdminLayoutComponent = ({ children, location }) => {
   const [isShowAppSetting, setIsShowAppSetting] = useState(false);
-  useEffect(() => {
-    console.log(location?.pathname);
-    console.log(location);
-  }, [location]);
+  useEffect(() => {}, [location]);
   const userProfile = useSelector((state) => state.userProfile);
   return (
     <div style={{ backgroundColor: "#F7F9FB", minHeight: "100vh" }}>
@@ -133,6 +130,11 @@ const AdminLayoutComponent = ({ children, location }) => {
                 href={"/files-alerts"}
                 icon={<AlertOutlined />}
                 title={"بخش هشدار ها"}
+              />
+              <CustomMenuItem
+                href={"/logs"}
+                icon={<AlertOutlined />}
+                title={"بخش لاگ ها"}
               />
               <CustomMenuItem
                 icon={<DatabaseOutlined />}

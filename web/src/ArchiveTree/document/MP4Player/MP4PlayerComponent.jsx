@@ -72,9 +72,6 @@ const MP4PlayerComponent = ({ url, deleteFlagHandle, addNewFlagHandle }) => {
           controls={true}
           onProgress={(e) => {
             setProgress(e.playedSeconds);
-            console.log("start ------*");
-            console.log(endPlay.end.toFixed(0));
-            console.log(e.playedSeconds.toFixed(0));
             if (
               endPlay.enable &&
               endPlay.end.toFixed(0) === e.playedSeconds.toFixed(0)

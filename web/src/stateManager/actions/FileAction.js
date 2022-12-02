@@ -69,7 +69,6 @@ export const updateFileAction = (file, id) => {
     if (status === 200) {
       dispatch(getSingleFileArchive(id));
       doneToast("با موفقیت ثبت شد");
-      window.$("#updateFileDialog").modal("hide");
     }
   };
 };
@@ -244,7 +243,6 @@ export const changeFilesArchiveTreeAction = (dataForSend) => {
   return async (dispatch) => {
     const { status } = await changeFilesArchiveTreeService(dataForSend);
     if (status === 200) {
-      window.$("#searchArchivesTrees").modal("hide");
       doneToast("با موفقیت منتقل شد");
     }
   };

@@ -1,9 +1,6 @@
 import React from "react";
 import ReactTooltip from "react-tooltip";
 const SupervisorFilesTableComponent = ({ files, history }) => {
-  console.log("filesfiles");
-  console.log("filesfiles");
-  console.log(files);
   return (
     <div className="table-rep-plugin">
       <div className="table-responsive mb-0" data-pattern="priority-columns">

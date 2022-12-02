@@ -38,7 +38,6 @@ const LibraryRootComponent = () => {
         label: u.archiveId.title,
       });
     });
-    console.log(archives);
     setUsersArchivesState(archives);
     if (archives.length === 1) {
       setArchive(archives[0].value);

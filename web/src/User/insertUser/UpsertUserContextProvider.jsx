@@ -22,8 +22,6 @@ const UpsertUserContextProvider = ({ children }) => {
   const [position, setPosition] = useState("");
   const [showMelliCodeError, setShowMelliCodeError] = useState(false);
   const addUserRoleHandler = () => {
-    console.log(archive);
-    console.log(role);
     if (archive !== undefined && role !== undefined) {
       let data = {};
       let archiveEdited = archive.split("!@");
@@ -44,9 +42,7 @@ const UpsertUserContextProvider = ({ children }) => {
       setFileAccess([]);
     }
   };
-  useEffect(() => {
-    console.log(dataRole);
-  }, [dataRole, reload]);
+  useEffect(() => {}, [dataRole, reload]);
   const deleteUserRoleHandle = (data) => {
     let dataRoleCopy = dataRole;
     dataRoleCopy = dataRoleCopy.filter((d) => d !== data);

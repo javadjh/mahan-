@@ -103,7 +103,6 @@ const BaseInformationArchiveTreeComponent = () => {
               className={"mx-2"}
               style={{ marginTop: 7 }}
               onClick={async () => {
-                console.log(u.archiveId._id);
                 await dispatch(getSingleArchiveAction(u.archiveId._id));
               }}
             >

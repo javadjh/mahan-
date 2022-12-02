@@ -19,7 +19,6 @@ export const insertArchiveTreeAction = (archiveTree) => {
         type: "INIT_RELOAD_MAIN_PARENT_ARCHIVE_TREE",
         payload: { mainParent: data.mainParent },
       });
-      window.$("#addTreeDialog").modal("hide");
       doneToast("با موفقیت ثبت شد");
     }
   };
@@ -37,7 +36,6 @@ export const changeArchiveTreesNameAction = (id, archiveTreesTitle) => {
         type: "INIT_RELOAD_MAIN_PARENT_ARCHIVE_TREE",
         payload: { mainParent: data.mainParent },
       });
-      window.$("#addTreeDialog").modal("hide");
       doneToast("با موفقیت بروز شد");
     }
   };

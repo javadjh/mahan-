@@ -54,7 +54,6 @@ const ShareDocumentDialog = ({ insertShareFile }) => {
             <div className={"text-center"}>
               <Select
                 onChange={(e) => {
-                  console.log(e);
                   let users = [];
                   e.map((u) => {
                     users.push(u.value);
@@ -96,8 +95,6 @@ const ShareDocumentDialog = ({ insertShareFile }) => {
                   onSelect={(moment) => {
                     const miladiDate = moment.format("MM/DD/YYYY");
                     const persianDate = moment.format("jYYYY/jMM/jDD");
-                    console.log(persianDate);
-                    console.log(miladiDate);
                     setExpire(moment);
                   }}
                 />

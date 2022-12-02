@@ -81,7 +81,6 @@ export const insertLegalPeopleFormExcelAction = (file) => {
           searchValue: "",
         })
       );
-      window.$("#insertLegalPeopleFromExcelDialog").modal("hide");
     }
   };
 };

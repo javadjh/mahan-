@@ -405,8 +405,6 @@ const UpsertDocumentRoot = ({ history }) => {
   };
 
   const onGetFileHandle = async (id = "1", title, ex = undefined) => {
-    console.log(id);
-    console.log(title);
     setIsFileDownloading(true);
     const { data, status } = await getDocumentFileService(
       id === "1" ? document._id : id
@@ -567,12 +565,6 @@ const UpsertDocumentRoot = ({ history }) => {
   };
 
   const insertShareFile = async (usersSelected, expire) => {
-    console.log({
-      usersReceiver: usersSelected,
-      expireDate: expire,
-      isCompleteFile: true,
-      fileId: history.location.state.fileId,
-    });
     await dispatch(
       insertLendAction({
         usersReceiver: usersSelected,
@@ -1096,7 +1088,6 @@ const UpsertDocumentRoot = ({ history }) => {
                       >
                         <ScanDialog
                           onScannedListener={(fileScanned) => {
-                            console.log(fileScanned);
                             onImageChange([fileScanned]);
                           }}
                         />

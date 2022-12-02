@@ -62,7 +62,6 @@ const InsertFileComponent = ({ tree, mainTree, isUpdate = false, fileId }) => {
     formData.applicantId = formData.applicantId.value;
     formData.enDate = undefined;
     formData.faDate = undefined;
-    console.log(formData);
     await dispatch(insertFileAction(formData, history));
   };
   return (
@@ -185,8 +184,6 @@ const InsertFileComponent = ({ tree, mainTree, isUpdate = false, fileId }) => {
                           onSelect={(moment) => {
                             const miladiDate = moment.format("MM/DD/YYYY");
                             const persianDate = moment.format("jYYYY/jMM/jDD");
-                            console.log(persianDate);
-                            console.log(miladiDate);
                             form.setFieldsValue({
                               ...form.getFieldsValue,
                               ...{
@@ -206,8 +203,6 @@ const InsertFileComponent = ({ tree, mainTree, isUpdate = false, fileId }) => {
                               const miladiDate = moment.format("MM/DD/YYYY");
                               const persianDate =
                                 moment.format("jYYYY/jMM/jDD");
-                              console.log(persianDate);
-                              console.log(miladiDate);
                               form.setFieldsValue({
                                 ...form.getFieldsValue,
                                 ...{

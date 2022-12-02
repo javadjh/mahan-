@@ -176,7 +176,6 @@ export const groupAddNoteDocumentAction = (data, fileId) => {
           fileId,
         })
       );
-      window.$("#addGroupNoteDialog").modal("hide");
       doneToast("با موفقیت اضافه شد");
     }
   };
@@ -187,7 +186,6 @@ export const saveDocumentsInfoAction = (data, history, isDone = false) => {
   return async (dispatch) => {
     await dispatch({ type: "INIT_DOCUMENTS_CUT", payload: data });
     if (!isDone) {
-      window.$("#searchFileDialog").modal("show");
       infoToast("پرونده مقصد را انتخاب کنید");
     }
   };

@@ -8,8 +8,6 @@ const CustomDatePicker = ({ value, onChange }) => {
       onSelect={(moment) => {
         const miladiDate = moment.format("MM/DD/YYYY");
         const persianDate = moment.format("jYYYY/jMM/jDD");
-        console.log(persianDate);
-        console.log(miladiDate);
         // form.setFieldsValue({
         //   ...form.getFieldsValue,
         //   ...{

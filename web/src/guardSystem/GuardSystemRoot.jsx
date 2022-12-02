@@ -58,11 +58,6 @@ const GuardSystemRoot = ({ archiveId }) => {
       if (guardSystem.audit) setAuditUser(guardSystem.audit.value);
       if (guardSystem.finally) setFinallyUser(guardSystem.finally.value);
     }
-    console.log({
-      primitiveUser: guardSystem?.primitive?.value,
-      auditUser: guardSystem?.audit?.value,
-      finallyUser: guardSystem?.finally?.value,
-    });
   }, [guardSystem]);
 
   const getArchiveGuardSystem = async () => {
@@ -93,7 +88,6 @@ const GuardSystemRoot = ({ archiveId }) => {
         isActive,
       })
     );
-    window.$("#insertMoreSetting").modal("hide");
   };
 
   return (

@@ -55,7 +55,6 @@ const ShareFile = ({ fileId }) => {
           <Select
             styles={colourStyles}
             onChange={(e) => {
-              console.log(e);
               let users = [];
               e.map((u) => {
                 users.push(u.value);
@@ -79,8 +78,7 @@ const ShareFile = ({ fileId }) => {
               onSelect={(moment) => {
                 const miladiDate = moment.format("MM/DD/YYYY");
                 const persianDate = moment.format("jYYYY/jMM/jDD");
-                console.log(persianDate);
-                console.log(miladiDate);
+
                 setExpire(moment);
               }}
             />

@@ -67,7 +67,6 @@ const ArchiveTreeSettingDialog = ({ tree, reload }) => {
       <Radio.Group
         value={lang}
         onChange={(e) => {
-          console.log(e);
           setLang(e?.target?.value);
         }}
       >
@@ -91,7 +90,6 @@ const ArchiveTreeSettingDialog = ({ tree, reload }) => {
                     checked={isFormRequired}
                     value={isFormRequired}
                     onChange={(e) => {
-                      console.log(e?.target?.checked);
                       setIsFormRequired(e?.target?.checked);
                     }}
                   >

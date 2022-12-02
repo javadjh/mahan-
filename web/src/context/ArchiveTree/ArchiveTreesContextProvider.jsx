@@ -49,14 +49,12 @@ const ArchiveTreeContextProvider = ({ children }) => {
       mainParent: mainParent?._id,
       archiveId,
     });
-    console.log(data);
 
     if (status === 200) {
       setArchiveTrees(data);
     }
   };
   const changeTreeTitle = async (id, newTitle) => {
-    console.log(newTitle);
     const { data, status } = await changeArchiveTreesNameService(id, {
       title: newTitle,
       archiveId,

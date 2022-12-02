@@ -130,7 +130,6 @@ const ImageCropComponent = ({
   }, [documentId, lastVersion, versions]);
 
   const getFileForEditor = async (id = undefined) => {
-    console.log(id ? "id" : "documentId");
     const { data, status } = await getImageDocumentService(
       id ? id : documentId
     );
@@ -141,7 +140,6 @@ const ImageCropComponent = ({
         size: 10,
         endings: "transparent",
       });
-      console.log("filefilefile");
       setFileData(file);
       // this.setState({ openCropper: true, selectedImage: file, fileUploadErrors: [] });
       setOpenCropper(true);
@@ -156,12 +154,10 @@ const ImageCropComponent = ({
   const setEditorRef = (editor) => setEditor(editor);
   const loadableCanvasRef = (canvas) => setLoadableCanvas(canvas);
   const onCrop = async () => {
-    console.log(editor);
     //const { editor } = this.state;
     // if (editor !== null) {
     const url = editor.getImageScaledToCanvas().toDataURL();
     setUrlAddress(url);
-    console.log(url);
     setUserProfilePic(url);
     var blob = dataURItoBlob(url);
     var file = new File([blob], `${title}.${ex}`);

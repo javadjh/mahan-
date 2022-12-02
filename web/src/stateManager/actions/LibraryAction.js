@@ -99,7 +99,6 @@ export const moveDocumentsToLibraryShelfAction = (data) => {
     if (status === 200) {
       await dispatch(getLibraryAction());
       doneToast("با موفقیت ثبت شد");
-      window.$("#moveDocumentsToLibraryShelfDialog").modal("hide");
     }
   };
 };

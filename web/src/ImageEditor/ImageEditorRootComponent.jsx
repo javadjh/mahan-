@@ -33,7 +33,6 @@ const ImageEditorRootComponent = ({ history, match }) => {
   }, [match?.params]);
 
   const getFileForEditor = async () => {
-    console.log(id ? "id" : "documentId");
     const { data, status } = await getImageDocumentService(lastdocument);
     if (status === 200) {
       var file = new File([data], `sdcsdcsdc.jpg`, {
@@ -42,7 +41,6 @@ const ImageEditorRootComponent = ({ history, match }) => {
         size: 10,
         endings: "transparent",
       });
-      console.log("filefilefile");
       const url = URL.createObjectURL(file);
       setSrc(url);
 

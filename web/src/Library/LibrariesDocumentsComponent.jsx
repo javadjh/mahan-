@@ -86,7 +86,6 @@ const LibrariesDocumentsComponent = ({ isManage = true }) => {
   };
 
   const showGroupAlertDialogDelete = async () => {
-    console.log(selectedDoc);
     await dispatch(
       deleteGroupLibrariesDocumentsAction(
         {

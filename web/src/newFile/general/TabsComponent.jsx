@@ -19,9 +19,6 @@ import CorrespondenceRoot from "./CorrespondenceRoot";
 const TabsComponent = () => {
   const { setTabState, fileStatistic } = useContext(FileContext);
   const nazerTab = () => {
-    console.log(fileStatistic?.file?.isConfirm);
-    console.log(fileStatistic?.file?.isReject);
-    console.log(fileStatistic?.file?.isWaiting);
     if (fileStatistic?.file?.isConfirm)
       return <CustomText color={lightGreenColor}>ناظر (تایید شده)</CustomText>;
     if (fileStatistic?.file?.isReject)

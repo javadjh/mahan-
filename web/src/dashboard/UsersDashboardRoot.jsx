@@ -66,7 +66,6 @@ const UsersDashboardRoot = () => {
     let pieLabel = [];
     let pieValues = [];
     adminDashboard.fileType.map((f) => {
-      console.log(f);
       pieLabel.push(f.label);
       pieValues.push(f.value);
     });
@@ -95,7 +94,6 @@ const UsersDashboardRoot = () => {
     let verticalLabel = [];
     let verticalValues = [];
     adminDashboard.fileUpload7DaysAgo.map((f) => {
-      console.log(f);
       verticalLabel.push(f.label);
       verticalValues.push(f.value);
     });

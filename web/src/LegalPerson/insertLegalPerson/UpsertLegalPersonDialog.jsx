@@ -33,7 +33,6 @@ const UpsertLegalPersonDialog = ({
 
   const [form] = Form.useForm();
   useEffect(() => {
-    console.log(singleLegalPerson);
     if (singleLegalPerson?._id) {
       form.setFieldsValue({
         ...singleLegalPerson,
@@ -44,7 +43,6 @@ const UpsertLegalPersonDialog = ({
       form.resetFields();
       form.setFieldsValue({ companyName: "" });
     }
-    console.log(form.getFieldsValue());
   }, [singleLegalPerson]);
 
   const sendData = async (formData) => {
@@ -91,8 +89,7 @@ const UpsertLegalPersonDialog = ({
                     onSelect={(moment) => {
                       const miladiDate = moment.format("MM/DD/YYYY");
                       const persianDate = moment.format("jYYYY/jMM/jDD");
-                      console.log(persianDate);
-                      console.log(miladiDate);
+
                       setRegisterDate(persianDate);
                     }}
                   />{" "}

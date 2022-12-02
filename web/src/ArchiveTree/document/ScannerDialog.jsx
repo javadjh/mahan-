@@ -33,9 +33,7 @@ const ScannerDialog = ({ history, getDocData }) => {
           setScannerName(json.Name);
         });
       }
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   };
 
   const startScanning = async () => {
@@ -54,7 +52,6 @@ const ScannerDialog = ({ history, getDocData }) => {
     const imageBlob = await res.blob();
 
     let blobsFile = new File([imageBlob], "scanned-file-" + uuidv4() + ".png");
-    console.log(blobsFile);
     setFile(blobsFile);
 
     const imageObjectURL = URL.createObjectURL(imageBlob);

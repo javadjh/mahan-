@@ -38,8 +38,6 @@ const ItemTreeComponent = ({ isMain, mainParent }) => {
   }, []);
 
   useEffect(() => {
-    console.log(reloadMainParentArchiveTree.mianParent);
-    console.log(mainParent);
     if (reloadMainParentArchiveTree.mainParent === mainParent) getData();
   }, [reloadMainParentArchiveTree]);
 
