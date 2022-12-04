@@ -1,9 +1,18 @@
+import { Col, Input, Row } from "antd";
 import React, { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 import { useSelector } from "react-redux";
+import { darkBlueColor, lightGreenColor } from "../../../app/appColor";
+import CustomButton from "../../../styled/components/CustomButton";
+import { SpaceStyled } from "../../../styled/global";
 import { fancyTimeFormat } from "../../../utility/timeUtility";
 
-const MP4PlayerComponent = ({ url, deleteFlagHandle, addNewFlagHandle }) => {
+const MP4PlayerComponent = ({
+  url,
+  deleteFlagHandle,
+  addNewFlagHandle,
+  doc,
+}) => {
   const [playing, setPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const [startSecond, setStartSecond] = useState(0);
@@ -16,7 +25,6 @@ const MP4PlayerComponent = ({ url, deleteFlagHandle, addNewFlagHandle }) => {
     end: 0,
   });
   const [isMute, setIsMute] = useState(false);
-  const singleDocumentState = useSelector((state) => state.document.document);
 
   const playerRef = (playerRef) => {
     setPlayer(playerRef);
@@ -84,76 +92,79 @@ const MP4PlayerComponent = ({ url, deleteFlagHandle, addNewFlagHandle }) => {
             }
           }}
         />
-        <div className={"row"}>
-          <div className={"col-lg-6"}>
+        <Row>
+          <Col span={12}>
             <div
-              className={"my-2 mx-4"}
               style={{
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
               }}
             >
-              <span
-                onClick={() => {
-                  if (progress <= endSecond || endSecond === 0)
-                    setStartSecond(progress);
-                }}
-                className={`custom-cursor mx-5 btn btn-${
-                  startSecond > 0 ? "success" : "dark"
-                }`}
-              >
-                زمان شروع {fancyTimeFormat(startSecond)}
-              </span>
-              <span
-                onClick={() => {
-                  if (progress >= startSecond) setEndSecond(progress);
-                }}
-                className={`custom-cursor mx-5 btn btn-${
-                  endSecond > 0 ? "success" : "dark"
-                }`}
-              >
-                زمان پایان {fancyTimeFormat(endSecond)}
-              </span>
-            </div>
-          </div>
-          {startSecond > 0 && endSecond > 0 ? (
-            <div className={"col-lg-6 mt-2"}>
-              <div className={"row mx-1"}>
-                <input
-                  className={"form-control col-lg-10"}
-                  onChange={(e) => {
-                    setFlatDescription(e.target.value);
+              <SpaceStyled vertical={10} horizontal={5}>
+                <CustomButton
+                  onClick={() => {
+                    if (progress <= endSecond || endSecond === 0)
+                      setStartSecond(progress);
                   }}
-                  placeholder={"توضیحات"}
-                />
-                <div className={"col-lg-2"}>
-                  <button
-                    className={"btn btn-success btn-block"}
-                    onClick={async () => {
-                      addNewFlagHandle(
-                        startSecond,
-                        endSecond,
-                        flatDescription
-                      ).then((isSuccess) => {
-                        if (isSuccess) {
-                          setFlatDescription("");
-
-                          setProgress(0);
-                          setStartSecond(0);
-                          setEndSecond(0);
-                          setFlagProgress(0);
-                        }
-                      });
-                    }}
-                  >
-                    ثبت
-                  </button>
-                </div>
-              </div>
+                  color={startSecond > 0 ? darkBlueColor : lightGreenColor}
+                >
+                  زمان شروع {fancyTimeFormat(startSecond)}
+                </CustomButton>
+              </SpaceStyled>
+              <SpaceStyled vertical={10} horizontal={5}>
+                <CustomButton
+                  onClick={() => {
+                    if (progress >= startSecond) setEndSecond(progress);
+                  }}
+                  color={endSecond > 0 ? darkBlueColor : lightGreenColor}
+                >
+                  زمان پایان {fancyTimeFormat(endSecond)}
+                </CustomButton>
+              </SpaceStyled>
             </div>
+          </Col>
+          {startSecond > 0 && endSecond > 0 ? (
+            <Col span={12}>
+              <Row justify="center" align="middle">
+                <Col span={17}>
+                  <SpaceStyled vertical={10} horizontal={5}>
+                    <Input
+                      onChange={(e) => {
+                        setFlatDescription(e.target.value);
+                      }}
+                      placeholder={"توضیحات"}
+                    />
+                  </SpaceStyled>
+                </Col>
+                <Col span={7}>
+                  <SpaceStyled vertical={10} horizontal={5}>
+                    <CustomButton
+                      onClick={async () => {
+                        addNewFlagHandle(
+                          startSecond,
+                          endSecond,
+                          flatDescription
+                        ).then((isSuccess) => {
+                          if (isSuccess) {
+                            setFlatDescription("");
+
+                            setProgress(0);
+                            setStartSecond(0);
+                            setEndSecond(0);
+                            setFlagProgress(0);
+                          }
+                        });
+                      }}
+                    >
+                      ثبت
+                    </CustomButton>
+                  </SpaceStyled>
+                </Col>
+              </Row>
+            </Col>
           ) : null}
-        </div>
+        </Row>
 
         <div className="table-rep-plugin">
           <div
@@ -171,7 +182,7 @@ const MP4PlayerComponent = ({ url, deleteFlagHandle, addNewFlagHandle }) => {
                 </tr>
               </thead>
               <tbody>
-                {singleDocumentState?.videoFlags?.map((f, index) => (
+                {doc?.videoFlags?.map((f, index) => (
                   <tr
                     style={
                       progress >= f.startSecond && progress <= f.endSecond

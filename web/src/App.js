@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+
 import { v4 as uuidv4 } from "uuid";
 import PanelRootComponent from "./RootComponent/PanelRootComponent";
 import { FileDrop } from "react-file-drop";
@@ -8,14 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router";
 // import Loading from "react-fullscreen-loading";
 import { getLibraryAction } from "./stateManager/actions/LibraryAction";
-import RootContextProvider from "./RootComponent/RootContextProvider";
 import { RootContext } from "./RootComponent/RootContext";
-import { useCookies } from "react-cookie";
-import { doneToast } from "./utility/ShowToast";
-import ResetPasswordDialog from "./dialog/ResetPasswordDialog";
-import AppSettingDialog from "./dialog/AppSettingDialog";
-import UserProfileDialog from "./Profile/UserProfileDialog";
-import PdfPreviewComponent from "./dialog/PdfPreviewComponent";
 import { Image, Modal } from "antd";
 import {
   CenterStyled,

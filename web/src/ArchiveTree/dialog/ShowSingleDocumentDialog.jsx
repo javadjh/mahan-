@@ -197,6 +197,7 @@ const ShowSingleDocumentDialog = ({ doc }) => {
                         >{`دریافت سند`}</a>
                       </CenterStyled>
                       <MP4PlayerComponent
+                        doc={doc}
                         deleteFlagHandle={deleteFlagHandle}
                         url={`http://localhost:5000/${previewUrl}`}
                         addNewFlagHandle={addNewFlagHandle}

@@ -93,6 +93,7 @@ const ShowSingleDocDialog = ({ doc }) => {
             doc.ex.toLowerCase() === "mkv" ||
             doc.ex.toLowerCase() === "wmv" ? (
             <MP4PlayerComponent
+              doc={doc}
               deleteFlagHandle={deleteFlagHandle}
               url={`http://localhost:5000/${previewUrl}`}
               addNewFlagHandle={addNewFlagHandle}
