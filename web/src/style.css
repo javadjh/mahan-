@@ -134,3 +134,242 @@
 .ant-collapse-content-active {
   border: none !important;
 }
+
+.vl {
+  border-left: 2px solid green;
+}
+
+.black-vl {
+  border-left: 2px solid black;
+}
+
+.black-vl-small {
+  border-left: 1px solid black;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent; /* make scrollbar transparent */
+}
+
+.btn-group-fab {
+  position: fixed;
+  width: 50px;
+  height: auto;
+  left: 20px;
+  bottom: 5px;
+}
+.btn-group-fab div {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+.btn-group-fab .btn {
+  position: absolute;
+  bottom: 0;
+  border-radius: 50%;
+  display: block;
+  margin-bottom: 4px;
+  width: 40px;
+  height: 40px;
+  margin: 4px auto;
+}
+.btn-group-fab .btn-main {
+  width: 58px;
+  height: 58px;
+  right: 50%;
+  margin-right: -25px;
+  z-index: 9;
+}
+.btn-group-fab .btn-sub {
+  bottom: 0;
+  z-index: 8;
+  right: 50%;
+  margin-right: -20px;
+  -webkit-transition: all 2s;
+  transition: all 0.5s;
+}
+.btn-group-fab.active .btn-sub:nth-child(2) {
+  bottom: 60px;
+}
+.btn-group-fab.active .btn-sub:nth-child(3) {
+  bottom: 110px;
+}
+.btn-group-fab.active .btn-sub:nth-child(4) {
+  bottom: 160px;
+}
+.btn-group-fab .btn-sub:nth-child(5) {
+  bottom: 210px;
+}
+
+.lds-roller {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-roller div {
+  animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  transform-origin: 40px 40px;
+}
+.lds-roller div:after {
+  content: " ";
+  display: block;
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #3b5de7;
+  margin: -4px 0 0 -4px;
+}
+.lds-roller div:nth-child(1) {
+  animation-delay: -0.036s;
+}
+.lds-roller div:nth-child(1):after {
+  top: 63px;
+  left: 63px;
+}
+.lds-roller div:nth-child(2) {
+  animation-delay: -0.072s;
+}
+.lds-roller div:nth-child(2):after {
+  top: 68px;
+  left: 56px;
+}
+.lds-roller div:nth-child(3) {
+  animation-delay: -0.108s;
+}
+.lds-roller div:nth-child(3):after {
+  top: 71px;
+  left: 48px;
+}
+.lds-roller div:nth-child(4) {
+  animation-delay: -0.144s;
+}
+.lds-roller div:nth-child(4):after {
+  top: 72px;
+  left: 40px;
+}
+.lds-roller div:nth-child(5) {
+  animation-delay: -0.18s;
+}
+.lds-roller div:nth-child(5):after {
+  top: 71px;
+  left: 32px;
+}
+.lds-roller div:nth-child(6) {
+  animation-delay: -0.216s;
+}
+.lds-roller div:nth-child(6):after {
+  top: 68px;
+  left: 24px;
+}
+.lds-roller div:nth-child(7) {
+  animation-delay: -0.252s;
+}
+.lds-roller div:nth-child(7):after {
+  top: 63px;
+  left: 17px;
+}
+.lds-roller div:nth-child(8) {
+  animation-delay: -0.288s;
+}
+.lds-roller div:nth-child(8):after {
+  top: 56px;
+  left: 12px;
+}
+@keyframes lds-roller {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.nav-area {
+  background: #000000;
+}
+.nav-area2:after {
+  content: "";
+  clear: both;
+  display: block;
+}
+.nav-area2 ul {
+  list-style: none;
+  margin: 0;
+}
+.menu {
+  width: 500px;
+  margin: 0 auto !important;
+}
+.nav-area2 > ul > li {
+  float: left;
+  position: relative;
+}
+.nav-area2 ul li a {
+  text-decoration: none;
+  color: #fff;
+  padding: 15px 20px;
+  display: block;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+.nav-area2 ul li:hover a {
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+}
+
+.nav-area2 ul ul {
+  position: absolute;
+  padding: 0;
+  min-width: 160px;
+  display: none;
+  top: 100%;
+  left: 0;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.5);
+}
+.nav-area2 ul li:hover > ul {
+  display: block;
+}
+.nav-area2 ul ul li:hover a {
+  background: #262626;
+}
+.nav-area2 ul ul li {
+  position: relative;
+}
+.nav-area2 ul ul ul {
+  top: 0;
+  left: 100%;
+}
+.nav-area2 ul ul ul li:hover a {
+  background: #34495e;
+}
+.custom-cursor {
+  cursor: pointer;
+}
+
+.box-flat {
+  border: 1px dashed #a2a2a2;
+  border-radius: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 80px;
+  margin-left: 10px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.custom-box-shadow {
+  -webkit-box-shadow: 0px 14px 22px -6px rgba(0, 0, 0, 0.22);
+  box-shadow: 0px 14px 22px -6px rgba(0, 0, 0, 0.22);
+}

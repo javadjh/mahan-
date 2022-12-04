@@ -12,11 +12,9 @@ import {
 } from "../../stateManager/actions/FileAction";
 import { useState } from "react";
 import {
-  addNewNoteForDocumentAction,
   deleteDocumentAction,
   getDeActivateDocumentsAction,
   getDocumentsAction,
-  removeNoteFromDocumentAction,
   restoreDocumentAction,
 } from "../../stateManager/actions/DocumentAction";
 import { getFileLogsAction } from "../../stateManager/actions/LogsAction";
@@ -28,10 +26,9 @@ import {
 } from "../../service/DocumentService";
 import {
   fileAlertsAction,
-  getUsersFileAlertsAction,
-  getUsersFilesAlertsAction,
   insertFileAlertAction,
 } from "../../stateManager/actions/FileAlertAction";
+import { RootContext } from "../../RootComponent/RootContext";
 
 const FileContextProvider = ({ children, match, history }) => {
   // redux utils
@@ -40,6 +37,11 @@ const FileContextProvider = ({ children, match, history }) => {
 
   //init some params
   const fileId = match?.params?.id;
+  const { setFileId, setArchiveId } = useContext(RootContext);
+  useEffect(() => {
+    setFileId(fileId);
+    setArchiveId(fileStatistic?.file?.archiveId);
+  }, [fileId, fileStatistic]);
 
   //local state
   const [currentTab, setCurrentTab] = useState("docs");

@@ -82,93 +82,93 @@ const SearchInputComponent = () => {
     <SpaceStyled vertical={20} horizontal={20}>
       <Form>
         <Form.Item>
-          <Dropdown
-            overlay={
-              <Menu>
-                <Menu.Item>
-                  <CustomLabel title="پرونده ها" />
-                  {files.map((f) => (
-                    <div
-                      className={"p-1 dropdown-item custom-cursor"}
-                      onClick={() => {
-                        history.push({
-                          pathname: "/file/" + f._id,
-                          state: {
-                            archiveId: f.archiveId._id,
-                            fileId: f._id,
-                            hasForm: f.archiveId.isFormRequired,
-                          },
-                        });
-                      }}
-                    >
-                      <a style={{ fontSize: 16 }} className="m-0 p-0">
-                        {f.title}
-                      </a>
-                      <br />
-                      <a
-                        style={{ color: "#aeaeae", fontSize: 13 }}
-                        className="m-0 p-0"
-                      >
-                        {f.archiveTreeId.route}
-                      </a>
-                      <br />
-                      <a
-                        style={{
-                          color: "black",
-                          backgroundColor: "yellow",
+          <Auth accessList={["جستجوی پیشرفته اسناد"]}>
+            <Dropdown
+              overlay={
+                <Menu>
+                  <Menu.Item>
+                    <CustomLabel title="پرونده ها" />
+                    {files.map((f) => (
+                      <div
+                        className={"p-1 dropdown-item custom-cursor"}
+                        onClick={() => {
+                          history.push({
+                            pathname: "/file/" + f._id,
+                            state: {
+                              archiveId: f.archiveId._id,
+                              fileId: f._id,
+                              hasForm: f.archiveId.isFormRequired,
+                            },
+                          });
                         }}
                       >
-                        یافته شده در : {onFilesTargetHandler(f.target)}
-                      </a>
-                    </div>
-                  ))}
-                  <CustomLabel title="اسناد" />
-                  {documents.map((d) => (
-                    <div
-                      className={"p-1 dropdown-item custom-cursor"}
-                      onClick={() => {
-                        history.push({
-                          pathname: "/file/" + d.fileId._id,
-                          state: {
-                            archiveId: d.archiveId._id,
-                            fileId: d.fileId._id,
-                            hasForm: d.archiveId.isFormRequired,
-                            documentId: d._id,
-                            isFocused: true,
-                          },
-                        });
-                      }}
-                    >
-                      <a style={{ fontSize: 16 }} className="m-0 p-0">
-                        {d.title.length > 30
-                          ? d.title.substr(0, 30) + "..."
-                          : d.title}
-                      </a>
-                      <br />
-                      <a
-                        style={{ color: "#aeaeae", fontSize: 13 }}
-                        className="m-0 p-0"
-                      >
-                        {d.fileId.title.length > 30
-                          ? d.fileId.title.substr(0, 30) + "..."
-                          : d.fileId.title}
-                      </a>
-                      <br />
-                      <a
-                        style={{
-                          color: "black",
-                          backgroundColor: "yellow",
+                        <a style={{ fontSize: 16 }} className="m-0 p-0">
+                          {f.title}
+                        </a>
+                        <br />
+                        <a
+                          style={{ color: "#aeaeae", fontSize: 13 }}
+                          className="m-0 p-0"
+                        >
+                          {f.archiveTreeId.route}
+                        </a>
+                        <br />
+                        <a
+                          style={{
+                            color: "black",
+                            backgroundColor: "yellow",
+                          }}
+                        >
+                          یافته شده در : {onFilesTargetHandler(f.target)}
+                        </a>
+                      </div>
+                    ))}
+                    <CustomLabel title="اسناد" />
+                    {documents.map((d) => (
+                      <div
+                        className={"p-1 dropdown-item custom-cursor"}
+                        onClick={() => {
+                          history.push({
+                            pathname: "/file/" + d.fileId._id,
+                            state: {
+                              archiveId: d.archiveId._id,
+                              fileId: d.fileId._id,
+                              hasForm: d.archiveId.isFormRequired,
+                              documentId: d._id,
+                              isFocused: true,
+                            },
+                          });
                         }}
                       >
-                        یافته شده در : {onDocumentsTargetHandler(d.target)}
-                      </a>
-                    </div>
-                  ))}
-                </Menu.Item>
-              </Menu>
-            }
-          >
-            <Auth accessList={["جستجوی پیشرفته اسناد"]}>
+                        <a style={{ fontSize: 16 }} className="m-0 p-0">
+                          {d.title.length > 30
+                            ? d.title.substr(0, 30) + "..."
+                            : d.title}
+                        </a>
+                        <br />
+                        <a
+                          style={{ color: "#aeaeae", fontSize: 13 }}
+                          className="m-0 p-0"
+                        >
+                          {d.fileId.title.length > 30
+                            ? d.fileId.title.substr(0, 30) + "..."
+                            : d.fileId.title}
+                        </a>
+                        <br />
+                        <a
+                          style={{
+                            color: "black",
+                            backgroundColor: "yellow",
+                          }}
+                        >
+                          یافته شده در : {onDocumentsTargetHandler(d.target)}
+                        </a>
+                      </div>
+                    ))}
+                  </Menu.Item>
+                </Menu>
+              }
+            >
               <Input
                 onChange={(e) => {
                   setSearchValue(e.target.value);
@@ -176,8 +176,8 @@ const SearchInputComponent = () => {
                 className="ant-search-custom"
                 placeholder="موتور جستجو..."
               />
-            </Auth>
-          </Dropdown>
+            </Dropdown>
+          </Auth>
         </Form.Item>
       </Form>
     </SpaceStyled>

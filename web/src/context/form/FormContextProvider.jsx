@@ -72,9 +72,22 @@ const FormContextProvider = ({ children, match, history }) => {
   const onSortEnd = ({ oldIndex, newIndex }) => {
     array_move(oldIndex, newIndex);
   };
+  const upAction = (item) => {
+    let { itemIndex, childrenCopy } = findItem(item.uiId);
+    if (itemIndex !== childrenCopy.length) {
+      array_move(itemIndex, itemIndex - 1);
+    }
+  };
+  const downAction = (item) => {
+    let { itemIndex } = findItem(item.uiId);
+    if (itemIndex !== child.length) {
+      array_move(itemIndex, itemIndex + 1);
+    }
+  };
 
   function array_move(old_index, new_index) {
-    let arr = child;
+    let arr = [...child];
+
     if (new_index >= arr.length) {
       var k = new_index - arr.length + 1;
       while (k--) {
@@ -114,6 +127,8 @@ const FormContextProvider = ({ children, match, history }) => {
         onSortEnd,
         deleteObject,
         sendData,
+        upAction,
+        downAction,
       }}
     >
       {children}

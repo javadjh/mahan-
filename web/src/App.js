@@ -16,8 +16,17 @@ import ResetPasswordDialog from "./dialog/ResetPasswordDialog";
 import AppSettingDialog from "./dialog/AppSettingDialog";
 import UserProfileDialog from "./Profile/UserProfileDialog";
 import PdfPreviewComponent from "./dialog/PdfPreviewComponent";
+import { Image, Modal } from "antd";
+import {
+  CenterStyled,
+  CenterVerticalStyled,
+  SpaceStyled,
+} from "./styled/global";
+import CustomText from "./styled/components/CustomText";
+import { grayColor } from "./app/appColor";
 
 const App = ({ location }) => {
+  const [showUploadBlock, setShowUploadBlock] = useState(false);
   location = useLocation();
   const {
     libraryShelfContext,
@@ -59,9 +68,7 @@ const App = ({ location }) => {
       setCanUpload(false);
       const file = new FormData();
       file.append("file", files[i]);
-      console.log(
-        "fileIdfileIdfileIdfileIdfileIdfileIdfileIdfileIdfileIdfileIdfileIdfileIdfileIdfileIdfileIdfileIdfileIdfileIdfileIdfileIdfileIdfileId"
-      );
+
       console.log(fileId);
       const { data, status } = await insertDocumentService(
         archiveId,
@@ -81,7 +88,7 @@ const App = ({ location }) => {
     setCanUpload(true);
     await dispatch(getLibraryAction());
     setTimeout(() => {
-      window.$("#uploadFileDialog").modal("hide");
+      setShowUploadBlock(false);
     }, 500);
 
     setImages([]);
@@ -90,191 +97,193 @@ const App = ({ location }) => {
   };
   return (
     <>
-      {/*  */}
-
-      {/*  */}
-
       {/* <Loading
         loading={loading}
         background={"rgba(255, 255, 255, 0.81)"}
         loaderColor="#3b5de7"
       /> */}
-      {/* <FileDrop
+      <FileDrop
         onDragOver={() => {
-          window.$("#uploadFileDialog").modal("show");
+          setShowUploadBlock(true);
         }}
         onFrameDragLeave={() => {
-          window.$("#uploadFileDialog").modal("hide");
+          setShowUploadBlock(false);
         }}
         onDrop={(files, e) => {
           if (canUpload) onImageChange(files);
         }}
       >
-        <div
-          className="modal fade "
-          id="uploadFileDialog"
-          tabIndex="-1"
-          role="dialog"
-          aria-labelledby="exampleModalLabel"
-          aria-hidden="true"
-        >
-          <div className="modal-dialog modal-xl" role="document">
-            <div className="modal-content p-4">
-              <div>
-                <div
-                  style={{
-                    minHeight: "70vh",
-                    backgroundColor: "#f3f3f3",
-                    border: "4px dashed rgba(144,144,144,0.38)",
-                    borderRadius: 12,
-                  }}
-                >
-                  <div style={{ width: "100%", height: "100%" }}>
-                    {images.length > 0 || uploadedFile.length > 0 ? (
+        <Modal width={"70%"} footer={null} visible={showUploadBlock}>
+          <div>
+            <div
+              style={{
+                minHeight: "70vh",
+                borderRadius: 12,
+                margin: 40,
+                background: "rgba(230, 237, 241, 0.24)",
+                border: "1.2px dashed #DDE6ED",
+                borderRadius: 6,
+              }}
+            >
+              <div style={{ width: "100%", height: "100%" }}>
+                {images.length > 0 || uploadedFile.length > 0 ? (
+                  <>
+                    <div style={{ display: "flex", flexWrap: "wrap" }}>
                       <>
-                        <div style={{ display: "flex", flexWrap: "wrap" }}>
+                        {uploadedFile.map((u) => (
                           <>
-                            {uploadedFile.map((u) => (
-                              <>
-                                <span
-                                  style={{
-                                    flexWrap: "wrap",
-                                    width: 100,
-                                    height: 100,
-                                    marginTop: 5,
-                                    marginBottom: 30,
-                                    marginRight: 5,
-                                    marginLeft: 5,
-                                    backgroundColor: "rgba(0,0,0,0.3)",
-                                    padding: 5,
-                                    borderRadius: 10,
-                                    position: "relative",
-                                  }}
-                                >
-                                  <img
-                                    style={{
-                                      objectFit: "cover",
-                                      borderRadius: 7,
-                                      zIndex: -1,
-                                      opacity: "0.5",
-                                    }}
-                                    width={90}
-                                    height={90}
-                                    src={
-                                      "http://localhost:3000/assets/images/paper.png"
-                                    }
-                                  />
-                                  <p
-                                    style={{ width: 100 }}
-                                    className={"text-center"}
-                                  >
-                                    <span data-tip={u.title}>
-                                      {u.title.substr(0, 10)}
-                                    </span>
-                                    <ReactTooltip />
-                                  </p>
-                                  <span
-                                    style={{
-                                      position: "absolute",
-                                      top: "50%",
-                                      left: "50%",
-                                      transform: "translate(-50%, -50%)",
-                                    }}
-                                  >
-                                    <i
-                                      className="mdi mdi-checkbox-marked-circle"
-                                      style={{ fontSize: 40, color: "green" }}
-                                    />
-                                  </span>
+                            <span
+                              style={{
+                                flexWrap: "wrap",
+                                width: 100,
+                                height: 100,
+                                marginTop: 5,
+                                marginBottom: 30,
+                                marginRight: 5,
+                                marginLeft: 5,
+                                backgroundColor: "rgba(0,0,0,0.3)",
+                                padding: 5,
+                                borderRadius: 10,
+                                position: "relative",
+                              }}
+                            >
+                              <img
+                                style={{
+                                  objectFit: "cover",
+                                  borderRadius: 7,
+                                  zIndex: -1,
+                                  opacity: "0.5",
+                                }}
+                                width={90}
+                                height={90}
+                                src={"/assets/icons/paper.svg"}
+                              />
+                              <p
+                                style={{ width: 100 }}
+                                className={"text-center"}
+                              >
+                                <span data-tip={u.title}>
+                                  {u.title.substr(0, 10)}
                                 </span>
-                              </>
-                            ))}
-                            {images.map((i, index) => (
-                              <>
-                                <span
+                                <ReactTooltip />
+                              </p>
+                              <span
+                                style={{
+                                  position: "absolute",
+                                  top: "50%",
+                                  left: "50%",
+                                  transform: "translate(-50%, -50%)",
+                                }}
+                              >
+                                <Image
                                   style={{
-                                    flexWrap: "wrap",
-                                    width: 100,
-                                    height: 100,
-                                    marginTop: 5,
-                                    marginBottom: 30,
-                                    marginRight: 5,
-                                    marginLeft: 5,
-                                    padding: 5,
-                                    borderRadius: 10,
-                                    position: "relative",
+                                    objectFit: "cover",
+                                    borderRadius: 7,
                                   }}
-                                >
-                                  <img
-                                    style={{
-                                      objectFit: "cover",
-                                      borderRadius: 7,
-                                    }}
-                                    width={90}
-                                    height={90}
-                                    src={
-                                      "http://localhost:3000/assets/images/paper.png"
-                                    }
-                                  />
-                                  <p
-                                    style={{ width: 100 }}
-                                    className={"text-center"}
-                                  >
-                                    <span data-tip={i.title}>
-                                      {i.title.substr(0, 10)}
-                                    </span>
-                                    <ReactTooltip />
-                                  </p>
-                                  {index === 0 ? (
-                                    <span
-                                      style={{
-                                        position: "absolute",
-                                        top: "50%",
-                                        left: "50%",
-                                        transform: "translate(-50%, -50%)",
-                                      }}
-                                    >
-                                      <div className="lds-roller">
-                                        <div></div>
-                                        <div></div>
-                                        <div></div>
-                                        <div></div>
-                                        <div></div>
-                                        <div></div>
-                                        <div></div>
-                                        <div></div>
-                                      </div>
-                                    </span>
-                                  ) : null}
-                                </span>
-                              </>
-                            ))}
+                                  width={40}
+                                  preview={false}
+                                  src={"/assets/icons/check.svg"}
+                                />
+                              </span>
+                            </span>
                           </>
-                        </div>
+                        ))}
+                        {images.map((i, index) => (
+                          <>
+                            <span
+                              style={{
+                                flexWrap: "wrap",
+                                width: 100,
+                                height: 100,
+                                marginTop: 5,
+                                marginBottom: 30,
+                                marginRight: 5,
+                                marginLeft: 5,
+                                padding: 5,
+                                borderRadius: 10,
+                                position: "relative",
+                              }}
+                            >
+                              <Image
+                                style={{
+                                  borderRadius: 7,
+                                }}
+                                width={90}
+                                height={90}
+                                preview={false}
+                                src={"/assets/icons/paper.svg"}
+                              />
+                              <p
+                                style={{ width: 100 }}
+                                className={"text-center"}
+                              >
+                                <span data-tip={i.title}>
+                                  {i.title.substr(0, 10)}
+                                </span>
+                                <ReactTooltip />
+                              </p>
+                              {index === 0 ? (
+                                <span
+                                  style={{
+                                    position: "absolute",
+                                    top: "50%",
+                                    left: "50%",
+                                    transform: "translate(-50%, -50%)",
+                                  }}
+                                >
+                                  <div className="lds-roller">
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                  </div>
+                                </span>
+                              ) : null}
+                            </span>
+                          </>
+                        ))}
                       </>
-                    ) : (
-                      <h4
-                        style={{
-                          width: "100%",
-                          height: "100%",
-                          marginTop: "25%",
-                          color: "rgba(144,144,144,0.38)",
-                        }}
-                        className={"text-center"}
-                      >
-                        فایل را در این قسمت رها کنید
-                      </h4>
-                    )}
+                    </div>
+                  </>
+                ) : (
+                  <div
+                    style={{
+                      width: "100%",
+                      height: "70vh",
+                    }}
+                  >
+                    <CenterVerticalStyled>
+                      <CenterStyled>
+                        <Image
+                          src="/assets/icons/upload.svg"
+                          width={100}
+                          height={100}
+                          preview={false}
+                        />
+                        <SpaceStyled top={20}>
+                          <CenterStyled>
+                            <CustomText color="black" size={17}>
+                              فایل را اینجا رها کنید
+                            </CustomText>
+                            <CustomText color={grayColor} size={14}>
+                              انتخاب فایل یا فایل را اینجا رها کنید
+                            </CustomText>
+                          </CenterStyled>
+                        </SpaceStyled>
+                      </CenterStyled>
+                    </CenterVerticalStyled>
                   </div>
-                </div>
+                )}
               </div>
             </div>
           </div>
-        </div>
-
+        </Modal>
         <PanelRootComponent />
-      </FileDrop> */}
-      <PanelRootComponent />
+      </FileDrop>
     </>
   );
 };
