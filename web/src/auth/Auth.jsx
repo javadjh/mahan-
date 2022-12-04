@@ -19,7 +19,7 @@ const Auth = ({ children, accessList }) => {
   const handleHide = () => {
     for (let i = 0; i < access.length; i++) {
       const item = access[i];
-      if (accessList.includes(item)) setIsFind(true);
+      if (accessList?.includes(item)) setIsFind(true);
     }
   };
   return <>{isFind && <>{children}</>}</>;

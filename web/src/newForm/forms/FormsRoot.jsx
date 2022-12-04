@@ -8,6 +8,7 @@ import CustomButton from "../../styled/components/CustomButton";
 import CustomDialog from "../../styled/components/CustomDialog";
 import { SpaceStyled } from "../../styled/global";
 import FormsTable from "./FormsTable";
+import Auth from "../../auth/Auth";
 
 const FormsRoot = ({ history }) => {
   history = useHistory();
@@ -25,11 +26,13 @@ const FormsRoot = ({ history }) => {
         <Col span={24}>
           <Row justify="end" align="middle">
             <Col>
-              <Link to={"/forms/upsert/form/0"}>
-                <CustomButton color={lightGreenColor}>
-                  افزودن فرم جدید
-                </CustomButton>
-              </Link>
+              <Auth accessList={["افزودن فرم"]}>
+                <Link to={"/forms/upsert/form/0"}>
+                  <CustomButton color={lightGreenColor}>
+                    افزودن فرم جدید
+                  </CustomButton>
+                </Link>
+              </Auth>
             </Col>
           </Row>
         </Col>

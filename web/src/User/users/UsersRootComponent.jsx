@@ -15,6 +15,7 @@ import CustomButton from "../../styled/components/CustomButton";
 import { lightGreenColor, orangeColor } from "../../app/appColor";
 import { SpaceStyled } from "../../styled/global";
 import UsersTableComponent from "../../components/users/UsersTableComponent";
+import Auth from "../../auth/Auth";
 const UsersRootComponent = ({ history }) => {
   const { handleHide } = useContext(RootContext);
   const dispatch = useDispatch();
@@ -60,16 +61,15 @@ const UsersRootComponent = ({ history }) => {
           />
         </Col>
         <Col span={11} offset={1}>
-          <Row justify="end" align="middle">
-            <Col>
-              <CustomButton
-                color={lightGreenColor}
-                onClick={() => upsertIntent({})}
-              >
-                افزودن کاربر جدید
-              </CustomButton>
-            </Col>
-          </Row>
+          <Auth accessList={["تعریف کاربر"]}>
+            <CustomButton
+              isLeft={true}
+              color={lightGreenColor}
+              onClick={() => upsertIntent({})}
+            >
+              افزودن کاربر جدید
+            </CustomButton>
+          </Auth>
         </Col>
       </Row>
       <SpaceStyled top={20}>

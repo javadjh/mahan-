@@ -15,6 +15,7 @@ import { grayColor, lightGreenColor, orangeColor } from "../../app/appColor";
 import { ArchiveTreeContext } from "../../context/ArchiveTree/ArchiveTreesContext";
 import ArchiveTreeSettingDialog from "../../ArchiveTree/dialog/ArchiveTreeSettingDialog";
 import InsertFileComponent from "../../ArchiveTree/files/InsertFileComponent";
+import Auth from "../../auth/Auth";
 const TreeItem = ({ tree, addTree }) => {
   const { changeTreeTitle, deleteArchiveTree, reload, setMainTree, mainTree } =
     useContext(ArchiveTreeContext);
@@ -33,10 +34,12 @@ const TreeItem = ({ tree, addTree }) => {
           <CustomText
             editable={{
               icon: (
-                <Image
-                  preview={false}
-                  src="http://localhost:3000/assets/edit-vector.png"
-                />
+                <Auth accessList={["مدیریت درخت"]}>
+                  <Image
+                    preview={false}
+                    src="http://localhost:3000/assets/edit-vector.png"
+                  />
+                </Auth>
               ),
 
               tooltip: "ویرایش عنوان قفسه",
@@ -66,74 +69,80 @@ const TreeItem = ({ tree, addTree }) => {
           <Row justify="end">
             <Col>
               <SpaceStyled left={5}>
-                <CustomDialog
-                  title={"پرونده"}
-                  render={
-                    <InsertFileComponent
-                      inTree={false}
-                      tree={tree}
-                      mainTree={mainTree}
-                    />
-                  }
-                  width={"60%"}
-                  actionRender={
-                    <CustomSmallButton
-                      color={lightGreenColor}
-                      icon={
-                        <Image
-                          preview={false}
-                          src="http://localhost:3000/assets/plus-vector.png"
-                        />
-                      }
-                    >
-                      افزودن پرونده به قفسه
-                    </CustomSmallButton>
-                  }
-                />
+                <Auth accessList={["ویرایش پرونده"]}>
+                  <CustomDialog
+                    title={"پرونده"}
+                    render={
+                      <InsertFileComponent
+                        inTree={false}
+                        tree={tree}
+                        mainTree={mainTree}
+                      />
+                    }
+                    width={"60%"}
+                    actionRender={
+                      <CustomSmallButton
+                        color={lightGreenColor}
+                        icon={
+                          <Image
+                            preview={false}
+                            src="http://localhost:3000/assets/plus-vector.png"
+                          />
+                        }
+                      >
+                        افزودن پرونده به قفسه
+                      </CustomSmallButton>
+                    }
+                  />
+                </Auth>
               </SpaceStyled>
             </Col>
             <Col>
               <SpaceStyled left={5}>
-                <CustomPopConfirm
-                  onDelete={() => deleteArchiveTree(tree._id)}
-                  render={
-                    <CustomSmallButton
-                      color={grayColor}
-                      icon={
-                        <Image
-                          preview={false}
-                          src="http://localhost:3000/assets/delete-vector.png"
-                        />
-                      }
-                    >
-                      حذف قفسه
-                    </CustomSmallButton>
-                  }
-                />
+                <Auth accessList={["مدیریت درخت"]}>
+                  <CustomPopConfirm
+                    onDelete={() => deleteArchiveTree(tree._id)}
+                    render={
+                      <CustomSmallButton
+                        color={grayColor}
+                        icon={
+                          <Image
+                            preview={false}
+                            src="http://localhost:3000/assets/delete-vector.png"
+                          />
+                        }
+                      >
+                        حذف قفسه
+                      </CustomSmallButton>
+                    }
+                  />
+                </Auth>
               </SpaceStyled>
             </Col>
             <Col>
               <SpaceStyled left={5}>
-                <CustomDialog
-                  width={"60%"}
-                  title={"تنظیمات قفسه"}
-                  render={
-                    <ArchiveTreeSettingDialog tree={tree} reload={reload} />
-                  }
-                  actionRender={
-                    <CustomSmallButton
-                      color={orangeColor}
-                      icon={
-                        <Image
-                          preview={false}
-                          src="http://localhost:3000/assets/setting-vector.png"
-                        />
-                      }
-                    >
-                      تنظیمات قفسه
-                    </CustomSmallButton>
-                  }
-                />
+                <Auth accessList={["مدیریت درخت"]}>
+                  <CustomDialog
+                    width={"60%"}
+                    title={"تنظیمات قفسه"}
+                    render={
+                      <ArchiveTreeSettingDialog tree={tree} reload={reload} />
+                    }
+                    actionRender={
+                      <CustomSmallButton
+                        color={orangeColor}
+                        icon={
+                          <Image
+                            preview={false}
+                            src="http://localhost:3000/assets/setting-vector.png"
+                          />
+                        }
+                      >
+                        تنظیمات قفسه
+                      </CustomSmallButton>
+                    }
+                  />
+                </Auth>
               </SpaceStyled>
             </Col>
           </Row>

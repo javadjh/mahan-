@@ -8,6 +8,7 @@ import CustomButton from "../../styled/components/CustomButton";
 import { darkBlueColor, redColor } from "../../app/appColor";
 import CustomDialog from "../../styled/components/CustomDialog";
 import ShowSingleDocumentDialog from "../../ArchiveTree/dialog/ShowSingleDocumentDialog";
+import Auth from "../../auth/Auth";
 
 const DocumentsTable = () => {
   const { documentsFilterHandle, deleteDocHandler, history } =
@@ -46,36 +47,42 @@ const DocumentsTable = () => {
       width: "40%",
       render: (item) => (
         <>
-          <CustomPopConfirm
-            onDelete={() => {
-              deleteDocHandler(item._id);
-            }}
-            render={<CustomButton color={redColor}>حذف</CustomButton>}
-          />
-          <CustomDialog
-            width={"100%"}
-            title={"سند"}
-            render={<ShowSingleDocumentDialog doc={item} />}
-            actionRender={
-              <CustomButton style={{ marginRight: 5 }} color={darkBlueColor}>
-                نمایش
-              </CustomButton>
-            }
-          />
-          {(item.ex === "png" ||
-            item.ex === "jpg" ||
-            item.ex === "PNG" ||
-            item.ex === "jpge") && (
-            <CustomButton
-              onClick={() => {
-                history.push(`/edit-${item._id}-${item.lastDocumentId}`);
+          <Auth accessList={["حذف سند"]}>
+            <CustomPopConfirm
+              onDelete={() => {
+                deleteDocHandler(item._id);
               }}
-              style={{ marginRight: 5 }}
-              color={darkBlueColor}
-            >
-              ویرایشگر
-            </CustomButton>
-          )}
+              render={<CustomButton color={redColor}>حذف</CustomButton>}
+            />
+          </Auth>
+          <Auth accessList={["نمایش سندها"]}>
+            <CustomDialog
+              width={"100%"}
+              title={"سند"}
+              render={<ShowSingleDocumentDialog doc={item} />}
+              actionRender={
+                <CustomButton style={{ marginRight: 5 }} color={darkBlueColor}>
+                  نمایش
+                </CustomButton>
+              }
+            />
+          </Auth>
+          <Auth accessList={["نمایش سندها"]}>
+            {(item.ex === "png" ||
+              item.ex === "jpg" ||
+              item.ex === "PNG" ||
+              item.ex === "jpge") && (
+              <CustomButton
+                onClick={() => {
+                  history.push(`/edit-${item._id}-${item.lastDocumentId}`);
+                }}
+                style={{ marginRight: 5 }}
+                color={darkBlueColor}
+              >
+                ویرایشگر
+              </CustomButton>
+            )}
+          </Auth>
         </>
       ),
     },

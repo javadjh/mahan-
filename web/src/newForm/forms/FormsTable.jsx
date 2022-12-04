@@ -1,6 +1,7 @@
 import { Table } from "antd";
 import CustomButton from "../../styled/components/CustomButton";
 import React from "react";
+import Auth from "../../auth/Auth";
 const FormsTable = ({ forms, history }) => {
   forms.map((item) => {
     item.children = undefined;
@@ -31,13 +32,15 @@ const FormsTable = ({ forms, history }) => {
       title: "عملیات",
       key: "action",
       render: (item) => (
-        <CustomButton
-          onClick={() => {
-            history.push("/forms/upsert/form/" + item._id);
-          }}
-        >
-          ویرایش
-        </CustomButton>
+        <Auth accessList={["افزودن فرم"]}>
+          <CustomButton
+            onClick={() => {
+              history.push("/forms/upsert/form/" + item._id);
+            }}
+          >
+            ویرایش
+          </CustomButton>
+        </Auth>
       ),
     },
   ];

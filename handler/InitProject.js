@@ -18,7 +18,7 @@ module.exports = async (req, res) => {
   let postData = JSON.stringify({ license: req.params.id });
 
   const options = {
-    hostname: "116.202.210.69",
+    hostname: "87.236.215.49",
     port: 9000,
     path: "/api/v1/use/license",
     method: "POST",

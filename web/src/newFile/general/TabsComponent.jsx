@@ -16,6 +16,7 @@ import {
   redColor,
 } from "../../app/appColor";
 import CorrespondenceRoot from "./CorrespondenceRoot";
+import Auth from "../../auth/Auth";
 const TabsComponent = () => {
   const { setTabState, fileStatistic } = useContext(FileContext);
   const nazerTab = () => {
@@ -36,19 +37,36 @@ const TabsComponent = () => {
       }}
     >
       <Tabs.TabPane tab=" لیست اسناد " key={"docs"}>
-        <DocumentsTable />
+        <Auth
+          accessList={[
+            "ایجاد سند",
+            "ویرایش سند",
+            "حذف سند",
+            "نمایش سندها",
+            "دریافت سند",
+          ]}
+        >
+          <DocumentsTable />
+        </Auth>
       </Tabs.TabPane>
       <Tabs.TabPane tab="تاریخچه اسناد " key={"log"}>
-        <FilesLogTable />
+        <Auth accessList={["تاریخچه تغییرات سند"]}>
+          <FilesLogTable />
+        </Auth>
       </Tabs.TabPane>
+
       <Tabs.TabPane tab="آمار پرونده " key={"statistic"}>
         <FileStatisticComponent />
       </Tabs.TabPane>
       <Tabs.TabPane tab="اسناد حذف شده " key={"deleted"}>
-        <DeletedDocsTable />
+        <Auth accessList={["مدیریت اسناد حذف شده"]}>
+          <DeletedDocsTable />
+        </Auth>
       </Tabs.TabPane>
       <Tabs.TabPane tab="روکش پرونده" key={"form"}>
-        <FilesFormComponent />
+        <Auth accessList={["ویرایش روکش پرونده"]}>
+          <FilesFormComponent />
+        </Auth>
       </Tabs.TabPane>
       <Tabs.TabPane tab="هشدار ها" key={"alerts"}>
         <MergeAlertComponent />

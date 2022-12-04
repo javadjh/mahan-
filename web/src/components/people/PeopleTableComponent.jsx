@@ -3,6 +3,7 @@ import React from "react";
 import CustomButton from "../../styled/components/CustomButton";
 import { darkBlueColor, grayColor } from "../../app/appColor";
 import CustomPopConfirm from "../../styled/components/CustomPopConfirm";
+import Auth from "../../auth/Auth";
 const PeopleTableComponent = (props) => {
   const columns = [
     {
@@ -50,7 +51,7 @@ const PeopleTableComponent = (props) => {
       key: "action",
       width: "30%",
       render: (item) => (
-        <>
+        <Auth accessList={["مدیریت اشخاص حقیقی"]}>
           <CustomButton
             onClick={() => {
               props.editPersonHandle(item);
@@ -66,7 +67,7 @@ const PeopleTableComponent = (props) => {
             }}
             render={<CustomButton color={grayColor}>حذف</CustomButton>}
           />
-        </>
+        </Auth>
       ),
     },
   ];

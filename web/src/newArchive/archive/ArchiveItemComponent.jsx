@@ -22,6 +22,7 @@ import {
 import { useDispatch } from "react-redux";
 import CustomText from "../../styled/components/CustomText";
 import { lightBlueColor } from "../../app/appColor";
+import Auth from "../../auth/Auth";
 const ArchiveItemComponent = ({ archive }) => {
   let isSelected = localStorage.getItem("archive") === archive.archiveId._id;
   const dispatch = useDispatch();
@@ -41,25 +42,32 @@ const ArchiveItemComponent = ({ archive }) => {
             <CustomText>عنوان بایگانی</CustomText>
           </Col>
           <Col>
-            <CustomDialog
-              title={"تنظیمات بایگانی"}
-              render={<InsertMoreSettingDialog />}
-              actionRender={
-                <AiFillSetting
-                  style={{
-                    fontSize: 18,
-                    color: isSelected ? "white" : lightBlueColor,
-                  }}
-                  onClick={async () => {
-                    await dispatch(
-                      getSingleArchiveAction(archive.archiveId._id)
-                    );
-                    setIsShowMoreSettingDialog(true);
-                  }}
-                />
-              }
-              isShow={isShowMoreSettingDialog}
-            />
+            <Auth
+              accessList={[
+                "انتصاب کاربران به بایگانی",
+                "ثبت اطلاعات تکمیلی برای بایگانی",
+              ]}
+            >
+              <CustomDialog
+                title={"تنظیمات بایگانی"}
+                render={<InsertMoreSettingDialog />}
+                actionRender={
+                  <AiFillSetting
+                    style={{
+                      fontSize: 18,
+                      color: isSelected ? "white" : lightBlueColor,
+                    }}
+                    onClick={async () => {
+                      await dispatch(
+                        getSingleArchiveAction(archive.archiveId._id)
+                      );
+                      setIsShowMoreSettingDialog(true);
+                    }}
+                  />
+                }
+                isShow={isShowMoreSettingDialog}
+              />
+            </Auth>
           </Col>
         </Row>
       </SpaceStyled>

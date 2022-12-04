@@ -8,6 +8,7 @@ import CustomButton from "../../styled/components/CustomButton";
 import { CenterVerticalStyled, SpaceStyled } from "../../styled/global";
 import CustomDialog from "../../styled/components/CustomDialog";
 import InsertFileComponent from "../../ArchiveTree/files/InsertFileComponent";
+import Auth from "../../auth/Auth";
 const FilesRoot = () => {
   const { files, setFileFilter, fileFilter, mainParent, mainTree } =
     useContext(ArchiveTreeContext);
@@ -34,20 +35,22 @@ const FilesRoot = () => {
               <Col span={12}>
                 <Row justify="end">
                   <Col>
-                    <CustomDialog
-                      width={"60%"}
-                      title={"پرونده"}
-                      render={
-                        <InsertFileComponent
-                          inTree={false}
-                          tree={mainParent}
-                          mainTree={mainTree}
-                        />
-                      }
-                      actionRender={
-                        <CustomButton>افزودن پرونده ی جدید</CustomButton>
-                      }
-                    />
+                    <Auth accessList={["ویرایش پرونده"]}>
+                      <CustomDialog
+                        width={"60%"}
+                        title={"پرونده"}
+                        render={
+                          <InsertFileComponent
+                            inTree={false}
+                            tree={mainParent}
+                            mainTree={mainTree}
+                          />
+                        }
+                        actionRender={
+                          <CustomButton>افزودن پرونده ی جدید</CustomButton>
+                        }
+                      />
+                    </Auth>
                   </Col>
                 </Row>
               </Col>

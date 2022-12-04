@@ -40,7 +40,6 @@ const LoginComponent = () => {
   const formValidator = useRef(validatorSP());
   const [isInitState, setIsInitState] = useState(true);
   const [isLoadData, setIsLoadData] = useState(false);
-  const [license, setLicense] = useState();
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState();
@@ -63,15 +62,14 @@ const LoginComponent = () => {
       setIsLoadData(true);
     }
   };
-  const checkLicenseCode = async () => {
-    if (license) {
-      const { status } = await axiosConfig.get(
-        `http://localhost:5000/init/${license}`
-      );
-      if (status === 200) {
-        doneToast("با موفقیت ارسال شد");
-        window.location.reload();
-      }
+  const checkLicenseCode = async ({ license }) => {
+    console.log(license);
+    const { status } = await axiosConfig.get(
+      `http://localhost:5000/init/${license}`
+    );
+    if (status === 200) {
+      doneToast("با موفقیت ارسال شد");
+      window.location.reload();
     }
   };
   return (
@@ -105,100 +103,114 @@ const LoginComponent = () => {
                       </CustomText>
                     </Col>
                   </Row>
-                  <SpaceStyled vertical={20}>
-                    {isForgetPassword ? (
-                      <span>
-                        <Form onFinish={sendData}>
-                          <SpaceStyled vertical={15}>
-                            <Form.Item
-                              name={"userName"}
-                              rules={[maxForm(11), minForm(3)]}
-                            >
-                              <Input
-                                placeholder={"نام کاربری خود را وارد کنید"}
-                              />
-                            </Form.Item>
-                          </SpaceStyled>
-                          <SpaceStyled vertical={15}>
-                            <Form.Item
-                              name={"email"}
-                              rules={[maxForm(80), minForm(6)]}
-                            >
-                              <Input
-                                type={"email"}
-                                placeholder={"ایمیل خود را وارد کنید"}
-                              />
-                            </Form.Item>
-                          </SpaceStyled>
-                          <Row>
-                            <Col span={17}>
-                              <CustomButton htmlType={"submit"} block>
-                                ارسال ایمیل
-                              </CustomButton>
-                            </Col>
-                            <Col span={7}>
-                              <SpaceStyled right={10}>
-                                <CustomButton block color={lightGreenColor}>
-                                  <CaretLeftOutlined />
+                  {isInitState ? (
+                    <SpaceStyled vertical={20}>
+                      {isForgetPassword ? (
+                        <span>
+                          <Form onFinish={sendData}>
+                            <SpaceStyled vertical={15}>
+                              <Form.Item
+                                name={"userName"}
+                                rules={[maxForm(11), minForm(3)]}
+                              >
+                                <Input
+                                  placeholder={"نام کاربری خود را وارد کنید"}
+                                />
+                              </Form.Item>
+                            </SpaceStyled>
+                            <SpaceStyled vertical={15}>
+                              <Form.Item
+                                name={"email"}
+                                rules={[maxForm(80), minForm(6)]}
+                              >
+                                <Input
+                                  type={"email"}
+                                  placeholder={"ایمیل خود را وارد کنید"}
+                                />
+                              </Form.Item>
+                            </SpaceStyled>
+                            <Row>
+                              <Col span={17}>
+                                <CustomButton htmlType={"submit"} block>
+                                  ارسال ایمیل
                                 </CustomButton>
-                              </SpaceStyled>
-                            </Col>
-                          </Row>
-                        </Form>
-                      </span>
-                    ) : (
-                      <span>
-                        <Form onFinish={sendData}>
-                          <SpaceStyled vertical={15}>
-                            <Form.Item
-                              name={"userName"}
-                              rules={[maxForm(11), minForm(3)]}
-                            >
-                              <Input
-                                placeholder={"نام کاربری خود را وارد کنید"}
-                              />
-                            </Form.Item>
-                          </SpaceStyled>
-                          <SpaceStyled vertical={15}>
-                            <Form.Item
-                              name={"password"}
-                              rules={[maxForm(80), minForm(6)]}
-                            >
-                              <Input
-                                type={"password"}
-                                placeholder={"گذرواژه خود را وارد کنید"}
-                              />
-                            </Form.Item>
-                          </SpaceStyled>
-                          <Row>
-                            <Col span={17}>
-                              <CustomButton htmlType={"submit"} block>
-                                ورود به حساب کاربری
-                              </CustomButton>
-                            </Col>
-                            <Col span={7}>
-                              <SpaceStyled right={10}>
-                                <CustomButton block color={lightGreenColor}>
-                                  <CaretLeftOutlined />
+                              </Col>
+                              <Col span={7}>
+                                <SpaceStyled right={10}>
+                                  <CustomButton block color={lightGreenColor}>
+                                    <CaretLeftOutlined />
+                                  </CustomButton>
+                                </SpaceStyled>
+                              </Col>
+                            </Row>
+                          </Form>
+                        </span>
+                      ) : (
+                        <span>
+                          <Form onFinish={sendData}>
+                            <SpaceStyled vertical={15}>
+                              <Form.Item
+                                name={"userName"}
+                                rules={[maxForm(11), minForm(3)]}
+                              >
+                                <Input
+                                  placeholder={"نام کاربری خود را وارد کنید"}
+                                />
+                              </Form.Item>
+                            </SpaceStyled>
+                            <SpaceStyled vertical={15}>
+                              <Form.Item
+                                name={"password"}
+                                rules={[maxForm(80), minForm(6)]}
+                              >
+                                <Input
+                                  type={"password"}
+                                  placeholder={"گذرواژه خود را وارد کنید"}
+                                />
+                              </Form.Item>
+                            </SpaceStyled>
+                            <Row>
+                              <Col span={17}>
+                                <CustomButton htmlType={"submit"} block>
+                                  ورود به حساب کاربری
                                 </CustomButton>
-                              </SpaceStyled>
-                            </Col>
-                          </Row>
-                        </Form>
-                      </span>
-                    )}
-                    <SpaceStyled top={10}>
-                      <CustomButton
-                        onClick={() => setIsForgetPassword(!isForgetPassword)}
-                        block
-                        color={whiteColor}
-                      >
-                        {isForgetPassword
-                          ? "کلمه ی عبور یادم اومد"
-                          : "رمز عبورم رو فراموش کردم"}
-                      </CustomButton>
+                              </Col>
+                              <Col span={7}>
+                                <SpaceStyled right={10}>
+                                  <CustomButton block color={lightGreenColor}>
+                                    <CaretLeftOutlined />
+                                  </CustomButton>
+                                </SpaceStyled>
+                              </Col>
+                            </Row>
+                          </Form>
+                        </span>
+                      )}
+                      <SpaceStyled top={10}>
+                        <CustomButton
+                          onClick={() => setIsForgetPassword(!isForgetPassword)}
+                          block
+                          color={whiteColor}
+                        >
+                          {isForgetPassword
+                            ? "کلمه ی عبور یادم اومد"
+                            : "رمز عبورم رو فراموش کردم"}
+                        </CustomButton>
+                      </SpaceStyled>
                     </SpaceStyled>
-                  </SpaceStyled>
+                  ) : (
+                    <Form onFinish={checkLicenseCode}>
+                      <SpaceStyled vertical={15}>
+                        <Form.Item name={"license"} rules={[requiredForm]}>
+                          <Input placeholder={"کد لایسنس را وارد کنید"} />
+                        </Form.Item>
+                      </SpaceStyled>
+
+                      <CustomButton htmlType={"submit"} block>
+                        کد لایسنس
+                      </CustomButton>
+                    </Form>
+                  )}
                 </SpaceStyled>
               </CardStyled>
             </BackgroundWave>

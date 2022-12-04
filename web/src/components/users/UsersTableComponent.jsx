@@ -5,6 +5,7 @@ import CustomPopConfirm from "../../styled/components/CustomPopConfirm";
 import { Table } from "antd";
 import ChangeUsersPasswordAdminDialog from "../../dialog/ChangeUsersPasswordAdminDialog";
 import CustomDialog from "../../styled/components/CustomDialog";
+import Auth from "../../auth/Auth";
 const UsersTableComponent = ({
   users,
   deleteHandle,
@@ -47,33 +48,35 @@ const UsersTableComponent = ({
 
       render: (item) => (
         <>
-          <CustomPopConfirm
-            onDelete={() => {
-              deleteHandle(item._id);
-            }}
-            render={
-              <CustomButton style={{ marginLeft: 10 }} color={grayColor}>
-                حذف
-              </CustomButton>
-            }
-          />
-          <CustomButton
-            style={{ marginLeft: 10 }}
-            onClick={() => {
-              upsertIntent(item);
-            }}
-            color={darkBlueColor}
-          >
-            ویرایش
-          </CustomButton>
-          <CustomDialog
-            title={"تغییر کلمه ی عبور"}
-            render={<ChangeUsersPasswordAdminDialog user={item} />}
-            actionRender={
-              <CustomButton color={orangeColor}>تغییر کلمه عبور</CustomButton>
-            }
-            isShow={isShowResetPasswordDialog}
-          />
+          <Auth accessList={["تعریف کاربر"]}>
+            <CustomPopConfirm
+              onDelete={() => {
+                deleteHandle(item._id);
+              }}
+              render={
+                <CustomButton style={{ marginLeft: 10 }} color={grayColor}>
+                  حذف
+                </CustomButton>
+              }
+            />
+            <CustomButton
+              style={{ marginLeft: 10 }}
+              onClick={() => {
+                upsertIntent(item);
+              }}
+              color={darkBlueColor}
+            >
+              ویرایش
+            </CustomButton>
+            <CustomDialog
+              title={"تغییر کلمه ی عبور"}
+              render={<ChangeUsersPasswordAdminDialog user={item} />}
+              actionRender={
+                <CustomButton color={orangeColor}>تغییر کلمه عبور</CustomButton>
+              }
+              isShow={isShowResetPasswordDialog}
+            />
+          </Auth>
         </>
       ),
     },

@@ -5,6 +5,7 @@ import CustomButton from "../../styled/components/CustomButton";
 import CustomText from "../../styled/components/CustomText";
 import { BsArrowLeftShort } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import Auth from "../../auth/Auth";
 const FilesTableComponent = (props) => {
   const columns = [
     {
@@ -48,9 +49,18 @@ const FilesTableComponent = (props) => {
       title: "عملیات",
       key: "action",
       render: (item) => (
-        <Link to={`/file/${item._id}`}>
-          <CustomButton color={lightGreenColor}>نمایش</CustomButton>
-        </Link>
+        <Auth
+          accessList={[
+            "ویرایش پرونده",
+            "حذف پرونده",
+            "ویرایش روکش پرونده",
+            "مخاطبین پرونده",
+          ]}
+        >
+          <Link to={`/file/${item._id}`}>
+            <CustomButton color={lightGreenColor}>نمایش</CustomButton>
+          </Link>
+        </Auth>
       ),
     },
   ];

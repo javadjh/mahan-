@@ -3,6 +3,7 @@ import CustomButton from "../../styled/components/CustomButton";
 import { darkBlueColor, grayColor } from "../../app/appColor";
 import CustomPopConfirm from "../../styled/components/CustomPopConfirm";
 import { Table } from "antd";
+import Auth from "../../auth/Auth";
 const LegalPeopleTableComponent = (props) => {
   const columns = [
     {
@@ -36,7 +37,8 @@ const LegalPeopleTableComponent = (props) => {
       key: "action",
       width: "30%",
       render: (item) => (
-        <>
+        <Auth accessList={["مدیریت اشخاص حقوقی"]}>
+          حقوقی
           <CustomButton
             onClick={() => {
               props.onClickEditLegalPerson(item);
@@ -52,7 +54,7 @@ const LegalPeopleTableComponent = (props) => {
             }}
             render={<CustomButton color={grayColor}>حذف</CustomButton>}
           />
-        </>
+        </Auth>
       ),
     },
   ];

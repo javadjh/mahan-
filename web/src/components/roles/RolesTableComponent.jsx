@@ -3,6 +3,7 @@ import React from "react";
 import CustomButton from "../../styled/components/CustomButton";
 import { darkBlueColor, grayColor } from "../../app/appColor";
 import CustomPopConfirm from "../../styled/components/CustomPopConfirm";
+import Auth from "../../auth/Auth";
 const RolesTableComponent = ({ roles, upsertRoleHandle, deleteHandle }) => {
   const columns = [
     {
@@ -30,7 +31,7 @@ const RolesTableComponent = ({ roles, upsertRoleHandle, deleteHandle }) => {
       key: "action",
       width: "30%",
       render: (item) => (
-        <>
+        <Auth accessList={["الگوی دسترسی"]}>
           <CustomButton
             onClick={() => {
               upsertRoleHandle(item);
@@ -46,7 +47,7 @@ const RolesTableComponent = ({ roles, upsertRoleHandle, deleteHandle }) => {
             }}
             render={<CustomButton color={grayColor}>حذف</CustomButton>}
           />
-        </>
+        </Auth>
       ),
     },
   ];

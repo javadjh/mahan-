@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { searchEngineAction } from "../../stateManager/actions/FileAction";
 import { useHistory } from "react-router";
 import CustomLabel from "./CustomLabel";
+import Auth from "../../auth/Auth";
 
 const SearchInputComponent = () => {
   let history = useHistory();
@@ -167,13 +168,15 @@ const SearchInputComponent = () => {
               </Menu>
             }
           >
-            <Input
-              onChange={(e) => {
-                setSearchValue(e.target.value);
-              }}
-              className="ant-search-custom"
-              placeholder="موتور جستجو..."
-            />
+            <Auth accessList={["جستجوی پیشرفته اسناد"]}>
+              <Input
+                onChange={(e) => {
+                  setSearchValue(e.target.value);
+                }}
+                className="ant-search-custom"
+                placeholder="موتور جستجو..."
+              />
+            </Auth>
           </Dropdown>
         </Form.Item>
       </Form>

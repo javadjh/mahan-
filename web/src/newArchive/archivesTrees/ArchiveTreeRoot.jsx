@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useContext } from "react";
 import { darkBlueColor, lightGreenColor } from "../../app/appColor";
 import AddTreeDialog from "../../ArchiveTree/dialog/AddTreeDialog";
+import Auth from "../../auth/Auth";
 import CustomButton from "../../styled/components/CustomButton";
 import CustomDialog from "../../styled/components/CustomDialog";
 import { SpaceStyled } from "../../styled/global";
@@ -19,26 +20,28 @@ const ArchiveTreeRoot = () => {
             <TreeRouteComponent />
           </Col>
           <Col span={4}>
-            <CustomDialog
-              title={"قفسه"}
-              render={
-                <AddTreeDialog
-                  setIsShowInsertTreeDialog={setIsShowInsertTreeDialog}
-                />
-              }
-              actionRender={
-                <CustomButton
-                  onClick={() => {
-                    setIsShowInsertTreeDialog(true);
-                  }}
-                  block
-                  color={darkBlueColor}
-                >
-                  افزودن قفسه
-                </CustomButton>
-              }
-              isShow={isShowInsertTreeDialog}
-            />
+            <Auth accessList={["مدیریت درخت"]}>
+              <CustomDialog
+                title={"قفسه"}
+                render={
+                  <AddTreeDialog
+                    setIsShowInsertTreeDialog={setIsShowInsertTreeDialog}
+                  />
+                }
+                actionRender={
+                  <CustomButton
+                    onClick={() => {
+                      setIsShowInsertTreeDialog(true);
+                    }}
+                    block
+                    color={darkBlueColor}
+                  >
+                    افزودن قفسه
+                  </CustomButton>
+                }
+                isShow={isShowInsertTreeDialog}
+              />
+            </Auth>
           </Col>
         </Row>
       </SpaceStyled>

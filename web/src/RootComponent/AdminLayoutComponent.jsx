@@ -30,6 +30,7 @@ import AppSettingDialog from "../dialog/AppSettingDialog";
 import CustomDialog from "../styled/components/CustomDialog";
 import SearchInputComponent from "../styled/components/SearchInputComponent";
 import FooterRootComponent from "./FooterRootComponent";
+import Auth from "../auth/Auth";
 
 const AdminLayoutComponent = ({ children, location }) => {
   const [isShowAppSetting, setIsShowAppSetting] = useState(false);
@@ -101,93 +102,144 @@ const AdminLayoutComponent = ({ children, location }) => {
                 icon={<DashboardOutlined />}
                 title={"پیشخوان کاربر"}
               />
-              <CustomMenuItem
-                href={"/archive-trees"}
-                icon={<UnorderedListOutlined />}
-                title={"بخش بایگانی"}
-              />
-              <CustomMenuItem
-                href={"/library"}
-                icon={<ShareAltOutlined />}
-                title={"یخش کازیو"}
-              />
-              <CustomMenuItem
-                href={"/lends"}
-                icon={<UserOutlined />}
-                title={"بخش اشتراک گذاری"}
-              />
-              <CustomMenuItem
-                href={"/files-guard-system"}
-                icon={<ReadOutlined />}
-                title={"بخش ناظر سامانه"}
-              />
-              <CustomMenuItem
-                href={"/reporting"}
-                icon={<FundProjectionScreenOutlined />}
-                title={"بخش گزارش گیری"}
-              />
+              <Auth
+                accessList={[
+                  "انتصاب کاربران به بایگانی",
+                  "انتصاب کاربران به بایگانی",
+                  "انتصاب کاربران به بایگانی",
+                  "ثبت اطلاعات تکمیلی برای بایگانی",
+                  "ثبت اطلاعات تکمیلی برای بایگانی",
+                ]}
+              >
+                <CustomMenuItem
+                  href={"/archive-trees"}
+                  icon={<UnorderedListOutlined />}
+                  title={"بخش بایگانی"}
+                />
+              </Auth>
+              <Auth accessList={["کازیو"]}>
+                <CustomMenuItem
+                  href={"/library"}
+                  icon={<ShareAltOutlined />}
+                  title={"یخش کازیو"}
+                />
+              </Auth>
+              <Auth accessList={["اشتراک گذاری"]}>
+                <CustomMenuItem
+                  href={"/lends"}
+                  icon={<UserOutlined />}
+                  title={"بخش اشتراک گذاری"}
+                />
+              </Auth>
+              <Auth accessList={["ناظر"]}>
+                <CustomMenuItem
+                  href={"/files-guard-system"}
+                  icon={<ReadOutlined />}
+                  title={"بخش ناظر سامانه"}
+                />
+              </Auth>
+              <Auth accessList={["گزارش گیری"]}>
+                <CustomMenuItem
+                  href={"/reporting"}
+                  icon={<FundProjectionScreenOutlined />}
+                  title={"بخش گزارش گیری"}
+                />
+              </Auth>
               <CustomMenuItem
                 href={"/files-alerts"}
                 icon={<AlertOutlined />}
                 title={"بخش هشدار ها"}
               />
-              <CustomMenuItem
-                href={"/logs"}
-                icon={<AlertOutlined />}
-                title={"بخش لاگ ها"}
-              />
-              <CustomMenuItem
-                icon={<DatabaseOutlined />}
-                title={"بخش اطلاعات پایه"}
-                dropdown={
-                  <>
-                    <CustomMenuItem
-                      href={"/users"}
-                      icon={<UserOutlined />}
-                      title={"مدیریت کاربران"}
+              <Auth accessList={["تاریخچه تغییرات"]}>
+                <CustomMenuItem
+                  href={"/logs"}
+                  icon={<AlertOutlined />}
+                  title={"بخش لاگ ها"}
+                />
+              </Auth>
+              <Auth
+                accessList={[
+                  "کاربران",
+                  "تعریف کاربر",
+                  "الگوی دسترسی",
+                  "مدیریت اشخاص حقیقی",
+                  "مدیریت اشخاص حقوقی",
+                  "مدیریت سمت سازمانی",
+                  "افزودن فرم",
+                ]}
+              >
+                <CustomMenuItem
+                  icon={<DatabaseOutlined />}
+                  title={"بخش اطلاعات پایه"}
+                  dropdown={
+                    <>
+                      <Auth accessList={["کاربران", "تعریف کاربر"]}>
+                        <CustomMenuItem
+                          href={"/users"}
+                          icon={<UserOutlined />}
+                          title={"مدیریت کاربران"}
+                        />
+                      </Auth>
+                      <Auth accessList={["الگوی دسترسی"]}>
+                        <CustomMenuItem
+                          href={"/roles"}
+                          icon={<FileProtectOutlined />}
+                          title={"مدیریت نقش ها"}
+                        />
+                      </Auth>
+                      <Auth accessList={["مدیریت اشخاص حقیقی"]}>
+                        <CustomMenuItem
+                          href={"/people"}
+                          icon={<UsergroupAddOutlined />}
+                          title={"مدیریت اشخاص حقیقی"}
+                        />
+                      </Auth>
+
+                      <Auth accessList={["مدیریت اشخاص حقوقی"]}>
+                        <CustomMenuItem
+                          href={"/legal-people"}
+                          icon={<UsergroupAddOutlined />}
+                          title={"مدیریت اشخاص حقوقی"}
+                        />
+                      </Auth>
+                      <Auth accessList={["مدیریت سمت سازمانی"]}>
+                        <CustomMenuItem
+                          href={"/applicants"}
+                          icon={<ClusterOutlined />}
+                          title={"سمت سازمانی"}
+                        />
+                      </Auth>
+                      <Auth accessList={["افزودن فرم"]}>
+                        <CustomMenuItem
+                          href={"/forms"}
+                          icon={<ClusterOutlined />}
+                          title={"فرم ساز"}
+                        />
+                      </Auth>
+                    </>
+                  }
+                />
+              </Auth>
+
+              <Auth accessList={["مدیریت اطلاعات پایه"]}>
+                <CustomDialog
+                  title={"تنظیمات برنامه"}
+                  render={
+                    <AppSettingDialog
+                      setIsShowAppSetting={setIsShowAppSetting}
                     />
+                  }
+                  actionRender={
                     <CustomMenuItem
-                      href={"/roles"}
-                      icon={<FileProtectOutlined />}
-                      title={"مدیریت نقش ها"}
+                      onClick={() => setIsShowAppSetting(true)}
+                      icon={<SettingOutlined />}
+                      title={"بخش مدیریت سامانه"}
                     />
-                    <CustomMenuItem
-                      href={"/people"}
-                      icon={<UsergroupAddOutlined />}
-                      title={"مدیریت اشخاص حقیقی"}
-                    />
-                    <CustomMenuItem
-                      href={"/legal-people"}
-                      icon={<UsergroupAddOutlined />}
-                      title={"مدیریت اشخاص حقوقی"}
-                    />
-                    <CustomMenuItem
-                      href={"/applicants"}
-                      icon={<ClusterOutlined />}
-                      title={"سمت سازمانی"}
-                    />
-                    <CustomMenuItem
-                      href={"/forms"}
-                      icon={<ClusterOutlined />}
-                      title={"فرم ساز"}
-                    />
-                  </>
-                }
-              />
-              <CustomDialog
-                title={"تنظیمات برنامه"}
-                render={
-                  <AppSettingDialog setIsShowAppSetting={setIsShowAppSetting} />
-                }
-                actionRender={
-                  <CustomMenuItem
-                    onClick={() => setIsShowAppSetting(true)}
-                    icon={<SettingOutlined />}
-                    title={"بخش مدیریت سامانه"}
-                  />
-                }
-                isShow={isShowAppSetting}
-              />
+                  }
+                  isShow={isShowAppSetting}
+                />
+              </Auth>
+
               <CustomMenuItem
                 onClick={() => {
                   localStorage.clear();

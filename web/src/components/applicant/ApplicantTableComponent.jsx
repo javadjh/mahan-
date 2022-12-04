@@ -3,6 +3,7 @@ import CustomButton from "../../styled/components/CustomButton";
 import { darkBlueColor, grayColor } from "../../app/appColor";
 import CustomPopConfirm from "../../styled/components/CustomPopConfirm";
 import { Table } from "antd";
+import Auth from "../../auth/Auth";
 const ApplicantTableComponent = ({
   applicants,
 
@@ -25,14 +26,14 @@ const ApplicantTableComponent = ({
       key: "action",
       width: "20%",
       render: (item) => (
-        <>
+        <Auth accessList={["مدیریت سمت سازمانی"]}>
           <CustomPopConfirm
             onDelete={() => {
               deleteApplicantsHandle(item._id);
             }}
             render={<CustomButton color={grayColor}>حذف</CustomButton>}
           />
-        </>
+        </Auth>
       ),
     },
   ];

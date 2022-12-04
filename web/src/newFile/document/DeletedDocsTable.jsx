@@ -6,6 +6,7 @@ import { FileContext } from "../../context/file/FileContext";
 import { darkBlueColor } from "../../app/appColor";
 import CustomButton from "../../styled/components/CustomButton";
 import CustomPopConfirm from "../../styled/components/CustomPopConfirm";
+import Auth from "../../auth/Auth";
 const DeletedDocsTable = () => {
   const { documentsFilterHandle, restoreDocHandler } = useContext(FileContext);
   const deActivateDocuments = useSelector((state) => state.deActivateDocuments);
@@ -42,7 +43,7 @@ const DeletedDocsTable = () => {
       key: "action",
       width: "20%",
       render: (item) => (
-        <>
+        <Auth accessList={["مدیریت اسناد حذف شده"]}>
           <CustomPopConfirm
             onDelete={() => {
               restoreDocHandler(item._id);
@@ -58,7 +59,7 @@ const DeletedDocsTable = () => {
           >
             ویرایش
           </CustomButton> */}
-        </>
+        </Auth>
       ),
     },
   ];
