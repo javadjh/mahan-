@@ -1,46 +1,54 @@
-import React from 'react'
-const LendsTableComponent = ({lends,setDialogData})=>{
-    return(
-        <div className="table-rep-plugin">
-            <div className="table-responsive mb-0" data-pattern="priority-columns">
-                <table id="tech-companies-1" className="table table-striped">
-                    <thead>
-                    <tr>
-                        <th>شماره</th>
-                        <th data-priority="6">پرونده</th>
-                        <th data-priority="6">وضعیت پرونده</th>
-                        <th data-priority="6">نوع</th>
-                        <th data-priority="6">فرستنده</th>
-                        <th data-priority="6">شروع</th>
-                        <th data-priority="6">پایان</th>
-                        <th data-priority="6">عملیات</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {lends.map((lend,index)=>(
-                        <tr>
-                            <th>{index+1}</th>
-                            <td>{lend.fileId.title}</td>
-                            <td>{lend.fileId.fileStatus}</td>
-                            <td>{lend.fileId.type}</td>
-                            <td>{lend.creator.firstName} {lend.creator.lastName} ({lend.creator.position}) </td>
-                            <td>{lend.createDate}</td>
-                            <td>{lend.expireDate}</td>
-                            <td>
-                                <i className={"mdi mdi-eye custom-cursor"} onClick={()=>{
-                                    setDialogData({
-                                        isCompleteFile:lend.isCompleteFile,
-                                        fileId:lend.fileId._id
-                                    })
-                                }} style={{color:"royalblue"}}/>
-                            </td>
-                        </tr>
-                    ))}
-                    </tbody>
-                </table>
-            </div>
+import { Table } from "antd";
+import React from "react";
+import CustomText from "../../styled/components/CustomText";
+const LendsTableComponent = ({ lends }) => {
+  const columns = [
+    {
+      title: "شماره",
+      key: "index",
+      render: (item, record, index) => <span>{index + 1}</span>,
+    },
 
-        </div>
-    )
-}
-export default LendsTableComponent
+    {
+      title: "پرونده",
+      key: "title",
+      render: (item) => <CustomText>{item.fileId.title}</CustomText>,
+    },
+    {
+      title: "وضعیت پرونده",
+      key: "fileStatus",
+      render: (item) => <CustomText>{item.fileId.fileStatus}</CustomText>,
+    },
+    {
+      title: "نوع",
+      key: "type",
+      render: (item) => <CustomText>{item.fileId.type}</CustomText>,
+    },
+    {
+      title: "فرستنده",
+      key: "creator",
+      render: (item) => (
+        <CustomText>
+          {item?.creator?.firstName} {item?.creator?.lastName} (
+          {item?.creator?.position})
+        </CustomText>
+      ),
+    },
+    {
+      title: "شروع",
+      key: "createDate",
+      dataIndex: "createDate",
+    },
+    {
+      title: "پایان",
+      key: "expireDate",
+      dataIndex: "expireDate",
+    },
+  ];
+  return (
+    <>
+      <Table columns={columns} dataSource={lends.lends} pagination={false} />
+    </>
+  );
+};
+export default LendsTableComponent;
