@@ -206,7 +206,7 @@ const LibrariesDocumentsComponent = ({ isManage = true }) => {
                           className={"mt-2"}
                           width={90}
                           height={90}
-                          src={`http://localhost:3000/assets/images/icons/${l.ex}.png`}
+                          src={`http://192.168.2.25:3000/assets/images/icons/${l.ex}.png`}
                         />
                         <span
                           style={{ width: 90 }}

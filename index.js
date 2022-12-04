@@ -40,7 +40,7 @@ app.use(function (req, res, next) {
     "Access-Control-Allow-Headers",
     "Origin, x-auth-token, Content-Type, Accept"
   );
-  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.header("Access-Control-Allow-Origin", "http://192.168.2.25:3000");
   res.header("token", " 3.2.1");
   next();
 });
@@ -95,7 +95,7 @@ app.use("/api/v1", require("./router/SupervisorRouter"));
 app.use("/api/v1", require("./router/LibraryRouter"));
 app.get("/tt", async (req, res) => {
   const { jsPDF } = require("jspdf");
-  let pdf = new jsPDF()
+  let pdf = new jsPDF();
   return res.send("ok");
 });
 

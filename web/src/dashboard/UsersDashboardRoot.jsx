@@ -49,7 +49,7 @@ const UsersDashboardRoot = () => {
   const [verticalData, setVerticalData] = useState({});
   const usersDashboard = useSelector((state) => state.usersDashboard);
   const adminDashboard = useSelector((state) => state.adminDashboard);
-  const docs = [{ uri: "http://localhost:5000/1.pdf" }];
+  const docs = [{ uri: "http://192.168.2.25:5000/1.pdf" }];
   useEffect(() => {
     getData();
   }, []);
@@ -108,7 +108,7 @@ const UsersDashboardRoot = () => {
       ],
     });
   };
-  let pdf = "http://localhost:5000/62d0a491df63a81dfc99fb58.pdf";
+  let pdf = "http://192.168.2.25:5000/62d0a491df63a81dfc99fb58.pdf";
 
   return (
     <StickyContainer>

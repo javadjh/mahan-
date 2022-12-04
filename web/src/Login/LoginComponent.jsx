@@ -65,7 +65,7 @@ const LoginComponent = () => {
   const checkLicenseCode = async ({ license }) => {
     console.log(license);
     const { status } = await axiosConfig.get(
-      `http://localhost:5000/init/${license}`
+      `http://192.168.2.25:5000/init/${license}`
     );
     if (status === 200) {
       doneToast("با موفقیت ارسال شد");
