@@ -253,7 +253,10 @@ const InsertFileComponent = ({
                 <Col span={8}>
                   <SpaceStyled left={10}>
                     <Form.Item name={"type"} rules={[requiredForm]}>
-                      <Select style={{ width: "100%" }}>
+                      <Select
+                        style={{ width: "100%" }}
+                        placeholder="نوع پرونده را مشخص کنید"
+                      >
                         <Select.Option value={""} key={""}>
                           انتخاب کنید
                         </Select.Option>
@@ -282,6 +285,7 @@ const InsertFileComponent = ({
                     >
                       <Form.Item name={"contacts"}>
                         <RSelect
+                          isClearable={true}
                           styles={colourStyles}
                           noOptionsMessage={() => "یافت نشد"}
                           placeholder={"جست و جو در مخاطبین..."}
@@ -302,6 +306,7 @@ const InsertFileComponent = ({
                   >
                     <Form.Item name={"applicantId"}>
                       <RSelect
+                        isClearable={true}
                         styles={colourStyles}
                         className="basic-single"
                         classNamePrefix="select"

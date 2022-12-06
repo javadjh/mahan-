@@ -56,13 +56,13 @@ const LibraryRootComponent = () => {
   return (
     <Fragment>
       <div className={"mb-4 mx-2"}>
-        <span className="alert alert-info " role="alert">
+        {/* <span className="alert alert-info " role="alert">
           <CustomLabel
             title={`جهت حذف اسناد انتخاب شده کلید "Del"
             و جهت انتقال به پوشه کلید "M" را
             فشار دهید`}
           />
-        </span>
+        </span> */}
       </div>
       <CustomCard>
         <Row align="bottom">

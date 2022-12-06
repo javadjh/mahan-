@@ -22,7 +22,10 @@ import { SpaceStyled } from "../styled/global";
 import AddShelfComponent from "../components/library/AddShelfComponent";
 import CustomDialog from "../styled/components/CustomDialog";
 import ShelfItemComponent from "../components/library/ShelfItemComponent";
+import CustomButton from "../styled/components/CustomButton";
+import { lightGreenColor } from "../app/appColor";
 const LibrariesDocumentsComponent = ({ isManage = true }) => {
+  const [isShowMoveDialog, setIsShowMoveDialog] = useState(false);
   const { selectedDoc, setSelectedDoc, removeDoc, addDoc } =
     useContext(LibraryContext);
   const { libraryShelfContext, setLibraryShelfContext, reload, setReload } =
@@ -108,8 +111,9 @@ const LibrariesDocumentsComponent = ({ isManage = true }) => {
     );
     setSelectedDoc([]);
   };
+
   return (
-    <div className={"mt-0"}>
+    <div>
       {/* <AlertDialog
         title={`آیا از حذف سند ${singleDocument.title} مطمعن هستید؟`}
         deleteHandle={deleteDocument}
@@ -192,32 +196,6 @@ const LibrariesDocumentsComponent = ({ isManage = true }) => {
                   actionRender={<AddShelfComponent />}
                 />
               </Col>
-              {/* <Col span={4}>
-                <span
-                  className={"card py-2 px-3 mr-3 mt-0"}
-                  style={{ height: 220, backgroundColor: "#f6f6f6" }}
-                  onClick={() => {}}
-                >
-                  <div className="form-group">
-                    <div className="custom-control custom-checkbox text-center p-0">
-                      <div
-                        style={{ width: 100, marginTop: 65 }}
-                        data-tip={"افزودن پوشه"}
-                      >
-                        <i
-                          className={"mdi mdi-plus-thick custom-cursor"}
-                          onClick={() => {
-                            // window.$("#upsertLibraryDialog").modal("show");
-                          }}
-                          style={{ fontSize: 40, color: "green" }}
-                        />
-                      </div>
-                      <ReactTooltip />
-                    </div>
-                  </div>
-                </span>
-              </Col> */}
-
               {library.library.map((l) => (
                 <Col>
                   <SpaceStyled horizontal={5}>
