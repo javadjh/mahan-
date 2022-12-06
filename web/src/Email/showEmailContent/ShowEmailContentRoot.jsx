@@ -71,7 +71,7 @@ const ShowEmailContentRoot = ({ getDocumentsFileEmailHandle }) => {
                           className={"mt-1"}
                           width={90}
                           height={90}
-                          src={`http://localhost:3000/assets/images/icons/${d.ex}.png`}
+                          src={`http://192.168.2.25:3000/assets/images/icons/${d.ex}.png`}
                         />
                         <p className={"m-0 p-0"}>{d.title.substr(0, 15)}</p>
                         <p className={"m-0 p-0"}>حجم : {d.documentSize}</p>
