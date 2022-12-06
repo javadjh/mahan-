@@ -98,10 +98,7 @@ const UpsertLegalPersonDialog = ({
             </Col>
             <Col span={12}>
               <SpaceStyled horizontal={10}>
-                <Form.Item
-                  name={"registerCode"}
-                  rules={[requiredForm, minForm(2), maxForm(50)]}
-                >
+                <Form.Item name={"registerCode"} rules={[maxForm(50)]}>
                   <Input
                     type="number"
                     placeholder="شماره ثبت را وارد کنید..."
@@ -111,10 +108,7 @@ const UpsertLegalPersonDialog = ({
             </Col>
             <Col span={24}>
               <SpaceStyled horizontal={10}>
-                <Form.Item
-                  name={"tel"}
-                  rules={[requiredForm, minForm(11), maxForm(11)]}
-                >
+                <Form.Item name={"tel"} rules={[maxForm(11)]}>
                   <Input
                     type="number"
                     placeholder="شماره تماس را وارد کنید..."
@@ -124,10 +118,7 @@ const UpsertLegalPersonDialog = ({
             </Col>
             <Col span={24}>
               <SpaceStyled horizontal={10}>
-                <Form.Item
-                  name={"address"}
-                  rules={[requiredForm, maxForm(550)]}
-                >
+                <Form.Item name={"address"} rules={[maxForm(550)]}>
                   <Input.TextArea placeholder="آدرس را وارد کنید..." />
                 </Form.Item>
               </SpaceStyled>

@@ -14,33 +14,23 @@ import { SpaceStyled } from "../../styled/global";
 import { useState } from "react";
 
 const OptionItem = ({ children, onClick }) => {
-  const [isHovered, setIsHoverd] = useState(false);
   const OptionContainer = styled.div`
     padding: 15px;
-    background: #f6f8fb;
+    background: ${darkBlueColor};
     border-radius: 6px;
     margin: 10px 0px;
+    color: white;
     cursor: pointer;
-    :hover {
-      background-color: ${darkBlueColor};
-      color: white;
-    }
   `;
   return (
-    <OptionContainer
-      onClick={onClick}
-      onMouseEnter={() => {
-        setIsHoverd(true);
-      }}
-      onMouseLeave={() => setIsHoverd(false)}
-    >
+    <OptionContainer onClick={onClick}>
       <Row justify="space-between" align="middle">
         <Col>
           <Row>
             <Col>
               <BiSitemap
                 style={{
-                  color: isHovered ? "white" : darkBlueColor,
+                  color: "white",
                   fontSize: 15,
                   marginTop: 5,
                 }}
@@ -48,9 +38,7 @@ const OptionItem = ({ children, onClick }) => {
             </Col>
             <Col>
               <SpaceStyled right={10}>
-                <CustomText color={isHovered ? "white" : darkBlueColor}>
-                  {children}
-                </CustomText>
+                <CustomText color={"white"}>{children}</CustomText>
               </SpaceStyled>
             </Col>
           </Row>
@@ -58,9 +46,7 @@ const OptionItem = ({ children, onClick }) => {
         <Col>
           <Row>
             <Col>
-              <CustomText color={isHovered ? "white" : lightBlueColor}>
-                افزودن
-              </CustomText>
+              <CustomText color={"white"}>افزودن</CustomText>
             </Col>
             <Col>
               <FiPlus

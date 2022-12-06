@@ -25,7 +25,7 @@ const ShowDocumentsLendsDialog = ({ dialogData }) => {
   }, [singleDocument]);
 
   useEffect(() => {
-    if (previewUrl) saveAs(`http://192.168.2.25:5000/${previewUrl}`);
+    if (previewUrl) saveAs(`http://localhost:5000/${previewUrl}`);
   }, [previewUrl]);
 
   const getSingleDocument = async () => {

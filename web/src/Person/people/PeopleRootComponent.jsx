@@ -24,6 +24,9 @@ const PeopleRootComponent = () => {
   let [isUpsertDialogShow, setIsUpsertDialogShow] = useState(false);
   let [isUploadExcelDialogShow, setIsUploadExcelDialogShow] = useState(false);
   const dispatch = useDispatch();
+  useEffect(() => {
+    if (!isUpsertDialogShow) setSinglePerson({});
+  }, [isUpsertDialogShow]);
 
   useEffect(() => {
     getData();
@@ -90,6 +93,7 @@ const PeopleRootComponent = () => {
                   </CustomButton>
                 }
                 isShow={isUpsertDialogShow}
+                setIsShow={setIsUpsertDialogShow}
               />
             </Col>
           </Row>

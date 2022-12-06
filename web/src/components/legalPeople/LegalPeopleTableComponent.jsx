@@ -38,7 +38,6 @@ const LegalPeopleTableComponent = (props) => {
       width: "30%",
       render: (item) => (
         <Auth accessList={["مدیریت اشخاص حقوقی"]}>
-          حقوقی
           <CustomButton
             onClick={() => {
               props.onClickEditLegalPerson(item);

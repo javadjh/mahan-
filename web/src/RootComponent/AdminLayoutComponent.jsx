@@ -61,7 +61,7 @@ const AdminLayoutComponent = ({ children, location }) => {
                     </CustomText> */}
                       <SpaceStyled bottom={10}>
                         <Image
-                          src="http://192.168.2.25:3000/assets/mahan-typography.png"
+                          src="http://localhost:3000/assets/mahan-typography.png"
                           preview={false}
                         />
                       </SpaceStyled>
@@ -89,7 +89,7 @@ const AdminLayoutComponent = ({ children, location }) => {
                         preview={false}
                         src={
                           userProfile.profileImage
-                            ? `http://192.168.2.25:5000/${userProfile._id}/${userProfile.profileImage}`
+                            ? `http://localhost:5000/${userProfile._id}/${userProfile.profileImage}`
                             : "./assets/avatar.png"
                         }
                       />

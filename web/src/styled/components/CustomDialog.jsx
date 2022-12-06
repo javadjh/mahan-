@@ -13,7 +13,10 @@ const CustomDialog = (props) => {
       title: props.title,
       closeIcon: (
         <CloseCircleFilled
-          onClick={() => setVisible(false)}
+          onClick={() => {
+            setVisible(false);
+            if (props.setIsShow) props.setIsShow(false);
+          }}
           style={{ color: "white", fontSize: 20 }}
         />
       ),
@@ -21,7 +24,10 @@ const CustomDialog = (props) => {
         backdropFilter: "blur(3px)",
         backgroundColor: "#21212199",
       },
-      onCancel: () => setVisible(false),
+      onCancel: () => {
+        setVisible(false);
+        if (props.setIsShow) props.setIsShow(false);
+      },
     },
   });
   useEffect(() => {

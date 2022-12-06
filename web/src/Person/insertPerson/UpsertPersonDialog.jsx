@@ -85,17 +85,14 @@ const UpsertPersonDialog = ({ singlePerson, setIsUpsertDialogShow }) => {
             </Col>
             <Col span={12}>
               <SpaceStyled horizontal={10}>
-                <Form.Item name={"idCode"} rules={[requiredForm]}>
+                <Form.Item name={"idCode"}>
                   <Input placeholder="شماره شناسنامه را وارد کنید..." />
                 </Form.Item>
               </SpaceStyled>
             </Col>
             <Col span={12}>
               <SpaceStyled horizontal={10}>
-                <Form.Item
-                  name={"melliCode"}
-                  rules={[melliCodeRule, requiredForm]}
-                >
+                <Form.Item name={"melliCode"} rules={[melliCodeRule]}>
                   <Input placeholder="شماره ملی را وارد کنید..." />
                 </Form.Item>
               </SpaceStyled>

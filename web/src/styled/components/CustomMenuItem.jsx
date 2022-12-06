@@ -12,7 +12,7 @@ const CustomMenuItem = ({ title, icon, href, onClick, dropdown }) => {
   const location = useLocation();
   let MenuItemContainer = styled.div`
     ${location.pathname === href
-      ? `background-image: url("http://192.168.2.25:3000/assets/btn-hover.png");`
+      ? `background-image: url("http://localhost:3000/assets/btn-hover.png");`
       : ""};
 
     background-color: ${location.pathname === href ? darkBlueColor : "white"};

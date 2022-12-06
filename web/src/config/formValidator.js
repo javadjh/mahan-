@@ -118,6 +118,7 @@ const melliCodeRuleHandler = (_, value) => {
 };
 
 const just_persian = (str) => {
+  if (!str) return true;
   let p = /^[\u0600-\u06FF\s]+$/;
 
   if (!p.test(str)) {
@@ -154,6 +155,7 @@ const just_english_and_digit = (str) => {
 };
 
 const melliCodeValidator = (value) => {
+  if (!value) return true;
   if (value?.length !== 10) {
     return false;
   } else {

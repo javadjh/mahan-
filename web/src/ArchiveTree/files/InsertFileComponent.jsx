@@ -19,7 +19,13 @@ import CustomButton from "../../styled/components/CustomButton";
 import { maxForm, minForm, requiredForm } from "../../config/formValidator";
 const animatedComponents = makeAnimated();
 
-const InsertFileComponent = ({ tree, mainTree, isUpdate = false, fileId }) => {
+const InsertFileComponent = ({
+  tree,
+  mainTree,
+  isUpdate = false,
+  fileId,
+  setIsShowUpsertFileDialog,
+}) => {
   let [archive, setArchive] = useState(tree?.archive);
   let [lang, setLang] = useState(tree?.lang);
   const [form] = Form.useForm();
@@ -56,13 +62,15 @@ const InsertFileComponent = ({ tree, mainTree, isUpdate = false, fileId }) => {
   };
 
   const sendData = async (formData) => {
-    formData.fileDate = lang === "fa" ? formData.faDate : formData.enDate;
-    formData.archiveTreeId = tree._id;
+    formData.fileDate = lang === "fa" ? formData?.faDate : formData?.enDate;
+    formData.archiveTreeId = tree?._id;
     formData.mainArchiveTreeId = mainTree?._id;
-    formData.applicantId = formData.applicantId.value;
+    formData.applicantId = formData?.applicantId?.value;
     formData.enDate = undefined;
     formData.faDate = undefined;
     await dispatch(insertFileAction(formData, history));
+    setIsShowUpsertFileDialog(false);
+    form.resetFields();
   };
   return (
     <div>
@@ -272,7 +280,7 @@ const InsertFileComponent = ({ tree, mainTree, isUpdate = false, fileId }) => {
                         getData();
                       }}
                     >
-                      <Form.Item name={"contacts"} rules={[requiredForm]}>
+                      <Form.Item name={"contacts"}>
                         <RSelect
                           styles={colourStyles}
                           noOptionsMessage={() => "یافت نشد"}
@@ -292,7 +300,7 @@ const InsertFileComponent = ({ tree, mainTree, isUpdate = false, fileId }) => {
                       getData();
                     }}
                   >
-                    <Form.Item name={"applicantId"} rules={[requiredForm]}>
+                    <Form.Item name={"applicantId"}>
                       <RSelect
                         styles={colourStyles}
                         className="basic-single"

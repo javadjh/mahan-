@@ -31,7 +31,7 @@ const PdfPreviewComponent = () => {
 
   const fetchPdfUrl = () => {
     axios(
-      `http://192.168.2.25:5000/61e3f77540129135ec4d928f/62d0a491df63a81dfc99fb58.pdf`,
+      `http://localhost:5000/61e3f77540129135ec4d928f/62d0a491df63a81dfc99fb58.pdf`,
       {
         method: "GET",
         withCredentials: false,

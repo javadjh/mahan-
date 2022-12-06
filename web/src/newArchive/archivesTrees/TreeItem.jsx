@@ -17,6 +17,7 @@ import ArchiveTreeSettingDialog from "../../ArchiveTree/dialog/ArchiveTreeSettin
 import InsertFileComponent from "../../ArchiveTree/files/InsertFileComponent";
 import Auth from "../../auth/Auth";
 const TreeItem = ({ tree, addTree }) => {
+  const [isShowUpsertFileDialog, setIsShowUpsertFileDialog] = useState(false);
   const { changeTreeTitle, deleteArchiveTree, reload, setMainTree, mainTree } =
     useContext(ArchiveTreeContext);
   return (
@@ -26,7 +27,7 @@ const TreeItem = ({ tree, addTree }) => {
           <CenterVerticalStyled>
             <Image
               preview={false}
-              src="http://192.168.2.25:3000/assets/icon-archive.png"
+              src="http://localhost:3000/assets/icon-archive.png"
             />
           </CenterVerticalStyled>
         </Col>
@@ -37,7 +38,7 @@ const TreeItem = ({ tree, addTree }) => {
                 <Auth accessList={["مدیریت درخت"]}>
                   <Image
                     preview={false}
-                    src="http://192.168.2.25:3000/assets/edit-vector.png"
+                    src="http://localhost:3000/assets/edit-vector.png"
                   />
                 </Auth>
               ),
@@ -72,21 +73,27 @@ const TreeItem = ({ tree, addTree }) => {
                 <Auth accessList={["ویرایش پرونده"]}>
                   <CustomDialog
                     title={"پرونده"}
+                    isShow={isShowUpsertFileDialog}
+                    setIsShow={setIsShowUpsertFileDialog}
                     render={
                       <InsertFileComponent
                         inTree={false}
                         tree={tree}
-                        mainTree={mainTree}
+                        mainTree={mainTree?._id || tree}
+                        setIsShowUpsertFileDialog={setIsShowUpsertFileDialog}
                       />
                     }
                     width={"60%"}
                     actionRender={
                       <CustomSmallButton
+                        onClick={() => {
+                          setIsShowUpsertFileDialog(true);
+                        }}
                         color={lightGreenColor}
                         icon={
                           <Image
                             preview={false}
-                            src="http://192.168.2.25:3000/assets/plus-vector.png"
+                            src="/assets/plus-vector.png"
                           />
                         }
                       >
@@ -108,7 +115,7 @@ const TreeItem = ({ tree, addTree }) => {
                         icon={
                           <Image
                             preview={false}
-                            src="http://192.168.2.25:3000/assets/delete-vector.png"
+                            src="http://localhost:3000/assets/delete-vector.png"
                           />
                         }
                       >
@@ -134,7 +141,7 @@ const TreeItem = ({ tree, addTree }) => {
                         icon={
                           <Image
                             preview={false}
-                            src="http://192.168.2.25:3000/assets/setting-vector.png"
+                            src="http://localhost:3000/assets/setting-vector.png"
                           />
                         }
                       >

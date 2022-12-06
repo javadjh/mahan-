@@ -19,7 +19,8 @@ const LibraryItemComponent = ({
     box-shadow: 0px 7px 17px -3px rgba(77, 89, 107, 0.05);
     border-radius: 8px;
     padding: 0px 20px;
-    width: 150px;
+    width: 160px;
+    margin: 5px;
   `;
   return (
     <Containner>

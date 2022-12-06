@@ -44,7 +44,7 @@ const ArchivesRootComponent = () => {
   return (
     <Fragment>
       <CustomDialog
-        title={"شخص حقوقی"}
+        title={"بایگانی"}
         render={
           <InsertArchiveDialog
             singleArchive={singleArchive}
@@ -59,7 +59,7 @@ const ArchivesRootComponent = () => {
             }}
             color={lightGreenColor}
           >
-            افزودن شخص حقوقی
+            بایگانی
           </CustomButton>
         }
         isShow={isUpsertDialogShow}
