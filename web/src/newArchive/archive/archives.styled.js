@@ -16,7 +16,7 @@ export const ArchiveItem = styled.div`
   border-radius: 8px;
   min-width: 250px;
   height: 90px;
-  background-image: url("http://localhost:3000/assets/archive.png");
+  background-image: url("http://192.168.2.24:3000/assets/archive.png");
   background-repeat: no-repeat;
   background-position: right;
   cursor: pointer;
@@ -37,5 +37,5 @@ export const ArchiveIconStyled = styled.div`
   background-repeat: no-repeat;
   height: 100%;
   padding: -20px;
-  background-image: url("http://localhost:3000/assets/bg-wave.png");
+  background-image: url("http://192.168.2.24:3000/assets/bg-wave.png");
 `;

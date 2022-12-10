@@ -193,7 +193,7 @@ const HeaderRootComponent = ({ history }) => {
                         <img
                           src={
                             userProfile.profileImage
-                              ? `http://192.168.2.25:5000/${userProfile._id}/${userProfile.profileImage}`
+                              ? `http://192.168.2.24:5000/${userProfile._id}/${userProfile.profileImage}`
                               : "./assets/images/profile.png"
                           }
                           alt="Cinque Terre"

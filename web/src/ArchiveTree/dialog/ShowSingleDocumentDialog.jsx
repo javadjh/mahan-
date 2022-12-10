@@ -82,7 +82,7 @@ const ShowSingleDocumentDialog = ({ doc }) => {
           setPreviewUrl(id + "." + ex);
         }
       }
-      // saveAs(`http://192.168.2.25:5000/${filename.includes(".pdf")?id + ".pdf":id+"."+ex}`, filename);
+      // saveAs(`http://192.168.2.24:5000/${filename.includes(".pdf")?id + ".pdf":id+"."+ex}`, filename);
 
       // setIsFileDownloading(false);
     } else {
@@ -191,7 +191,7 @@ const ShowSingleDocumentDialog = ({ doc }) => {
                     <>
                       <CenterStyled>
                         <a
-                          href={`http://192.168.2.25:5000/${previewUrl}`}
+                          href={`http://192.168.2.24:5000/${previewUrl}`}
                           target="_blank"
                           download={true}
                         >{`دریافت سند`}</a>
@@ -199,7 +199,7 @@ const ShowSingleDocumentDialog = ({ doc }) => {
                       <MP4PlayerComponent
                         doc={doc}
                         deleteFlagHandle={deleteFlagHandle}
-                        url={`http://192.168.2.25:5000/${previewUrl}`}
+                        url={`http://192.168.2.24:5000/${previewUrl}`}
                         addNewFlagHandle={addNewFlagHandle}
                       />
                     </>
@@ -214,7 +214,7 @@ const ShowSingleDocumentDialog = ({ doc }) => {
                     <>
                       <CenterStyled>
                         <a
-                          href={`http://192.168.2.25:5000/${previewUrl}`}
+                          href={`http://192.168.2.24:5000/${previewUrl}`}
                           target="_blank"
                           download={true}
                         >{`دریافت سند`}</a>
@@ -228,7 +228,7 @@ const ShowSingleDocumentDialog = ({ doc }) => {
                     >
                       <CustomCursor>
                         <a
-                          href={`http://192.168.2.25:5000/${previewUrl}`}
+                          href={`http://192.168.2.24:5000/${previewUrl}`}
                           target="_blank"
                           download={true}
                         >

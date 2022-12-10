@@ -40,7 +40,7 @@ app.use(function (req, res, next) {
     "Access-Control-Allow-Headers",
     "Origin, x-auth-token, Content-Type, Accept"
   );
-  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.header("Access-Control-Allow-Origin", "http://192.168.2.24:3000");
   res.header("token", " 3.2.1");
   next();
 });

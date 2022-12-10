@@ -13,7 +13,7 @@ const UserProfileDialog = () => {
         render={<UsersProfileComponent />}
         actionRender={
           <CustomCursor onClick={() => setIsProfileDialogShow(true)}>
-            <EditOutlined />
+            <EditOutlined color={"#fff"} style={{ color: "#fff" }} />
           </CustomCursor>
         }
         isShow={isProfileDialogShow}

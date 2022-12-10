@@ -48,27 +48,24 @@ const AdminLayoutComponent = ({ children, location }) => {
           </Col>
         </Row>
       </BlueHeader>
-      <Row>
+      <Row justify="space-between">
         <Col span={6}>
-          <SpaceStyled top={-90} right={15}>
-            <CustomCard>
+          <SpaceStyled top={-90} right={15} left={30}>
+            <CustomCard color="#0A365F">
               <SpaceStyled bottom={30}>
                 <SpaceStyled horizontal={30}>
-                  <Row justify="space-between" align="middle">
-                    <Col>
-                      {/* <CustomText size={20} color={"#BFCED8"}>
-                      مدیریت سامانه
-                    </CustomText> */}
+                  <Row justify="space-between" align="stretch">
+                    <Col span={14}>
                       <SpaceStyled bottom={10}>
                         <Image
-                          src="http://192.168.2.25:3000/assets/mahan-typography.png"
+                          src="http://192.168.2.24:3000/assets/mahan-typography.png"
                           preview={false}
                         />
                       </SpaceStyled>
                       <Row>
                         <Col>
-                          <CustomText color={darkBlueColor}>
-                            ویرایش اطلاعات کاربری
+                          <CustomText color={"#fff"}>
+                            ویرایش پروفایل{" "}
                           </CustomText>
                         </Col>
                         <Col>
@@ -78,21 +75,23 @@ const AdminLayoutComponent = ({ children, location }) => {
                         </Col>
                       </Row>
                     </Col>
-                    <Col>
-                      <Image
-                        width={60}
-                        style={{
-                          borderRadius: 100,
-                          aspectRatio: "1/1",
-                          objectFit: "cover",
-                        }}
-                        preview={false}
-                        src={
-                          userProfile.profileImage
-                            ? `http://192.168.2.25:5000/${userProfile._id}/${userProfile.profileImage}`
-                            : "./assets/avatar.png"
-                        }
-                      />
+                    <Col span={10} align="middle">
+                      <div>
+                        <Image
+                          width={60}
+                          style={{
+                            borderRadius: 100,
+                            aspectRatio: "1/1",
+                            objectFit: "cover",
+                          }}
+                          preview={false}
+                          src={
+                            userProfile.profileImage
+                              ? `http://192.168.2.24:5000/${userProfile._id}/${userProfile.profileImage}`
+                              : "./assets/avatar.png"
+                          }
+                        />
+                      </div>
                     </Col>
                   </Row>
                 </SpaceStyled>

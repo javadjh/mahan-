@@ -47,9 +47,8 @@ export const colourStyles = {
   control: (styles) => ({
     ...styles,
     ...{
-      background: "#f9fafc ",
+      border: "1.1px solid #e4eaef",
       borderRadius: "8px",
-      border: "none ",
       padding: "10px ",
       color: "black ",
       marginTop: 10,

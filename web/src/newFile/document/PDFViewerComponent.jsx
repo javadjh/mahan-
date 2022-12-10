@@ -37,7 +37,7 @@ const PDFViewerComponent = ({ previewUrl, watermark }) => {
   };
   useEffect(() => {
     if (previewUrl) {
-      axios(`http://192.168.2.25:5000/${previewUrl}`, {
+      axios(`http://192.168.2.24:5000/${previewUrl}`, {
         method: "GET",
         withCredentials: false,
         responseType: "blob",

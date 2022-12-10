@@ -15,36 +15,38 @@
   font-weight: 100 !important;
 }
 .ant-input {
-  background: #f9fafc !important;
   border-radius: 8px !important;
-  border: none !important;
-  padding: 20px !important;
+  background: #ffffff !important;
+  border: 1.1px solid #e4eaef;
+  border-radius: 6px;
+  padding: 15px !important;
 }
 .ant-select {
-  background: #f9fafc !important;
   border-radius: 8px !important;
-  border: none !important;
-  padding: 20px !important;
+  background: #ffffff !important;
+  border: 1.1px solid #e4eaef;
+  border-radius: 6px;
+  padding: 10px !important;
   color: black !important;
 }
 
 .ant-select-selector {
   border-radius: 0.25rem !important;
   border: none !important;
-  background: #f9fafc !important;
+  background: #ffffff !important;
 }
 
 .ant-select-selector {
   border: none !important;
-  background: #f9fafc !important;
+  background: #ffffff !important;
 }
 .ant-select-selection-search input {
   border: none !important;
-  background: #f9fafc !important;
+  background: #ffffff !important;
 }
 .ant-select-selection-item {
   border: none !important;
-  background: #f9fafc !important;
+  background: #ffffff !important;
 }
 
 .ant-modal-header {

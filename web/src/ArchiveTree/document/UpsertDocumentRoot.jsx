@@ -431,7 +431,7 @@ const UpsertDocumentRoot = ({ history }) => {
           setPreviewUrl(id + "." + ex);
         }
       }
-      // saveAs(`http://192.168.2.25:5000/${filename.includes(".pdf")?id + ".pdf":id+"."+ex}`, filename);
+      // saveAs(`http://192.168.2.24:5000/${filename.includes(".pdf")?id + ".pdf":id+"."+ex}`, filename);
 
       setIsFileDownloading(false);
     } else {
@@ -766,7 +766,7 @@ const UpsertDocumentRoot = ({ history }) => {
                                         width={90}
                                         height={90}
                                         src={
-                                          "http://192.168.2.25:3000/assets/images/paper.png"
+                                          "http://192.168.2.24:3000/assets/images/paper.png"
                                         }
                                       />
                                       <p
@@ -821,7 +821,7 @@ const UpsertDocumentRoot = ({ history }) => {
                                         width={90}
                                         height={90}
                                         src={
-                                          "http://192.168.2.25:3000/assets/images/paper.png"
+                                          "http://192.168.2.24:3000/assets/images/paper.png"
                                         }
                                       />
                                       <p

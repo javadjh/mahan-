@@ -12,11 +12,11 @@ const CustomMenuItem = ({ title, icon, href, onClick, dropdown }) => {
   const location = useLocation();
   let MenuItemContainer = styled.div`
     ${location.pathname === href
-      ? `background-image: url("http://192.168.2.25:3000/assets/btn-hover.png");`
+      ? `background-image: url("http://192.168.2.24:3000/assets/btn-hover.png");`
       : ""};
 
-    background-color: ${location.pathname === href ? darkBlueColor : "white"};
-    color: ${location.pathname === href ? "white" : darkBlueColor};
+    background-color: ${location.pathname === href ? darkBlueColor : "none"};
+    color: #fff;
     width: 100%;
     border-radius: 30px;
     padding: 15px 30px;
@@ -33,20 +33,18 @@ const CustomMenuItem = ({ title, icon, href, onClick, dropdown }) => {
                 <SpaceStyled horizontal={10}>{icon}</SpaceStyled>
               </Col>
               <Col>
-                <CustomText
-                  color={location.pathname === href ? "white" : darkBlueColor}
-                >
-                  {title}
-                </CustomText>
+                <CustomText color={"#fff"}>{title}</CustomText>
               </Col>
             </Row>
           </Col>
           <Col>
-            <CaretLeftOutlined style={{ color: "#DBE5EC" }} />
+            <CaretLeftOutlined style={{ color: "#fff" }} />
           </Col>
         </Row>
       </MenuItemContainer>
-      <Divider style={{ margin: 0, padding: 0 }}></Divider>
+      <Divider
+        style={{ margin: 0, padding: 0, backgroundColor: "#1b446a" }}
+      ></Divider>
     </>
   );
   return (
