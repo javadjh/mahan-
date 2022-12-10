@@ -12,10 +12,7 @@ import { getAppInfoAction } from "./actions/AppSettingAction";
 
 export const store = createStore(
   combineReducersIndex,
-  compose(
-    applyMiddleware(thunk, loadingBarMiddleware()),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-  )
+  compose(applyMiddleware(thunk, loadingBarMiddleware()))
 );
 
 const init = async () => {
