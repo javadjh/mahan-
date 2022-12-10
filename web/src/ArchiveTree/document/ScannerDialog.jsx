@@ -146,7 +146,7 @@ const ScannerDialog = ({ history, getDocData }) => {
               >
                 <img
                   style={{ borderRadius: 50 }}
-                  src={"http://192.168.2.24:3000/assets/images/scanning.gif"}
+                  src={"http://localhost:3000/assets/images/scanning.gif"}
                   className={"col-lg-5 mt-2"}
                 />
               </div>

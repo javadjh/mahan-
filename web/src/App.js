@@ -18,6 +18,7 @@ import {
 } from "./styled/global";
 import CustomText from "./styled/components/CustomText";
 import { grayColor } from "./app/appColor";
+import "swiper/swiper.min.css";
 
 const App = ({ location }) => {
   const [showUploadBlock, setShowUploadBlock] = useState(false);

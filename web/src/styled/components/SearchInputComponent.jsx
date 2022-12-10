@@ -11,11 +11,11 @@ import Auth from "../../auth/Auth";
 const SearchInputComponent = () => {
   let history = useHistory();
   const dispatch = useDispatch();
-  const [searchValue, setSearchValue] = useState();
+  const [searchValue, setSearchValue] = useState("");
   const files = useSelector((state) => state.search.files);
   const documents = useSelector((state) => state.search.documents);
   useEffect(() => {
-    if (searchValue) getData();
+    getData();
   }, [searchValue]);
   const getData = async () => {
     await dispatch(
@@ -93,7 +93,7 @@ const SearchInputComponent = () => {
                         className={"p-1 dropdown-item custom-cursor"}
                         onClick={() => {
                           history.push({
-                            pathname: "/file/" + f._id,
+                            pathname: "/file/" + f._id + "/0",
                             state: {
                               archiveId: f.archiveId._id,
                               fileId: f._id,
@@ -129,7 +129,7 @@ const SearchInputComponent = () => {
                         className={"p-1 dropdown-item custom-cursor"}
                         onClick={() => {
                           history.push({
-                            pathname: "/file/" + d.fileId._id,
+                            pathname: "/file/" + d.fileId._id + "/" + d._id,
                             state: {
                               archiveId: d.archiveId._id,
                               fileId: d.fileId._id,
@@ -171,7 +171,7 @@ const SearchInputComponent = () => {
             >
               <Input
                 onChange={(e) => {
-                  setSearchValue(e.target.value);
+                  setSearchValue(e.target.value || "");
                 }}
                 className="ant-search-custom"
                 placeholder="موتور جستجو..."

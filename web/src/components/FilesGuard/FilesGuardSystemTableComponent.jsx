@@ -62,7 +62,7 @@ const FilesGuardSystemTableComponent = ({ files, setPageId, setReload }) => {
         <>
           <CustomButton
             onClick={() => {
-              history.push("/file/" + item._id);
+              history.push("/file/" + item._id + "/0");
             }}
             color={darkBlueColor}
             style={{ marginLeft: 10 }}

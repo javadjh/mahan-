@@ -65,7 +65,7 @@ const LoginComponent = () => {
   const checkLicenseCode = async ({ license }) => {
     console.log(license);
     const { status } = await axiosConfig.get(
-      `http://192.168.2.24:5000/init/${license}`
+      `http://localhost:5000/init/${license}`
     );
     if (status === 200) {
       doneToast("با موفقیت ارسال شد");
@@ -130,15 +130,23 @@ const LoginComponent = () => {
                               </Form.Item>
                             </SpaceStyled>
                             <Row>
-                              <Col span={17}>
+                              <Col span={12}>
                                 <CustomButton htmlType={"submit"} block>
                                   ارسال ایمیل
                                 </CustomButton>
                               </Col>
-                              <Col span={7}>
+                              <Col span={12}>
                                 <SpaceStyled right={10}>
-                                  <CustomButton block color={lightGreenColor}>
-                                    <CaretLeftOutlined />
+                                  <CustomButton
+                                    block
+                                    onClick={() =>
+                                      setIsForgetPassword(!isForgetPassword)
+                                    }
+                                    color={lightGreenColor}
+                                  >
+                                    {isForgetPassword
+                                      ? "کلمه ی عبور یادم اومد"
+                                      : "رمز عبورم رو فراموش کردم"}
                                   </CustomButton>
                                 </SpaceStyled>
                               </Col>
@@ -170,15 +178,23 @@ const LoginComponent = () => {
                               </Form.Item>
                             </SpaceStyled>
                             <Row>
-                              <Col span={17}>
+                              <Col span={12}>
                                 <CustomButton htmlType={"submit"} block>
                                   ورود به حساب کاربری
                                 </CustomButton>
                               </Col>
-                              <Col span={7}>
+                              <Col span={12}>
                                 <SpaceStyled right={10}>
-                                  <CustomButton block color={lightGreenColor}>
-                                    <CaretLeftOutlined />
+                                  <CustomButton
+                                    block
+                                    onClick={() =>
+                                      setIsForgetPassword(!isForgetPassword)
+                                    }
+                                    color={lightGreenColor}
+                                  >
+                                    {isForgetPassword
+                                      ? "کلمه ی عبور یادم اومد"
+                                      : "رمز عبورم رو فراموش کردم"}
                                   </CustomButton>
                                 </SpaceStyled>
                               </Col>
@@ -186,17 +202,6 @@ const LoginComponent = () => {
                           </Form>
                         </span>
                       )}
-                      <SpaceStyled top={10}>
-                        <CustomButton
-                          onClick={() => setIsForgetPassword(!isForgetPassword)}
-                          block
-                          color={whiteColor}
-                        >
-                          {isForgetPassword
-                            ? "کلمه ی عبور یادم اومد"
-                            : "رمز عبورم رو فراموش کردم"}
-                        </CustomButton>
-                      </SpaceStyled>
                     </SpaceStyled>
                   ) : (
                     <Form onFinish={checkLicenseCode}>

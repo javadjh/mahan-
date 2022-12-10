@@ -36,6 +36,11 @@ const TabsComponent = () => {
         setTabState(e);
       }}
     >
+      <Tabs.TabPane tab="روکش پرونده" key={"form"}>
+        <Auth accessList={["ویرایش روکش پرونده"]}>
+          <FilesFormComponent />
+        </Auth>
+      </Tabs.TabPane>
       <Tabs.TabPane tab=" لیست اسناد " key={"docs"}>
         <Auth
           accessList={[
@@ -61,11 +66,6 @@ const TabsComponent = () => {
       <Tabs.TabPane tab="اسناد حذف شده " key={"deleted"}>
         <Auth accessList={["مدیریت اسناد حذف شده"]}>
           <DeletedDocsTable />
-        </Auth>
-      </Tabs.TabPane>
-      <Tabs.TabPane tab="روکش پرونده" key={"form"}>
-        <Auth accessList={["ویرایش روکش پرونده"]}>
-          <FilesFormComponent />
         </Auth>
       </Tabs.TabPane>
       <Tabs.TabPane tab="هشدار ها" key={"alerts"}>

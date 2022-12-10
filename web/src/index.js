@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import "antd/dist/antd.css";
 import "./style.css";
-
 import { CookiesProvider } from "react-cookie";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";

@@ -67,7 +67,7 @@ const DocumentsTable = () => {
               }
             />
           </Auth>
-          <Auth accessList={["نمایش سندها"]}>
+          {/* <Auth accessList={["نمایش سندها"]}>
             {(item.ex === "png" ||
               item.ex === "jpg" ||
               item.ex === "PNG" ||
@@ -82,7 +82,7 @@ const DocumentsTable = () => {
                 ویرایشگر
               </CustomButton>
             )}
-          </Auth>
+          </Auth> */}
         </>
       ),
     },

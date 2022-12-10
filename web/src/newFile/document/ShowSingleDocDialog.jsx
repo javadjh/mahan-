@@ -36,7 +36,7 @@ const ShowSingleDocDialog = ({ doc }) => {
   //         setPreviewUrl(id + "." + ex);
   //       }
   //     }
-  //     // saveAs(`http://192.168.2.24:5000/${filename.includes(".pdf")?id + ".pdf":id+"."+ex}`, filename);
+  //     // saveAs(`http://localhost:5000/${filename.includes(".pdf")?id + ".pdf":id+"."+ex}`, filename);
 
   //     setIsFileDownloading(false);
   //   } else {
@@ -95,7 +95,7 @@ const ShowSingleDocDialog = ({ doc }) => {
             <MP4PlayerComponent
               doc={doc}
               deleteFlagHandle={deleteFlagHandle}
-              url={`http://192.168.2.24:5000/${previewUrl}`}
+              url={`http://localhost:5000/${previewUrl}`}
               addNewFlagHandle={addNewFlagHandle}
             />
           ) : doc.ex === "txt" ? (

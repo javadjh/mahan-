@@ -151,7 +151,11 @@ const PanelRootComponent = ({ history, location }) => {
                           component={LogRootComponent}
                           exact
                         />
-                        <Route path={"/file/:id"} component={FileRoot} exact />
+                        <Route
+                          path={"/file/:id/:docId"}
+                          component={FileRoot}
+                          exact
+                        />
                         {/* <Route
                           path={"/upsert-document"}
                           render={() => (

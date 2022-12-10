@@ -94,7 +94,7 @@ export default ArchiveItemComponent;
             <Image
               height={50}
               preview={false}
-              src="http://192.168.2.24:3000/assets/icon-archive.png"
+              src="http://localhost:3000/assets/icon-archive.png"
             />
           </CenterVerticalStyled>
         </Col>
@@ -118,7 +118,7 @@ export default ArchiveItemComponent;
               <Col>
                 <Image
                   preview={false}
-                  src="http://192.168.2.24:3000/assets/description-vector.png"
+                  src="http://localhost:3000/assets/description-vector.png"
                 />
               </Col>
               <Col>

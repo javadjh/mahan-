@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import { useContext } from "react";
 import { FileContext } from "./FileContext";
 import { useDispatch, useSelector } from "react-redux";
+import { getDocumentService } from "../../service/DocumentService";
 import { saveAs } from "file-saver";
 import {
   deleteFileAction,
@@ -29,6 +30,8 @@ import {
   insertFileAlertAction,
 } from "../../stateManager/actions/FileAlertAction";
 import { RootContext } from "../../RootComponent/RootContext";
+import CustomDialog from "../../styled/components/CustomDialog";
+import ShowSingleDocumentDialog from "../../ArchiveTree/dialog/ShowSingleDocumentDialog";
 
 const FileContextProvider = ({ children, match, history }) => {
   // redux utils
@@ -37,6 +40,7 @@ const FileContextProvider = ({ children, match, history }) => {
 
   //init some params
   const fileId = match?.params?.id;
+  const docId = match?.params?.docId;
   const { setFileId, setArchiveId } = useContext(RootContext);
   useEffect(() => {
     setFileId(fileId);
@@ -50,6 +54,8 @@ const FileContextProvider = ({ children, match, history }) => {
   const [isShowUploadBlock, setIsShowUploadBlock] = useState(false);
   const [images, setImages] = useState([]);
   const [uploadedFile, setUploadedFile] = useState([]);
+  const [isShowSingleDocument, setIsShowSingleDocument] = useState(false);
+  const [docItem, setDocItem] = useState({});
 
   //filter state
   const [documentFilter, setDocumentFilter] = useState({
@@ -83,6 +89,9 @@ const FileContextProvider = ({ children, match, history }) => {
   useEffect(() => {
     if (currentTab == "deleted") getDeletedDocs();
   }, [deletedDocsFilter]);
+  useEffect(() => {
+    if (docId && docId !== "0") getSpecialDocument();
+  }, [docId]);
 
   //handlers funcs
 
@@ -129,6 +138,13 @@ const FileContextProvider = ({ children, match, history }) => {
     else if (currentTab == "deleted") getDeletedDocs();
     else if (currentTab == "docs") getDocuments();
     else if (currentTab == "alerts") getAlerts();
+  };
+  const getSpecialDocument = async () => {
+    if (!isShowSingleDocument) {
+      const { data } = await getDocumentService(docId);
+      setDocItem(data);
+      setIsShowSingleDocument(true);
+    }
   };
 
   //command handlers
@@ -240,6 +256,7 @@ const FileContextProvider = ({ children, match, history }) => {
         canUpload,
         history,
         fileId,
+        docId,
         setTabState,
         documentsFilterHandle,
         filesLogFilterHandle,
@@ -256,6 +273,13 @@ const FileContextProvider = ({ children, match, history }) => {
       }}
     >
       {children}
+      <CustomDialog
+        width={"100%"}
+        title={"سند"}
+        render={<ShowSingleDocumentDialog doc={docItem?.document} />}
+        isShow={isShowSingleDocument}
+        setIsShow={setIsShowSingleDocument}
+      />
     </FileContext.Provider>
   );
 };

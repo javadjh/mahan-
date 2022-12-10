@@ -1,11 +1,12 @@
 import React, { useContext } from "react";
 import { ArchiveTreeContext } from "../../context/ArchiveTree/ArchiveTreesContext";
+import { archiveTreesDataAction } from "../../stateManager/actions/ArchiveTreeAction";
 import TreeItem from "./TreeItem";
 
 const ArchiveTreesComponents = () => {
-  const { archiveTrees, setMainParent, setRoutes, routes } =
+  const { archiveTrees, setMainParent, setRoutes, routes, dispatch } =
     useContext(ArchiveTreeContext);
-  const addTree = (tree) => {
+  const addTree = async (tree) => {
     let routesCopy = [...routes];
     routesCopy.push({
       label: tree.title,
@@ -14,6 +15,8 @@ const ArchiveTreesComponents = () => {
     });
     setRoutes(routesCopy);
     setMainParent(tree);
+    await dispatch(archiveTreesDataAction({ routes: routesCopy }));
+    await dispatch(archiveTreesDataAction({ mainParent: tree }));
   };
   return (
     <>

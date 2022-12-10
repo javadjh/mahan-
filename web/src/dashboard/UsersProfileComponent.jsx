@@ -87,7 +87,7 @@ const UsersProfileComponent = () => {
             width={256}
             src={
               userProfile.profileImage
-                ? `http://192.168.2.24:5000/${userProfile._id}/${userProfile.profileImage}`
+                ? `http://localhost:5000/${userProfile._id}/${userProfile.profileImage}`
                 : "./assets/avatar.png"
             }
           />

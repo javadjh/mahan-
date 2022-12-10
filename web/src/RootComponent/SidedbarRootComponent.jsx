@@ -13,7 +13,7 @@ const SidebarRootComponent = () => {
           <img
             src={
               appInfo.logo
-                ? `http://192.168.2.24:5000/${appInfo.logo}`
+                ? `http://localhost:5000/${appInfo.logo}`
                 : "./assets/images/logo.png"
             }
             width={50}

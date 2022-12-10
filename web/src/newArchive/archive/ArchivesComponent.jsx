@@ -1,6 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import CustomText from "../../styled/components/CustomText";
+import { Swiper, SwiperSlide } from "swiper/react";
+
 import {
   CenterVerticalStyled,
   HorizontalScroll,
@@ -21,9 +23,18 @@ const ArchivesComponent = () => {
       </SpaceStyled>
       <HorizontalScroll>
         <CenterVerticalStyled>
-          {usersArchives.map((archive) => (
-            <ArchiveItemComponent archive={archive} />
-          ))}
+          <Swiper
+            spaceBetween={10}
+            slidesPerView={3.5}
+            onSlideChange={() => console.log("slide change")}
+            onSwiper={(swiper) => console.log(swiper)}
+          >
+            {usersArchives.map((archive) => (
+              <SwiperSlide>
+                <ArchiveItemComponent archive={archive} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </CenterVerticalStyled>
       </HorizontalScroll>
     </>

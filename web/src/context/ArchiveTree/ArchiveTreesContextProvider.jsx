@@ -5,10 +5,17 @@ import {
   getArchiveTreesService,
   insertArchiveTreeService,
 } from "../../service/ArchiveTreeService";
+import { useDispatch, useSelector } from "react-redux";
 import { getArchiveTreesFileService } from "../../service/FileService";
 import { doneToast } from "../../utility/ShowToast";
 import { ArchiveTreeContext } from "./ArchiveTreesContext";
+import { archiveTreesDataAction } from "../../stateManager/actions/ArchiveTreeAction";
 const ArchiveTreeContextProvider = ({ children }) => {
+  //reduxs selector
+  const archiveTreesData = useSelector((state) => state.archiveTreesData);
+  //reduxs dispatch
+  const dispatch = useDispatch();
+
   let archiveId = localStorage.getItem("archive");
   const [mainParent, setMainParent] = useState();
   const [mainTree, setMainTree] = useState();
@@ -35,12 +42,28 @@ const ArchiveTreeContextProvider = ({ children }) => {
     if (mainParent) getFiles();
   }, [fileFilter, isLoad]);
 
+  //init archiveTree data
+  useEffect(() => {
+    if (archiveTreesData?.routes?.length > 1) {
+      setMainParent(archiveTreesData.mainParent);
+      setMainTree(archiveTreesData.mainTree);
+      setArchiveTrees(archiveTreesData.archiveTrees);
+      setFiles(archiveTreesData.files);
+      setFileFilter(archiveTreesData.fileFilter);
+      setRoutes(archiveTreesData.routes);
+      setDocuments(archiveTreesData.documents);
+    }
+  }, []);
+
   const getFiles = async () => {
     const { status, data } = await getArchiveTreesFileService(
       mainParent._id,
       fileFilter
     );
-    if (status === 200) setFiles(data);
+    if (status === 200) {
+      setFiles(data);
+      await dispatch(archiveTreesDataAction({ files: data }));
+    }
   };
 
   const getData = async () => {
@@ -52,6 +75,7 @@ const ArchiveTreeContextProvider = ({ children }) => {
 
     if (status === 200) {
       setArchiveTrees(data);
+      await dispatch(archiveTreesDataAction({ archiveTrees: data }));
     }
   };
   const changeTreeTitle = async (id, newTitle) => {
@@ -86,6 +110,7 @@ const ArchiveTreeContextProvider = ({ children }) => {
   return (
     <ArchiveTreeContext.Provider
       value={{
+        dispatch,
         reload,
         mainTree,
         setMainTree,

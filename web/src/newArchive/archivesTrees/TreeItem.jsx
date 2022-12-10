@@ -16,10 +16,17 @@ import { ArchiveTreeContext } from "../../context/ArchiveTree/ArchiveTreesContex
 import ArchiveTreeSettingDialog from "../../ArchiveTree/dialog/ArchiveTreeSettingDialog";
 import InsertFileComponent from "../../ArchiveTree/files/InsertFileComponent";
 import Auth from "../../auth/Auth";
+import { archiveTreesDataAction } from "../../stateManager/actions/ArchiveTreeAction";
 const TreeItem = ({ tree, addTree }) => {
   const [isShowUpsertFileDialog, setIsShowUpsertFileDialog] = useState(false);
-  const { changeTreeTitle, deleteArchiveTree, reload, setMainTree, mainTree } =
-    useContext(ArchiveTreeContext);
+  const {
+    changeTreeTitle,
+    deleteArchiveTree,
+    reload,
+    setMainTree,
+    mainTree,
+    dispatch,
+  } = useContext(ArchiveTreeContext);
   return (
     <ArchiveTreeItem>
       <Row justify="space-between" align="middle">
@@ -27,7 +34,7 @@ const TreeItem = ({ tree, addTree }) => {
           <CenterVerticalStyled>
             <Image
               preview={false}
-              src="http://192.168.2.24:3000/assets/icon-archive.png"
+              src="http://localhost:3000/assets/icon-archive.png"
             />
           </CenterVerticalStyled>
         </Col>
@@ -38,7 +45,7 @@ const TreeItem = ({ tree, addTree }) => {
                 <Auth accessList={["مدیریت درخت"]}>
                   <Image
                     preview={false}
-                    src="http://192.168.2.24:3000/assets/edit-vector.png"
+                    src="http://localhost:3000/assets/edit-vector.png"
                   />
                 </Auth>
               ),
@@ -51,9 +58,10 @@ const TreeItem = ({ tree, addTree }) => {
             color={"black"}
           >
             <CustomCursor
-              onClick={() => {
+              onClick={async () => {
                 if (tree.isMain) {
                   setMainTree(tree);
+                  await dispatch(archiveTreesDataAction({ mainTree: tree }));
                 }
                 addTree(tree);
               }}
@@ -115,7 +123,7 @@ const TreeItem = ({ tree, addTree }) => {
                         icon={
                           <Image
                             preview={false}
-                            src="http://192.168.2.24:3000/assets/delete-vector.png"
+                            src="http://localhost:3000/assets/delete-vector.png"
                           />
                         }
                       >
@@ -141,7 +149,7 @@ const TreeItem = ({ tree, addTree }) => {
                         icon={
                           <Image
                             preview={false}
-                            src="http://192.168.2.24:3000/assets/setting-vector.png"
+                            src="http://localhost:3000/assets/setting-vector.png"
                           />
                         }
                       >

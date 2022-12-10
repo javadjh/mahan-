@@ -57,7 +57,7 @@ const FilesTableComponent = (props) => {
             "مخاطبین پرونده",
           ]}
         >
-          <Link to={`/file/${item._id}`}>
+          <Link to={`/file/${item._id}/0`}>
             <CustomButton color={lightGreenColor}>نمایش</CustomButton>
           </Link>
         </Auth>

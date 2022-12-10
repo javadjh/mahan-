@@ -27,6 +27,12 @@ module.exports.searchEngine = async (req, res) => {
     })
     console.log(archives)*/
   const { searchValue } = req.query;
+  if (searchValue?.length < 1 || !searchValue) {
+    return res.send({
+      files: [],
+      documents: [],
+    });
+  }
 
   const user = await UserModel.findById(req.user.userId).select("role");
   let fileAccess = [];

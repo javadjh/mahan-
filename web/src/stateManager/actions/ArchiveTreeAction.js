@@ -128,3 +128,13 @@ export const mainArchiveTreesFormAction = (archiveTreeId, bodyData) => {
     }
   };
 };
+
+//ذخیره سازی دیتای درخت
+export const archiveTreesDataAction = (data) => {
+  return async (dispatch) => {
+    await dispatch({
+      type: "INIT_ARCHIVE_TREES_DATA",
+      payload: data,
+    });
+  };
+};
