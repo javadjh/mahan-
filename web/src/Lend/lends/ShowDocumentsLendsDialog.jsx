@@ -8,6 +8,7 @@ import PagingComponent from "../../utility/PagingComponent";
 import { setLoadingAction } from "../../stateManager/actions/LoadingAction";
 import { getDocumentFileService } from "../../service/DocumentService";
 import saveAs from "file-saver";
+import { SERVER_IP } from "../../config/ip";
 const ShowDocumentsLendsDialog = ({ dialogData }) => {
   const dispatch = useDispatch();
   const documents = useSelector((state) => state.documents);
@@ -25,7 +26,7 @@ const ShowDocumentsLendsDialog = ({ dialogData }) => {
   }, [singleDocument]);
 
   useEffect(() => {
-    if (previewUrl) saveAs(`http://192.168.2.24:5000/${previewUrl}`);
+    if (previewUrl) saveAs(`${SERVER_IP}/${previewUrl}`);
   }, [previewUrl]);
 
   const getSingleDocument = async () => {

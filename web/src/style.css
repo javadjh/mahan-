@@ -375,3 +375,10 @@ input[type="number"] {
   -webkit-box-shadow: 0px 14px 22px -6px rgba(0, 0, 0, 0.22);
   box-shadow: 0px 14px 22px -6px rgba(0, 0, 0, 0.22);
 }
+.login-input {
+  background: #0b3b66 !important;
+  border-radius: 8px !important;
+  border: none !important;
+  padding: 27px !important;
+  color: white !important;
+}

@@ -17,6 +17,7 @@ import ArchiveTreeSettingDialog from "../../ArchiveTree/dialog/ArchiveTreeSettin
 import InsertFileComponent from "../../ArchiveTree/files/InsertFileComponent";
 import Auth from "../../auth/Auth";
 import { archiveTreesDataAction } from "../../stateManager/actions/ArchiveTreeAction";
+import { FRONT_IP } from "../../config/ip";
 const TreeItem = ({ tree, addTree }) => {
   const [isShowUpsertFileDialog, setIsShowUpsertFileDialog] = useState(false);
   const {
@@ -26,6 +27,7 @@ const TreeItem = ({ tree, addTree }) => {
     setMainTree,
     mainTree,
     dispatch,
+    routes,
   } = useContext(ArchiveTreeContext);
   return (
     <ArchiveTreeItem>
@@ -34,7 +36,7 @@ const TreeItem = ({ tree, addTree }) => {
           <CenterVerticalStyled>
             <Image
               preview={false}
-              src="http://192.168.2.24:3000/assets/icon-archive.png"
+              src={FRONT_IP + "/assets/icon-archive.png"}
             />
           </CenterVerticalStyled>
         </Col>
@@ -45,7 +47,7 @@ const TreeItem = ({ tree, addTree }) => {
                 <Auth accessList={["مدیریت درخت"]}>
                   <Image
                     preview={false}
-                    src="http://192.168.2.24:3000/assets/edit-vector.png"
+                    src={FRONT_IP + "/assets/edit-vector.png"}
                   />
                 </Auth>
               ),
@@ -87,7 +89,7 @@ const TreeItem = ({ tree, addTree }) => {
                       <InsertFileComponent
                         inTree={false}
                         tree={tree}
-                        mainTree={mainTree?._id || tree}
+                        mainTree={routes.length === 1 ? tree : mainTree || tree}
                         setIsShowUpsertFileDialog={setIsShowUpsertFileDialog}
                       />
                     }
@@ -123,7 +125,7 @@ const TreeItem = ({ tree, addTree }) => {
                         icon={
                           <Image
                             preview={false}
-                            src="http://192.168.2.24:3000/assets/delete-vector.png"
+                            src={FRONT_IP + "/assets/delete-vector.png"}
                           />
                         }
                       >
@@ -149,7 +151,7 @@ const TreeItem = ({ tree, addTree }) => {
                         icon={
                           <Image
                             preview={false}
-                            src="http://192.168.2.24:3000/assets/setting-vector.png"
+                            src={FRONT_IP + "/assets/setting-vector.png"}
                           />
                         }
                       >

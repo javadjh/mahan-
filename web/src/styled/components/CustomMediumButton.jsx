@@ -12,7 +12,7 @@ const CustomMediumButton = (props) => {
     background-color: ${props.color ? props.color : darkBlueColor} !important;
     color: ${props.color === "#fff" ? "#92A2B0" : "white"} !important;
     padding: 0px 20px !important;
-    min-height: 43px !important;
+    min-height: ${props.height ? props.height : 43}px !important;
     border-radius: 7px !important;
     text-align: center !important;
     border: ${props.color === "#fff" ? "2px solid #EEF2F5" : "none"} !important;
@@ -20,9 +20,9 @@ const CustomMediumButton = (props) => {
   `;
   const CustomMediumButtonTranseparentStyled = styled(Button)`
     background-color: ${transeparentColor} !important;
-    color: ${props.color} !important;
+    color: ${props.textColor ? props.textColor : props.color} !important;
     padding: 0px 20px !important;
-    min-height: 43px !important;
+    min-height: ${props.height ? props.height : 43}px !important;
     border-radius: 7px !important;
     text-align: center !important;
     border: 1px solid ${props.color} !important;

@@ -152,7 +152,7 @@ module.exports.insertEmail = async (req, res) => {
     emails,
     "اسنادی برای شما ارسال شده است",
     user,
-    `http://192.168.2.24:3000/email-${newEmail._id}`,
+    `/email-${newEmail._id}`,
     documents,
     newEmail.expireDate,
     file,

@@ -8,10 +8,11 @@ import {
   setArchiveGuardSystemAction,
   setGuardSystemAction,
 } from "../stateManager/actions/ArchiveAction";
-import { Button, Checkbox, Col, Row } from "antd";
+import { Button, Checkbox, Col, Divider, Image, Row } from "antd";
 import { colourStyles, SpaceStyled } from "../styled/global";
 import CustomButton from "../styled/components/CustomButton";
 import CustomSmallButton from "../styled/components/CustomSmallButton";
+import { FRONT_IP } from "../config/ip";
 const animatedComponents = makeAnimated();
 
 const cycle = [
@@ -94,7 +95,6 @@ const GuardSystemRoot = ({ archiveId }) => {
     <div
       style={{
         width: "100%",
-        backgroundColor: "#68686822",
         borderRadius: 10,
         padding: 10,
         marginBottom: 20,
@@ -112,7 +112,7 @@ const GuardSystemRoot = ({ archiveId }) => {
         options={usersArchivesState}
       /> */}
       {archiveId && (
-        <div className={"mx-3"}>
+        <Divider orientation={"right"}>
           <Checkbox
             value={isActive}
             checked={isActive}
@@ -122,96 +122,163 @@ const GuardSystemRoot = ({ archiveId }) => {
           >
             برای بایگانی ناظر فعال شود
           </Checkbox>
-        </div>
+        </Divider>
       )}
       {cycleValue && isActive && (
         <div className={"card card-body mx-3"}>
-          <div className={"row"}>
-            <Select
-              styles={colourStyles}
-              className={"mb-3 col-lg-4"}
-              onChange={(e) => {
-                setCycleValue(e.value);
-              }}
-              noOptionsMessage={() => "یافت نشد"}
-              placeholder={"تعداد مراحل"}
-              defaultValue={cycle[guardSystem.cycle - 1]}
-              components={animatedComponents}
-              options={cycle}
-            />
-          </div>
-          <div className={"row mb-3"}>
-            <div className={"col-lg-6 row"}>
-              <label className={"mt-2 col-lg-3"}>تصویب کننده</label>
-              <Select
-                styles={colourStyles}
-                onChange={(e) => {
-                  setFinallyUser(e.value);
-                }}
-                className={"col-lg-9"}
-                noOptionsMessage={() => "یافت نشد"}
-                defaultValue={guardSystem.finally}
-                placeholder={"تصویب کننده"}
-                components={animatedComponents}
-                options={supervisors}
+          <Row align="middle" justify="center">
+            <Col span={11} align={"top"}>
+              <SpaceStyled vertical={10}>
+                <Select
+                  styles={colourStyles}
+                  className={"mb-3 col-lg-4"}
+                  onChange={(e) => {
+                    setCycleValue(e.value);
+                  }}
+                  noOptionsMessage={() => "یافت نشد"}
+                  placeholder={"تعداد مراحل"}
+                  defaultValue={cycle[guardSystem.cycle - 1]}
+                  components={animatedComponents}
+                  options={cycle}
+                />
+              </SpaceStyled>
+            </Col>
+            <Col span={2} align={"middle"}>
+              <Image
+                preview={false}
+                src={`${FRONT_IP}/assets/svg/guard-${
+                  cycleValue === 1
+                    ? "one"
+                    : cycleValue === 2
+                    ? "two"
+                    : "three-1"
+                }.svg`}
               />
-            </div>
-          </div>
-          {cycleValue >= 2 && (
-            <div className={"row mb-3"}>
-              <div className={"col-lg-6 row"}>
-                <label className={"mt-2 col-lg-3"}>تایید اولیه</label>
-                <Select
-                  styles={colourStyles}
-                  onChange={(e) => {
-                    setPrimitiveUser(e.value);
-                  }}
-                  className={"col-lg-9"}
-                  noOptionsMessage={() => "یافت نشد"}
-                  defaultValue={guardSystem.primitive}
-                  placeholder={"تایید اولیه"}
-                  components={animatedComponents}
-                  options={supervisors}
-                />
-              </div>
-            </div>
-          )}
+            </Col>
+            <Col span={11}>
+              {cycleValue === 1 && (
+                <>
+                  <SpaceStyled vertical={10}>
+                    <Select
+                      style={{ width: "100%" }}
+                      styles={colourStyles}
+                      onChange={(e) => {
+                        setFinallyUser(e.value);
+                      }}
+                      className={"col-lg-9"}
+                      noOptionsMessage={() => "یافت نشد"}
+                      defaultValue={guardSystem.finally}
+                      placeholder={"تصویب کننده"}
+                      components={animatedComponents}
+                      options={supervisors}
+                    />
+                  </SpaceStyled>
+                </>
+              )}
+              {cycleValue === 2 && (
+                <>
+                  <SpaceStyled vertical={10}>
+                    {cycleValue >= 2 && (
+                      <SpaceStyled vertical={10}>
+                        <Select
+                          style={{ width: "100%" }}
+                          styles={colourStyles}
+                          onChange={(e) => {
+                            setPrimitiveUser(e.value);
+                          }}
+                          className={"col-lg-9"}
+                          noOptionsMessage={() => "یافت نشد"}
+                          defaultValue={guardSystem.primitive}
+                          placeholder={"تایید اولیه"}
+                          components={animatedComponents}
+                          options={supervisors}
+                        />
+                      </SpaceStyled>
+                    )}
+                    <Select
+                      style={{ width: "100%" }}
+                      styles={colourStyles}
+                      onChange={(e) => {
+                        setFinallyUser(e.value);
+                      }}
+                      className={"col-lg-9"}
+                      noOptionsMessage={() => "یافت نشد"}
+                      defaultValue={guardSystem.finally}
+                      placeholder={"تصویب کننده"}
+                      components={animatedComponents}
+                      options={supervisors}
+                    />
+                  </SpaceStyled>
+                </>
+              )}
+              {cycleValue === 3 && (
+                <div>
+                  {cycleValue >= 2 && (
+                    <SpaceStyled vertical={10}>
+                      <Select
+                        style={{ width: "100%" }}
+                        styles={colourStyles}
+                        onChange={(e) => {
+                          setPrimitiveUser(e.value);
+                        }}
+                        noOptionsMessage={() => "یافت نشد"}
+                        defaultValue={guardSystem.primitive}
+                        placeholder={"تایید اولیه"}
+                        components={animatedComponents}
+                        options={supervisors}
+                      />
+                    </SpaceStyled>
+                  )}
+                  {cycleValue >= 3 && (
+                    <SpaceStyled vertical={10}>
+                      <Select
+                        style={{ width: "100%" }}
+                        styles={colourStyles}
+                        onChange={(e) => {
+                          setAuditUser(e.value);
+                        }}
+                        className={"col-lg-9"}
+                        defaultValue={guardSystem.audit}
+                        noOptionsMessage={() => "یافت نشد"}
+                        placeholder={"ممیزی"}
+                        components={animatedComponents}
+                        options={supervisors}
+                      />
+                    </SpaceStyled>
+                  )}
 
-          {cycleValue >= 3 && (
-            <div className={"row mb-3"}>
-              <div className={"col-lg-6 row"}>
-                <label className={"mt-2 col-lg-3"}>ممیزی</label>
-                <Select
-                  styles={colourStyles}
-                  onChange={(e) => {
-                    setAuditUser(e.value);
-                  }}
-                  className={"col-lg-9"}
-                  defaultValue={guardSystem.audit}
-                  noOptionsMessage={() => "یافت نشد"}
-                  placeholder={"ممیزی"}
-                  components={animatedComponents}
-                  options={supervisors}
-                />
-              </div>
-            </div>
-          )}
+                  <SpaceStyled vertical={10}>
+                    <Select
+                      style={{ width: "100%" }}
+                      styles={colourStyles}
+                      onChange={(e) => {
+                        setFinallyUser(e.value);
+                      }}
+                      className={"col-lg-9"}
+                      noOptionsMessage={() => "یافت نشد"}
+                      defaultValue={guardSystem.finally}
+                      placeholder={"تصویب کننده"}
+                      components={animatedComponents}
+                      options={supervisors}
+                    />
+                  </SpaceStyled>
+                </div>
+              )}
+            </Col>
+          </Row>
         </div>
       )}
 
       {archiveId && (
         <SpaceStyled top={10}>
-          <Row justify="end">
-            <Col>
-              <CustomSmallButton
-                onClick={() => {
-                  sendData();
-                }}
-              >
-                ثبت
-              </CustomSmallButton>
-            </Col>
-          </Row>
+          <CustomButton
+            isLeft={true}
+            onClick={() => {
+              sendData();
+            }}
+          >
+            ثبت
+          </CustomButton>
         </SpaceStyled>
       )}
     </div>

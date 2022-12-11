@@ -6,9 +6,8 @@ export const BlueBackground = styled.div`
 export const CardStyled = styled.div`
   box-sizing: border-box;
   padding: 30px;
-  background: #ffffff;
-  box-shadow: 90px 85px 70px -28px rgba(82, 94, 102, 0.04),
-    inset 41px 42px 71px -77px #e0e6ee;
+  background: #06437c;
+  box-shadow: 0px 13px 33px rgba(6, 67, 124, 0.13);
   border-radius: 16px;
 `;
 

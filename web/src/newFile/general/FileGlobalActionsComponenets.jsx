@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Col, Dropdown, Image, Menu, Row } from "antd";
 import CustomDialog from "../../styled/components/CustomDialog";
 import CustomMediumButton from "../../styled/components/CustomMediumButton";
@@ -8,7 +8,10 @@ import { FiEdit } from "react-icons/fi";
 import { HiOutlineDownload } from "react-icons/hi";
 import {
   blueColor,
+  borderColor,
   darkBlueColor,
+  darkBlueOpacityColor,
+  lightBlueBorder,
   lightGreenColor,
   redColor,
   transeparentColor,
@@ -26,8 +29,15 @@ import Auth from "../../auth/Auth";
 const iconStyle = { fontSize: 17, marginTop: 5 };
 const FileGlobalActionsComponenets = ({ history }) => {
   history = useHistory();
-  const { onImageChange, fileId, deleteFileHandler, downloadGroupDocuments } =
-    useContext(FileContext);
+  const [isShowUpsertFileDialog, setIsShowUpsertFileDialog] = useState(false);
+
+  const {
+    onImageChange,
+    fileId,
+    deleteFileHandler,
+    downloadGroupDocuments,
+    freshData,
+  } = useContext(FileContext);
   const menu = (
     <Menu>
       <Menu.Item>
@@ -89,13 +99,27 @@ const FileGlobalActionsComponenets = ({ history }) => {
           <SpaceStyled horizontal={5}>
             <CustomDialog
               title={"پرونده"}
-              render={<InsertFileComponent isUpdate={true} fileId={fileId} />}
+              isShow={isShowUpsertFileDialog}
+              setIsShow={setIsShowUpsertFileDialog}
+              render={
+                <InsertFileComponent
+                  onUpdate={() => {
+                    freshData();
+                  }}
+                  setIsShowUpsertFileDialog={setIsShowUpsertFileDialog}
+                  isUpdate={true}
+                  fileId={fileId}
+                />
+              }
               width={"60%"}
               actionRender={
                 <CustomMediumButton
+                  onClick={() => {
+                    setIsShowUpsertFileDialog(true);
+                  }}
                   icon={<FiEdit style={iconStyle} />}
                   isBordred={true}
-                  color={blueColor}
+                  color={lightBlueBorder}
                 >
                   ویرایش پرونده
                 </CustomMediumButton>
@@ -110,7 +134,7 @@ const FileGlobalActionsComponenets = ({ history }) => {
           <CustomMediumButton
             icon={<HiOutlineDownload style={iconStyle} />}
             isBordred={true}
-            color={blueColor}
+            color={lightBlueBorder}
             onClick={downloadGroupDocuments}
           >
             دریافت
@@ -126,7 +150,7 @@ const FileGlobalActionsComponenets = ({ history }) => {
                 <CustomMediumButton
                   icon={<MdOutlineDelete style={iconStyle} />}
                   isBordred={true}
-                  color={blueColor}
+                  color={lightBlueBorder}
                 >
                   حذف پرونده
                 </CustomMediumButton>
@@ -145,7 +169,7 @@ const FileGlobalActionsComponenets = ({ history }) => {
               <CustomMediumButton
                 icon={<AiOutlineShareAlt style={iconStyle} />}
                 isBordred={true}
-                color={blueColor}
+                color={lightBlueBorder}
               >
                 اشتراک گذاری
               </CustomMediumButton>

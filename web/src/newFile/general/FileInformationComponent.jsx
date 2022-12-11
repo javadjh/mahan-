@@ -2,6 +2,7 @@ import { Col, Image, Row } from "antd";
 import React from "react";
 import { useState } from "react";
 import { useContext } from "react";
+import styled from "styled-components";
 import { darkBlueColor, lightGreenColor, titleColor } from "../../app/appColor";
 import { FileContext } from "../../context/file/FileContext";
 import CustomCard from "../../styled/components/CustomCard";
@@ -122,17 +123,46 @@ const FileInformationComponent = () => {
           </>
         )}
         <CenterStyled>
-          <CustomCursor>
-            <CustomText
-              color={lightGreenColor}
-              onClick={() => setIsExpanded(!isExpanded)}
-            >
-              {isExpanded ? "کم تر" : "بیشتر..."}
-            </CustomText>
-          </CustomCursor>
+          {isExpanded ? (
+            <CustomCursor>
+              <CustomText
+                color={lightGreenColor}
+                onClick={() => setIsExpanded(!isExpanded)}
+              >
+                کم تر
+              </CustomText>
+            </CustomCursor>
+          ) : (
+            <BottonShadowBlock>
+              <CustomCursor>
+                <CustomText
+                  color={lightGreenColor}
+                  onClick={() => setIsExpanded(!isExpanded)}
+                >
+                  بیشتر...
+                </CustomText>
+              </CustomCursor>
+            </BottonShadowBlock>
+          )}
         </CenterStyled>
       </Row>
     </CustomCard>
   );
 };
 export default FileInformationComponent;
+const BottonShadowBlock = styled.div`
+  width: 100%;
+  background: rgb(255, 255, 255);
+  background: linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  height: 70px;
+  margin-top: -70px;
+  z-index: 4;
+  text-align: center;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+`;

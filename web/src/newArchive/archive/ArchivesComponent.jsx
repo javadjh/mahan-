@@ -24,6 +24,7 @@ const ArchivesComponent = () => {
       <HorizontalScroll>
         <CenterVerticalStyled>
           <Swiper
+            style={{ width: "100%" }}
             spaceBetween={10}
             slidesPerView={3.5}
             onSlideChange={() => console.log("slide change")}

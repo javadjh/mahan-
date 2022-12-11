@@ -6,6 +6,7 @@ import {
   getInsertFileInsertDataAction,
   getSingleFileArchive,
   insertFileAction,
+  updateFileAction,
   setManualSingleFileArchive,
 } from "../../stateManager/actions/FileAction";
 import makeAnimated from "react-select/animated";
@@ -25,6 +26,7 @@ const InsertFileComponent = ({
   isUpdate = false,
   fileId,
   setIsShowUpsertFileDialog,
+  onUpdate,
 }) => {
   let [archive, setArchive] = useState(tree?.archive);
   let [lang, setLang] = useState(tree?.lang);
@@ -63,12 +65,23 @@ const InsertFileComponent = ({
 
   const sendData = async (formData) => {
     formData.fileDate = lang === "fa" ? formData?.faDate : formData?.enDate;
-    formData.archiveTreeId = tree?._id;
-    formData.mainArchiveTreeId = mainTree?._id;
+    if (fileId) {
+      formData.archiveTreeId = file?.archiveTreeId?._id;
+      formData.mainArchiveTreeId = file?.mainArchiveTreeId?._id;
+    } else {
+      formData.archiveTreeId = tree?._id;
+      formData.mainArchiveTreeId = mainTree?._id;
+    }
+
     formData.applicantId = formData?.applicantId?.value;
     formData.enDate = undefined;
     formData.faDate = undefined;
-    await dispatch(insertFileAction(formData, history));
+    if (fileId) {
+      await dispatch(updateFileAction(formData, fileId));
+      onUpdate();
+    } else {
+      await dispatch(insertFileAction(formData, history));
+    }
     setIsShowUpsertFileDialog(false);
     form.resetFields();
   };

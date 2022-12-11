@@ -29,23 +29,6 @@ const PdfPreviewComponent = () => {
     }
   };
 
-  const fetchPdfUrl = () => {
-    axios(
-      `http://192.168.2.24:5000/61e3f77540129135ec4d928f/62d0a491df63a81dfc99fb58.pdf`,
-      {
-        method: "GET",
-        withCredentials: false,
-        responseType: "blob",
-        header: {
-          "Access-Control-Allow-Origin": "*",
-        },
-      }
-    ).then((response) => {
-      const file = new Blob([response.data], { type: "application/pdf" });
-      setFile(file);
-    });
-  };
-
   return (
     <div
       className="modal fade"
@@ -67,9 +50,6 @@ const PdfPreviewComponent = () => {
                   <label htmlFor="file">انتخاب از فایل:</label>{" "}
                   <input onChange={onFileChange} type="file" />
                   <hr />
-                  <button className="button" onClick={fetchPdfUrl}>
-                    استفاده از api
-                  </button>
                 </div>
                 {file ? (
                   <React.Fragment>

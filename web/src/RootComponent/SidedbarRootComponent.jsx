@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { RootContext } from "./RootContext";
 import ReactTooltip from "react-tooltip";
 import { useSelector } from "react-redux";
+import { SERVER_IP } from "../config/ip";
 const SidebarRootComponent = () => {
   const { access, handleHide } = useContext(RootContext);
   const appInfo = useSelector((state) => state.appInfo);
@@ -13,7 +14,7 @@ const SidebarRootComponent = () => {
           <img
             src={
               appInfo.logo
-                ? `http://192.168.2.24:5000/${appInfo.logo}`
+                ? `${SERVER_IP}/${appInfo.logo}`
                 : "./assets/images/logo.png"
             }
             width={50}

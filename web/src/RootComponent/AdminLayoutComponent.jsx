@@ -31,6 +31,7 @@ import CustomDialog from "../styled/components/CustomDialog";
 import SearchInputComponent from "../styled/components/SearchInputComponent";
 import FooterRootComponent from "./FooterRootComponent";
 import Auth from "../auth/Auth";
+import { FRONT_IP, SERVER_IP } from "../config/ip";
 
 const AdminLayoutComponent = ({ children, location }) => {
   const [isShowAppSetting, setIsShowAppSetting] = useState(false);
@@ -58,7 +59,7 @@ const AdminLayoutComponent = ({ children, location }) => {
                     <Col span={14}>
                       <SpaceStyled bottom={10}>
                         <Image
-                          src="http://192.168.2.24:3000/assets/mahan-typography.png"
+                          src={FRONT_IP + "/assets/mahan-typography.png"}
                           preview={false}
                         />
                       </SpaceStyled>
@@ -87,8 +88,8 @@ const AdminLayoutComponent = ({ children, location }) => {
                           preview={false}
                           src={
                             userProfile.profileImage
-                              ? `http://192.168.2.24:5000/${userProfile._id}/${userProfile.profileImage}`
-                              : "./assets/avatar.png"
+                              ? `${SERVER_IP}/${userProfile._id}/${userProfile.profileImage}`
+                              : "/assets/avatar.png"
                           }
                         />
                       </div>
@@ -223,6 +224,7 @@ const AdminLayoutComponent = ({ children, location }) => {
               <Auth accessList={["مدیریت اطلاعات پایه"]}>
                 <CustomDialog
                   title={"تنظیمات برنامه"}
+                  width={"50%"}
                   render={
                     <AppSettingDialog
                       setIsShowAppSetting={setIsShowAppSetting}

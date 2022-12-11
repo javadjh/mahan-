@@ -6,13 +6,14 @@ import { darkBlueColor, whiteColor } from "../../app/appColor";
 import { SpaceStyled } from "../global";
 import CustomText from "./CustomText";
 import { Link, useLocation } from "react-router-dom";
+import { FRONT_IP } from "../../config/ip";
 
 const CustomMenuItem = ({ title, icon, href, onClick, dropdown }) => {
   const [isOpenDropdown, setIsOpenDropdown] = useState(false);
   const location = useLocation();
   let MenuItemContainer = styled.div`
     ${location.pathname === href
-      ? `background-image: url("http://192.168.2.24:3000/assets/btn-hover.png");`
+      ? `background-image: url(${FRONT_IP}/assets/btn-hover.png);`
       : ""};
 
     background-color: ${location.pathname === href ? darkBlueColor : "none"};

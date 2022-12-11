@@ -1,5 +1,5 @@
 import { Col, Input, Row, Table } from "antd";
-import React from "react";
+import React, { useState } from "react";
 import { useContext } from "react";
 import { ArchiveTreeContext } from "../../context/ArchiveTree/ArchiveTreesContext";
 import FilesTableComponent from "./FilesTableComponent";
@@ -12,6 +12,8 @@ import Auth from "../../auth/Auth";
 const FilesRoot = () => {
   const { files, setFileFilter, fileFilter, mainParent, mainTree } =
     useContext(ArchiveTreeContext);
+  const [isShowUpsertFileDialog, setIsShowUpsertFileDialog] = useState(false);
+
   return (
     <>
       {mainParent && (
@@ -37,6 +39,8 @@ const FilesRoot = () => {
                   <Col>
                     <Auth accessList={["ویرایش پرونده"]}>
                       <CustomDialog
+                        isShow={isShowUpsertFileDialog}
+                        setIsShow={setIsShowUpsertFileDialog}
                         width={"60%"}
                         title={"پرونده"}
                         render={
@@ -44,10 +48,19 @@ const FilesRoot = () => {
                             inTree={false}
                             tree={mainParent}
                             mainTree={mainTree}
+                            setIsShowUpsertFileDialog={
+                              setIsShowUpsertFileDialog
+                            }
                           />
                         }
                         actionRender={
-                          <CustomButton>افزودن پرونده ی جدید</CustomButton>
+                          <CustomButton
+                            onClick={() => {
+                              setIsShowUpsertFileDialog(true);
+                            }}
+                          >
+                            افزودن پرونده ی جدید
+                          </CustomButton>
                         }
                       />
                     </Auth>
@@ -57,6 +70,12 @@ const FilesRoot = () => {
             </Row>
           </SpaceStyled>
           <FilesTableComponent
+            setPageId={(page) => {
+              setFileFilter({
+                ...fileFilter,
+                ...{ pageId: page },
+              });
+            }}
             files={files.files}
             total={files.total}
             pageId={files.pageId}

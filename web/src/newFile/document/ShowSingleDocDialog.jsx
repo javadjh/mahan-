@@ -1,5 +1,6 @@
 import React from "react";
 import ImageCropComponent from "../../ArchiveTree/document/imageCroper/ImageCropComponent";
+import { SERVER_IP } from "../../config/ip";
 import { getDocumentFileService } from "../../service/DocumentService";
 import PDFViewerComponent from "./PDFViewerComponent";
 const ShowSingleDocDialog = ({ doc }) => {
@@ -8,41 +9,6 @@ const ShowSingleDocDialog = ({ doc }) => {
   const versions = useSelector((state) => state.document.versions);
   const [isHover, setIsHover] = useState(false);
   const [isFileDownloading, setIsFileDownloading] = useState(false);
-
-  // const onGetFileHandle = async (id = "1", title, ex = undefined) => {
-  //   setIsFileDownloading(true);
-  //   const { data, status } = await getDocumentFileService(
-  //     id === "1" ? doc._id : id
-  //   );
-  //   if (status === 200) {
-  //     let filename;
-  //     if (
-  //       ex === "png" ||
-  //       ex === "jpg" ||
-  //       ex === "jpge" ||
-  //       ex === "docx" ||
-  //       ex === "xlsm" ||
-  //       ex === "xlsx" ||
-  //       ex === "txt" ||
-  //       ex === "xlsx"
-  //     ) {
-  //       filename = `${title}.pdf`;
-  //       if (id !== "1") {
-  //         setPreviewUrl(id + ".pdf");
-  //       }
-  //     } else {
-  //       filename = `${title}.${ex}`;
-  //       if (id !== "1") {
-  //         setPreviewUrl(id + "." + ex);
-  //       }
-  //     }
-  //     // saveAs(`http://192.168.2.24:5000/${filename.includes(".pdf")?id + ".pdf":id+"."+ex}`, filename);
-
-  //     setIsFileDownloading(false);
-  //   } else {
-  //     setIsFileDownloading(false);
-  //   }
-  // };
 
   const addNewFlagHandle = async (startSecond, endSecond, description) => {
     if (description.length < 2) {
@@ -95,7 +61,7 @@ const ShowSingleDocDialog = ({ doc }) => {
             <MP4PlayerComponent
               doc={doc}
               deleteFlagHandle={deleteFlagHandle}
-              url={`http://192.168.2.24:5000/${previewUrl}`}
+              url={`${SERVER_IP}/${previewUrl}`}
               addNewFlagHandle={addNewFlagHandle}
             />
           ) : doc.ex === "txt" ? (

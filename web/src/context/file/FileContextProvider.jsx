@@ -270,6 +270,7 @@ const FileContextProvider = ({ children, match, history }) => {
         addNewNoteForDocument,
         removeNoteFromDocument,
         sendFileHandle,
+        freshData,
       }}
     >
       {children}

@@ -84,6 +84,7 @@ import { doneToast, errorToast } from "../../utility/ShowToast";
 import ScannerDialog from "./ScannerDialog";
 import LoadingDialog from "../../dialog/LoadingDialog";
 import { WaterMark } from "@ant-design/pro-components";
+import { FRONT_IP } from "../../config/ip";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const UpsertDocumentRoot = ({ history }) => {
@@ -431,7 +432,6 @@ const UpsertDocumentRoot = ({ history }) => {
           setPreviewUrl(id + "." + ex);
         }
       }
-      // saveAs(`http://192.168.2.24:5000/${filename.includes(".pdf")?id + ".pdf":id+"."+ex}`, filename);
 
       setIsFileDownloading(false);
     } else {
@@ -766,7 +766,7 @@ const UpsertDocumentRoot = ({ history }) => {
                                         width={90}
                                         height={90}
                                         src={
-                                          "http://192.168.2.24:3000/assets/images/paper.png"
+                                          FRONT_IP + "/assets/images/paper.png"
                                         }
                                       />
                                       <p
@@ -821,7 +821,7 @@ const UpsertDocumentRoot = ({ history }) => {
                                         width={90}
                                         height={90}
                                         src={
-                                          "http://192.168.2.24:3000/assets/images/paper.png"
+                                          FRONT_IP + "/assets/images/paper.png"
                                         }
                                       />
                                       <p

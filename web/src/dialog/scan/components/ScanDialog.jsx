@@ -56,13 +56,13 @@ const ScanDialog = ({ onScannedListener }) => {
   };
   return (
     <div>
-      <span
+      <div
         onClick={() => {
           showModal();
         }}
       >
         اسکن
-      </span>
+      </div>
       <Modal
         style={{ top: 0 }}
         width={"100%"}

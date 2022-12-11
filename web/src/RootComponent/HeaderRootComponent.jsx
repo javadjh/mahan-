@@ -7,6 +7,7 @@ import { searchEngineAction } from "../stateManager/actions/FileAction";
 import AppSettingDialog from "../dialog/AppSettingDialog";
 import { defaultDate } from "../utility/dateUtil";
 import { getUsersFileAlertsAction } from "../stateManager/actions/FileAlertAction";
+import { SERVER_IP } from "../config/ip";
 const HeaderRootComponent = ({ history }) => {
   history = useHistory();
   const dispatch = useDispatch();
@@ -193,7 +194,7 @@ const HeaderRootComponent = ({ history }) => {
                         <img
                           src={
                             userProfile.profileImage
-                              ? `http://192.168.2.24:5000/${userProfile._id}/${userProfile.profileImage}`
+                              ? `${SERVER_IP}/${userProfile._id}/${userProfile.profileImage}`
                               : "./assets/images/profile.png"
                           }
                           alt="Cinque Terre"

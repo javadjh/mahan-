@@ -21,6 +21,7 @@ import {
   minForm,
   requiredForm,
 } from "../config/formValidator";
+import { SERVER_IP } from "../config/ip";
 const centerStyle = {
   color: "white",
   position: "absolute",
@@ -87,8 +88,8 @@ const UsersProfileComponent = () => {
             width={256}
             src={
               userProfile.profileImage
-                ? `http://192.168.2.24:5000/${userProfile._id}/${userProfile.profileImage}`
-                : "./assets/avatar.png"
+                ? `${SERVER_IP}/${userProfile._id}/${userProfile.profileImage}`
+                : "/assets/avatar.png"
             }
           />
         </label>

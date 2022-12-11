@@ -7,7 +7,7 @@ import {
   whiteColor,
 } from "../../app/appColor";
 import CustomText from "../../styled/components/CustomText";
-
+import { FRONT_IP } from "../../config/ip";
 export const ArchiveItem = styled.div`
   background: ${(props) => (props.isSelected ? darkBlueColor : whiteColor)};
   border: 1.2px solid #eef2f5;
@@ -16,7 +16,7 @@ export const ArchiveItem = styled.div`
   border-radius: 8px;
   min-width: 250px;
   height: 90px;
-  background-image: url("http://192.168.2.24:3000/assets/archive.png");
+  background-image: url(${FRONT_IP}/assets/archive.png);
   background-repeat: no-repeat;
   background-position: right;
   cursor: pointer;
@@ -36,5 +36,5 @@ export const ArchiveIconStyled = styled.div`
   background-repeat: no-repeat;
   height: 100%;
   padding: -20px;
-  background-image: url("http://192.168.2.24:3000/assets/bg-wave.png");
+  background-image: url(${FRONT_IP}/assets/bg-wave.png);
 `;

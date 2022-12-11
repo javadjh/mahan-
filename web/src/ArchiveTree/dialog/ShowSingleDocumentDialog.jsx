@@ -40,6 +40,7 @@ import CustomText from "../../styled/components/CustomText";
 import CustomButton from "../../styled/components/CustomButton";
 import { maxForm, minForm, requiredForm } from "../../config/formValidator";
 import { convertToJalali } from "../../utility/dateUtil";
+import { SERVER_IP } from "../../config/ip";
 
 const ShowSingleDocumentDialog = ({ doc }) => {
   let [notes, setNotes] = useState(doc?.notes);
@@ -82,11 +83,7 @@ const ShowSingleDocumentDialog = ({ doc }) => {
           setPreviewUrl(id + "." + ex);
         }
       }
-      // saveAs(`http://192.168.2.24:5000/${filename.includes(".pdf")?id + ".pdf":id+"."+ex}`, filename);
-
-      // setIsFileDownloading(false);
     } else {
-      // setIsFileDownloading(false);
     }
   };
 
@@ -191,7 +188,7 @@ const ShowSingleDocumentDialog = ({ doc }) => {
                     <>
                       <CenterStyled>
                         <a
-                          href={`http://192.168.2.24:5000/${previewUrl}`}
+                          href={`${SERVER_IP}/${previewUrl}`}
                           target="_blank"
                           download={true}
                         >{`دریافت سند`}</a>
@@ -199,7 +196,7 @@ const ShowSingleDocumentDialog = ({ doc }) => {
                       <MP4PlayerComponent
                         doc={doc}
                         deleteFlagHandle={deleteFlagHandle}
-                        url={`http://192.168.2.24:5000/${previewUrl}`}
+                        url={`${SERVER_IP}/${previewUrl}`}
                         addNewFlagHandle={addNewFlagHandle}
                       />
                     </>
@@ -214,7 +211,7 @@ const ShowSingleDocumentDialog = ({ doc }) => {
                     <>
                       <CenterStyled>
                         <a
-                          href={`http://192.168.2.24:5000/${previewUrl}`}
+                          href={`${SERVER_IP}/${previewUrl}`}
                           target="_blank"
                           download={true}
                         >{`دریافت سند`}</a>
@@ -228,7 +225,7 @@ const ShowSingleDocumentDialog = ({ doc }) => {
                     >
                       <CustomCursor>
                         <a
-                          href={`http://192.168.2.24:5000/${previewUrl}`}
+                          href={`${SERVER_IP}/${previewUrl}`}
                           target="_blank"
                           download={true}
                         >

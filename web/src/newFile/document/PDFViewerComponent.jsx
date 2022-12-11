@@ -9,6 +9,7 @@ import { Col, Input, Row } from "antd";
 import CustomButton from "../../styled/components/CustomButton";
 import { darkBlueColor } from "../../app/appColor";
 import { CenterStyled, SpaceStyled } from "../../styled/global";
+import { SERVER_IP } from "../../config/ip";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 const PDFViewerComponent = ({ previewUrl, watermark }) => {
   const { fileStatistic } = useContext(FileContext);
@@ -37,7 +38,7 @@ const PDFViewerComponent = ({ previewUrl, watermark }) => {
   };
   useEffect(() => {
     if (previewUrl) {
-      axios(`http://192.168.2.24:5000/${previewUrl}`, {
+      axios(`${SERVER_IP}/${previewUrl}`, {
         method: "GET",
         withCredentials: false,
         responseType: "blob",

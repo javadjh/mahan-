@@ -33,7 +33,6 @@ const ArchiveTreeRoot = () => {
                     onClick={() => {
                       setIsShowInsertTreeDialog(true);
                     }}
-                    block
                     color={darkBlueColor}
                   >
                     افزودن قفسه
