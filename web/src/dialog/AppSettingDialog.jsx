@@ -138,7 +138,7 @@ export const AppSettingDialog = ({
                     preview={false}
                     src={
                       appInfo.logo
-                        ? `http://localhost:5000/${appInfo.logo}`
+                        ? `http://192.168.2.24:5000/${appInfo.logo}`
                         : "./assets/avatar.png"
                     }
                   />

@@ -34,7 +34,7 @@ const TreeItem = ({ tree, addTree }) => {
           <CenterVerticalStyled>
             <Image
               preview={false}
-              src="http://localhost:3000/assets/icon-archive.png"
+              src="http://192.168.2.24:3000/assets/icon-archive.png"
             />
           </CenterVerticalStyled>
         </Col>
@@ -45,14 +45,14 @@ const TreeItem = ({ tree, addTree }) => {
                 <Auth accessList={["مدیریت درخت"]}>
                   <Image
                     preview={false}
-                    src="http://localhost:3000/assets/edit-vector.png"
+                    src="http://192.168.2.24:3000/assets/edit-vector.png"
                   />
                 </Auth>
               ),
 
               tooltip: "ویرایش عنوان قفسه",
               onChange: (text) => {
-                changeTreeTitle(tree._id, text);
+                if (text) changeTreeTitle(tree._id, text);
               },
             }}
             color={"black"}
@@ -123,7 +123,7 @@ const TreeItem = ({ tree, addTree }) => {
                         icon={
                           <Image
                             preview={false}
-                            src="http://localhost:3000/assets/delete-vector.png"
+                            src="http://192.168.2.24:3000/assets/delete-vector.png"
                           />
                         }
                       >
@@ -149,7 +149,7 @@ const TreeItem = ({ tree, addTree }) => {
                         icon={
                           <Image
                             preview={false}
-                            src="http://localhost:3000/assets/setting-vector.png"
+                            src="http://192.168.2.24:3000/assets/setting-vector.png"
                           />
                         }
                       >

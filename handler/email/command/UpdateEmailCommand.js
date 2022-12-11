@@ -45,7 +45,7 @@ module.exports.updateEmail = async (req, res) => {
     emails,
     "اسنادی برای شما ارسال شده است",
     user,
-    `http://localhost:3000/email-${updatedEmail._id}`,
+    `http://192.168.2.24:3000/email-${updatedEmail._id}`,
     documents,
     updatedEmail.expireDate,
     file,
