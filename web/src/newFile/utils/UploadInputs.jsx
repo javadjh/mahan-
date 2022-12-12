@@ -2,11 +2,12 @@ import React from "react";
 import { useContext } from "react";
 import { FileContext } from "../../context/file/FileContext";
 const UploadInputs = () => {
-  const { canUpload, onImageChange } = useContext(FileContext);
+  const { canUpload, onImageChange, setIsShowProcessDialog } =
+    useContext(FileContext);
   const getFolder = (e) => {
     const files = e.target.files;
     if (canUpload) onImageChange(files);
-    // else window.$("#infoDialog").modal("show");
+    else setIsShowProcessDialog(true);
   };
   return (
     <>
@@ -23,6 +24,7 @@ const UploadInputs = () => {
         msdirectory
         odirectory
         multiple
+        aria-describedby="getFolder"
       />
       <input
         type="file"
@@ -30,11 +32,12 @@ const UploadInputs = () => {
         multiple="multiple"
         name={"imageUrl"}
         onChange={(e) => {
+          console.log(canUpload);
           if (canUpload) onImageChange(e.target.files);
-          else window.$("#infoDialog").modal("show");
+          else setIsShowProcessDialog(true);
         }}
         style={{ visibility: "hidden" }}
-        aria-describedby="imageUrl"
+        aria-describedby="input-url"
       />
     </>
   );

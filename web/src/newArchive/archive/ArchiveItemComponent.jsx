@@ -39,7 +39,9 @@ const ArchiveItemComponent = ({ archive }) => {
               }, 100);
             }}
           >
-            <CustomText>عنوان بایگانی</CustomText>
+            <CustomCursor>
+              <CustomText>عنوان بایگانی</CustomText>
+            </CustomCursor>
           </Col>
           <Col>
             <Auth

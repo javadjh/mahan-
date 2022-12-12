@@ -12,8 +12,13 @@ import {
 import { titleColor } from "../../app/appColor";
 import ArchiveItemComponent from "./ArchiveItemComponent";
 import { Col, Row } from "antd";
+import { useState } from "react";
+import styled from "styled-components";
 const ArchivesComponent = () => {
   const usersArchives = useSelector((state) => state.usersArchives);
+  const DragableCursor = styled.div`
+    cursor: grab;
+  `;
   return (
     <>
       <SpaceStyled bottom={20}>
@@ -32,7 +37,9 @@ const ArchivesComponent = () => {
           >
             {usersArchives.map((archive) => (
               <SwiperSlide>
-                <ArchiveItemComponent archive={archive} />
+                <DragableCursor>
+                  <ArchiveItemComponent archive={archive} />
+                </DragableCursor>
               </SwiperSlide>
             ))}
           </Swiper>

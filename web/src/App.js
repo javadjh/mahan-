@@ -19,6 +19,8 @@ import {
 import CustomText from "./styled/components/CustomText";
 import { grayColor } from "./app/appColor";
 import "swiper/swiper.min.css";
+import CustomEXShower from "./styled/components/CustomEXShower";
+import { fileNameToEX } from "./utility/global";
 
 const App = ({ location }) => {
   const [showUploadBlock, setShowUploadBlock] = useState(false);
@@ -199,24 +201,20 @@ const App = ({ location }) => {
                                 position: "relative",
                               }}
                             >
-                              <Image
-                                style={{
-                                  borderRadius: 7,
-                                }}
-                                width={90}
-                                height={90}
-                                preview={false}
-                                src={"/assets/icons/paper.svg"}
-                              />
-                              <p
-                                style={{ width: 100 }}
-                                className={"text-center"}
-                              >
-                                <span data-tip={i.title}>
-                                  {i.title.substr(0, 10)}
-                                </span>
-                                <ReactTooltip />
-                              </p>
+                              <CenterStyled>
+                                <CustomEXShower ex={fileNameToEX(i.title)} />
+                              </CenterStyled>
+                              <CenterStyled>
+                                <p
+                                  style={{ width: 100 }}
+                                  className={"text-center"}
+                                >
+                                  <span data-tip={i.title}>
+                                    {i.title.substr(0, 10)}
+                                  </span>
+                                  <ReactTooltip />
+                                </p>
+                              </CenterStyled>
                               {index === 0 ? (
                                 <span
                                   style={{

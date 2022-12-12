@@ -32,6 +32,7 @@ import {
 import { RootContext } from "../../RootComponent/RootContext";
 import CustomDialog from "../../styled/components/CustomDialog";
 import ShowSingleDocumentDialog from "../../ArchiveTree/dialog/ShowSingleDocumentDialog";
+import InfoDialog from "../../dialog/InfoDialog";
 
 const FileContextProvider = ({ children, match, history }) => {
   // redux utils
@@ -56,6 +57,7 @@ const FileContextProvider = ({ children, match, history }) => {
   const [uploadedFile, setUploadedFile] = useState([]);
   const [isShowSingleDocument, setIsShowSingleDocument] = useState(false);
   const [docItem, setDocItem] = useState({});
+  const [isShowProcessDialog, setIsShowProcessDialog] = useState(false);
 
   //filter state
   const [documentFilter, setDocumentFilter] = useState({
@@ -92,6 +94,9 @@ const FileContextProvider = ({ children, match, history }) => {
   useEffect(() => {
     if (docId && docId !== "0") getSpecialDocument();
   }, [docId]);
+  useEffect(() => {
+    console.log(canUpload);
+  }, [canUpload]);
 
   //handlers funcs
 
@@ -205,6 +210,7 @@ const FileContextProvider = ({ children, match, history }) => {
     const aTag = document.getElementById("uploadBlock");
     if (aTag) aTag.click();
     setIsShowUploadBlock(true);
+
     let copyImages = [...images];
     for (let i = 0; i < files.length; i++) {
       let type = files[i].type;
@@ -237,6 +243,7 @@ const FileContextProvider = ({ children, match, history }) => {
           freshData();
         }
       } catch (err) {
+        console.log(err);
         setTimeout(() => {
           setCanUpload(true);
         }, 1000);
@@ -257,6 +264,7 @@ const FileContextProvider = ({ children, match, history }) => {
         history,
         fileId,
         docId,
+        uploadedFile,
         setTabState,
         documentsFilterHandle,
         filesLogFilterHandle,
@@ -271,6 +279,7 @@ const FileContextProvider = ({ children, match, history }) => {
         removeNoteFromDocument,
         sendFileHandle,
         freshData,
+        setIsShowProcessDialog,
       }}
     >
       {children}
@@ -280,6 +289,21 @@ const FileContextProvider = ({ children, match, history }) => {
         render={<ShowSingleDocumentDialog doc={docItem?.document} />}
         isShow={isShowSingleDocument}
         setIsShow={setIsShowSingleDocument}
+      />
+      <CustomDialog
+        width={"40%"}
+        title={"خطا"}
+        render={
+          <InfoDialog
+            title={"خطا در بارگذاری"}
+            description={
+              "در حال بارگذاری اسناد هستیم ، پس از اتمام عملیات ، مجدد اقدام کنید"
+            }
+            setShowVisible={setIsShowProcessDialog}
+          />
+        }
+        isShow={isShowProcessDialog}
+        setIsShow={setIsShowProcessDialog}
       />
     </FileContext.Provider>
   );

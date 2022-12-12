@@ -1,6 +1,7 @@
 import { Col, Image, Row, Typography } from "antd";
 import React from "react";
 import styled from "styled-components";
+import CustomEXShower from "../styled/components/CustomEXShower";
 import CustomPopConfirm from "../styled/components/CustomPopConfirm";
 import CustomText from "../styled/components/CustomText";
 import { CenterStyled, CustomCursor, SpaceStyled } from "../styled/global";
@@ -39,7 +40,7 @@ const LibraryItemComponent = ({
             />
           </CustomCursor>
         </SpaceStyled>
-        <Image preview={false} src="/assets/icons/folder.svg" />
+        <CustomEXShower ex={item.ex} />
         <SpaceStyled horizontal={40}>
           <Typography.Paragraph
             style={{ width: 120, textAlign: "center" }}

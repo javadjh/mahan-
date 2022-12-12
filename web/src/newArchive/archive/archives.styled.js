@@ -19,7 +19,6 @@ export const ArchiveItem = styled.div`
   background-image: url(${FRONT_IP}/assets/archive.png);
   background-repeat: no-repeat;
   background-position: right;
-  cursor: pointer;
   margin-bottom: 10px;
   padding-right: 80px;
   display: flex;

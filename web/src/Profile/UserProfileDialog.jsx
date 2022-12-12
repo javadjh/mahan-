@@ -9,6 +9,7 @@ const UserProfileDialog = () => {
   return (
     <Fragment>
       <CustomDialog
+        width={"40%"}
         title={"پروفایل"}
         render={<UsersProfileComponent />}
         actionRender={
