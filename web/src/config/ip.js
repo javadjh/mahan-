@@ -1,2 +1,2 @@
-export const FRONT_IP = "http://localhost:3000";
-export const SERVER_IP = "http://localhost:5000";
+export const FRONT_IP = "http://87.236.215.49:3000";
+export const SERVER_IP = "http://87.236.215.49:5000";
