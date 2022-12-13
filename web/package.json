@@ -20,6 +20,7 @@
     "echarts-for-react": "^3.0.2",
     "file-saver": "^2.0.5",
     "generate-password": "^1.7.0",
+    "gzipper": "^7.2.0",
     "imrc-datetime-picker": "^2.1.3",
     "jalali-moment": "^3.3.11",
     "jsonwebtoken": "^8.5.1",
@@ -75,7 +76,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && gzipper --verbose ./build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
