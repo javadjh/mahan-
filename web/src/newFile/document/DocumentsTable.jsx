@@ -55,7 +55,7 @@ const DocumentsTable = () => {
               render={<CustomButton color={redColor}>حذف</CustomButton>}
             />
           </Auth>
-          <Auth accessList={["نمایش سندها"]}>
+          <Auth accessList={["نمایش سندها"]} isLend={true}>
             <CustomDialog
               width={"100%"}
               title={"سند"}

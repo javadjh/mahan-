@@ -41,6 +41,7 @@ import CustomButton from "../../styled/components/CustomButton";
 import { maxForm, minForm, requiredForm } from "../../config/formValidator";
 import { convertToJalali } from "../../utility/dateUtil";
 import { SERVER_IP } from "../../config/ip";
+import Auth from "../../auth/Auth";
 
 const ShowSingleDocumentDialog = ({ doc }) => {
   let [notes, setNotes] = useState(doc?.notes);
@@ -123,17 +124,19 @@ const ShowSingleDocumentDialog = ({ doc }) => {
                   setNotes(newNote.notes);
                 }}
               >
-                <SpaceStyled vertical={10} horizontal={10}>
-                  <Form.Item
-                    name={"note"}
-                    rules={[requiredForm, minForm(2), maxForm(500)]}
-                  >
-                    <Input.TextArea placeholder="یادداشت وارد کنید" />
-                  </Form.Item>
-                </SpaceStyled>
-                <SpaceStyled vertical={10} horizontal={10}>
-                  <CustomButton htmlType="submit">ثبت</CustomButton>
-                </SpaceStyled>
+                <Auth accessList={["ویرایش سند"]}>
+                  <SpaceStyled vertical={10} horizontal={10}>
+                    <Form.Item
+                      name={"note"}
+                      rules={[requiredForm, minForm(2), maxForm(500)]}
+                    >
+                      <Input.TextArea placeholder="یادداشت وارد کنید" />
+                    </Form.Item>
+                  </SpaceStyled>
+                  <SpaceStyled vertical={10} horizontal={10}>
+                    <CustomButton htmlType="submit">ثبت</CustomButton>
+                  </SpaceStyled>
+                </Auth>
 
                 {notes?.map((n) => (
                   <SpaceStyled vertical={10} horizontal={10}>
@@ -145,18 +148,20 @@ const ShowSingleDocumentDialog = ({ doc }) => {
                         key="1"
                       >
                         <p>{n.description}</p>
-                        <CustomText
-                          color={redColor}
-                          onClick={async () => {
-                            let note = await removeNoteFromDocument(
-                              n._id,
-                              doc._id
-                            );
-                            setNotes(note.notes);
-                          }}
-                        >
-                          حذف
-                        </CustomText>
+                        <Auth accessList={["ویرایش سند"]}>
+                          <CustomText
+                            color={redColor}
+                            onClick={async () => {
+                              let note = await removeNoteFromDocument(
+                                n._id,
+                                doc._id
+                              );
+                              setNotes(note.notes);
+                            }}
+                          >
+                            حذف
+                          </CustomText>
+                        </Auth>
                       </Collapse.Panel>
                     </Collapse>
                   </SpaceStyled>

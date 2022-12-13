@@ -1507,3 +1507,68 @@
 {"level":"error"}
 {"level":"error"}
 {"code":"ENOENT","errno":-4058,"level":"error","path":"uploads/63974f53475db72b6cc5e943.pdf","syscall":"stat"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error","message":"Cannot read properties of null (reading 'createDate') Cannot read properties of null (reading 'createDate')","stack":"TypeError: Cannot read properties of null (reading 'createDate')\n    at module.exports.getFileStatistic (C:\\Users\\hojat\\OneDrive\\Desktop\\pj\\mahan\\handler\\file\\query\\GetFileStatisticQuery.js:36:42)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)"}
+{"level":"error","message":"Cannot read properties of null (reading 'createDate') Cannot read properties of null (reading 'createDate')","stack":"TypeError: Cannot read properties of null (reading 'createDate')\n    at module.exports.getFileStatistic (C:\\Users\\hojat\\OneDrive\\Desktop\\pj\\mahan\\handler\\file\\query\\GetFileStatisticQuery.js:36:42)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)"}
+{"level":"error","message":"Cannot read properties of null (reading 'createDate') Cannot read properties of null (reading 'createDate')","stack":"TypeError: Cannot read properties of null (reading 'createDate')\n    at module.exports.getFileStatistic (C:\\Users\\hojat\\OneDrive\\Desktop\\pj\\mahan\\handler\\file\\query\\GetFileStatisticQuery.js:36:42)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)"}
+{"level":"error","message":"Cannot read properties of null (reading 'createDate') Cannot read properties of null (reading 'createDate')","stack":"TypeError: Cannot read properties of null (reading 'createDate')\n    at module.exports.getFileStatistic (C:\\Users\\hojat\\OneDrive\\Desktop\\pj\\mahan\\handler\\file\\query\\GetFileStatisticQuery.js:36:42)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)"}
+{"level":"error","message":"Cannot read properties of null (reading 'createDate') Cannot read properties of null (reading 'createDate')","stack":"TypeError: Cannot read properties of null (reading 'createDate')\n    at module.exports.getFileStatistic (C:\\Users\\hojat\\OneDrive\\Desktop\\pj\\mahan\\handler\\file\\query\\GetFileStatisticQuery.js:36:42)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)"}
+{"level":"error","message":"Cannot read properties of null (reading 'createDate') Cannot read properties of null (reading 'createDate')","stack":"TypeError: Cannot read properties of null (reading 'createDate')\n    at module.exports.getFileStatistic (C:\\Users\\hojat\\OneDrive\\Desktop\\pj\\mahan\\handler\\file\\query\\GetFileStatisticQuery.js:36:42)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)"}
+{"level":"error","message":"Cannot read properties of null (reading 'createDate') Cannot read properties of null (reading 'createDate')","stack":"TypeError: Cannot read properties of null (reading 'createDate')\n    at module.exports.getFileStatistic (C:\\Users\\hojat\\OneDrive\\Desktop\\pj\\mahan\\handler\\file\\query\\GetFileStatisticQuery.js:38:42)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)"}
+{"level":"error","message":"Cannot read properties of null (reading 'createDate') Cannot read properties of null (reading 'createDate')","stack":"TypeError: Cannot read properties of null (reading 'createDate')\n    at module.exports.getFileStatistic (C:\\Users\\hojat\\OneDrive\\Desktop\\pj\\mahan\\handler\\file\\query\\GetFileStatisticQuery.js:38:42)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)"}
+{"level":"error","message":"Cannot read properties of null (reading 'createDate') Cannot read properties of null (reading 'createDate')","stack":"TypeError: Cannot read properties of null (reading 'createDate')\n    at module.exports.getFileStatistic (C:\\Users\\hojat\\OneDrive\\Desktop\\pj\\mahan\\handler\\file\\query\\GetFileStatisticQuery.js:38:42)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)"}
+{"level":"error","message":"fileId is not defined fileId is not defined","stack":"ReferenceError: fileId is not defined\n    at module.exports.getDocumentsFile (C:\\Users\\hojat\\OneDrive\\Desktop\\pj\\mahan\\handler\\document\\query\\GetDocumentsFileQuery.js:15:27)\n    at newFn (C:\\Users\\hojat\\OneDrive\\Desktop\\pj\\mahan\\node_modules\\express-async-errors\\index.js:16:20)\n    at Layer.handle [as handle_request] (C:\\Users\\hojat\\OneDrive\\Desktop\\pj\\mahan\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\hojat\\OneDrive\\Desktop\\pj\\mahan\\node_modules\\express\\lib\\router\\route.js:137:13)\n    at module.exports.firstGuard (C:\\Users\\hojat\\OneDrive\\Desktop\\pj\\mahan\\authUtilities\\Auth.js:16:5)"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"code":"ERR_HTTP_HEADERS_SENT","level":"error"}
+{"code":"ERR_HTTP_HEADERS_SENT","level":"error"}
+{"code":"ERR_HTTP_HEADERS_SENT","level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error","message":"isLent is not defined isLent is not defined","stack":"ReferenceError: isLent is not defined\n    at module.exports.getImageDocument (C:\\Users\\hojat\\OneDrive\\Desktop\\pj\\mahan\\handler\\document\\query\\GetImageDocumentQuery.js:31:3)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)"}
+{"level":"error","message":"isLent is not defined isLent is not defined","stack":"ReferenceError: isLent is not defined\n    at module.exports.getImageDocument (C:\\Users\\hojat\\OneDrive\\Desktop\\pj\\mahan\\handler\\document\\query\\GetImageDocumentQuery.js:31:3)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error","message":"isLent is not defined isLent is not defined","stack":"ReferenceError: isLent is not defined\n    at module.exports.getImageDocument (C:\\Users\\hojat\\OneDrive\\Desktop\\pj\\mahan\\handler\\document\\query\\GetImageDocumentQuery.js:31:3)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"expose":false,"level":"error","message":"Can't set headers after they are sent. Can't set headers after they are sent.","stack":"Error: Can't set headers after they are sent.\n    at SendStream.headersAlreadySent (C:\\Users\\hojat\\OneDrive\\Desktop\\pj\\mahan\\node_modules\\send\\index.js:390:13)\n    at SendStream.send (C:\\Users\\hojat\\OneDrive\\Desktop\\pj\\mahan\\node_modules\\send\\index.js:617:10)\n    at onstat (C:\\Users\\hojat\\OneDrive\\Desktop\\pj\\mahan\\node_modules\\send\\index.js:729:10)\n    at FSReqCallback.oncomplete (node:fs:207:5)","status":500,"statusCode":500}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"code":"ERR_HTTP_HEADERS_SENT","level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"code":"ERR_HTTP_HEADERS_SENT","level":"error"}
+{"code":"ERR_HTTP_HEADERS_SENT","level":"error"}

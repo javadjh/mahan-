@@ -7,14 +7,17 @@ const {
 const { roleGuard } = require("../../../authUtilities/Auth");
 const { errorResponse } = require("../../../utility/ResponseHandler");
 const { convertToShamsi } = require("../../../utility/dateUtility");
+const { isLent } = require("../../lend/share");
 
 /*
 برای دریافت اسناد حذف شده از این ماژول استفاده می شود
 */
 module.exports.getDeActivateDocuments = async (req, res) => {
-  await roleGuard(["مدیریت اسناد حذف شده", "ناظر"], req, res);
-  if (res.statusCode > 399) return errorResponse(res, 6);
   let { fileId, pageId, eachPerPage } = req.query;
+  if (!(await isLent(req, fileId))) {
+    await roleGuard(["مدیریت اسناد حذف شده", "ناظر"], req, res);
+    if (res.statusCode > 399) return errorResponse(res, 6);
+  }
   pageId = Number(pageId);
   eachPerPage = Number(eachPerPage);
 

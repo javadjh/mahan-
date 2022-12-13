@@ -37,12 +37,13 @@ const TabsComponent = () => {
       }}
     >
       <Tabs.TabPane tab="روکش پرونده" key={"form"}>
-        <Auth accessList={["ویرایش روکش پرونده"]}>
+        <Auth isLend={true} accessList={["ویرایش روکش پرونده"]}>
           <FilesFormComponent />
         </Auth>
       </Tabs.TabPane>
       <Tabs.TabPane tab=" لیست اسناد " key={"docs"}>
         <Auth
+          isLend={true}
           accessList={[
             "ایجاد سند",
             "ویرایش سند",
@@ -55,7 +56,7 @@ const TabsComponent = () => {
         </Auth>
       </Tabs.TabPane>
       <Tabs.TabPane tab="تاریخچه اسناد " key={"log"}>
-        <Auth accessList={["تاریخچه تغییرات سند"]}>
+        <Auth isLend={true} accessList={["تاریخچه تغییرات سند"]}>
           <FilesLogTable />
         </Auth>
       </Tabs.TabPane>
@@ -64,7 +65,7 @@ const TabsComponent = () => {
         <FileStatisticComponent />
       </Tabs.TabPane>
       <Tabs.TabPane tab="اسناد حذف شده " key={"deleted"}>
-        <Auth accessList={["مدیریت اسناد حذف شده"]}>
+        <Auth isLend={true} accessList={["مدیریت اسناد حذف شده"]}>
           <DeletedDocsTable />
         </Auth>
       </Tabs.TabPane>

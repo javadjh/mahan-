@@ -1,5 +1,6 @@
 import { Col, Row } from "antd";
 import React, { Fragment } from "react";
+import Auth from "../../auth/Auth";
 import InsertAlertComponent from "./InsertAlertComponent";
 import ShowAlertsComponent from "./ShowAlertsComponent";
 const MergeAlertComponent = () => {
@@ -10,7 +11,9 @@ const MergeAlertComponent = () => {
           <ShowAlertsComponent />
         </Col>
         <Col span={9} offset={1}>
-          <InsertAlertComponent />
+          <Auth accessList={["ویرایش پرونده"]}>
+            <InsertAlertComponent />
+          </Auth>
         </Col>
       </Row>
     </Fragment>

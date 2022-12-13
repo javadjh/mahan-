@@ -4,7 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { getLendsAction } from "../../stateManager/actions/LendsAction";
 import LendsTableComponent from "./LendsTableComponent";
 import ShowDocumentsLendsDialog from "./ShowDocumentsLendsDialog";
-const LendsRoot = () => {
+import { useHistory } from "react-router";
+const LendsRoot = ({ history }) => {
+  history = useHistory();
   const dispatch = useDispatch();
   const lends = useSelector((state) => state.lends);
   const [dialogData, setDialogData] = useState({});
@@ -44,7 +46,7 @@ const LendsRoot = () => {
     //     </div>
     //   </div>
     // </MainLayout>
-    <LendsTableComponent lends={lends} />
+    <LendsTableComponent lends={lends} history={history} />
   );
 };
 export default LendsRoot;

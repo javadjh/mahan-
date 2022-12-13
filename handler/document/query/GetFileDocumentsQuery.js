@@ -6,15 +6,17 @@ const { convertToShamsi } = require("../../../utility/dateUtility");
 const { errorResponse } = require("../../../utility/ResponseHandler");
 const { roleGuard } = require("../../../authUtilities/Auth");
 const { isValidObjectId } = require("mongoose");
+const { isLent } = require("../../lend/share");
 /*
 نمایش لیست فایل ها با paging و همچنین قابلیت سرچ را دارد
 ابتدا چک میکنیم کاربر به این بایگانی - پرونده - سند دسترسی دارد یا خیر
  */
 module.exports.getFileDocuments = async (req, res) => {
-  await roleGuard(["نمایش سندها", "ناظر"], req, res);
-  if (res.statusCode > 399) return errorResponse(res, 6);
-
   let { fileId, pageId, eachPerPage, searchValue } = req.query;
+  if (!(await isLent(req, fileId))) {
+    await roleGuard(["نمایش سندها", "ناظر"], req, res);
+    if (res.statusCode > 399) return errorResponse(res, 6);
+  }
 
   pageId = Number(pageId);
   eachPerPage = Number(eachPerPage);

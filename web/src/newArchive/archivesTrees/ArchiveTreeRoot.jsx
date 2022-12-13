@@ -30,6 +30,7 @@ const ArchiveTreeRoot = () => {
                 }
                 actionRender={
                   <CustomButton
+                    isLeft={true}
                     onClick={() => {
                       setIsShowInsertTreeDialog(true);
                     }}

@@ -9,6 +9,7 @@ import CheckboxViewer from "./objects/CheckboxViewer";
 import SelectorViewer from "./objects/SelectorViewer";
 import DateViewer from "./objects/DateViewer";
 import CustomButton from "../../../styled/components/CustomButton";
+import Auth from "../../../auth/Auth";
 
 const ObjectListViewer = () => {
   const [form] = Form.useForm();
@@ -50,9 +51,11 @@ const ObjectListViewer = () => {
           ))}
         </Row>
 
-        <CustomButton block isLeft={true} htmlType="submit">
-          ثبت
-        </CustomButton>
+        <Auth accessList={["ویرایش روکش پرونده"]}>
+          <CustomButton block isLeft={true} htmlType="submit">
+            ثبت
+          </CustomButton>
+        </Auth>
       </Form>
     </Fragment>
   );

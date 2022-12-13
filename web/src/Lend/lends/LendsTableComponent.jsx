@@ -1,7 +1,8 @@
 import { Table } from "antd";
 import React from "react";
+import CustomButton from "../../styled/components/CustomButton";
 import CustomText from "../../styled/components/CustomText";
-const LendsTableComponent = ({ lends }) => {
+const LendsTableComponent = ({ lends, history }) => {
   const columns = [
     {
       title: "شماره",
@@ -12,26 +13,26 @@ const LendsTableComponent = ({ lends }) => {
     {
       title: "پرونده",
       key: "title",
-      render: (item) => <CustomText>{item.fileId.title}</CustomText>,
+      render: (item) => <span>{item.fileId.title}</span>,
     },
     {
       title: "وضعیت پرونده",
       key: "fileStatus",
-      render: (item) => <CustomText>{item.fileId.fileStatus}</CustomText>,
+      render: (item) => <span>{item.fileId.fileStatus}</span>,
     },
     {
       title: "نوع",
       key: "type",
-      render: (item) => <CustomText>{item.fileId.type}</CustomText>,
+      render: (item) => <span>{item.fileId.type}</span>,
     },
     {
       title: "فرستنده",
       key: "creator",
       render: (item) => (
-        <CustomText>
+        <span>
           {item?.creator?.firstName} {item?.creator?.lastName} (
           {item?.creator?.position})
-        </CustomText>
+        </span>
       ),
     },
     {
@@ -44,10 +45,28 @@ const LendsTableComponent = ({ lends }) => {
       key: "expireDate",
       dataIndex: "expireDate",
     },
+    {
+      title: "پایان",
+      key: "expireDate",
+      render: (item) => (
+        <CustomButton
+          onClick={() => {
+            history.push({
+              pathname: "/file/" + item?.fileId?._id + "/0",
+              state: {
+                isLend: true,
+              },
+            });
+          }}
+        >
+          نمایش پرونده
+        </CustomButton>
+      ),
+    },
   ];
   return (
     <>
-      <Table columns={columns} dataSource={lends.lends} pagination={false} />
+      <Table columns={columns} dataSource={lends} pagination={false} />
     </>
   );
 };

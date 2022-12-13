@@ -7,13 +7,11 @@ const fs = require("fs");
 const encrypt = require("node-file-encrypt");
 const libre = require("libreoffice-convert");
 var mime = require("mime");
+const { isLent } = require("../../lend/share");
 
 libre.convertAsync = require("util").promisify(libre.convert);
 
 module.exports.getDocumentsFile = async (req, res) => {
-  await roleGuard(["نمایش سندها", "ناظر"], req, res);
-  if (res.statusCode > 399) return errorResponse(res, 6);
-
   const { id } = req.params;
 
   /*//حذف فایل های گذشته
@@ -25,6 +23,11 @@ module.exports.getDocumentsFile = async (req, res) => {
 
   //برای پیدا کردن سند
   let document = await DocumentModel.findById(id).lean();
+
+  if (!(await isLent(req, document.fileId))) {
+    await roleGuard(["نمایش سندها", "ناظر"], req, res);
+    if (res.statusCode > 399) return errorResponse(res, 6);
+  }
 
   //برای decrypt کردن فایل
   let encryptPath = "";

@@ -2,7 +2,9 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import jwt from "jsonwebtoken";
-const Auth = ({ children, accessList }) => {
+import { useHistory } from "react-router";
+const Auth = ({ children, accessList, isLend }) => {
+  const history = useHistory();
   const [isFind, setIsFind] = useState(false);
   let token;
   if (localStorage.getItem("token")) {
@@ -22,6 +24,12 @@ const Auth = ({ children, accessList }) => {
       if (accessList?.includes(item)) setIsFind(true);
     }
   };
-  return <>{isFind && <>{children}</>}</>;
+  return (
+    <>
+      {(isFind || (isLend && history?.location?.state?.isLend)) && (
+        <>{children}</>
+      )}
+    </>
+  );
 };
 export default Auth;

@@ -51,7 +51,7 @@ const FilesGuardSystemRoot = () => {
     <Fragment>
       <div>
         <Row>
-          <Col span={12}>
+          <Col span={11}>
             {usersArchivesState && (
               <Select
                 styles={colourStyles}
@@ -66,13 +66,15 @@ const FilesGuardSystemRoot = () => {
               />
             )}
           </Col>
-          <Col span={12}>
-            <Input
-              placeholder={"جستجو..."}
-              onChange={(e) => {
-                setSearchValue(e.target.value);
-              }}
-            />
+          <Col span={12} offset={1}>
+            <SpaceStyled top={10}>
+              <Input
+                placeholder={"جستجو..."}
+                onChange={(e) => {
+                  setSearchValue(e.target.value);
+                }}
+              />
+            </SpaceStyled>
           </Col>
         </Row>
         <div>

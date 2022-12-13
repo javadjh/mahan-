@@ -26,6 +26,8 @@ import CustomSmallButton from "../../styled/components/CustomSmallButton";
 import CustomPopConfirm from "../../styled/components/CustomPopConfirm";
 import ShareFile from "./ShareFile";
 import Auth from "../../auth/Auth";
+import ShowLibraryDialog from "../../ArchiveTree/dialog/ShowLibraryDialog";
+import LibraryContextProvider from "../../Library/LibraryContextProvider";
 const iconStyle = { fontSize: 17, marginTop: 5 };
 const FileGlobalActionsComponenets = ({ history }) => {
   history = useHistory();
@@ -62,7 +64,18 @@ const FileGlobalActionsComponenets = ({ history }) => {
           انتخاب پوشه
         </label>
       </Menu.Item>
-      <Menu.Item>کازیو</Menu.Item>
+      <Menu.Item>
+        <CustomDialog
+          width={"80%"}
+          title={"کازیو"}
+          render={
+            <LibraryContextProvider>
+              <ShowLibraryDialog />
+            </LibraryContextProvider>
+          }
+          actionRender={"کازیو"}
+        />
+      </Menu.Item>
       <Menu.Item>
         <span
           onClick={() => {
@@ -159,24 +172,26 @@ const FileGlobalActionsComponenets = ({ history }) => {
           </SpaceStyled>
         </Col>
       </Auth>
-      <Auth accessList={["اشتراک گذاری"]}>
-        <Col>
-          <CustomDialog
-            title={"پرونده"}
-            render={<ShareFile fileId={fileId} />}
-            width={"60%"}
-            actionRender={
-              <CustomMediumButton
-                icon={<AiOutlineShareAlt style={iconStyle} />}
-                isBordred={true}
-                color={lightBlueBorder}
-              >
-                اشتراک گذاری
-              </CustomMediumButton>
-            }
-          />
-        </Col>
-      </Auth>
+      {!history?.location?.state?.isLend && (
+        <Auth accessList={["اشتراک گذاری", "ویرایش پرونده"]}>
+          <Col>
+            <CustomDialog
+              title={"پرونده"}
+              render={<ShareFile fileId={fileId} />}
+              width={"60%"}
+              actionRender={
+                <CustomMediumButton
+                  icon={<AiOutlineShareAlt style={iconStyle} />}
+                  isBordred={true}
+                  color={lightBlueBorder}
+                >
+                  اشتراک گذاری
+                </CustomMediumButton>
+              }
+            />
+          </Col>
+        </Auth>
+      )}
       <Auth accessList={["ایجاد سند"]}>
         <Col>
           <SpaceStyled horizontal={5}>

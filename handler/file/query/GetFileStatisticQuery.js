@@ -1,4 +1,5 @@
 const DocumentModel = require("../../../model/DocumentModel");
+const LendModel = require("../../../model/LendModel");
 const FileModel = require("../../../model/FileModel");
 const { convertToShamsi } = require("../../../utility/dateUtility");
 const { byteToSize } = require("../../../utility/bytesToSize");
@@ -7,11 +8,15 @@ const { errorResponse } = require("../../../utility/ResponseHandler");
 const ArchiveModel = require("../../../model/ArchiveModel");
 const ArchiveTreeModel = require("../../../model/ArchiveTree");
 const FormModel = require("../../../model/FormModel");
+const { isLent } = require("../../lend/share");
 
 module.exports.getFileStatistic = async (req, res) => {
-  await roleGuard(["نمایش سندها", "ناظر"], req, res);
-  if (res.statusCode > 399) return errorResponse(res, 6);
   const { fileId } = req.params;
+
+  if (!(await isLent(req, fileId))) {
+    await roleGuard(["نمایش سندها", "ناظر"], req, res);
+    if (res.statusCode > 399) return errorResponse(res, 6);
+  }
 
   const documents = await DocumentModel.find({
     fileId,

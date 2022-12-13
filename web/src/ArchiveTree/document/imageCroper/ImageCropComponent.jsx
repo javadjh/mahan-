@@ -36,6 +36,7 @@ import {
 import { FiDownloadCloud } from "react-icons/fi";
 import { CenterStyled, SpaceStyled } from "../../../styled/global";
 import { FileContext } from "../../../context/file/FileContext";
+import Auth from "../../../auth/Auth";
 
 const ImageCropComponent = ({
   documentId,
@@ -226,6 +227,7 @@ const ImageCropComponent = ({
           </CustomSmallButton>
         </>
       ))}
+
       <CustomSmallButton
         onClick={() => {
           setInit(false);
@@ -239,7 +241,7 @@ const ImageCropComponent = ({
       </CustomSmallButton>
 
       <Divider />
-      <>
+      <Auth accessList={["ویرایش سند"]}>
         <div
           className={"pt-1 px-2"}
           style={{ display: "flex", justifyContent: "space-between" }}
@@ -398,6 +400,8 @@ const ImageCropComponent = ({
           step="0.01"
           defaultValue="1.1"
         />
+      </Auth>
+      <>
         <div style={{ width: "680px !important" }}>
           <CenterStyled>
             <AvatarEditor
