@@ -188,18 +188,7 @@ const FileContextProvider = ({ children, match, history }) => {
       saveAs(data, filename);
     }
   };
-  const addNewNoteForDocument = async (note, id) => {
-    const { status, data } = await addNewNoteForDocumentService({
-      documentId: id,
-      description: note,
-    });
 
-    return data;
-  };
-  const removeNoteFromDocument = async (id, docId) => {
-    const { status, data } = await removeNoteFromDocumentService(docId, id);
-    return data;
-  };
   const sendFileHandle = async (formData) => {
     await dispatch(sendFileAction(fileId, formData));
     freshData();
@@ -275,8 +264,6 @@ const FileContextProvider = ({ children, match, history }) => {
         deleteFileHandler,
         downloadGroupDocuments,
         insertFilesAlert,
-        addNewNoteForDocument,
-        removeNoteFromDocument,
         sendFileHandle,
         freshData,
         setIsShowProcessDialog,

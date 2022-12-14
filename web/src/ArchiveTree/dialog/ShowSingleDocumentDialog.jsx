@@ -42,51 +42,11 @@ import { maxForm, minForm, requiredForm } from "../../config/formValidator";
 import { convertToJalali } from "../../utility/dateUtil";
 import { SERVER_IP } from "../../config/ip";
 import Auth from "../../auth/Auth";
+import { DocumentContext } from "../../context/document/DocumentContext";
 
 const ShowSingleDocumentDialog = ({ doc }) => {
-  let [notes, setNotes] = useState(doc?.notes);
-  const { addNewNoteForDocument, removeNoteFromDocument } =
-    useContext(FileContext);
+  const { isLoaded, previewUrl } = useContext(DocumentContext);
   const dispatch = useDispatch();
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [previewUrl, setPreviewUrl] = useState();
-
-  useEffect(() => {
-    if (doc._id) onGetFileHandle(doc._id, doc.documentName, doc.ex);
-  }, [doc]);
-
-  const onGetFileHandle = async (id = "1", title, ex = undefined) => {
-    setIsLoaded(false);
-    // setIsFileDownloading(true);
-    const { data, status } = await getDocumentFileService(
-      id === "1" ? document._id : id
-    );
-    if (status === 200) {
-      setIsLoaded(true);
-      let filename;
-      if (
-        ex === "png" ||
-        ex === "jpg" ||
-        ex === "jpge" ||
-        ex === "docx" ||
-        ex === "xlsm" ||
-        ex === "xlsx" ||
-        ex === "txt" ||
-        ex === "xlsx"
-      ) {
-        filename = `${title}.pdf`;
-        if (id !== "1") {
-          setPreviewUrl(id + ".pdf");
-        }
-      } else {
-        filename = `${title}.${ex}`;
-        if (id !== "1") {
-          setPreviewUrl(id + "." + ex);
-        }
-      }
-    } else {
-    }
-  };
 
   const addNewFlagHandle = async (startSecond, endSecond, description) => {
     if (description.length < 2) {
@@ -110,7 +70,7 @@ const ShowSingleDocumentDialog = ({ doc }) => {
     <Fragment style={{ zIndex: 8000 }}>
       {isLoaded ? (
         <Row>
-          <Col
+          {/* <Col
             span={7}
             style={{
               backgroundColor: lightBackgroundColor,
@@ -168,8 +128,8 @@ const ShowSingleDocumentDialog = ({ doc }) => {
                 ))}
               </Form>
             </div>
-          </Col>
-          <Col span={17}>
+          </Col> */}
+          <Col span={24}>
             <SpaceStyled right={10}>
               {previewUrl && doc.ex ? (
                 <>

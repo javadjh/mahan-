@@ -24,6 +24,12 @@ export const SpaceStyled = styled.div`
 export const TextAlignStyled = styled.div`
   text-align: ${(props) => props.align};
 `;
+export const Vr = styled.div`
+  border-left: 1px solid #d5dfe8;
+  margin: 0px 10px;
+
+  height: 100%;
+`;
 
 export const CenterStyled = styled.div`
   justify-content: center;

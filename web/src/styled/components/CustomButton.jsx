@@ -6,7 +6,12 @@ import { SpaceStyled } from "../global";
 const CustomButton = (props) => {
   const CustomButtonStyled = styled(Button)`
     background-color: ${props.color ? props.color : darkBlueColor} !important;
-    color: ${props.color === "#fff" ? "#92A2B0" : "white"} !important;
+
+    color: ${props.textColor
+      ? props.textColor
+      : props.color === "#fff"
+      ? "#92A2B0"
+      : "white"} !important;
     padding: 0px 30px !important;
     min-height: 50px !important;
     border-radius: 8px !important;
@@ -37,7 +42,7 @@ const CustomButton = (props) => {
         </Row>
       ) : (
         <CustomButtonStyled {...editProps}>
-          <Row>
+          <Row justify="space-between" align="middle">
             <Col>{props.children}</Col>
             <Col>
               {props.icon && (

@@ -30,6 +30,7 @@ module.exports.getSingleDocument = async (req, res) => {
   })
     .populate("fileId")
     .populate("archiveId")
+    .populate("creator", "firstName lastName position userName")
     .lean();
 
   if (!document.isMain) {
@@ -40,6 +41,7 @@ module.exports.getSingleDocument = async (req, res) => {
     })
       .populate("fileId")
       .populate("archiveId")
+      .populate("creator", "firstName lastName position userName")
       .lean();
   }
 
@@ -70,28 +72,28 @@ module.exports.getSingleDocument = async (req, res) => {
   });
   document.documentSize = byteToSize(document.documentSize);
 
-  if (document.ex === "txt") {
-    let encryptPath = "uploads\\\\\\\\" + document.uniqueFileId;
-    let fr = new encrypt.FileEncrypt(encryptPath);
-    fr.openSourceFile();
-    try {
-      await fr.decrypt(process.env.encryptKey, async () => {
-        const data = fs.readFileSync(
-          "uploads\\\\\\\\" + document._id + ".txt",
-          "utf8"
-        );
-        console.log(data.toString());
-        document.txt = data;
-      });
-    } catch (err) {
-      const data = fs.readFileSync(
-        "uploads\\\\\\\\" + document._id + ".txt",
-        "utf8"
-      );
-      console.log(data.toString());
-      document.txt = data;
-    }
-  }
+  // if (document.ex === "txt") {
+  //   let encryptPath = "uploads\\\\\\\\" + document.uniqueFileId;
+  //   let fr = new encrypt.FileEncrypt(encryptPath);
+  //   fr.openSourceFile();
+  //   try {
+  //     await fr.decrypt(process.env.encryptKey, async () => {
+  //       const data = fs.readFileSync(
+  //         "uploads\\\\\\\\" + document._id + ".txt",
+  //         "utf8"
+  //       );
+  //       console.log(data.toString());
+  //       document.txt = data;
+  //     });
+  //   } catch (err) {
+  //     const data = fs.readFileSync(
+  //       "uploads\\\\\\\\" + document._id + ".txt",
+  //       "utf8"
+  //     );
+  //     console.log(data.toString());
+  //     document.txt = data;
+  //   }
+  // }
 
   return res.send({
     document,

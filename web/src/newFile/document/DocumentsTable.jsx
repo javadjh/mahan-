@@ -1,5 +1,6 @@
 import React from "react";
 import { Table } from "antd";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useContext } from "react";
 import { FileContext } from "../../context/file/FileContext";
@@ -56,7 +57,7 @@ const DocumentsTable = () => {
             />
           </Auth>
           <Auth accessList={["نمایش سندها"]} isLend={true}>
-            <CustomDialog
+            {/* <CustomDialog
               width={"100%"}
               title={"سند"}
               render={<ShowSingleDocumentDialog doc={item} />}
@@ -65,7 +66,12 @@ const DocumentsTable = () => {
                   نمایش
                 </CustomButton>
               }
-            />
+            /> */}
+            <Link to={`/document/${item.fileId}/${item._id}`}>
+              <CustomButton style={{ marginRight: 5 }} color={darkBlueColor}>
+                نمایش
+              </CustomButton>
+            </Link>
           </Auth>
           {/* <Auth accessList={["نمایش سندها"]}>
             {(item.ex === "png" ||

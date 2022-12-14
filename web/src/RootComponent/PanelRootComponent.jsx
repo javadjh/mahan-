@@ -50,6 +50,7 @@ import ArchiveViewerRoot from "../newArchive/ArchiveViewerRoot";
 import FileRoot from "../newFile/FileRoot";
 import FormsRoot from "../newForm/forms/FormsRoot";
 import UpsertFormRoot from "../newForm/upsert/UpsertFormRoot";
+import DocumentRoot from "../newFile/document/DocumentRoot";
 const PanelRootComponent = ({ history, location }) => {
   const [cookies] = useCookies(["isLogin"]);
 
@@ -227,9 +228,9 @@ const PanelRootComponent = ({ history, location }) => {
                           path={"/files-guard-system"}
                         />
                         <Route
-                          component={TextComponent}
+                          component={DocumentRoot}
                           exact={true}
-                          path={"/text"}
+                          path={"/document/:fileId/:documentId"}
                         />
                       </>
                     )}
