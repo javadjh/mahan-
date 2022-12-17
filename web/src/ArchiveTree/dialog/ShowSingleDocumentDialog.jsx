@@ -44,8 +44,8 @@ import { SERVER_IP } from "../../config/ip";
 import Auth from "../../auth/Auth";
 import { DocumentContext } from "../../context/document/DocumentContext";
 
-const ShowSingleDocumentDialog = ({ doc }) => {
-  const { isLoaded, previewUrl } = useContext(DocumentContext);
+const ShowSingleDocumentDialog = ({ doc, isLoaded, previewUrl }) => {
+  // const { isLoaded, previewUrl } = useContext(DocumentContext);
   const dispatch = useDispatch();
 
   const addNewFlagHandle = async (startSecond, endSecond, description) => {
@@ -66,6 +66,7 @@ const ShowSingleDocumentDialog = ({ doc }) => {
   const deleteFlagHandle = async (flagId) => {
     await dispatch(removeVideoFlagAction(doc._id, flagId));
   };
+
   return (
     <Fragment style={{ zIndex: 8000 }}>
       {isLoaded ? (

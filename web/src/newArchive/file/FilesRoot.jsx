@@ -10,7 +10,7 @@ import CustomDialog from "../../styled/components/CustomDialog";
 import InsertFileComponent from "../../ArchiveTree/files/InsertFileComponent";
 import Auth from "../../auth/Auth";
 const FilesRoot = () => {
-  const { files, setFileFilter, fileFilter, mainParent, mainTree } =
+  const { files, setFileFilter, fileFilter, mainParent, mainTree, reload } =
     useContext(ArchiveTreeContext);
   const [isShowUpsertFileDialog, setIsShowUpsertFileDialog] = useState(false);
 
@@ -45,6 +45,9 @@ const FilesRoot = () => {
                         title={"پرونده"}
                         render={
                           <InsertFileComponent
+                            onInsert={() => {
+                              reload(Date.now());
+                            }}
                             inTree={false}
                             tree={mainParent}
                             mainTree={mainTree}

@@ -13,6 +13,9 @@ import CustomMediumButton from "../../styled/components/CustomMediumButton";
 import CustomButton from "../../styled/components/CustomButton";
 import { SpaceStyled } from "../../styled/global";
 import OptionItemComponent from "./OptionItemComponent";
+import CustomDialog from "../../styled/components/CustomDialog";
+import ShowSingleDocumentDialog from "../../ArchiveTree/dialog/ShowSingleDocumentDialog";
+import Auth from "../../auth/Auth";
 const GeneralDocumentInformationComponent = () => {
   const { document, previewUrl } = useContext(DocumentContext);
 
@@ -33,7 +36,7 @@ const GeneralDocumentInformationComponent = () => {
                 color={lightBlueSecondColor}
                 textColor={blueColor}
               >
-                دانلود سند
+                دانلود
               </CustomButton>
             </SpaceStyled>
           </Col>
@@ -53,41 +56,58 @@ const GeneralDocumentInformationComponent = () => {
             </SpaceStyled>
           </Col>
           <Col span={24}>
-            <SpaceStyled top={10}>
-              <CustomButton
-                block
-                icon={
-                  <SpaceStyled top={-5}>
-                    <Image src="/assets/icons/edit-image.svg" />
+            <Auth accessList={["نمایش سندها"]} isLend={true}>
+              <CustomDialog
+                width={"100%"}
+                title={"سند"}
+                render={
+                  <ShowSingleDocumentDialog
+                    isLoaded={previewUrl}
+                    previewUrl={previewUrl}
+                    doc={document?.document}
+                  />
+                }
+                actionRender={
+                  <SpaceStyled top={10}>
+                    <CustomButton
+                      block
+                      icon={
+                        <SpaceStyled top={-5}>
+                          <Image src="/assets/icons/edit-image.svg" />
+                        </SpaceStyled>
+                      }
+                      color={darkBlueColor}
+                    >
+                      ویرایش ( نسخه {document.document.lastVersion})
+                    </CustomButton>
                   </SpaceStyled>
                 }
-                color={darkBlueColor}
-              >
-                ویرایش و ثبت نسخه جدید ( نسخه {document.document.lastVersion})
-              </CustomButton>
-            </SpaceStyled>
+              />
+            </Auth>
           </Col>
         </Row>
-        <OptionItemComponent
-          icon={"profile"}
-          keyName={"بارگذاری شده توسط"}
-          valueName={`${document.document?.creator?.firstName} ${document.document?.creator?.lastName}`}
-        />
-        <OptionItemComponent
-          icon={"book"}
-          keyName={"حجم سند"}
-          valueName={document.document.documentSize}
-        />
-        <OptionItemComponent
-          icon={"clock"}
-          keyName={"تاریخ بارگذاری"}
-          valueName={document.document.createDate}
-        />
-        <OptionItemComponent
-          icon={"clock"}
-          keyName={"تاریخ سر رسید"}
-          valueName={document.document.createDate}
-        />
+        <SpaceStyled top={30}>
+          <OptionItemComponent
+            icon={"profile"}
+            keyName={"بارگذاری توسط"}
+            valueName={`${document.document?.creator?.firstName} ${document.document?.creator?.lastName}`}
+          />
+          <OptionItemComponent
+            icon={"book"}
+            keyName={"حجم سند"}
+            valueName={document.document.documentSize}
+          />
+          <OptionItemComponent
+            icon={"clock"}
+            keyName={"تاریخ بارگذاری"}
+            valueName={document.document.createDate}
+          />
+          <OptionItemComponent
+            icon={"clock"}
+            keyName={"تاریخ سر رسید"}
+            valueName={document.document.createDate}
+          />
+        </SpaceStyled>
       </SpaceStyled>
     </Fragment>
   );

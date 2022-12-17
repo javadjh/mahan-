@@ -82,17 +82,17 @@ const DocumentContextProvider = ({ children, match }) => {
   };
 
   //comand handlers
-  const addNewNoteForDocument = async (note, id) => {
+  const addNewNoteForDocument = async ({ description }) => {
     const { status, data } = await addNewNoteForDocumentService({
-      documentId: id,
-      description: note,
+      documentId: docId,
+      description,
     });
 
-    return data;
+    await dispatch(getDocumentAction(docId));
   };
-  const removeNoteFromDocument = async (id, docId) => {
+  const removeNoteFromDocument = async (id) => {
     const { status, data } = await removeNoteFromDocumentService(docId, id);
-    return data;
+    await dispatch(getDocumentAction(docId));
   };
 
   return (

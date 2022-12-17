@@ -7,6 +7,7 @@ export const lightGreenColor = "#0EC5A4";
 export const lightBlueColor = "#BFCED8";
 export const lightBlueSecondColor = "#EBF0F4";
 export const grayColor = "#96AABC";
+export const dertyBlue = "#ECF1F5";
 export const hightlightColor = "#CED8E4";
 export const whiteColor = "#fff";
 export const lightColor = "#EEF2F5";

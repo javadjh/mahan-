@@ -1,4 +1,4 @@
-import { Typography } from "antd";
+import { Col, Row, Typography } from "antd";
 import React from "react";
 import { lightBlueColor } from "../../app/appColor";
 const CustomText = (props) => {
@@ -14,9 +14,21 @@ const CustomText = (props) => {
     style = { ...style, ...{ fontSize: props.size } };
   }
   return (
-    <Typography.Paragraph style={style} {...props}>
-      {props.children}
-    </Typography.Paragraph>
+    <>
+      {props?.isLeft ? (
+        <Row justify="end">
+          <Col>
+            <Typography.Paragraph style={style} {...props}>
+              {props.children}
+            </Typography.Paragraph>
+          </Col>
+        </Row>
+      ) : (
+        <Typography.Paragraph style={style} {...props}>
+          {props.children}
+        </Typography.Paragraph>
+      )}
+    </>
   );
 };
 export default CustomText;

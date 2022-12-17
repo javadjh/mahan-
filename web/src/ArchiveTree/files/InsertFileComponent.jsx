@@ -27,6 +27,7 @@ const InsertFileComponent = ({
   fileId,
   setIsShowUpsertFileDialog,
   onUpdate,
+  onInsert,
 }) => {
   let [archive, setArchive] = useState(tree?.archive);
   let [lang, setLang] = useState(tree?.lang);
@@ -81,6 +82,9 @@ const InsertFileComponent = ({
       onUpdate();
     } else {
       await dispatch(insertFileAction(formData, history));
+      if (onInsert) {
+        onInsert();
+      }
     }
     setIsShowUpsertFileDialog(false);
     form.resetFields();

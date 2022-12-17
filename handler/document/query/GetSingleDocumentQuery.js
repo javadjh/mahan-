@@ -65,6 +65,7 @@ module.exports.getSingleDocument = async (req, res) => {
 
   versions.map((versionItem) => {
     versionItem.documentSize = byteToSize(versionItem.documentSize);
+    versionItem.createDate = convertToShamsi(versionItem.createDate);
   });
 
   document.notes.map((n) => {

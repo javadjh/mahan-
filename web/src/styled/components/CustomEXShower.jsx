@@ -12,7 +12,7 @@ const CustomEXShower = ({ ex }) => {
   return (
     <>
       <Image
-        src={`${FRONT_IP}/assets/icons/ex/${ex.toUpperCase()}.svg`}
+        src={`${FRONT_IP}/assets/icons/ex/${ex?.toUpperCase()}.svg`}
         fallback={`${FRONT_IP}/assets/icons/paper.svg`}
         preview={false}
         onError={() => {

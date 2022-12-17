@@ -37,6 +37,7 @@ import { FiDownloadCloud } from "react-icons/fi";
 import { CenterStyled, SpaceStyled } from "../../../styled/global";
 import { FileContext } from "../../../context/file/FileContext";
 import Auth from "../../../auth/Auth";
+import { DocumentContext } from "../../../context/document/DocumentContext";
 
 const ImageCropComponent = ({
   documentId,
@@ -46,14 +47,14 @@ const ImageCropComponent = ({
   title,
   ex,
   documentSize,
+  document,
 }) => {
   const iconStyle = {
     fontSize: 25,
     color: borderColor,
     marginLeft: 10,
   };
-  const { fileId } = useContext(FileContext);
-  const { fileStatistic } = useContext(FileContext);
+  const { fileId } = useContext(DocumentContext);
   history = useHistory();
   const dispatch = useDispatch();
   const { width: widthWindowDimensions } = useWindowDimensions();
@@ -166,7 +167,7 @@ const ImageCropComponent = ({
     fileData.append("file", file);
 
     const { data, status } = await insertDocumentService(
-      fileStatistic.file.archiveId,
+      document?.archiveId?._id,
       fileId,
       "uiId",
       fileData,
