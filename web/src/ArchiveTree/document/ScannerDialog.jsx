@@ -40,19 +40,16 @@ const ScannerDialog = ({ history, getDocData }) => {
   const startScanning = async () => {
     setIsScanning(true);
     setIsScanned(false);
-    const res = await fetch(
-      "http://87.236.215.49:8080/api/Scanner/GetDevices",
-      {
-        headers: {
-          "Content-Type": "application/json; charset=utf-8",
-          "access-control-allow-headers": "*",
-          "access-control-allow-methods":
-            "GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS",
-          "access-control-allow-origin": "*",
-          "access-control-expose-headers": "*",
-        },
-      }
-    );
+    const res = await fetch("http://192.168.2.24:8080/api/Scanner/GetDevices", {
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+        "access-control-allow-headers": "*",
+        "access-control-allow-methods":
+          "GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS",
+        "access-control-allow-origin": "*",
+        "access-control-expose-headers": "*",
+      },
+    });
     const imageBlob = await res.blob();
 
     let blobsFile = new File([imageBlob], "scanned-file-" + uuidv4() + ".png");
