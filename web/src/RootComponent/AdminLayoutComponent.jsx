@@ -114,7 +114,7 @@ const AdminLayoutComponent = ({ children, location }) => {
                 <CustomMenuItem
                   href={"/archive-trees"}
                   icon={<UnorderedListOutlined />}
-                  title={"بخش بایگانی"}
+                  title={" بایگانی"}
                 />
               </Auth>
               <Auth accessList={["کازیو"]}>
@@ -128,33 +128,33 @@ const AdminLayoutComponent = ({ children, location }) => {
                 <CustomMenuItem
                   href={"/lends"}
                   icon={<UserOutlined />}
-                  title={"بخش اشتراک گذاری"}
+                  title={" اشتراک گذاری"}
                 />
               </Auth>
               <Auth accessList={["ناظر"]}>
                 <CustomMenuItem
                   href={"/files-guard-system"}
                   icon={<ReadOutlined />}
-                  title={"بخش ناظر سامانه"}
+                  title={" ناظر سامانه"}
                 />
               </Auth>
               <Auth accessList={["گزارش گیری"]}>
                 <CustomMenuItem
                   href={"/reporting"}
                   icon={<FundProjectionScreenOutlined />}
-                  title={"بخش گزارش گیری"}
+                  title={" گزارش گیری"}
                 />
               </Auth>
               <CustomMenuItem
                 href={"/files-alerts"}
                 icon={<AlertOutlined />}
-                title={"بخش هشدار ها"}
+                title={" هشدار ها"}
               />
               <Auth accessList={["تاریخچه تغییرات"]}>
                 <CustomMenuItem
                   href={"/logs"}
                   icon={<AlertOutlined />}
-                  title={"بخش لاگ ها"}
+                  title={" لاگ ها"}
                 />
               </Auth>
               <Auth
@@ -170,7 +170,7 @@ const AdminLayoutComponent = ({ children, location }) => {
               >
                 <CustomMenuItem
                   icon={<DatabaseOutlined />}
-                  title={"بخش اطلاعات پایه"}
+                  title={" اطلاعات پایه"}
                   dropdown={
                     <>
                       <Auth accessList={["کاربران", "تعریف کاربر"]}>
@@ -234,7 +234,7 @@ const AdminLayoutComponent = ({ children, location }) => {
                     <CustomMenuItem
                       onClick={() => setIsShowAppSetting(true)}
                       icon={<SettingOutlined />}
-                      title={"بخش مدیریت سامانه"}
+                      title={" مدیریت سامانه"}
                     />
                   }
                   isShow={isShowAppSetting}

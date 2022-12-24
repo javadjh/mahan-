@@ -254,9 +254,9 @@ const InsertFileComponent = ({
                           انتخاب کنید
                         </Select.Option>
 
-                        <Select.Optionon value={"جاری"} key={"جاری"}>
+                        <Select.Option value={"جاری"} key={"جاری"}>
                           جاری
-                        </Select.Optionon>
+                        </Select.Option>
                         <Select.Option value={"نیمه جاری"} key={"نیمه جاری"}>
                           نیمه جاری
                         </Select.Option>

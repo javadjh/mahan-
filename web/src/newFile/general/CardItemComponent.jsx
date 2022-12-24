@@ -12,8 +12,12 @@ const CardItemComponent = ({ title, value }) => {
           <Col>
             <CustomText color={darkBlueColor}>{title}</CustomText>
           </Col>
-          <Col>
-            <CustomText color={titleColor}>{value}</CustomText>
+          <Col align="middle">
+            <SpaceStyled top={10}>
+              <CustomText color={titleColor} style={{ fontWeight: "bold" }}>
+                {value}
+              </CustomText>
+            </SpaceStyled>
           </Col>
         </Row>
       </FileCardStyled>

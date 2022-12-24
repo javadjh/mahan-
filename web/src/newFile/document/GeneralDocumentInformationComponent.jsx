@@ -16,12 +16,20 @@ import OptionItemComponent from "./OptionItemComponent";
 import CustomDialog from "../../styled/components/CustomDialog";
 import ShowSingleDocumentDialog from "../../ArchiveTree/dialog/ShowSingleDocumentDialog";
 import Auth from "../../auth/Auth";
+import { FRONT_IP } from "../../config/ip";
+import CustomPopConfirm from "../../styled/components/CustomPopConfirm";
 const GeneralDocumentInformationComponent = () => {
-  const { document, previewUrl } = useContext(DocumentContext);
+  const { document, previewUrl, deleteDocHandler } =
+    useContext(DocumentContext);
 
   return (
     <Fragment>
-      {previewUrl && <Image src={`${previewUrl}`} />}
+      {previewUrl && (
+        <Image
+          src={`${previewUrl}`}
+          fallback={`${FRONT_IP}/assets/image-placeholder.jpg`}
+        />
+      )}
       <SpaceStyled top={15}>
         <Row>
           <Col span={12}>
@@ -42,17 +50,22 @@ const GeneralDocumentInformationComponent = () => {
           </Col>
           <Col span={12}>
             <SpaceStyled right={10}>
-              <CustomButton
-                block
-                icon={
-                  <SpaceStyled top={-5}>
-                    <Image src="/assets/icons/rm.svg" />
-                  </SpaceStyled>
+              <CustomPopConfirm
+                onDelete={deleteDocHandler}
+                render={
+                  <CustomButton
+                    block
+                    icon={
+                      <SpaceStyled top={-5}>
+                        <Image src="/assets/icons/rm.svg" />
+                      </SpaceStyled>
+                    }
+                    color={lightRedColor}
+                  >
+                    حذف
+                  </CustomButton>
                 }
-                color={lightRedColor}
-              >
-                پاک کردن
-              </CustomButton>
+              />
             </SpaceStyled>
           </Col>
           <Col span={24}>

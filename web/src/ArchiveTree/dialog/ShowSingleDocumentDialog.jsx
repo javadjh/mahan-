@@ -154,7 +154,11 @@ const ShowSingleDocumentDialog = ({ doc, isLoaded, previewUrl }) => {
                     <>
                       <CenterStyled>
                         <a
-                          href={`${SERVER_IP}/${previewUrl}`}
+                          href={`${
+                            !previewUrl.includes("http://")
+                              ? SERVER_IP + "/"
+                              : ""
+                          }${previewUrl}`}
                           target="_blank"
                           download={true}
                         >{`دریافت سند`}</a>
@@ -162,7 +166,9 @@ const ShowSingleDocumentDialog = ({ doc, isLoaded, previewUrl }) => {
                       <MP4PlayerComponent
                         doc={doc}
                         deleteFlagHandle={deleteFlagHandle}
-                        url={`${SERVER_IP}/${previewUrl}`}
+                        url={`${
+                          !previewUrl.includes("http://") ? SERVER_IP + "/" : ""
+                        }${previewUrl}`}
                         addNewFlagHandle={addNewFlagHandle}
                       />
                     </>
@@ -177,7 +183,11 @@ const ShowSingleDocumentDialog = ({ doc, isLoaded, previewUrl }) => {
                     <>
                       <CenterStyled>
                         <a
-                          href={`${SERVER_IP}/${previewUrl}`}
+                          href={`${
+                            !previewUrl.includes("http://")
+                              ? SERVER_IP + "/"
+                              : ""
+                          }${previewUrl}`}
                           target="_blank"
                           download={true}
                         >{`دریافت سند`}</a>
@@ -191,7 +201,11 @@ const ShowSingleDocumentDialog = ({ doc, isLoaded, previewUrl }) => {
                     >
                       <CustomCursor>
                         <a
-                          href={`${SERVER_IP}/${previewUrl}`}
+                          href={`${
+                            !previewUrl.includes("http://")
+                              ? SERVER_IP + "/"
+                              : ""
+                          }${previewUrl}`}
                           target="_blank"
                           download={true}
                         >

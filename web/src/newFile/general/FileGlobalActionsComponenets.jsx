@@ -76,7 +76,7 @@ const FileGlobalActionsComponenets = ({ history }) => {
           actionRender={"کازیو"}
         />
       </Menu.Item>
-      <Menu.Item>
+      {/* <Menu.Item>
         <span
           onClick={() => {
             localStorage.setItem("file", fileId);
@@ -94,7 +94,7 @@ const FileGlobalActionsComponenets = ({ history }) => {
             بارگذاری پیشرفته تصویر
           </label>
         </span>
-      </Menu.Item>
+      </Menu.Item> */}
       <Menu.Item>
         <ScanDialog
           onScannedListener={(fileScanned) => {

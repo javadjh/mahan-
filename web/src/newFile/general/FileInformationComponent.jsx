@@ -129,7 +129,7 @@ const FileInformationComponent = () => {
                 color={lightGreenColor}
                 onClick={() => setIsExpanded(!isExpanded)}
               >
-                کم تر
+                پنهان
               </CustomText>
             </CustomCursor>
           ) : (

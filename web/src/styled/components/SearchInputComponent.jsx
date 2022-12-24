@@ -129,14 +129,7 @@ const SearchInputComponent = () => {
                         className={"p-1 dropdown-item custom-cursor"}
                         onClick={() => {
                           history.push({
-                            pathname: "/file/" + d.fileId._id + "/" + d._id,
-                            state: {
-                              archiveId: d.archiveId._id,
-                              fileId: d.fileId._id,
-                              hasForm: d.archiveId.isFormRequired,
-                              documentId: d._id,
-                              isFocused: true,
-                            },
+                            pathname: `/document/${d.fileId._id}/${d._id}`,
                           });
                         }}
                       >

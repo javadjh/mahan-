@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router";
 import { SERVER_IP } from "../../config/ip";
 import {
   addNewNoteForDocumentService,
@@ -8,10 +9,15 @@ import {
   removeNoteFromDocumentService,
 } from "../../service/DocumentService";
 import { getImageDocumentService } from "../../service/FileService";
-import { getDocumentAction } from "../../stateManager/actions/DocumentAction";
+import {
+  deleteDocumentAction,
+  getDocumentAction,
+  setManualDocumentAction,
+} from "../../stateManager/actions/DocumentAction";
 import { DocumentContext } from "./DocumentContext";
 
 const DocumentContextProvider = ({ children, match }) => {
+  const history = useHistory();
   const docId = match?.params?.documentId;
   const fileId = match?.params?.fileId;
   //redux utilities
@@ -29,6 +35,18 @@ const DocumentContextProvider = ({ children, match }) => {
       dispatch(getDocumentAction(docId));
     }
   }, [document]);
+
+  useEffect(
+    () => () => {
+      dispatch(
+        setManualDocumentAction({
+          versions: [],
+          document: {},
+        })
+      );
+    },
+    []
+  );
 
   //query handlers
   const onGetFileHandle = async (id = "1", title, ex = undefined) => {
@@ -95,6 +113,11 @@ const DocumentContextProvider = ({ children, match }) => {
     await dispatch(getDocumentAction(docId));
   };
 
+  const deleteDocHandler = async () => {
+    await dispatch(deleteDocumentAction(docId, fileId));
+    history.goBack();
+  };
+
   return (
     <DocumentContext.Provider
       value={{
@@ -105,6 +128,7 @@ const DocumentContextProvider = ({ children, match }) => {
         document,
         addNewNoteForDocument,
         removeNoteFromDocument,
+        deleteDocHandler,
       }}
     >
       {children}
