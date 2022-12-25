@@ -40,7 +40,7 @@ const ScannerDialog = ({ history, getDocData }) => {
   const startScanning = async () => {
     setIsScanning(true);
     setIsScanned(false);
-    const res = await fetch("http://192.168.2.24:8080/api/Scanner/GetDevices", {
+    const res = await fetch("http://localhost:8080/api/Scanner/GetDevices", {
       headers: {
         "Content-Type": "application/json; charset=utf-8",
         "access-control-allow-headers": "*",
