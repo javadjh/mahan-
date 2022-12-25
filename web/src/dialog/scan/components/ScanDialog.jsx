@@ -29,7 +29,7 @@ const ScanDialog = ({ onScannedListener }) => {
   }, []);
   const getData = async () => {
     const { data } = await axios.get(
-      "http://192.168.2.24:8080/api/Scanner/GetDevices",
+      "http://localhost:8080/api/Scanner/GetDevices",
       {
         headers: {
           "Content-Type": "application/json; charset=utf-8",
@@ -43,7 +43,7 @@ const ScanDialog = ({ onScannedListener }) => {
   };
   const scanDocument = async (formData) => {
     setIsScanning(true);
-    const res = await axios.get("http://192.168.2.24:8080/api/Scanner/Scan", {
+    const res = await axios.get("http://localhost:8080/api/Scanner/Scan", {
       params: formData,
       responseType: "blob",
     });
