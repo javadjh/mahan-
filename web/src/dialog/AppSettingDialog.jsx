@@ -19,6 +19,7 @@ import { CenterStyled, CustomCursor, SpaceStyled } from "../styled/global";
 import { lightGreenColor } from "../app/appColor";
 import { FRONT_IP, SERVER_IP } from "../config/ip";
 import CustomEXShower from "../styled/components/CustomEXShower";
+import CustomInput from "../styled/components/CustomInput";
 const centerStyle = {
   color: "white",
   position: "absolute",
@@ -96,7 +97,7 @@ export const AppSettingDialog = ({ setIsShowAppSetting }) => {
   };
   return (
     <>
-      <Form form={form} onFinish={sendData}>
+      <Form layout="vertical" form={form} onFinish={sendData}>
         <div>
           <div>
             <SpaceStyled vertical={20}>
@@ -130,6 +131,7 @@ export const AppSettingDialog = ({ setIsShowAppSetting }) => {
                 <Row justify="center" align="middle">
                   <Col span={19} align="middle">
                     <Input
+                      label={"متن"}
                       maxLength={4}
                       name={"value"}
                       value={value}

@@ -3,6 +3,7 @@ import React, { Fragment, useContext } from "react";
 import { requiredForm } from "../../config/formValidator";
 import { FileContext } from "../../context/file/FileContext";
 import CustomButton from "../../styled/components/CustomButton";
+import CustomTextArea from "../../styled/components/CustomTextArea";
 
 const SendFileToCorrespondenceComponent = () => {
   const { fileStatistic, sendFileHandle } = useContext(FileContext);
@@ -12,11 +13,12 @@ const SendFileToCorrespondenceComponent = () => {
       !fileStatistic?.file?.isConfirm &&
       fileStatistic?.file?.creator === localStorage.getItem("userId") ? (
         <Form
+          layout="vertical"
           onFinish={(formData) => {
             sendFileHandle(formData);
           }}
         >
-          <Form.Item name={"message"} rules={[requiredForm]}>
+          <Form.Item label="توضیحات" name={"message"} rules={[requiredForm]}>
             <Input.TextArea
               rows={5}
               placeholder={"توضیحات را جهت ارسال وارد کنید..."}

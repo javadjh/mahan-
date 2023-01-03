@@ -10,6 +10,7 @@ import CustomButton from "../styled/components/CustomButton";
 import { lightGreenColor, redColor } from "../app/appColor";
 import CorrespondenceTable from "../newFile/general/CorrespondenceTable";
 import { CenterStyled } from "../styled/global";
+import CustomTextArea from "../styled/components/CustomTextArea";
 const FileGuardSystemActionDialog = ({ item, setReload, isReject }) => {
   const dispatch = useDispatch();
   const [message, setMessage] = useState("");
@@ -35,6 +36,7 @@ const FileGuardSystemActionDialog = ({ item, setReload, isReject }) => {
             <p>آیا از رد پرونده اطمینان دارید؟</p>
           </CenterStyled>
           <Input.TextArea
+            label="پیام"
             onChange={(e) => {
               setMessage(e.target.value);
             }}

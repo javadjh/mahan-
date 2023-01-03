@@ -5,6 +5,9 @@ import "imrc-datetime-picker/dist/imrc-datetime-picker.css";
 import { DatetimePicker } from "imrc-datetime-picker";
 import { DatetimePickerTrigger } from "imrc-datetime-picker";
 import { Input } from "antd";
+import styled from "styled-components";
+import { labelColor } from "../app/appColor";
+import { SpaceStyled } from "../styled/global";
 
 moment.loadPersian({
   dialect: "persian-modern",
@@ -20,6 +23,7 @@ class PersianDatePickerComponent extends Component {
 
   constructor(props) {
     super(props);
+    console.log(props);
 
     // Make sure it's locale is set to english,
     // because you've used moment.loadPersian() function, before.
@@ -71,6 +75,13 @@ class PersianDatePickerComponent extends Component {
         closeWidgets={true}
         showTimePicker={false}
       >
+        <SpaceStyled bottom={5}>
+          <CustomDatePickerLabelStyled>
+            {this.props?.label
+              ? this.props?.label
+              : this.props?.placeholder?.replace("...", "")}
+          </CustomDatePickerLabelStyled>
+        </SpaceStyled>
         <Input
           type="text"
           id={"date-picker-fa"}
@@ -82,3 +93,6 @@ class PersianDatePickerComponent extends Component {
   }
 }
 export default PersianDatePickerComponent;
+let CustomDatePickerLabelStyled = styled.span`
+  color: ${labelColor};
+`;

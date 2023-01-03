@@ -8,6 +8,7 @@ import {
 } from "../../utility/inputValidators";
 import { Col, Divider, Input, Row } from "antd";
 import { SpaceStyled } from "../../styled/global";
+import CustomInput from "../../styled/components/CustomInput";
 const BaseInformationUpsertUserComponent = () => {
   const [inputType, setInputType] = useState("password");
   const {
@@ -43,6 +44,7 @@ const BaseInformationUpsertUserComponent = () => {
               <Row>
                 <Col span={11}>
                   <Input
+                    label="نام"
                     type="text"
                     className="form-control"
                     id="validationCustom03"
@@ -69,6 +71,7 @@ const BaseInformationUpsertUserComponent = () => {
                 <Col span={12} offset={1}>
                   <div className="form-group">
                     <Input
+                      label="نام خانوادگی"
                       type="text"
                       value={lastName}
                       name={"lastName"}
@@ -99,6 +102,7 @@ const BaseInformationUpsertUserComponent = () => {
               <Row>
                 <Col span={11}>
                   <Input
+                    label="شماره تماس"
                     type="number"
                     name={phoneNumber}
                     onChange={(e) => {
@@ -120,6 +124,7 @@ const BaseInformationUpsertUserComponent = () => {
                 </Col>
                 <Col span={12} offset={1}>
                   <Input
+                    label="شماره ملی"
                     type="number"
                     disabled={id}
                     name={userName}
@@ -151,6 +156,7 @@ const BaseInformationUpsertUserComponent = () => {
                     <Row>
                       <Col span={24}>
                         <Input
+                          label="کلمه ی عبور"
                           type={inputType}
                           onChange={(e) => {
                             formValidator.current.showMessageFor("password");
@@ -188,6 +194,7 @@ const BaseInformationUpsertUserComponent = () => {
                   </Col>
                   <Col span={12} offset={1}>
                     <Input
+                      label="ایمیل"
                       type="text"
                       onChange={(e) => {
                         formValidator.current.showMessageFor("email");
@@ -212,6 +219,7 @@ const BaseInformationUpsertUserComponent = () => {
             <Row>
               <Col span={12}>
                 <Input
+                  label="سمت کاربر"
                   type="text"
                   onChange={(e) => {
                     formValidator.current.showMessageFor("position");

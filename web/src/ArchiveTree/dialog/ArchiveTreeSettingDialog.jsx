@@ -11,6 +11,7 @@ import { getAllFormsAction } from "../../stateManager/actions/FormAction";
 import { Checkbox, Col, Radio, Row, Select, Space } from "antd";
 import CustomButton from "../../styled/components/CustomButton";
 import { SpaceStyled } from "../../styled/global";
+import CustomSelect from "../../styled/components/CustomSelect";
 
 const ArchiveTreeSettingDialog = ({ tree, reload }) => {
   const [lang, setLang] = useState("both");
@@ -30,12 +31,14 @@ const ArchiveTreeSettingDialog = ({ tree, reload }) => {
   const reloadMainParentArchiveTree = useSelector(
     (state) => state.reloadMainParentArchiveTree
   );
+  const [formsData, setFormsData] = useState([]);
   const [form, setForm] = useState();
   const [isFormRequired, setIsFormRequired] = useState(false);
   useEffect(() => {
     getData();
     if (tree)
       if (tree._id) {
+        console.log(tree.form);
         setForm(tree.form);
         setIsFormRequired(tree.isFormRequired);
       } else {
@@ -43,6 +46,23 @@ const ArchiveTreeSettingDialog = ({ tree, reload }) => {
         setIsFormRequired(false);
       }
   }, [singleArchive, tree, reloadMainParentArchiveTree]);
+  useEffect(() => {
+    if (forms?.length > 0) {
+      let list = [
+        {
+          label: "یک فرم را انتخاب کنید",
+          value: undefined,
+        },
+      ];
+      forms.map((item) => {
+        list.push({
+          label: item.title,
+          value: item._id,
+        });
+      });
+      setFormsData(list);
+    }
+  }, [forms]);
   const getData = async () => {
     if (!handleHide("انتخاب فرم برای بایگانی"))
       await dispatch(getAllFormsAction());
@@ -83,7 +103,7 @@ const ArchiveTreeSettingDialog = ({ tree, reload }) => {
         <>
           {tree.isMain ? (
             <span hidden={handleHide("انتخاب فرم برای بایگانی")}>
-              <h2>انتخاب روکش اسناد زیر مجموعه</h2>
+              <h2>انتخاب یک روکش سند برای تمام پرونده های این قفسه :</h2>
               <Row justify="center" align="middle">
                 <Col span={12}>
                   <Checkbox
@@ -100,26 +120,62 @@ const ArchiveTreeSettingDialog = ({ tree, reload }) => {
                 <Col span={12}>
                   {isFormRequired ? (
                     <Select
+                      label="فرم"
+                      showSearch
+                      filterOption={(input, option) =>
+                        (option?.label ?? "")
+                          .toLowerCase()
+                          .includes(input.toLowerCase())
+                      }
                       defaultValue={form}
                       onChange={(e) => {
+                        console.log("*****");
+                        console.log(e);
                         setForm(e);
                       }}
+                      options={formsData}
                       style={{ width: "100%" }}
                     >
                       <Select.Option value={``} key={``}>
                         انتخاب کنید
                       </Select.Option>
-                      {forms.map((f) => (
+                      {formsData.map((f) => (
                         <Select.Option
-                          selected={form === f._id}
-                          value={f._id}
-                          key={f._id}
+                          selected={form === f.value}
+                          value={f.value}
+                          key={f.value}
                         >
-                          {f.title}
+                          {f.label}
                         </Select.Option>
                       ))}
                     </Select>
-                  ) : null}
+                  ) : // <Select
+                  //   showSearch
+                  //   placeholder="Select a person"
+                  //   optionFilterProp="children"
+                  //   onChange={onChange}
+                  //   onSearch={onSearch}
+                  //   filterOption={(input, option) =>
+                  //     (option?.label ?? "")
+                  //       .toLowerCase()
+                  //       .includes(input.toLowerCase())
+                  //   }
+                  //   options={[
+                  //     {
+                  //       value: "jack",
+                  //       label: "Jack",
+                  //     },
+                  //     {
+                  //       value: "lucy",
+                  //       label: "Lucy",
+                  //     },
+                  //     {
+                  //       value: "tom",
+                  //       label: "Tom",
+                  //     },
+                  //   ]}
+                  // />
+                  null}
                 </Col>
               </Row>
             </span>

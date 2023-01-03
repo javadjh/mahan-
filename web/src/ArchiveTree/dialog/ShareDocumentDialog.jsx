@@ -6,6 +6,7 @@ import moment from "moment-jalaali";
 import PersianDatePickerComponent from "../../utility/PersianDatePickerComponent";
 import { defaultDate } from "../../utility/dateUtil";
 import { RootContext } from "../../RootComponent/RootContext";
+import CustomSelect from "../../styled/components/CustomSelect";
 const ShareDocumentDialog = ({ insertShareFile }) => {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.users);
@@ -53,6 +54,7 @@ const ShareDocumentDialog = ({ insertShareFile }) => {
           <div className="modal-content p-4">
             <div className={"text-center"}>
               <Select
+                label="مخاطبین"
                 onChange={(e) => {
                   let users = [];
                   e.map((u) => {
@@ -92,6 +94,7 @@ const ShareDocumentDialog = ({ insertShareFile }) => {
                                        placeholder="تاریخ انقضا را وارد کنید (1400/05/07)" required/>*/}
                 <PersianDatePickerComponent
                   value={expire}
+                  label="تاریخ انتضا"
                   onSelect={(moment) => {
                     const miladiDate = moment.format("MM/DD/YYYY");
                     const persianDate = moment.format("jYYYY/jMM/jDD");

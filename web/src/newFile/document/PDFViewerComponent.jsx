@@ -10,9 +10,10 @@ import CustomButton from "../../styled/components/CustomButton";
 import { darkBlueColor } from "../../app/appColor";
 import { CenterStyled, SpaceStyled } from "../../styled/global";
 import { SERVER_IP } from "../../config/ip";
+import { DocumentContext } from "../../context/document/DocumentContext";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 const PDFViewerComponent = ({ previewUrl, watermark }) => {
-  const { fileStatistic } = useContext(FileContext);
+  const { document } = useContext(DocumentContext);
   const [file, setFile] = useState("");
   let [isLoad, setIsLoad] = useState(false);
   const [pageNumber, setPageNumber] = useState(1);
@@ -38,14 +39,17 @@ const PDFViewerComponent = ({ previewUrl, watermark }) => {
   };
   useEffect(() => {
     if (previewUrl) {
-      axios(`${SERVER_IP}/${previewUrl}`, {
-        method: "GET",
-        withCredentials: false,
-        responseType: "blob",
-        header: {
-          "Access-Control-Allow-Origin": "*",
-        },
-      }).then((response) => {
+      axios(
+        `${previewUrl?.includes("http") ? "" : SERVER_IP + "/"}${previewUrl}`,
+        {
+          method: "GET",
+          withCredentials: false,
+          responseType: "blob",
+          header: {
+            "Access-Control-Allow-Origin": "*",
+          },
+        }
+      ).then((response) => {
         const file = new Blob([response.data], { type: "application/pdf" });
         setFile(file);
         setTimeout(() => {
@@ -148,7 +152,7 @@ const PDFViewerComponent = ({ previewUrl, watermark }) => {
                     fontColor={"rgba(0,0,0,0.42)"}
                     fontFamily={"primary-font"}
                     fontSize={30}
-                    content={fileStatistic.archiveWatermark}
+                    content={document?.document?.archiveId?.watermarkText}
                   >
                     <CenterStyled>
                       <Document file={file} onLoadSuccess={onLoadSuccess}>

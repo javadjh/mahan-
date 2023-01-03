@@ -4,6 +4,7 @@ import ReactPlayer from "react-player";
 import { useSelector } from "react-redux";
 import { darkBlueColor, lightGreenColor } from "../../../app/appColor";
 import CustomButton from "../../../styled/components/CustomButton";
+import CustomInput from "../../../styled/components/CustomInput";
 import { SpaceStyled } from "../../../styled/global";
 import { fancyTimeFormat } from "../../../utility/timeUtility";
 

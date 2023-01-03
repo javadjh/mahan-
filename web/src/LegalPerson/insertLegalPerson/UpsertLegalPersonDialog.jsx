@@ -22,6 +22,8 @@ import {
 } from "../../config/formValidator";
 import CustomButton from "../../styled/components/CustomButton";
 import { lightGreenColor } from "../../app/appColor";
+import CustomInput from "../../styled/components/CustomInput";
+import CustomTextArea from "../../styled/components/CustomTextArea";
 const jalaliMoment = require("jalali-moment");
 
 const UpsertLegalPersonDialog = ({
@@ -58,12 +60,13 @@ const UpsertLegalPersonDialog = ({
         <h4>مدیریت شخص حقوقی</h4>
         <p>در این فرم می توانید اطلاعات اشخاص حقوقی را ثبت و ویرایش کنید</p>
 
-        <Form form={form} onFinish={sendData}>
+        <Form layout="vertical" form={form} onFinish={sendData}>
           <Form.Item name={"id"}></Form.Item>
           <Row>
             <Col span={12}>
               <SpaceStyled horizontal={10}>
                 <Form.Item
+                  label="نام شرکت"
                   name={"companyName"}
                   rules={[persianRule, requiredForm, minForm(2), maxForm(100)]}
                 >
@@ -74,16 +77,17 @@ const UpsertLegalPersonDialog = ({
             <Col span={12}>
               <SpaceStyled horizontal={10}>
                 <Form.Item
+                  label="نام مدیر عامل"
                   name={"ceo"}
                   rules={[persianRule, requiredForm, minForm(2), maxForm(80)]}
                 >
-                  <Input placeholder="مدیر عامل را وارد کنید..." />
+                  <Input put placeholder="مدیر عامل را وارد کنید..." />
                 </Form.Item>
               </SpaceStyled>
             </Col>
             <Col span={12}>
               <SpaceStyled horizontal={10}>
-                <Form.Item name={"registerDate"}>
+                <Form.Item label="تاریخ ثبت" name={"registerDate"}>
                   <PersianDatePickerComponent
                     value={registerDate}
                     onSelect={(moment) => {
@@ -98,7 +102,11 @@ const UpsertLegalPersonDialog = ({
             </Col>
             <Col span={12}>
               <SpaceStyled horizontal={10}>
-                <Form.Item name={"registerCode"} rules={[maxForm(50)]}>
+                <Form.Item
+                  label="شماره ثبت"
+                  name={"registerCode"}
+                  rules={[maxForm(50)]}
+                >
                   <Input
                     type="number"
                     placeholder="شماره ثبت را وارد کنید..."
@@ -108,7 +116,11 @@ const UpsertLegalPersonDialog = ({
             </Col>
             <Col span={24}>
               <SpaceStyled horizontal={10}>
-                <Form.Item name={"tel"} rules={[maxForm(11)]}>
+                <Form.Item
+                  label="شماره تماس"
+                  name={"tel"}
+                  rules={[maxForm(11)]}
+                >
                   <Input
                     type="number"
                     placeholder="شماره تماس را وارد کنید..."
@@ -118,7 +130,7 @@ const UpsertLegalPersonDialog = ({
             </Col>
             <Col span={24}>
               <SpaceStyled horizontal={10}>
-                <Form.Item name={"address"} rules={[maxForm(550)]}>
+                <Form.Item label="آدرس" name={"address"} rules={[maxForm(550)]}>
                   <Input.TextArea placeholder="آدرس را وارد کنید..." />
                 </Form.Item>
               </SpaceStyled>

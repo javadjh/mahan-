@@ -1,14 +1,15 @@
 import React from "react";
 import { Input } from "antd";
 import styled from "styled-components";
-
+import { labelColor } from "../../app/appColor";
+import { SpaceStyled } from "../global";
+import { useState } from "react";
 const CustomInput = (props) => {
-  let CustomInputStyled = styled(Input)`
-    background: #f9fafc;
-    border-radius: 8px;
-    border: none;
-    padding: 20px;
+  let CustomInputStyled = styled(Input)``;
+  let CustomInputLabelStyled = styled.span`
+    color: ${labelColor};
   `;
-  return <CustomInputStyled {...props} />;
+
+  return <Input {...props} />;
 };
 export default CustomInput;

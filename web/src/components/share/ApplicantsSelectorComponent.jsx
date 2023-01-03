@@ -3,6 +3,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { getApplicantsAutoService } from "../../service/ApplicantService";
+import CustomSelect from "../../styled/components/CustomSelect";
 const ApplicantsSelectorComponent = ({ onApplicantSelect }) => {
   const [options, setOptions] = useState([]);
   const [searchValue, setSearchValue] = useState("");
@@ -17,6 +18,7 @@ const ApplicantsSelectorComponent = ({ onApplicantSelect }) => {
   };
   return (
     <Select
+      label="سمت سازمانی"
       placeholder={"انتخاب سمت سازمانی"}
       showSearch
       onSelect={(e) => {

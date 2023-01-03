@@ -19,6 +19,7 @@ import { validatorSP } from "../../utility/formValidator";
 import PersianDatePickerComponent from "../../utility/PersianDatePickerComponent";
 import { defaultDate } from "../../utility/dateUtil";
 import { RootContext } from "../../RootComponent/RootContext";
+import CustomSelect from "../../styled/components/CustomSelect";
 const UpdateFileDialog = ({ fileId }) => {
   const formValidator = useRef(validatorSP());
   const dispatch = useDispatch();
@@ -315,6 +316,7 @@ const UpdateFileDialog = ({ fileId }) => {
                   <div>
                     {contacts.length > 0 || isDataReceived ? (
                       <Select
+                        label="مخاطبین"
                         defaultValue={contacts}
                         onChange={(e) => {
                           setContacts(e);

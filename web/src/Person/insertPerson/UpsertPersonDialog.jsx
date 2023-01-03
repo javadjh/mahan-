@@ -23,6 +23,8 @@ import {
 } from "../../config/formValidator";
 import CustomButton from "../../styled/components/CustomButton";
 import { lightGreenColor } from "../../app/appColor";
+import CustomInput from "../../styled/components/CustomInput";
+import CustomSelect from "../../styled/components/CustomSelect";
 const UpsertPersonDialog = ({ singlePerson, setIsUpsertDialogShow }) => {
   const dispatch = useDispatch();
   const [birthday, setBirthday] = useState(defaultDate(true));
@@ -49,7 +51,7 @@ const UpsertPersonDialog = ({ singlePerson, setIsUpsertDialogShow }) => {
     <div>
       <h4>مدیریت شخص حقیقی</h4>
       <p>در این فرم می توانید اطلاعات اشخاص حقیقی را ثبت و ویرایش نمایید</p>
-      <Form form={form} onFinish={sendData}>
+      <Form layout="vertical" form={form} onFinish={sendData}>
         <Form.Item name={"id"}></Form.Item>
         <div>
           <Row>
@@ -59,7 +61,7 @@ const UpsertPersonDialog = ({ singlePerson, setIsUpsertDialogShow }) => {
                   name={"firstName"}
                   rules={[persianRule, requiredForm, minForm(2), maxForm(50)]}
                 >
-                  <Input placeholder="نام را وارد کنید..." />
+                  <Input label="نام" placeholder="نام را وارد کنید..." />
                 </Form.Item>
               </SpaceStyled>
             </Col>
@@ -69,7 +71,10 @@ const UpsertPersonDialog = ({ singlePerson, setIsUpsertDialogShow }) => {
                   name={"lastName"}
                   rules={[persianRule, requiredForm, minForm(2), maxForm(50)]}
                 >
-                  <Input placeholder="نام خانوادگی را وارد کنید..." />
+                  <Input
+                    label="نام خانوادگی"
+                    placeholder="نام خانوادگی را وارد کنید..."
+                  />
                 </Form.Item>
               </SpaceStyled>
             </Col>
@@ -79,21 +84,30 @@ const UpsertPersonDialog = ({ singlePerson, setIsUpsertDialogShow }) => {
                   name={"fathersName"}
                   rules={[persianRule, minForm(2), maxForm(50)]}
                 >
-                  <Input placeholder="نام پدر را وارد کنید..." />
+                  <Input
+                    label="نام پدر"
+                    placeholder="نام پدر را وارد کنید..."
+                  />
                 </Form.Item>
               </SpaceStyled>
             </Col>
             <Col span={12}>
               <SpaceStyled horizontal={10}>
                 <Form.Item name={"idCode"}>
-                  <Input placeholder="شماره شناسنامه را وارد کنید..." />
+                  <Input
+                    label="شماره شناسنامه"
+                    placeholder="شماره شناسنامه را وارد کنید..."
+                  />
                 </Form.Item>
               </SpaceStyled>
             </Col>
             <Col span={12}>
               <SpaceStyled horizontal={10}>
                 <Form.Item name={"melliCode"} rules={[melliCodeRule]}>
-                  <Input placeholder="شماره ملی را وارد کنید..." />
+                  <Input
+                    label="شماره ملی"
+                    placeholder="شماره ملی را وارد کنید..."
+                  />
                 </Form.Item>
               </SpaceStyled>
             </Col>
@@ -104,6 +118,7 @@ const UpsertPersonDialog = ({ singlePerson, setIsUpsertDialogShow }) => {
                 </label> */}
                 <Form.Item name={"birthday"}>
                   <PersianDatePickerComponent
+                    label="تاریخ تولد"
                     value={birthday}
                     onSelect={(moment) => {
                       const miladiDate = moment.format("MM/DD/YYYY");
@@ -115,10 +130,12 @@ const UpsertPersonDialog = ({ singlePerson, setIsUpsertDialogShow }) => {
                 </Form.Item>
               </SpaceStyled>
             </Col>
+          </Row>
+          <Row align="bottom">
             <Col span={12}>
               <SpaceStyled horizontal={10}>
                 <Form.Item name={"gender"} rules={[requiredForm]}>
-                  <Select defaultValue="none">
+                  <Select label="جنسیت" defaultValue="none">
                     <Select.Option value="none">انتخاب کنید</Select.Option>
                     <Select.Option value="man">آقا</Select.Option>
                     <Select.Option value="woman">خانم</Select.Option>
@@ -127,7 +144,7 @@ const UpsertPersonDialog = ({ singlePerson, setIsUpsertDialogShow }) => {
               </SpaceStyled>
             </Col>
             <Col span={12}>
-              <SpaceStyled horizontal={10}>
+              <SpaceStyled horizontal={10} bottom={25}>
                 <CustomButton color={lightGreenColor} block htmlType={"submit"}>
                   ثبت
                 </CustomButton>

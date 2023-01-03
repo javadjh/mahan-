@@ -1,5 +1,6 @@
 import { Image } from "antd";
 import React, { useContext } from "react";
+import { useEffect } from "react";
 import ReactTooltip from "react-tooltip";
 import { grayColor } from "../../app/appColor";
 import { FRONT_IP } from "../../config/ip";
@@ -14,6 +15,10 @@ import {
 import { fileNameToEX } from "../../utility/global";
 const FilesUploadedComponent = () => {
   const { images, uploadedFile, canUpload } = useContext(FileContext);
+  useEffect(() => {
+    console.log("in files uploaded component => useEffect * ");
+    console.log(images);
+  }, [images]);
   return (
     <>
       {!canUpload ? (

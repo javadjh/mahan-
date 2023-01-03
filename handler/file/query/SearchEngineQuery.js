@@ -108,11 +108,11 @@ module.exports.searchEngine = async (req, res) => {
     ],
   };
 
-  if (
-    req.user.userId.toString() !== "61e3f77540129135ec4d928f" &&
-    req.user.userId.toString() !== "626451c2ce31af260c2238be"
-  )
-    documentFilter.isConfirm = true;
+  // if (
+  //   req.user.userId.toString() !== "61e3f77540129135ec4d928f" &&
+  //   req.user.userId.toString() !== "626451c2ce31af260c2238be"
+  // )
+  //   documentFilter.isConfirm = true;
   const documents = await DocumentModel.find(documentFilter, null, {})
     .sort({ createDate: -1 })
     .populate("archiveId fileId ")

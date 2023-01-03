@@ -34,9 +34,9 @@ const FileInformationComponent = () => {
               </Col>
             </Row>
           </Col>
-          <Col>
+          {/* <Col>
             <Image src="/assets/icons/file.svg" />
-          </Col>
+          </Col> */}
         </Row>
       </FileNameBlock>
       <Row>
@@ -54,7 +54,7 @@ const FileInformationComponent = () => {
         </Col>
         <Col span={8}>
           <CardItemComponent
-            title={"تعداد پرونده"}
+            title={"تعداد اسناد"}
             value={fileStatistic?.totalCount}
           />
         </Col>
@@ -96,6 +96,7 @@ const FileInformationComponent = () => {
             </Col>
             <Col span={24}>
               <CardItemComponent
+                dirPosition={"start"}
                 title={"مخاطبین"}
                 value={
                   <>

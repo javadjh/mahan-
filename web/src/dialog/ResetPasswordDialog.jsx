@@ -6,6 +6,7 @@ import { just_persian } from "../utility/inputValidators";
 import { Form, Input } from "antd";
 import CustomButton from "../styled/components/CustomButton";
 import { passwordRule, requiredForm } from "../config/formValidator";
+import CustomInput from "../styled/components/CustomInput";
 const ResetPasswordDialog = ({ setIsResetPasswordDialogShow }) => {
   const dispatch = useDispatch();
 
@@ -17,7 +18,7 @@ const ResetPasswordDialog = ({ setIsResetPasswordDialogShow }) => {
   };
   return (
     <Fragment>
-      <Form form={form} onFinish={changePasswordHandle}>
+      <Form layout="vertical" form={form} onFinish={changePasswordHandle}>
         <Form.Item rules={[requiredForm]} name={"oldPassword"}>
           <Input type="password" placeholder="کلمه ی عبور فعلی" />
         </Form.Item>

@@ -11,6 +11,8 @@ import { FormContext } from "../../context/form/FormContext";
 import { maxForm, minForm, requiredForm } from "../../config/formValidator";
 import CustomDialog from "../../styled/components/CustomDialog";
 import FormViewerRoot from "../objects/view/FormViewerRoot";
+import CustomInput from "../../styled/components/CustomInput";
+import CustomTextArea from "../../styled/components/CustomTextArea";
 const FormOptionsComponent = () => {
   const { form, child, sendData } = useContext(FormContext);
   return (
@@ -51,18 +53,19 @@ const FormOptionsComponent = () => {
           </Col>
         </Row>
         <SpaceStyled top={20}>
-          <Form form={form} onFinish={sendData}>
+          <Form layout="vertical" form={form} onFinish={sendData}>
             <SpaceStyled vertical={10}>
               <CustomText color={darkBlueColor}>اطلاعات فرم</CustomText>
             </SpaceStyled>
             <Form.Item
+              label="عنوان"
               name={"title"}
               rules={[requiredForm, minForm(2), maxForm(80)]}
             >
               <Input placeholder="عنوان فرم را وارد کنید" />
             </Form.Item>
-            <Form.Item name={"description"}>
-              <Input.TextArea rows={5} placeholder="عنوان فرم را وارد کنید" />
+            <Form.Item label="توضیحات" name={"description"}>
+              <Input.TextArea rows={5} placeholder="توضیحات فرم را وارد کنید" />
             </Form.Item>
           </Form>
         </SpaceStyled>

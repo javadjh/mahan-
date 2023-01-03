@@ -5,7 +5,9 @@ import { maxForm, minForm, requiredForm } from "../../config/formValidator";
 import { FileContext } from "../../context/file/FileContext";
 import CustomButton from "../../styled/components/CustomButton";
 import CustomDatePicker from "../../styled/components/CustomDatePicker";
+import CustomInput from "../../styled/components/CustomInput";
 import CustomLabel from "../../styled/components/CustomLabel";
+import CustomTextArea from "../../styled/components/CustomTextArea";
 import { SpaceStyled } from "../../styled/global";
 
 const InsertAlertComponent = () => {
@@ -16,6 +18,7 @@ const InsertAlertComponent = () => {
       <CustomLabel title="افزودن هشدار جدید" icon="file" />
       <SpaceStyled top={40}>
         <Form
+          layout="vertical"
           form={form}
           onFinish={(formData) => {
             insertFilesAlert(formData);
@@ -23,6 +26,7 @@ const InsertAlertComponent = () => {
           }}
         >
           <Form.Item
+            label="عنوان"
             name={"title"}
             rules={[requiredForm, minForm(2), maxForm(80)]}
           >
@@ -33,7 +37,11 @@ const InsertAlertComponent = () => {
             <CustomDatePicker />
           </Form.Item>
 
-          <Form.Item name={"description"} rules={[requiredForm, minForm(2)]}>
+          <Form.Item
+            label="متن هشدار"
+            name={"description"}
+            rules={[requiredForm, minForm(2)]}
+          >
             <Input.TextArea rows={4} placeholder="متن هشدار را تایپ کنید" />
           </Form.Item>
           <CustomButton htmlType="submit" color={lightGreenColor} isLeft={true}>

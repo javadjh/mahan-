@@ -55,25 +55,25 @@ const TabsComponent = () => {
           <DocumentsTable />
         </Auth>
       </Tabs.TabPane>
-      <Tabs.TabPane tab="تاریخچه اسناد " key={"log"}>
-        <Auth isLend={true} accessList={["تاریخچه تغییرات سند"]}>
-          <FilesLogTable />
-        </Auth>
+      <Tabs.TabPane tab={nazerTab()} key={"nazer"}>
+        <CorrespondenceRoot />
       </Tabs.TabPane>
-
-      <Tabs.TabPane tab="آمار پرونده " key={"statistic"}>
-        <FileStatisticComponent />
+      <Tabs.TabPane tab="هشدار ها" key={"alerts"}>
+        <MergeAlertComponent />
       </Tabs.TabPane>
       <Tabs.TabPane tab="اسناد حذف شده " key={"deleted"}>
         <Auth isLend={true} accessList={["مدیریت اسناد حذف شده"]}>
           <DeletedDocsTable />
         </Auth>
       </Tabs.TabPane>
-      <Tabs.TabPane tab="هشدار ها" key={"alerts"}>
-        <MergeAlertComponent />
+      <Tabs.TabPane tab="تاریخچه اسناد " key={"log"}>
+        <Auth isLend={true} accessList={["تاریخچه تغییرات سند"]}>
+          <FilesLogTable />
+        </Auth>
       </Tabs.TabPane>
-      <Tabs.TabPane tab={nazerTab()} key={"nazer"}>
-        <CorrespondenceRoot />
+
+      <Tabs.TabPane tab="آمار  " key={"statistic"}>
+        <FileStatisticComponent />
       </Tabs.TabPane>
     </Tabs>
   );

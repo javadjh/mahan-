@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import { validatorSP } from "../utility/formValidator";
+
+import { FiEye, FiEyeOff } from "react-icons/fi";
 import { useDispatch } from "react-redux";
 import {
   loginAction,
@@ -10,8 +11,9 @@ import { appStatusService } from "../service/AppSettingService";
 import { doneToast } from "../utility/ShowToast";
 import axiosConfig from "../service/axiosConfig";
 import LoadingComponent from "../RootComponent/LoadingComponent";
-import { CardStyled, SpaceStyled } from "../styled/global";
+import { CardStyled, CustomCursor, SpaceStyled } from "../styled/global";
 import { Col, Form, Input, Row } from "antd";
+import styled from "styled-components";
 import { BackgroundWave, LeftSideStyled } from "../styled/login";
 import CustomText from "../styled/components/CustomText";
 import CustomButton from "../styled/components/CustomButton";
@@ -21,6 +23,7 @@ import { maxForm, minForm, requiredForm } from "../config/formValidator";
 import CustomMediumButton from "../styled/components/CustomMediumButton";
 import { SERVER_IP } from "../config/ip";
 const LoginComponent = () => {
+  const [passwordVisibility, setPasswordVisibility] = useState(false);
   const [isInitState, setIsInitState] = useState(true);
   const [isLoadData, setIsLoadData] = useState(false);
   const [isForgetPassword, setIsForgetPassword] = useState(false);
@@ -75,17 +78,12 @@ const LoginComponent = () => {
                         فرم حساب کاربری
                       </CustomText>
                     </Col>
-                    <Col>
-                      <CustomText size={11} color={whiteColor}>
-                        برای ورود اطلاعات خود را وارد کنید
-                      </CustomText>
-                    </Col>
                   </Row>
                   {isInitState ? (
                     <SpaceStyled vertical={20}>
                       {isForgetPassword ? (
                         <span>
-                          <Form onFinish={sendData}>
+                          <Form layout="vertical" onFinish={sendData}>
                             <SpaceStyled vertical={15}>
                               <Form.Item
                                 name={"userName"}
@@ -139,7 +137,7 @@ const LoginComponent = () => {
                         </span>
                       ) : (
                         <span>
-                          <Form onFinish={sendData}>
+                          <Form layout="vertical" onFinish={sendData}>
                             <SpaceStyled vertical={15}>
                               <Form.Item
                                 name={"userName"}
@@ -152,16 +150,49 @@ const LoginComponent = () => {
                               </Form.Item>
                             </SpaceStyled>
                             <SpaceStyled vertical={15}>
-                              <Form.Item
-                                name={"password"}
-                                rules={[maxForm(80), minForm(6)]}
-                              >
-                                <Input
-                                  className="login-input"
-                                  type={"password"}
-                                  placeholder={"گذرواژه خود را وارد کنید"}
-                                />
-                              </Form.Item>
+                              <Row align="middle">
+                                <Col span={24}>
+                                  <Form.Item
+                                    name={"password"}
+                                    rules={[maxForm(80), minForm(6)]}
+                                  >
+                                    <Input
+                                      type={
+                                        passwordVisibility ? "text" : "password"
+                                      }
+                                      className="login-input"
+                                      placeholder={"گذرواژه خود را وارد کنید"}
+                                    />
+                                  </Form.Item>
+                                </Col>
+                                <Col>
+                                  <SpaceStyled top={-15} right={-30}>
+                                    <CustomCursor
+                                      onClick={() =>
+                                        setPasswordVisibility(
+                                          !passwordVisibility
+                                        )
+                                      }
+                                    >
+                                      {passwordVisibility ? (
+                                        <FiEye
+                                          style={{
+                                            fontSize: 20,
+                                            color: "white",
+                                          }}
+                                        />
+                                      ) : (
+                                        <FiEyeOff
+                                          style={{
+                                            fontSize: 20,
+                                            color: "white",
+                                          }}
+                                        />
+                                      )}
+                                    </CustomCursor>
+                                  </SpaceStyled>
+                                </Col>
+                              </Row>
                             </SpaceStyled>
                             <SpaceStyled top={40}>
                               <CustomMediumButton
@@ -194,7 +225,7 @@ const LoginComponent = () => {
                       )}
                     </SpaceStyled>
                   ) : (
-                    <Form onFinish={checkLicenseCode}>
+                    <Form layout="vertical" onFinish={checkLicenseCode}>
                       <SpaceStyled vertical={15}>
                         <Form.Item name={"license"} rules={[requiredForm]}>
                           <Input
@@ -222,3 +253,4 @@ const LoginComponent = () => {
   );
 };
 export default LoginComponent;
+const Password = styled(Input.Password)``;

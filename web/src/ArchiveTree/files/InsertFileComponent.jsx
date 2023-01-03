@@ -18,6 +18,10 @@ import { getAllFormsAction } from "../../stateManager/actions/FormAction";
 import { colourStyles, SpaceStyled } from "../../styled/global";
 import CustomButton from "../../styled/components/CustomButton";
 import { maxForm, minForm, requiredForm } from "../../config/formValidator";
+import CustomInput from "../../styled/components/CustomInput";
+import CustomSelect from "../../styled/components/CustomSelect";
+import CustomTextArea from "../../styled/components/CustomTextArea";
+import CustomRSelect from "../../styled/components/CustomRSelect";
 const animatedComponents = makeAnimated();
 
 const InsertFileComponent = ({
@@ -94,6 +98,7 @@ const InsertFileComponent = ({
       {isLoaded && (
         <div>
           <Form
+            layout="vertical"
             form={form}
             initialValues={{
               enDate: new Date().toISOString(),
@@ -116,7 +121,11 @@ const InsertFileComponent = ({
 
               {form.getFieldValue("hasSpecialForm") ? (
                 <Col span={12}>
-                  <Form.Item name={"formSelected"} rules={[requiredForm]}>
+                  <Form.Item
+                    label="فرم"
+                    name={"formSelected"}
+                    rules={[requiredForm]}
+                  >
                     <Select
                       placeholder="فرم را انتخاب کنید"
                       style={{ width: "100%" }}
@@ -195,7 +204,10 @@ const InsertFileComponent = ({
                 name={"title"}
                 rules={[requiredForm, minForm(2), maxForm(255)]}
               >
-                <Input placeholder="عنوان پرونده را وارد نمایید..." />
+                <Input
+                  label={"عنوان"}
+                  placeholder="عنوان پرونده را وارد نمایید..."
+                />
               </Form.Item>
             </SpaceStyled>
             <SpaceStyled vertical={10}>
@@ -203,7 +215,11 @@ const InsertFileComponent = ({
                 <Col span={8}>
                   <SpaceStyled left={10}>
                     {lang === "fa" ? (
-                      <Form.Item name={"faDate"} rules={[requiredForm]}>
+                      <Form.Item
+                        label={"تاریخ پرونده"}
+                        name={"faDate"}
+                        rules={[requiredForm]}
+                      >
                         <PersianDatePickerComponent
                           value={form.getFieldValue("faDate")}
                           onSelect={(moment) => {
@@ -221,7 +237,11 @@ const InsertFileComponent = ({
                       </Form.Item>
                     ) : (
                       <div dir={"ltr"}>
-                        <Form.Item name={"enDate"} rules={[requiredForm]}>
+                        <Form.Item
+                          label={"تاریخ پرونده"}
+                          name={"enDate"}
+                          rules={[requiredForm]}
+                        >
                           <PersianDatePickerComponent
                             value={form.getFieldValue("enDate")}
                             onSelect={(moment) => {
@@ -245,7 +265,11 @@ const InsertFileComponent = ({
 
                 <Col span={8}>
                   <SpaceStyled left={10}>
-                    <Form.Item rules={[requiredForm]} name={"fileStatus"}>
+                    <Form.Item
+                      label="وضعیت پرونده"
+                      rules={[requiredForm]}
+                      name={"fileStatus"}
+                    >
                       <Select
                         placeholder="وضعیت پرونده را مشخص کنید"
                         style={{ width: "100%" }}
@@ -271,6 +295,7 @@ const InsertFileComponent = ({
                   <SpaceStyled left={10}>
                     <Form.Item name={"type"} rules={[requiredForm]}>
                       <Select
+                        label={"نوع پرونده"}
                         style={{ width: "100%" }}
                         placeholder="نوع پرونده را مشخص کنید"
                       >
@@ -337,7 +362,7 @@ const InsertFileComponent = ({
                 </Col>
               </Row>
             </SpaceStyled>
-            <Form.Item name={"keyword"}>
+            <Form.Item label={"کلیدواژه ها"} name={"keyword"}>
               <Input.TextArea
                 rows={4}
                 placeholder={

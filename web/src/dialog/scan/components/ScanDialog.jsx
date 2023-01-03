@@ -72,7 +72,7 @@ const ScanDialog = ({ onScannedListener }) => {
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        <Form onFinish={scanDocument}>
+        <Form layout="vertical" onFinish={scanDocument}>
           {devices.length > 0 ? (
             <div className="flex-parent">
               <ScannerOptionsComponent

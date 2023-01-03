@@ -251,6 +251,7 @@ const FileContextProvider = ({ children, match, history }) => {
         isTabsDataLoading,
         canUpload,
         history,
+        images,
         fileId,
         docId,
         uploadedFile,

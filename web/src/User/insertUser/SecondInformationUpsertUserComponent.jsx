@@ -11,6 +11,7 @@ import {
   lightGreenColor,
 } from "../../app/appColor";
 import CustomCheckbox from "../../styled/components/CustomCheckbox";
+import CustomSelect from "../../styled/components/CustomSelect";
 const SecondInformationUpsertUserComponent = ({
   upsertUserData,
   sendData,
@@ -30,7 +31,7 @@ const SecondInformationUpsertUserComponent = ({
   const [form] = Form.useForm();
   return (
     <Col span={12} offset={1}>
-      <Form form={form}>
+      <Form layout="vertical" form={form}>
         <SpaceStyled horizontal={5}>
           <h4 className="card-title mx-3">انتخاب بایگانی و نقش</h4>
           <p className="card-title-desc mx-3">
@@ -40,6 +41,7 @@ const SecondInformationUpsertUserComponent = ({
             <Col span={11}>
               <Form.Item name={"archive"}>
                 <Select
+                  label="بایگانی"
                   placeholder={"انتخاب بایگانی"}
                   onChange={(e) => {
                     setArchive(e);
@@ -63,6 +65,7 @@ const SecondInformationUpsertUserComponent = ({
             <Col span={12} offset={1}>
               <Form.Item name={"role"}>
                 <Select
+                  label="نقش"
                   placeholder={"انتخاب نقش"}
                   style={{ width: "100%" }}
                   // onClick={() => {

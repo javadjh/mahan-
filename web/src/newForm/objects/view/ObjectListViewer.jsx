@@ -39,7 +39,7 @@ const ObjectListViewer = () => {
   }, []);
   return (
     <Fragment>
-      <Form onFinish={onFinishForm} form={form}>
+      <Form layout="vertical" onFinish={onFinishForm} form={form}>
         <Row>
           {child.map((item, index) => (
             <Col

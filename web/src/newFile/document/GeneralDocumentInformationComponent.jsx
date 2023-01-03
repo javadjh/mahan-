@@ -38,7 +38,7 @@ const GeneralDocumentInformationComponent = () => {
                 block
                 icon={
                   <SpaceStyled top={-5}>
-                    <Image src="/assets/icons/dl.svg" />
+                    <Image preview={false} src="/assets/icons/dl.svg" />
                   </SpaceStyled>
                 }
                 color={lightBlueSecondColor}
@@ -57,7 +57,7 @@ const GeneralDocumentInformationComponent = () => {
                     block
                     icon={
                       <SpaceStyled top={-5}>
-                        <Image src="/assets/icons/rm.svg" />
+                        <Image preview={false} src="/assets/icons/rm.svg" />
                       </SpaceStyled>
                     }
                     color={lightRedColor}
@@ -86,7 +86,10 @@ const GeneralDocumentInformationComponent = () => {
                       block
                       icon={
                         <SpaceStyled top={-5}>
-                          <Image src="/assets/icons/edit-image.svg" />
+                          <Image
+                            preview={false}
+                            src="/assets/icons/edit-image.svg"
+                          />
                         </SpaceStyled>
                       }
                       color={darkBlueColor}

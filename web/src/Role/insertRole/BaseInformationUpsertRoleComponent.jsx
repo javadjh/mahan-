@@ -5,6 +5,8 @@ import CustomButton from "../../styled/components/CustomButton";
 import { SpaceStyled } from "../../styled/global";
 import { UpsertRoleContext } from "./UpsertRoleContext";
 import { maxForm, minForm, requiredForm } from "../../config/formValidator";
+import CustomInput from "../../styled/components/CustomInput";
+import CustomTextArea from "../../styled/components/CustomTextArea";
 const BaseInformationUpsertRoleComponent = ({ insertRoleHandle }) => {
   const { title, setTitle, description, setDescription, formValidator, form } =
     useContext(UpsertRoleContext);
@@ -14,7 +16,7 @@ const BaseInformationUpsertRoleComponent = ({ insertRoleHandle }) => {
       <CustomCard>
         <h4>اطلاعات پایه</h4>
         <p>در این قسمت باید اطلاعات کلی نقش را وارد نمایید</p>
-        <Form form={form} onFinish={insertRoleHandle}>
+        <Form layout="vertical" form={form} onFinish={insertRoleHandle}>
           <div>
             <div>
               <Col span={24}>
@@ -22,7 +24,10 @@ const BaseInformationUpsertRoleComponent = ({ insertRoleHandle }) => {
                   name={"title"}
                   rules={[minForm(2), maxForm(150), requiredForm]}
                 >
-                  <Input placeholder={"عنوان نقش را وارد کنید..."} />
+                  <Input
+                    label="عنوان نقش"
+                    placeholder={"عنوان نقش را وارد کنید..."}
+                  />
                 </Form.Item>
               </Col>
             </div>
@@ -34,6 +39,7 @@ const BaseInformationUpsertRoleComponent = ({ insertRoleHandle }) => {
                 rules={[minForm(2), maxForm(500)]}
               >
                 <Input.TextArea
+                  label="توضیحات نقش"
                   rows="4"
                   placeholder={"توضیحات نقش را وارد کنید..."}
                 />

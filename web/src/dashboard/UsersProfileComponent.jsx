@@ -22,6 +22,7 @@ import {
   requiredForm,
 } from "../config/formValidator";
 import { SERVER_IP } from "../config/ip";
+import CustomInput from "../styled/components/CustomInput";
 const centerStyle = {
   color: "white",
   position: "absolute",
@@ -135,6 +136,7 @@ const UsersProfileComponent = () => {
         </SpaceStyled>
       </CenterStyled>
       <Form
+        layout="vertical"
         form={form}
         onFinish={onUpdateProfileHandle}
         disabled={isFormDisable}
@@ -142,6 +144,7 @@ const UsersProfileComponent = () => {
         <Row>
           <Col span={11} offset={1}>
             <Form.Item
+              label="نام"
               rules={[requiredForm, minForm(2), maxForm(50)]}
               name={"firstName"}
             >
@@ -151,6 +154,7 @@ const UsersProfileComponent = () => {
 
           <Col span={11} offset={1}>
             <Form.Item
+              label={"نام خانوادگی"}
               rules={[requiredForm, minForm(2), maxForm(50)]}
               name={"lastName"}
             >
@@ -159,6 +163,7 @@ const UsersProfileComponent = () => {
           </Col>
           <Col span={11} offset={1}>
             <Form.Item
+              label={"ایمیل"}
               rules={[requiredForm, emailForm("email")]}
               name={"email"}
             >
@@ -167,6 +172,7 @@ const UsersProfileComponent = () => {
           </Col>
           <Col span={11} offset={1}>
             <Form.Item
+              label={"شماره تماس"}
               rules={[requiredForm, minForm(11), maxForm(11)]}
               name={"phoneNumber"}
             >
@@ -174,12 +180,12 @@ const UsersProfileComponent = () => {
             </Form.Item>
           </Col>
           <Col span={11} offset={1}>
-            <Form.Item name={"userName"} disabled>
+            <Form.Item name={"userName"} disabled label={"نام کاربری"}>
               <Input placeholder="نام کاربری را وارد کنید" />
             </Form.Item>
           </Col>
           <Col span={11} offset={1}>
-            <Form.Item name={"createDate"} disabled>
+            <Form.Item label={"تاریخ ثبت"} name={"createDate"} disabled>
               <Input placeholder="تاریخ ثبت را وارد کنید" />
             </Form.Item>
           </Col>

@@ -5,12 +5,14 @@ import { lightGreenColor } from "../../app/appColor";
 import { useContext } from "react";
 import { DocumentContext } from "../../context/document/DocumentContext";
 import { minForm, requiredForm } from "../../config/formValidator";
+import CustomTextArea from "../../styled/components/CustomTextArea";
 
 const InsertDocumentsNoteComponent = () => {
   const { addNewNoteForDocument } = useContext(DocumentContext);
   const [form] = Form.useForm();
   return (
     <Form
+      layout="vertical"
       form={form}
       onFinish={(formData) => {
         addNewNoteForDocument(formData);
@@ -19,7 +21,11 @@ const InsertDocumentsNoteComponent = () => {
     >
       <Row align="middle">
         <Col span={19}>
-          <Form.Item name={"description"} rules={[requiredForm, minForm(2)]}>
+          <Form.Item
+            label="متن یادداشت"
+            name={"description"}
+            rules={[requiredForm, minForm(2)]}
+          >
             <Input.TextArea rows={4} placeholder="متن یادداشت را تایپ کنید" />
           </Form.Item>
         </Col>

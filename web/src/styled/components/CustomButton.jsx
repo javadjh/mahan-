@@ -28,7 +28,7 @@ const CustomButton = (props) => {
           <Col>
             <CustomButtonStyled {...editProps}>
               <Row>
-                <Col>{props.children}</Col>
+                <Col span={!props.icon && 24}>{props.children}</Col>
                 <Col>
                   {props.icon && (
                     <SpaceStyled right={5} top={5}>
@@ -43,7 +43,7 @@ const CustomButton = (props) => {
       ) : (
         <CustomButtonStyled {...editProps}>
           <Row justify="space-between" align="middle">
-            <Col>{props.children}</Col>
+            <Col span={!props.icon && 24}>{props.children}</Col>
             <Col>
               {props.icon && (
                 <SpaceStyled right={5} top={5}>

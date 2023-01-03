@@ -9,6 +9,7 @@ import {
 import { Input } from "antd";
 import CustomButton from "../../styled/components/CustomButton";
 import { SpaceStyled } from "../../styled/global";
+import CustomInput from "../../styled/components/CustomInput";
 export const UpsertLibraryShelfDialog = ({ libraryShelf }) => {
   const dispatch = useDispatch();
   const [title, setTitle] = useState("");
@@ -34,6 +35,7 @@ export const UpsertLibraryShelfDialog = ({ libraryShelf }) => {
       <div>
         <p>افزودن پوشه</p>
         <Input
+          label="عنوان پوشه"
           type={"text"}
           value={title}
           placeholder={"عنوان پوشه را وارد کنید..."}

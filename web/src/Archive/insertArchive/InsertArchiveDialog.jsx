@@ -13,6 +13,7 @@ import { Form, Input } from "antd";
 import { maxForm, minForm, requiredForm } from "../../config/formValidator";
 import CustomButton from "../../styled/components/CustomButton";
 import { lightGreenColor } from "../../app/appColor";
+import CustomInput from "../../styled/components/CustomInput";
 const InsertArchiveDialog = ({ singleArchive, setIsUpsertDialogShow }) => {
   console.table(singleArchive);
   const dispatch = useDispatch();
@@ -42,14 +43,15 @@ const InsertArchiveDialog = ({ singleArchive, setIsUpsertDialogShow }) => {
     <Fragment>
       <h4>مدیریت بایگانی ها</h4>
       <p>در این قسمت می توانید بایگانی ها را مدیریت یا ویرایش کنید</p>
-      <Form form={form} onFinish={sendData}>
+      <Form layout="vertical" form={form} onFinish={sendData}>
         <Form.Item
+          label="عنوان"
           name={"title"}
           rules={[requiredForm, minForm(2), maxForm(80)]}
         >
           <Input placeholder="عنوان بایگانی را وارد کنید..." />
         </Form.Item>
-        <Form.Item name={"description"} rules={[maxForm(550)]}>
+        <Form.Item label="توضیحات" name={"description"} rules={[maxForm(550)]}>
           <Input placeholder="توضیحات را وارد کنید..." />
         </Form.Item>
         <CustomButton htmlType={"submit"} color={lightGreenColor}>

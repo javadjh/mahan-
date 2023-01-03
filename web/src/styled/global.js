@@ -56,6 +56,7 @@ export const colourStyles = {
       borderRadius: "8px",
       padding: "10px ",
       color: "black ",
+      backgroundColor: "#fdfdfd",
       marginTop: 10,
     },
   }),

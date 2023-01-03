@@ -78,8 +78,8 @@ const FileAlertsDialog = () => {
                   )}
                 </div>
                 <div className="form-group">
-                  <label htmlFor="validationCustom04">تاریخ انقضا</label>
                   <PersianDatePickerComponent
+                    label="تاریخ انتضا"
                     value={alertDate}
                     onSelect={(moment) => {
                       const miladiDate = moment.format("MM/DD/YYYY");

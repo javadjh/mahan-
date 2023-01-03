@@ -6,6 +6,7 @@ import { Col, Divider, Input, Radio, Row, Space } from "antd";
 import { CenterVerticalStyled, SpaceStyled } from "../../styled/global";
 import CustomButton from "../../styled/components/CustomButton";
 import { lightGreenColor } from "../../app/appColor";
+import CustomInput from "../../styled/components/CustomInput";
 const InsertMoreSettingDialog = () => {
   const dispatch = useDispatch();
   const singleArchive = useSelector((state) => state.singleArchive.archive);
@@ -90,6 +91,7 @@ const InsertMoreSettingDialog = () => {
           <Row>
             <Col span={11}>
               <Input
+                label="واترمارک"
                 type="text"
                 name={"watermarkText"}
                 value={watermarkText}
@@ -104,6 +106,7 @@ const InsertMoreSettingDialog = () => {
             </Col>
             <Col span={12} offset={1}>
               <Input
+                label="حداکثر حجم"
                 type="number"
                 name={"maxFileSize"}
                 value={maxFileSize}

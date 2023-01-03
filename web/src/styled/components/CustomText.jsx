@@ -3,9 +3,12 @@ import React from "react";
 import { lightBlueColor } from "../../app/appColor";
 const CustomText = (props) => {
   let style = {
-    color: props.color ? props.color : lightBlueColor,
-    padding: "5px !important",
-    margin: "0px ",
+    ...props.style,
+    ...{
+      color: props.color ? props.color : lightBlueColor,
+      padding: "5px !important",
+      margin: "0px ",
+    },
   };
   if (props?.color) {
     style = { ...style, ...{ color: props.color } };

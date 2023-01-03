@@ -7,6 +7,10 @@ import { insertLendAction } from "../../stateManager/actions/LendsAction";
 import { Col, Row } from "antd";
 import CustomMediumButton from "../../styled/components/CustomMediumButton";
 import { colourStyles, SpaceStyled } from "../../styled/global";
+import CustomSelect from "../../styled/components/CustomSelect";
+import CustomRSelect from "../../styled/components/CustomRSelect";
+import styled from "styled-components";
+import { labelColor } from "../../app/appColor";
 
 const ShareFile = ({ fileId }) => {
   const dispatch = useDispatch();
@@ -14,7 +18,9 @@ const ShareFile = ({ fileId }) => {
   const [expire, setExpire] = useState(new Date().toISOString());
   const [usersReceiver, setUsersReceiver] = useState([]);
   const [usersSelected, setUsersSelected] = useState([]);
-
+  let CustomRSelectLabelStyled = styled.span`
+    color: ${labelColor};
+  `;
   useEffect(() => {
     getData();
   }, []);
@@ -52,6 +58,9 @@ const ShareFile = ({ fileId }) => {
     <div>
       <Row>
         <Col span={11}>
+          <SpaceStyled bottom={-5}>
+            <CustomRSelectLabelStyled>مخاطبین</CustomRSelectLabelStyled>
+          </SpaceStyled>
           <Select
             styles={colourStyles}
             onChange={(e) => {
@@ -59,6 +68,7 @@ const ShareFile = ({ fileId }) => {
               e.map((u) => {
                 users.push(u.value);
               });
+              console.log(users);
               setUsersSelected(users);
             }}
             noOptionsMessage={() => "یافت نشد"}
@@ -66,13 +76,14 @@ const ShareFile = ({ fileId }) => {
             closeMenuOnSelect={false}
             className="basic-multi-select mb-2"
             classNamePrefix="select"
-            isMulti
+            isMulti={true}
             options={usersReceiver}
           />
         </Col>
         <Col span={12} offset={1}>
           <SpaceStyled top={10}>
             <PersianDatePickerComponent
+              label="تاریخ انقضا اشتراک"
               style
               value={expire}
               onSelect={(moment) => {

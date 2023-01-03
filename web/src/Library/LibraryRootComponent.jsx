@@ -14,7 +14,9 @@ import CustomButton from "../styled/components/CustomButton";
 const animatedComponents = makeAnimated();
 const LibraryRootComponent = () => {
   const dispatch = useDispatch();
-  const { setFile, sendData, archive, setArchive } = useContext(LibraryContext);
+  const { setFile, sendData, archive, setArchive, file } =
+    useContext(LibraryContext);
+  const [fileItem, setFileItem] = useState({});
 
   const usersArchives = useSelector((state) => state.usersArchives);
   const archivesFile = useSelector((state) => state.archivesFile);
@@ -92,8 +94,10 @@ const LibraryRootComponent = () => {
               <Select
                 onChange={(e) => {
                   setFile(e.value);
-                  getArchivesFile(e.label);
+                  // getArchivesFile(e.label);
+                  setFileItem(e);
                 }}
+                value={fileItem}
                 noOptionsMessage={() => "یافت نشد"}
                 placeholder={"جست و جو در پرونده..."}
                 closeMenuOnSelect={false}
