@@ -64,7 +64,7 @@ const LegalPeopleRootComponent = () => {
         <Col span={12}>
           <Input
             block
-            placeholder="جستجو در اشحاص حقیقی"
+            placeholder="جستجو در اشحاص حقوقی"
             onChange={(e) => setSearchValue(e.target.value)}
           />
         </Col>

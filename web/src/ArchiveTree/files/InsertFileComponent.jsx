@@ -22,6 +22,8 @@ import CustomInput from "../../styled/components/CustomInput";
 import CustomSelect from "../../styled/components/CustomSelect";
 import CustomTextArea from "../../styled/components/CustomTextArea";
 import CustomRSelect from "../../styled/components/CustomRSelect";
+import PeopleEmpty from "../../styled/empties/PeopleEmpty";
+import ApplicantEmpty from "../../styled/empties/ApplicantEmpty";
 const animatedComponents = makeAnimated();
 
 const InsertFileComponent = ({
@@ -201,13 +203,11 @@ const InsertFileComponent = ({
 
             <SpaceStyled vertical={10}>
               <Form.Item
+                label={"عنوان"}
                 name={"title"}
                 rules={[requiredForm, minForm(2), maxForm(255)]}
               >
-                <Input
-                  label={"عنوان"}
-                  placeholder="عنوان پرونده را وارد نمایید..."
-                />
+                <Input placeholder="عنوان پرونده را وارد نمایید..." />
               </Form.Item>
             </SpaceStyled>
             <SpaceStyled vertical={10}>
@@ -293,9 +293,12 @@ const InsertFileComponent = ({
                 </Col>
                 <Col span={8}>
                   <SpaceStyled left={10}>
-                    <Form.Item name={"type"} rules={[requiredForm]}>
+                    <Form.Item
+                      label={"نوع پرونده"}
+                      name={"type"}
+                      rules={[requiredForm]}
+                    >
                       <Select
-                        label={"نوع پرونده"}
                         style={{ width: "100%" }}
                         placeholder="نوع پرونده را مشخص کنید"
                       >
@@ -329,7 +332,7 @@ const InsertFileComponent = ({
                         <RSelect
                           isClearable={true}
                           styles={colourStyles}
-                          noOptionsMessage={() => "یافت نشد"}
+                          noOptionsMessage={PeopleEmpty}
                           placeholder={"جست و جو در مخاطبین..."}
                           closeMenuOnSelect={false}
                           components={animatedComponents}
@@ -352,7 +355,7 @@ const InsertFileComponent = ({
                         styles={colourStyles}
                         className="basic-single"
                         classNamePrefix="select"
-                        noOptionsMessage={() => "یافت نشد"}
+                        noOptionsMessage={ApplicantEmpty}
                         placeholder={"جست و جو در سمت های سازمانی..."}
                         components={animatedComponents}
                         options={insertFileData.applicants}
@@ -370,14 +373,9 @@ const InsertFileComponent = ({
                 }
               />
             </Form.Item>
-            <Row justify="end">
-              <Col span={8}>
-                {/* onClick={sendData} */}
-                <CustomButton block htmlType="submit">
-                  ثبت پرونده
-                </CustomButton>
-              </Col>
-            </Row>
+            <CustomButton isLeft={true} htmlType="submit">
+              ثبت پرونده
+            </CustomButton>
           </Form>
         </div>
       )}

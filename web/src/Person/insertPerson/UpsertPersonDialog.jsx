@@ -44,6 +44,7 @@ const UpsertPersonDialog = ({ singlePerson, setIsUpsertDialogShow }) => {
     const data = { ...formData, ...{ birthday, id: undefined } };
     if (formData.id) await dispatch(updatePersonAction(formData.id, data));
     else await dispatch(insertPersonAction(data));
+    form.resetFields();
     setIsUpsertDialogShow(false);
   };
 
@@ -58,44 +59,41 @@ const UpsertPersonDialog = ({ singlePerson, setIsUpsertDialogShow }) => {
             <Col span={12}>
               <SpaceStyled horizontal={10}>
                 <Form.Item
+                  label="نام"
                   name={"firstName"}
                   rules={[persianRule, requiredForm, minForm(2), maxForm(50)]}
                 >
-                  <Input label="نام" placeholder="نام را وارد کنید..." />
+                  <Input placeholder="نام را وارد کنید..." />
                 </Form.Item>
               </SpaceStyled>
             </Col>
             <Col span={12}>
               <SpaceStyled horizontal={10}>
                 <Form.Item
+                  label="نام خانوادگی"
                   name={"lastName"}
                   rules={[persianRule, requiredForm, minForm(2), maxForm(50)]}
                 >
-                  <Input
-                    label="نام خانوادگی"
-                    placeholder="نام خانوادگی را وارد کنید..."
-                  />
+                  <Input placeholder="نام خانوادگی را وارد کنید..." />
                 </Form.Item>
               </SpaceStyled>
             </Col>
             <Col span={12}>
               <SpaceStyled horizontal={10}>
                 <Form.Item
+                  label="نام پدر"
                   name={"fathersName"}
                   rules={[persianRule, minForm(2), maxForm(50)]}
                 >
-                  <Input
-                    label="نام پدر"
-                    placeholder="نام پدر را وارد کنید..."
-                  />
+                  <Input placeholder="نام پدر را وارد کنید..." />
                 </Form.Item>
               </SpaceStyled>
             </Col>
             <Col span={12}>
               <SpaceStyled horizontal={10}>
-                <Form.Item name={"idCode"}>
+                <Form.Item label="شماره شناسنامه" name={"idCode"}>
                   <Input
-                    label="شماره شناسنامه"
+                    type="number"
                     placeholder="شماره شناسنامه را وارد کنید..."
                   />
                 </Form.Item>
@@ -103,9 +101,13 @@ const UpsertPersonDialog = ({ singlePerson, setIsUpsertDialogShow }) => {
             </Col>
             <Col span={12}>
               <SpaceStyled horizontal={10}>
-                <Form.Item name={"melliCode"} rules={[melliCodeRule]}>
+                <Form.Item
+                  label="شماره ملی"
+                  name={"melliCode"}
+                  rules={[melliCodeRule]}
+                >
                   <Input
-                    label="شماره ملی"
+                    type="number"
                     placeholder="شماره ملی را وارد کنید..."
                   />
                 </Form.Item>
@@ -119,7 +121,6 @@ const UpsertPersonDialog = ({ singlePerson, setIsUpsertDialogShow }) => {
                 <Form.Item name={"birthday"}>
                   <PersianDatePickerComponent
                     label="تاریخ تولد"
-                    value={birthday}
                     onSelect={(moment) => {
                       const miladiDate = moment.format("MM/DD/YYYY");
                       const persianDate = moment.format("jYYYY/jMM/jDD");
@@ -134,8 +135,8 @@ const UpsertPersonDialog = ({ singlePerson, setIsUpsertDialogShow }) => {
           <Row align="bottom">
             <Col span={12}>
               <SpaceStyled horizontal={10}>
-                <Form.Item name={"gender"} rules={[requiredForm]}>
-                  <Select label="جنسیت" defaultValue="none">
+                <Form.Item label="جنسیت" name={"gender"} rules={[requiredForm]}>
+                  <Select defaultValue="none">
                     <Select.Option value="none">انتخاب کنید</Select.Option>
                     <Select.Option value="man">آقا</Select.Option>
                     <Select.Option value="woman">خانم</Select.Option>

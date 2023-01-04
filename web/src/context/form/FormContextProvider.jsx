@@ -99,9 +99,11 @@ const FormContextProvider = ({ children, match, history }) => {
     setChild(arr);
   }
 
-  const deleteObject = (uiId) => {
+  const deleteObject = (item) => {
+    console.log("window uuid", item.uiId);
     let childrenCopy = [...child];
-    childrenCopy = childrenCopy.filter((item) => item.uiId !== uiId);
+    childrenCopy = childrenCopy.filter((i) => i.uiId !== item.uiId);
+    setChild([]);
     setChild(childrenCopy);
   };
 

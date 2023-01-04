@@ -6,7 +6,7 @@ import { SpaceStyled } from "../global";
 const CustomButton = (props) => {
   const CustomButtonStyled = styled(Button)`
     background-color: ${props.color ? props.color : darkBlueColor} !important;
-
+    margin-top: 10px;
     color: ${props.textColor
       ? props.textColor
       : props.color === "#fff"

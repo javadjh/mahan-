@@ -6,7 +6,7 @@ import {
   just_persian,
   melliCodeValidator,
 } from "../../utility/inputValidators";
-import { Col, Divider, Input, Row } from "antd";
+import { Col, Divider, Form, Input, Row } from "antd";
 import { SpaceStyled } from "../../styled/global";
 import CustomInput from "../../styled/components/CustomInput";
 const BaseInformationUpsertUserComponent = () => {
@@ -43,25 +43,26 @@ const BaseInformationUpsertUserComponent = () => {
             <SpaceStyled bottom={10}>
               <Row>
                 <Col span={11}>
-                  <Input
-                    label="نام"
-                    type="text"
-                    className="form-control"
-                    id="validationCustom03"
-                    value={firstName}
-                    name={"firstName"}
-                    onChange={(e) => {
-                      if (
-                        just_persian(e.target.value) ||
-                        e.target.value.length === 0
-                      ) {
-                        formValidator.current.showMessageFor("firstName");
-                        setFirstName(e.target.value);
-                      }
-                    }}
-                    placeholder="نام را وارد کنید..."
-                    required
-                  />
+                  <Form.Item label="نام">
+                    <Input
+                      type="text"
+                      className="form-control"
+                      id="validationCustom03"
+                      value={firstName}
+                      name={"firstName"}
+                      onChange={(e) => {
+                        if (
+                          just_persian(e.target.value) ||
+                          e.target.value.length === 0
+                        ) {
+                          formValidator.current.showMessageFor("firstName");
+                          setFirstName(e.target.value);
+                        }
+                      }}
+                      placeholder="نام را وارد کنید..."
+                      required
+                    />
+                  </Form.Item>
                   {formValidator.current.message(
                     "firstName",
                     firstName,
@@ -70,25 +71,26 @@ const BaseInformationUpsertUserComponent = () => {
                 </Col>
                 <Col span={12} offset={1}>
                   <div className="form-group">
-                    <Input
-                      label="نام خانوادگی"
-                      type="text"
-                      value={lastName}
-                      name={"lastName"}
-                      onChange={(e) => {
-                        if (
-                          just_persian(e.target.value) ||
-                          e.target.value.length === 0
-                        ) {
-                          formValidator.current.showMessageFor("lastName");
-                          setLastName(e.target.value);
-                        }
-                      }}
-                      className="form-control"
-                      id="validationCustom04"
-                      placeholder="نام خانوادگی را وارد کنید..."
-                      required
-                    />
+                    <Form.Item label="نام خانوادگی">
+                      <Input
+                        type="text"
+                        value={lastName}
+                        name={"lastName"}
+                        onChange={(e) => {
+                          if (
+                            just_persian(e.target.value) ||
+                            e.target.value.length === 0
+                          ) {
+                            formValidator.current.showMessageFor("lastName");
+                            setLastName(e.target.value);
+                          }
+                        }}
+                        className="form-control"
+                        id="validationCustom04"
+                        placeholder="نام خانوادگی را وارد کنید..."
+                        required
+                      />
+                    </Form.Item>
                     {formValidator.current.message(
                       "lastName",
                       lastName,
@@ -101,21 +103,22 @@ const BaseInformationUpsertUserComponent = () => {
             <SpaceStyled bottom={10}>
               <Row>
                 <Col span={11}>
-                  <Input
-                    label="شماره تماس"
-                    type="number"
-                    name={phoneNumber}
-                    onChange={(e) => {
-                      if (e.target.value.length > 11) return;
-                      formValidator.current.showMessageFor("phoneNumber");
-                      setPhoneNumber(e.target.value);
-                    }}
-                    value={phoneNumber}
-                    className="form-control"
-                    id="validationCustom05"
-                    placeholder="شماره تماس را وارد کنید..."
-                    required
-                  />
+                  <Form.Item label="شماره تماس">
+                    <Input
+                      type="number"
+                      name={phoneNumber}
+                      onChange={(e) => {
+                        if (e.target.value.length > 11) return;
+                        formValidator.current.showMessageFor("phoneNumber");
+                        setPhoneNumber(e.target.value);
+                      }}
+                      value={phoneNumber}
+                      className="form-control"
+                      id="validationCustom05"
+                      placeholder="شماره تماس را وارد کنید..."
+                      required
+                    />
+                  </Form.Item>
                   {formValidator.current.message(
                     "phoneNumber",
                     phoneNumber,
@@ -123,26 +126,27 @@ const BaseInformationUpsertUserComponent = () => {
                   )}
                 </Col>
                 <Col span={12} offset={1}>
-                  <Input
-                    label="شماره ملی"
-                    type="number"
-                    disabled={id}
-                    name={userName}
-                    onChange={(e) => {
-                      if (e.target.value.length > 10) return;
-                      setUserName(e.target.value);
-                      if (!melliCodeValidator(e.target.value)) {
-                        setShowMelliCodeError(true);
-                      } else {
-                        setShowMelliCodeError(false);
-                      }
-                    }}
-                    value={userName}
-                    className="form-control"
-                    id="validationCustom05"
-                    placeholder="شماره ملی را وارد کنید..."
-                    required
-                  />
+                  <Form.Item label="شماره ملی">
+                    <Input
+                      type="number"
+                      disabled={id}
+                      name={userName}
+                      onChange={(e) => {
+                        if (e.target.value.length > 10) return;
+                        setUserName(e.target.value);
+                        if (!melliCodeValidator(e.target.value)) {
+                          setShowMelliCodeError(true);
+                        } else {
+                          setShowMelliCodeError(false);
+                        }
+                      }}
+                      value={userName}
+                      className="form-control"
+                      id="validationCustom05"
+                      placeholder="شماره ملی را وارد کنید..."
+                      required
+                    />
+                  </Form.Item>
                   {showMelliCodeError ? (
                     <p style={{ color: "red" }}>شماره ملی نامعتبر است</p>
                   ) : null}
@@ -155,30 +159,31 @@ const BaseInformationUpsertUserComponent = () => {
                   <Col span={11}>
                     <Row>
                       <Col span={24}>
-                        <Input
-                          label="کلمه ی عبور"
-                          type={inputType}
-                          onChange={(e) => {
-                            formValidator.current.showMessageFor("password");
-                            if (
-                              !just_persian(
-                                e.target.value.substr(
-                                  e.target.value.length - 1,
-                                  e.target.value.length
-                                )
-                              ) ||
-                              e.target.value.length === 0
-                            ) {
-                              setPassword(e.target.value);
-                            }
-                          }}
-                          aria-describedby="validationTooltipUsernamePrepend"
-                          value={password}
-                          className="form-control "
-                          id="validationCustom05"
-                          placeholder="کلمه عبور را وارد کنید..."
-                          required
-                        />
+                        <Form.Item label="کلمه ی عبور">
+                          <Input
+                            type={inputType}
+                            onChange={(e) => {
+                              formValidator.current.showMessageFor("password");
+                              if (
+                                !just_persian(
+                                  e.target.value.substr(
+                                    e.target.value.length - 1,
+                                    e.target.value.length
+                                  )
+                                ) ||
+                                e.target.value.length === 0
+                              ) {
+                                setPassword(e.target.value);
+                              }
+                            }}
+                            aria-describedby="validationTooltipUsernamePrepend"
+                            value={password}
+                            className="form-control "
+                            id="validationCustom05"
+                            placeholder="کلمه عبور را وارد کنید..."
+                            required
+                          />
+                        </Form.Item>
 
                         <label style={{ fontSize: 11 }}>
                           کلمه عبور باید حداقل حاوی ۶ کارکتر، شامل حروف کوچک و
@@ -193,19 +198,20 @@ const BaseInformationUpsertUserComponent = () => {
                     </Row>
                   </Col>
                   <Col span={12} offset={1}>
-                    <Input
-                      label="ایمیل"
-                      type="text"
-                      onChange={(e) => {
-                        formValidator.current.showMessageFor("email");
-                        setEmail(e.target.value);
-                      }}
-                      value={email}
-                      className="form-control"
-                      id="validationCustom05"
-                      placeholder="ایمیل کاربر را وارد کنید"
-                      required
-                    />
+                    <Form.Item label="ایمیل">
+                      <Input
+                        type="text"
+                        onChange={(e) => {
+                          formValidator.current.showMessageFor("email");
+                          setEmail(e.target.value);
+                        }}
+                        value={email}
+                        className="form-control"
+                        id="validationCustom05"
+                        placeholder="ایمیل کاربر را وارد کنید"
+                        required
+                      />
+                    </Form.Item>
                     {formValidator.current.message(
                       "email",
                       email,
@@ -218,19 +224,20 @@ const BaseInformationUpsertUserComponent = () => {
             <Divider></Divider>
             <Row>
               <Col span={12}>
-                <Input
-                  label="سمت کاربر"
-                  type="text"
-                  onChange={(e) => {
-                    formValidator.current.showMessageFor("position");
-                    setPosition(e.target.value);
-                  }}
-                  value={position}
-                  className="form-control"
-                  id="validationCustom05"
-                  placeholder="سمت کاربر را وارد کنید"
-                  required
-                />
+                <Form.Item label="سمت کاربر">
+                  <Input
+                    type="text"
+                    onChange={(e) => {
+                      formValidator.current.showMessageFor("position");
+                      setPosition(e.target.value);
+                    }}
+                    value={position}
+                    className="form-control"
+                    id="validationCustom05"
+                    placeholder="سمت کاربر را وارد کنید"
+                    required
+                  />
+                </Form.Item>
                 {formValidator.current.message(
                   "position",
                   position,

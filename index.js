@@ -117,6 +117,9 @@ process.on("unhandledRejection", (unhandledRejectionError) => {
 app.get("/", async (req, res) => {
   res.send("this is api route , come back to the client :)");
 });
+app.get("/*", async (req, res) => {
+  res.send("این لینک منقضی شده است");
+});
 
 app.listen(process.env.PORT, () => {
   console.log(`http://192.168.1.34:${process.env.PORT}`);

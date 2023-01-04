@@ -9,6 +9,7 @@ const InsertApplicantDialog = ({ sendData }) => {
   return (
     <Fragment>
       <Form
+        layout="vertical"
         form={form}
         onFinish={async (formData) => {
           await sendData(formData);

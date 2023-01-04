@@ -11,7 +11,7 @@ import {
   upsertUserDataAction,
 } from "../../stateManager/actions/UsersAction";
 import { useHistory } from "react-router";
-import { Row } from "antd";
+import { Form, Row } from "antd";
 const UpsertUserRootComponent = () => {
   let history = useHistory();
   const dispatch = useDispatch();
@@ -115,14 +115,16 @@ const UpsertUserRootComponent = () => {
   };
   return (
     <div>
-      <Row>
-        <BaseInformationUpsertUserComponent />
-        <SecondInformationUpsertUserComponent
-          getData={getData}
-          upsertUserData={upsertUserData}
-          sendData={sendData}
-        />
-      </Row>
+      <Form layout="vertical">
+        <Row>
+          <BaseInformationUpsertUserComponent />
+          <SecondInformationUpsertUserComponent
+            getData={getData}
+            upsertUserData={upsertUserData}
+            sendData={sendData}
+          />
+        </Row>
+      </Form>
     </div>
   );
 };

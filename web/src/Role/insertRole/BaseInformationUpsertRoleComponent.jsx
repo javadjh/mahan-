@@ -22,12 +22,10 @@ const BaseInformationUpsertRoleComponent = ({ insertRoleHandle }) => {
               <Col span={24}>
                 <Form.Item
                   name={"title"}
+                  label="عنوان نقش"
                   rules={[minForm(2), maxForm(150), requiredForm]}
                 >
-                  <Input
-                    label="عنوان نقش"
-                    placeholder={"عنوان نقش را وارد کنید..."}
-                  />
+                  <Input placeholder={"عنوان نقش را وارد کنید..."} />
                 </Form.Item>
               </Col>
             </div>
@@ -35,11 +33,11 @@ const BaseInformationUpsertRoleComponent = ({ insertRoleHandle }) => {
           <SpaceStyled top={20}>
             <Col span={24}>
               <Form.Item
+                label="توضیحات نقش"
                 name={"description"}
                 rules={[minForm(2), maxForm(500)]}
               >
                 <Input.TextArea
-                  label="توضیحات نقش"
                   rows="4"
                   placeholder={"توضیحات نقش را وارد کنید..."}
                 />

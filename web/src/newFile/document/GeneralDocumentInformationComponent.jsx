@@ -16,7 +16,7 @@ import OptionItemComponent from "./OptionItemComponent";
 import CustomDialog from "../../styled/components/CustomDialog";
 import ShowSingleDocumentDialog from "../../ArchiveTree/dialog/ShowSingleDocumentDialog";
 import Auth from "../../auth/Auth";
-import { FRONT_IP } from "../../config/ip";
+import { FRONT_IP, SERVER_IP } from "../../config/ip";
 import CustomPopConfirm from "../../styled/components/CustomPopConfirm";
 const GeneralDocumentInformationComponent = () => {
   const { document, previewUrl, deleteDocHandler } =
@@ -34,18 +34,26 @@ const GeneralDocumentInformationComponent = () => {
         <Row>
           <Col span={12}>
             <SpaceStyled left={10}>
-              <CustomButton
-                block
-                icon={
-                  <SpaceStyled top={-5}>
-                    <Image preview={false} src="/assets/icons/dl.svg" />
-                  </SpaceStyled>
-                }
-                color={lightBlueSecondColor}
-                textColor={blueColor}
+              <a
+                href={`${
+                  !previewUrl?.includes("http://") ? SERVER_IP + "/" : ""
+                }${previewUrl}`}
+                target="_blank"
+                download={true}
               >
-                دانلود
-              </CustomButton>
+                <CustomButton
+                  block
+                  icon={
+                    <SpaceStyled top={-5}>
+                      <Image preview={false} src="/assets/icons/dl.svg" />
+                    </SpaceStyled>
+                  }
+                  color={lightBlueSecondColor}
+                  textColor={blueColor}
+                >
+                  دانلود
+                </CustomButton>
+              </a>
             </SpaceStyled>
           </Col>
           <Col span={12}>

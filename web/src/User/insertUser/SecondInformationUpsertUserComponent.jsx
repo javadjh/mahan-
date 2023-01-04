@@ -39,9 +39,8 @@ const SecondInformationUpsertUserComponent = ({
           </p>
           <Row>
             <Col span={11}>
-              <Form.Item name={"archive"}>
+              <Form.Item label="بایگانی" name={"archive"}>
                 <Select
-                  label="بایگانی"
                   placeholder={"انتخاب بایگانی"}
                   onChange={(e) => {
                     setArchive(e);
@@ -63,9 +62,8 @@ const SecondInformationUpsertUserComponent = ({
               </Form.Item>
             </Col>
             <Col span={12} offset={1}>
-              <Form.Item name={"role"}>
+              <Form.Item label="نقش" name={"role"}>
                 <Select
-                  label="نقش"
                   placeholder={"انتخاب نقش"}
                   style={{ width: "100%" }}
                   // onClick={() => {
