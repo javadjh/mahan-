@@ -1,5 +1,5 @@
 {
-  "baseUrl": "http://87.236.215.49:5000/api/v1",
+  "baseUrl": "http://192.168.2.24:5000/api/v1",
   "getAllUsers": "/users",
   "upsertUserData": "/upsert/user/data",
   "insertUser": "/insert/user",
