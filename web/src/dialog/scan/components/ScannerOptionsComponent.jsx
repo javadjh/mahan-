@@ -14,7 +14,7 @@ import { useState } from "react";
 const ScannerOptionsComponent = ({ devices, file, onScannedListener }) => {
   const [devicesDPISupported, setDevicesDPISupported] = useState([]);
   const onDeviceSelected = (item) => {
-    let itemIndex = devices.findIndex((item) => item.Id === item);
+    let itemIndex = devices.findIndex((deviceItem) => deviceItem.Id === item);
     console.log(itemIndex);
     setDevicesDPISupported(devices[itemIndex].SupportedResolutions);
   };
