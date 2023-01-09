@@ -20,7 +20,7 @@ module.exports.sendReportingFile = async (req, res) => {
   if (archiveIds.length === 0) return errorResponse(res, 6);
   let data = [];
 
-  const { files } = await FilterReportingFilesHandler(req.query);
+  const { files } = await FilterReportingFilesHandler(req.query, true);
 
   files.map((f) => {
     data.push({

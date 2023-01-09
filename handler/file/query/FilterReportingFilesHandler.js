@@ -2,7 +2,7 @@ const { convertToShamsi } = require("../../../utility/dateUtility");
 const FileModel = require("../../../model/FileModel");
 
 //جهت بازگشت اسناد و تعداد کل آن ها به ماژول نمایش گزارش و دانلود گزارش به صورت اکسل
-module.exports.FilterReportingFilesHandler = async (filterAction) => {
+module.exports.FilterReportingFilesHandler = async (filterAction, isExcel) => {
   let {
     pageId,
     eachPerPage,
@@ -54,8 +54,8 @@ module.exports.FilterReportingFilesHandler = async (filterAction) => {
     .populate("archiveTreeId", "title route")
     .populate("archiveId", "title")
     .populate("creator", "firstName lastName userName")
-    .skip((pageId - 1) * eachPerPage)
-    .limit(eachPerPage)
+    .skip(isExcel ? 0 : (pageId - 1) * eachPerPage)
+    .limit(!isExcel ? 1000000 : eachPerPage)
     .lean();
 
   const total = await FileModel.find(findFilter).count();
