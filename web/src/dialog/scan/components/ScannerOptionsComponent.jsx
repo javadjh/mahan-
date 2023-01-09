@@ -14,7 +14,9 @@ import { useState } from "react";
 const ScannerOptionsComponent = ({ devices, file, onScannedListener }) => {
   const [devicesDPISupported, setDevicesDPISupported] = useState([]);
   const onDeviceSelected = (item) => {
-    setDevicesDPISupported(item.SupportedResolutions);
+    let itemIndex = devices.findIndex((item) => item.Id === item);
+    console.log(itemIndex);
+    setDevicesDPISupported(devices[itemIndex].SupportedResolutions);
   };
   return (
     <div className="flex-second">
@@ -22,7 +24,7 @@ const ScannerOptionsComponent = ({ devices, file, onScannedListener }) => {
         <div>انتخاب دستگاه</div>
         <Form.Item name={"deviceId"}>
           <Select onChange={onDeviceSelected} style={{ width: "100%" }}>
-            {devices.map((device) => (
+            {devices?.map((device) => (
               <Select.Option key={device.Id} value={device.Id}>
                 {device.Name}
               </Select.Option>
