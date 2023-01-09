@@ -56,6 +56,8 @@ const ScanDialog = ({ onScannedListener }) => {
     //   },
     // };
     // console.log(formData.deviceId);
+    formData.width_pixels = 2480;
+    formData.height_pixels = 3508;
     setIsScanning(true);
     const res = await axios.get("http://localhost:8080/api/Scanner/Scan", {
       params: formData,
