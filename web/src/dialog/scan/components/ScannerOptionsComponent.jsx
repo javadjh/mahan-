@@ -11,7 +11,12 @@ import {
 } from "antd";
 import React from "react";
 import { useState } from "react";
-const ScannerOptionsComponent = ({ devices, file, onScannedListener }) => {
+const ScannerOptionsComponent = ({
+  devices,
+  file,
+  onScannedListener,
+  handleCancel,
+}) => {
   const [devicesDPISupported, setDevicesDPISupported] = useState([]);
   const onDeviceSelected = (item) => {
     console.log(item);
@@ -80,6 +85,7 @@ const ScannerOptionsComponent = ({ devices, file, onScannedListener }) => {
               <Button
                 onClick={() => {
                   onScannedListener(file);
+                  handleCancel();
                 }}
                 block
                 type="primary"

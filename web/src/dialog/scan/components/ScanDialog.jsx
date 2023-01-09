@@ -87,6 +87,7 @@ const ScanDialog = ({ onScannedListener }) => {
                 onScannedListener={onScannedListener}
                 devices={devices}
                 file={file}
+                handleCancel={handleCancel}
               />
               <ShowDocumentScannedComponent
                 isScanning={isScanning}
