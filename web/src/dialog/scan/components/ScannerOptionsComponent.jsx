@@ -21,7 +21,7 @@ const ScannerOptionsComponent = ({ devices, file, onScannedListener }) => {
       <div style={{ padding: 30 }}>
         <div>انتخاب دستگاه</div>
         <Form.Item name={"deviceId"}>
-          <Select style={{ width: "100%" }}>
+          <Select onChange={onDeviceSelected} style={{ width: "100%" }}>
             {devices.map((device) => (
               <Select.Option key={device.Id} value={device.Id}>
                 {device.Name}
