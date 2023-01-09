@@ -110,7 +110,7 @@ const FilesUploadedComponent = () => {
                             }}
                           >
                             <CenterStyled>
-                              <CustomEXShower ex={fileNameToEX(i.title)} />
+                              <CustomEXShower ex={fileNameToEX(i?.title)} />
                             </CenterStyled>
                             <CenterStyled>
                               <p
