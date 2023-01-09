@@ -9,15 +9,7 @@ const ShowDocumentScannedComponent = ({ isScanning, blobImage }) => {
             در حال اسکن...
           </div>
         ) : (
-          <Image
-            width={"40%"}
-            style={{
-              objectFit: "cover",
-            }}
-            src={blobImage}
-            height={"100vh"}
-            preview={false}
-          />
+          <Image width={"70%"} src={blobImage} preview={false} />
         )}
       </div>
     </>
