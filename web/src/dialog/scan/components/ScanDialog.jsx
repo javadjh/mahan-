@@ -19,10 +19,16 @@ const ScanDialog = ({ onScannedListener }) => {
 
   const handleOk = () => {
     setIsModalOpen(false);
+    setBlobImage(null);
+    setIsScanning(false);
+    setFile(null);
   };
 
   const handleCancel = () => {
     setIsModalOpen(false);
+    setBlobImage(null);
+    setIsScanning(false);
+    setFile(null);
   };
   useEffect(() => {
     getData();
