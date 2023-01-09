@@ -51,12 +51,12 @@ const ScannerOptionsComponent = ({
         <Row>
           <Col span={12}>
             <Form.Item name={"width_pixels"}>
-              <Input defaultValue={"1754"} placeholder="طول را وارد کنید..." />
+              <Input value={"1754"} placeholder="طول را وارد کنید..." />
             </Form.Item>
           </Col>
           <Col span={12}>
             <Form.Item name={"height_pixels"}>
-              <Input defaultValue={"1275"} placeholder="عرض را وارد کنید..." />
+              <Input value={"1275"} placeholder="عرض را وارد کنید..." />
             </Form.Item>
           </Col>
         </Row>
