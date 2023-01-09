@@ -11,6 +11,7 @@ import {
 } from "antd";
 import React from "react";
 import { useState } from "react";
+import { requiredForm } from "../../../config/formValidator";
 const ScannerOptionsComponent = ({
   devices,
   file,
@@ -28,7 +29,7 @@ const ScannerOptionsComponent = ({
     <div className="flex-second">
       <div style={{ padding: 30 }}>
         <div>انتخاب دستگاه</div>
-        <Form.Item name={"deviceId"}>
+        <Form.Item name={"deviceId"} rules={[requiredForm]}>
           <Select onChange={onDeviceSelected} style={{ width: "100%" }}>
             {devices?.map((device) => (
               <Select.Option key={device.Id} value={device.Id}>
@@ -38,7 +39,7 @@ const ScannerOptionsComponent = ({
           </Select>
         </Form.Item>
         <div>رزولوشن</div>
-        <Form.Item name={"dpi"}>
+        <Form.Item name={"dpi"} rules={[requiredForm]}>
           <Select style={{ width: "100%" }}>
             {devicesDPISupported.map((dpi) => (
               <Select.Option key={dpi} value={dpi}>
