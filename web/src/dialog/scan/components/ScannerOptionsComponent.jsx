@@ -10,7 +10,12 @@ import {
   Slider,
 } from "antd";
 import React from "react";
+import { useState } from "react";
 const ScannerOptionsComponent = ({ devices, file, onScannedListener }) => {
+  const [devicesDPISupported, setDevicesDPISupported] = useState([]);
+  const onDeviceSelected = (item) => {
+    setDevicesDPISupported(item.SupportedResolutions);
+  };
   return (
     <div className="flex-second">
       <div style={{ padding: 30 }}>
@@ -27,10 +32,13 @@ const ScannerOptionsComponent = ({ devices, file, onScannedListener }) => {
         <div>رزولوشن</div>
         <Form.Item name={"dpi"}>
           <Select style={{ width: "100%" }}>
-            <Select.Option>950dpi</Select.Option>
+            {devicesDPISupported.map((dpi) => (
+              <Select.Option key={dpi} value={dpi}>
+                {dpi}dpi
+              </Select.Option>
+            ))}
           </Select>
         </Form.Item>
-
         <label>ابعاد</label>
         <Row>
           <Col span={12}>

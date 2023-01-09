@@ -42,6 +42,14 @@ const ScanDialog = ({ onScannedListener }) => {
     }
   };
   const scanDocument = async (formData) => {
+    // console.log(formData.deviceId);
+    // formData = {
+    //   ...formData,
+    //   ...{
+    //     deviceId: formData.deviceId.replaceAll(String.fromCharCode(92), "\\"),
+    //   },
+    // };
+    // console.log(formData.deviceId);
     setIsScanning(true);
     const res = await axios.get("http://localhost:8080/api/Scanner/Scan", {
       params: formData,
