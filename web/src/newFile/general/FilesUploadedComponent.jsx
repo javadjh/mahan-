@@ -118,7 +118,7 @@ const FilesUploadedComponent = () => {
                                 className={"text-center"}
                               >
                                 <span data-tip={i.title}>
-                                  {i.title.substr(0, 10)}
+                                  {i?.title?.substr(0, 10)}
                                 </span>
                                 <ReactTooltip />
                               </p>
