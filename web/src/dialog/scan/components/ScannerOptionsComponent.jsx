@@ -73,9 +73,13 @@ const ScannerOptionsComponent = ({
         </Form.Item>
         <div>رزولوشن</div>
         <Form.Item name={"dpi"} rules={[requiredForm]}>
-          <Select defaultValue={300} style={{ width: "100%" }}>
+          <Select
+            onChange={onDPIChange}
+            defaultValue={300}
+            style={{ width: "100%" }}
+          >
             {devicesDPISupported.map((dpi) => (
-              <Select.Option onChange={onDPIChange} key={dpi} value={dpi}>
+              <Select.Option key={dpi} value={dpi}>
                 {dpi}dpi
               </Select.Option>
             ))}
