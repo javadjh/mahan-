@@ -1,12 +1,12 @@
 const cors = require("cors");
 
 const whitelist = [
-  "192.168.2.24:80",
-  "192.168.2.24:80",
+  "localhost:3000",
+  "localhost:3000",
   "localhost:3100",
   "localhost:3300",
   "localhost",
-  "192.168.2.24:8080",
+  "localhost:300080",
   "116.202.210.69:3100",
   "116.202.210.69:3300",
 ];
