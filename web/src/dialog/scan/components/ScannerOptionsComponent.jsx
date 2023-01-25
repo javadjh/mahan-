@@ -29,7 +29,9 @@ const ScannerOptionsComponent = ({
     setDevicesDPISupported(devices[itemIndex].SupportedResolutions);
   };
   const onDPIChange = (e) => {
-    switch (e) {
+    console.log(e);
+    console.log(Number(e.toString()));
+    switch (Number(e.toString())) {
       case 150:
         form.setFieldValue("width_pixels", 1240);
         form.setFieldValue("height_pixels", 1753);
