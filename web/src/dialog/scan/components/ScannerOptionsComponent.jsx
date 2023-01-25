@@ -17,6 +17,7 @@ const ScannerOptionsComponent = ({
   file,
   onScannedListener,
   handleCancel,
+  form,
 }) => {
   const [devicesDPISupported, setDevicesDPISupported] = useState([]);
   const [width, setWidth] = useState(2480);
@@ -30,18 +31,26 @@ const ScannerOptionsComponent = ({
   const onDPIChange = (e) => {
     switch (e) {
       case 150:
+        form.setFieldValue("width_pixels", 1240);
+        form.setFieldValue("height_pixels", 1753);
         setWidth(1240);
         setHeight(1753);
         break;
       case 200:
+        form.setFieldValue("width_pixels", 1653);
+        form.setFieldValue("height_pixels", 2338);
         setWidth(1653);
         setHeight(2338);
         break;
       case 300:
+        form.setFieldValue("width_pixels", 2480);
+        form.setFieldValue("height_pixels", 3507);
         setWidth(2480);
         setHeight(3507);
         break;
       case 600:
+        form.setFieldValue("width_pixels", 4960);
+        form.setFieldValue("height_pixels", 7015);
         setWidth(4960);
         setHeight(7015);
         break;

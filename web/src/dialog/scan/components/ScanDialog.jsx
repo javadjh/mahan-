@@ -7,6 +7,7 @@ import ScannerOptionsComponent from "./ScannerOptionsComponent";
 import ShowDocumentScannedComponent from "./ShowDocumentScannedComponent";
 
 const ScanDialog = ({ onScannedListener }) => {
+  const [form] = Form.useForm();
   const [devices, setDevices] = useState([]);
   const [blobImage, setBlobImage] = useState();
   const [isScanning, setIsScanning] = useState(false);
@@ -89,10 +90,11 @@ const ScanDialog = ({ onScannedListener }) => {
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        <Form layout="vertical" onFinish={scanDocument}>
+        <Form form={form} layout="vertical" onFinish={scanDocument}>
           {devices.length > 0 ? (
             <div className="flex-parent">
               <ScannerOptionsComponent
+                form={form}
                 onScannedListener={onScannedListener}
                 devices={devices}
                 file={file}
