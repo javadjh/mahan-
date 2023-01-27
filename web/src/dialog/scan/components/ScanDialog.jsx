@@ -68,7 +68,7 @@ const ScanDialog = ({ onScannedListener }) => {
     const url = window.URL.createObjectURL(
       new Blob([res.data], { type: "image/jpg" })
     );
-    var file = new File([res.data], `sdcsdcsdcsdcsdc.jpg`, {
+    var file = new File([res.data], `scanned-${Date.now()}.jpg`, {
       type: "image/jpeg",
       lastModified: new Date(),
       size: 10,
