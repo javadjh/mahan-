@@ -55,7 +55,7 @@ module.exports.FilterReportingFilesHandler = async (filterAction, isExcel) => {
     .populate("archiveId", "title")
     .populate("creator", "firstName lastName userName")
     .skip(isExcel ? 0 : (pageId - 1) * eachPerPage)
-    .limit(!isExcel ? 1000000 : eachPerPage)
+    .limit(isExcel ? 10000000 : eachPerPage)
     .lean();
 
   const total = await FileModel.find(findFilter).count();
