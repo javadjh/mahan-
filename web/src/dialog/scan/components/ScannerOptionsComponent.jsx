@@ -88,11 +88,12 @@ const ScannerOptionsComponent = ({
             ))}
           </Select>
         </Form.Item>
-        {/* <label>ابعاد</label>
+        <label>ابعاد</label>
         <Row>
           <Col span={12}>
             <Form.Item name={"width_pixels"}>
               <Input
+                disabled
                 defaultValue={width}
                 value={width}
                 placeholder="طول را وارد کنید..."
@@ -102,13 +103,14 @@ const ScannerOptionsComponent = ({
           <Col span={12}>
             <Form.Item name={"height_pixels"}>
               <Input
+                disabled
                 defaultValue={height}
                 value={height}
                 placeholder="عرض را وارد کنید..."
               />
             </Form.Item>
           </Col>
-        </Row> */}
+        </Row>
         <label>brightness</label>
         <Form.Item name={"brightnessPercents"}>
           <Slider defaultValue={0.5} max={1} step={0.01} />
