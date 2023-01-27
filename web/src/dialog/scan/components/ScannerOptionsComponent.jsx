@@ -33,7 +33,7 @@ const ScannerOptionsComponent = ({
   // };
   useEffect(() => {
     form.setFieldValue("dpi", dpi || 300);
-    if (!dpi) {
+    if (dpi === 300) {
       form.setFieldValue("width_pixels", 2480);
       form.setFieldValue("height_pixels", 3507);
       setWidth(2480);
