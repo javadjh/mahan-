@@ -9,7 +9,7 @@ import {
   Select,
   Slider,
 } from "antd";
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { requiredForm } from "../../../config/formValidator";
 const ScannerOptionsComponent = ({
@@ -31,6 +31,9 @@ const ScannerOptionsComponent = ({
   //   console.log(itemIndex);
   //   setDevicesDPISupported(devices[itemIndex].SupportedResolutions);
   // };
+  useEffect(() => {
+    form.setFieldValue("dpi", dpi || 300);
+  }, [dpi]);
   const onDPIChange = (e) => {
     console.log(e);
     setDpi(Number(e.toString()));
