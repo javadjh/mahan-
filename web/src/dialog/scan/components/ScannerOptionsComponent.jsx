@@ -19,15 +19,17 @@ const ScannerOptionsComponent = ({
   handleCancel,
   form,
 }) => {
-  const [devicesDPISupported, setDevicesDPISupported] = useState([]);
+  const [devicesDPISupported, setDevicesDPISupported] = useState([
+    150, 200, 300, 600,
+  ]);
   const [width, setWidth] = useState(2480);
   const [height, setHeight] = useState(3507);
-  const onDeviceSelected = (item) => {
-    console.log(item);
-    let itemIndex = devices.findIndex((deviceItem) => deviceItem.Id === item);
-    console.log(itemIndex);
-    setDevicesDPISupported(devices[itemIndex].SupportedResolutions);
-  };
+  // const onDeviceSelected = (item) => {
+  //   console.log(item);
+  //   let itemIndex = devices.findIndex((deviceItem) => deviceItem.Id === item);
+  //   console.log(itemIndex);
+  //   setDevicesDPISupported(devices[itemIndex].SupportedResolutions);
+  // };
   const onDPIChange = (e) => {
     console.log(e);
     console.log(Number(e.toString()));
@@ -58,12 +60,13 @@ const ScannerOptionsComponent = ({
         break;
     }
   };
+  // onChange={onDeviceSelected}
   return (
     <div className="flex-second">
       <div style={{ padding: 30 }}>
         <div>انتخاب دستگاه</div>
         <Form.Item name={"deviceId"} rules={[requiredForm]}>
-          <Select onChange={onDeviceSelected} style={{ width: "100%" }}>
+          <Select style={{ width: "100%" }}>
             {devices?.map((device) => (
               <Select.Option key={device.Id} value={device.Id}>
                 {device.Name}
@@ -85,7 +88,7 @@ const ScannerOptionsComponent = ({
             ))}
           </Select>
         </Form.Item>
-        <label>ابعاد</label>
+        {/* <label>ابعاد</label>
         <Row>
           <Col span={12}>
             <Form.Item name={"width_pixels"}>
@@ -105,7 +108,7 @@ const ScannerOptionsComponent = ({
               />
             </Form.Item>
           </Col>
-        </Row>
+        </Row> */}
         <label>brightness</label>
         <Form.Item name={"brightnessPercents"}>
           <Slider defaultValue={0.5} max={1} step={0.01} />
