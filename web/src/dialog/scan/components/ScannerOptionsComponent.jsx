@@ -22,6 +22,7 @@ const ScannerOptionsComponent = ({
   const [devicesDPISupported, setDevicesDPISupported] = useState([
     150, 200, 300, 600,
   ]);
+  const [dpi, setDpi] = useState(300);
   const [width, setWidth] = useState(2480);
   const [height, setHeight] = useState(3507);
   // const onDeviceSelected = (item) => {
@@ -32,7 +33,7 @@ const ScannerOptionsComponent = ({
   // };
   const onDPIChange = (e) => {
     console.log(e);
-    console.log(Number(e.toString()));
+    setDpi(Number(e.toString()));
     switch (Number(e.toString())) {
       case 150:
         form.setFieldValue("width_pixels", 1240);
@@ -78,7 +79,8 @@ const ScannerOptionsComponent = ({
         <Form.Item name={"dpi"} rules={[requiredForm]}>
           <Select
             onChange={onDPIChange}
-            defaultValue={300}
+            value={dpi}
+            defaultValue={dpi}
             style={{ width: "100%" }}
           >
             {devicesDPISupported.map((dpi) => (
