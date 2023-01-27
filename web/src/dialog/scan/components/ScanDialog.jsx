@@ -68,9 +68,15 @@ const ScanDialog = ({ onScannedListener }) => {
     const url = window.URL.createObjectURL(
       new Blob([res.data], { type: "image/jpg" })
     );
+    var file = new File([res.data], `sdcsdcsdcsdcsdc.jpg`, {
+      type: "image/jpeg",
+      lastModified: new Date(),
+      size: 10,
+      endings: "transparent",
+    });
     setBlobImage(url);
     setIsScanning(false);
-    setFile(res.data);
+    setFile(file);
   };
   return (
     <div>
