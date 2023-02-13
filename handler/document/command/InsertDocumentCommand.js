@@ -166,8 +166,8 @@ module.exports.insertDocument = async (req, res) => {
       console.log(e);
     }
   }
-  if (ex === "jpg" || ex === "png" || ex === "jpge")
-    newDocument.documentOCR = await OCR(newDocument._id + "." + newDocument.ex);
+  // if (ex === "jpg" || ex === "png" || ex === "jpge")
+  //   newDocument.documentOCR = await OCR(newDocument._id + "." + newDocument.ex);
   if (outputPath) fs.unlink(outputPath, function () {});
   fs.unlink(path, function () {});
 
