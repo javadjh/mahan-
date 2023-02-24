@@ -1,10 +1,18 @@
-import { Col, Input, Row } from "antd";
+import { Col, Divider, Image, Input, Row, Table } from "antd";
 import React, { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 import { useSelector } from "react-redux";
-import { darkBlueColor, lightGreenColor } from "../../../app/appColor";
+import {
+  darkBlueColor,
+  greenBlueColor,
+  lightGreenColor,
+  orangeColor,
+  redColor,
+} from "../../../app/appColor";
+import { FRONT_IP } from "../../../config/ip";
 import CustomButton from "../../../styled/components/CustomButton";
 import CustomInput from "../../../styled/components/CustomInput";
+import CustomPopConfirm from "../../../styled/components/CustomPopConfirm";
 import { SpaceStyled } from "../../../styled/global";
 import { fancyTimeFormat } from "../../../utility/timeUtility";
 
@@ -39,6 +47,69 @@ const MP4PlayerComponent = ({
     // this.setState({ seeking: false })
     player.seekTo(flagProgress);
   };
+  console.log(doc?.videoFlags);
+  const columns = [
+    {
+      title: "زمان بندی",
+      key: "listen",
+      render: (item) => (
+        <span
+          onClick={() => {
+            setProgress(item.startSecond);
+            setFlagProgress(item.startSecond);
+            player.seekTo(item.startSecond);
+            setPlaying(true);
+            setEndPlay({
+              enable: true,
+              end: item.endSecond,
+            });
+          }}
+        >
+          <CustomButton>برو به این زمان</CustomButton>
+        </span>
+      ),
+    },
+    {
+      title: "انجام دهنده تگ",
+      key: "creator",
+      render: (item) => (
+        <span>{item?.creator ? item.creator.userName : ""}</span>
+      ),
+    },
+    {
+      title: "زمان شروع",
+      key: "startSecond",
+      dataIndex: "startSecond",
+      render: (startSecond) => <span>{fancyTimeFormat(startSecond)}</span>,
+    },
+    {
+      title: "زمان پایان",
+      key: "endSecond",
+      dataIndex: "endSecond",
+      render: (endSecond) => <span>{fancyTimeFormat(endSecond)}</span>,
+    },
+    {
+      title: "تووضیحات",
+      key: "description",
+      dataIndex: "description",
+    },
+
+    {
+      title: "عملیات",
+      key: "action",
+      width: "20%",
+      render: (item) => (
+        <>
+          <CustomPopConfirm
+            onDelete={() => {
+              deleteFlagHandle(item._id);
+            }}
+            render={<CustomButton color={redColor}>حذف تگ</CustomButton>}
+          />
+        </>
+      ),
+    },
+  ];
   return (
     <>
       <div>
@@ -93,6 +164,7 @@ const MP4PlayerComponent = ({
             }
           }}
         />
+        <Divider orientation="right">ثبت برش ویدیو و توضیحات</Divider>
         <Row>
           <Col span={12}>
             <div
@@ -102,23 +174,37 @@ const MP4PlayerComponent = ({
                 alignItems: "center",
               }}
             >
-              <SpaceStyled vertical={10} horizontal={5}>
+              <SpaceStyled bottom={10} top={-15} horizontal={5}>
                 <CustomButton
+                  icon={
+                    <Image
+                      preview={false}
+                      style={{ marginTop: -5 }}
+                      src={FRONT_IP + "/assets/icons/clock-ic.png"}
+                    />
+                  }
                   onClick={() => {
                     if (progress <= endSecond || endSecond === 0)
                       setStartSecond(progress);
                   }}
-                  color={startSecond > 0 ? darkBlueColor : lightGreenColor}
+                  color={startSecond > 0 ? darkBlueColor : greenBlueColor}
                 >
                   زمان شروع {fancyTimeFormat(startSecond)}
                 </CustomButton>
               </SpaceStyled>
-              <SpaceStyled vertical={10} horizontal={5}>
+              <SpaceStyled bottom={10} top={-15} horizontal={5}>
                 <CustomButton
+                  icon={
+                    <Image
+                      preview={false}
+                      style={{ marginTop: -5 }}
+                      src={FRONT_IP + "/assets/icons/clock-ic.png"}
+                    />
+                  }
                   onClick={() => {
                     if (progress >= startSecond) setEndSecond(progress);
                   }}
-                  color={endSecond > 0 ? darkBlueColor : lightGreenColor}
+                  color={endSecond > 0 ? darkBlueColor : orangeColor}
                 >
                   زمان پایان {fancyTimeFormat(endSecond)}
                 </CustomButton>
@@ -129,17 +215,19 @@ const MP4PlayerComponent = ({
             <Col span={12}>
               <Row justify="center" align="middle">
                 <Col span={17}>
-                  <SpaceStyled vertical={10} horizontal={5}>
+                  <SpaceStyled bottom={10} top={-15} horizontal={5}>
                     <Input
                       onChange={(e) => {
                         setFlatDescription(e.target.value);
                       }}
-                      placeholder={"توضیحات"}
+                      placeholder={
+                        "توضیحات تگ ویدیو ( برای مثال :‌ بخش آموزش بارگزاری اسناد بین المللی)"
+                      }
                     />
                   </SpaceStyled>
                 </Col>
                 <Col span={7}>
-                  <SpaceStyled vertical={10} horizontal={5}>
+                  <SpaceStyled top={-35} horizontal={5}>
                     <CustomButton
                       onClick={async () => {
                         addNewFlagHandle(
@@ -158,7 +246,7 @@ const MP4PlayerComponent = ({
                         });
                       }}
                     >
-                      ثبت
+                      ثبت تگ
                     </CustomButton>
                   </SpaceStyled>
                 </Col>
@@ -166,74 +254,17 @@ const MP4PlayerComponent = ({
             </Col>
           ) : null}
         </Row>
-
-        <div className="table-rep-plugin">
-          <div
-            className="table-responsive mb-0"
-            data-pattern="priority-columns"
-          >
-            <table id="tech-companies-1" className="table table-striped">
-              <thead>
-                <tr>
-                  <th>شماره</th>
-                  <th data-priority="1">شروع</th>
-                  <th data-priority="6">پایان</th>
-                  <th data-priority="6">توضیحات</th>
-                  <th data-priority="6">عملیات</th>
-                </tr>
-              </thead>
-              <tbody>
-                {doc?.videoFlags?.map((f, index) => (
-                  <tr
-                    style={
-                      progress >= f.startSecond && progress <= f.endSecond
-                        ? { backgroundColor: "#65af43", color: "white" }
-                        : {}
-                    }
-                  >
-                    <th>{index + 1}</th>
-                    <td>
-                      <span
-                        style={{ color: "royalblue", cursor: "pointer" }}
-                        onClick={() => {
-                          setProgress(f.startSecond);
-                          setFlagProgress(f.startSecond);
-                          player.seekTo(f.startSecond);
-                          setPlaying(true);
-                          setEndPlay({
-                            enable: true,
-                            end: f.endSecond,
-                          });
-                        }}
-                      >
-                        <i className={"mdi mdi-play"} />
-                        {fancyTimeFormat(f.startSecond)}
-                      </span>
-                    </td>
-                    <td>{fancyTimeFormat(f.endSecond)}</td>
-                    <td>{f.description}</td>
-                    <td>
-                      <i
-                        onClick={() => {
-                          deleteFlagHandle(f._id);
-                        }}
-                        className={"mdi mdi-close-circle-outline mx-2 mt-2"}
-                        style={{
-                          color: `${
-                            progress > f.startSecond && progress < f.endSecond
-                              ? "white"
-                              : "red"
-                          }`,
-                          fontSize: 14,
-                        }}
-                      />
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
+        <Divider orientation="right">اطلاعات برش های ثبت شده</Divider>
+        <Table
+          rowClassName={(record, index) =>
+            progress >= record.startSecond && progress <= record.endSecond
+              ? "table-row-dark"
+              : "table-row-light"
+          }
+          columns={columns}
+          dataSource={doc?.videoFlags}
+          pagination={false}
+        />
       </div>
     </>
   );

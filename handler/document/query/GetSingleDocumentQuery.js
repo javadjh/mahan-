@@ -31,6 +31,8 @@ module.exports.getSingleDocument = async (req, res) => {
     .populate("fileId")
     .populate("archiveId")
     .populate("creator", "firstName lastName position userName")
+    .populate("videoFlags.creator", "firstName lastName position userName")
+
     .lean();
 
   if (!document.isMain) {
@@ -42,6 +44,8 @@ module.exports.getSingleDocument = async (req, res) => {
       .populate("fileId")
       .populate("archiveId")
       .populate("creator", "firstName lastName position userName")
+      .populate("videoFlags.creator", "firstName lastName position userName")
+
       .lean();
   }
 

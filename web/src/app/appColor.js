@@ -4,6 +4,7 @@ export const transeparentColor = "rgba(0, 0, 0, 0)";
 export const borderColor = "rgba(0, 0, 0,0.2)";
 export const lightBackgroundColor = "rgba(0, 0, 0,0.06)";
 export const lightGreenColor = "#0EC5A4";
+export const greenBlueColor = "#0DB0B0";
 export const lightBlueColor = "#707980";
 export const lightBlueSecondColor = "#EBF0F4";
 export const labelColor = "#ADADAD";

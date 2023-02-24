@@ -1,11 +1,13 @@
 import { Col, Image, Row } from "antd";
 import React from "react";
 import styled from "styled-components";
+import { darkBlueColor } from "../../app/appColor";
 const CustomLabel = (props) => {
   const Container = styled.div`
-    background: rgba(239, 244, 248, 0.44);
+    background: ${darkBlueColor};
     border-radius: 6px;
     padding: 20px;
+    color: white;
   `;
   return (
     <Container>

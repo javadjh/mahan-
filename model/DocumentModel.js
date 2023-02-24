@@ -9,6 +9,10 @@ const VideoFlagSchema = new mongoose.Schema({
   endSecond: {
     type: Number,
   },
+  creator: {
+    type: mongoose.Types.ObjectId,
+    ref: "user",
+  },
 });
 const DocumentNotesSchema = new mongoose.Schema({
   description: {
@@ -18,6 +22,7 @@ const DocumentNotesSchema = new mongoose.Schema({
   creator: {
     type: mongoose.Types.ObjectId,
     required: true,
+    ref: "user",
   },
   userFullName: {
     type: String,
