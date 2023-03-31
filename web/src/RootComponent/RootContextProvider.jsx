@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { RootContext } from "./RootContext";
 import jwt from "jsonwebtoken";
-import UserProfileDialog from "../Profile/UserProfileDialog";
 const RootContextProvider = ({ children }) => {
   const [libraryShelfContext, setLibraryShelfContext] = useState({});
   const [reload, setReload] = useState();

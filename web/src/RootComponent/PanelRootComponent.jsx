@@ -51,6 +51,7 @@ import FileRoot from "../newFile/FileRoot";
 import FormsRoot from "../newForm/forms/FormsRoot";
 import UpsertFormRoot from "../newForm/upsert/UpsertFormRoot";
 import DocumentRoot from "../newFile/document/DocumentRoot";
+import ChooseLibraryDocsPage from "../newFile/library/ChooseLibraryDocsPage";
 const PanelRootComponent = ({ history, location }) => {
   const [cookies] = useCookies(["isLogin"]);
 
@@ -231,6 +232,11 @@ const PanelRootComponent = ({ history, location }) => {
                           component={DocumentRoot}
                           exact={true}
                           path={"/document/:fileId/:documentId"}
+                        />
+                        <Route
+                          component={ChooseLibraryDocsPage}
+                          exact={true}
+                          path={"/file/library/:fileId"}
                         />
                       </>
                     )}

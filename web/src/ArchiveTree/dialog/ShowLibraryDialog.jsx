@@ -3,13 +3,13 @@ import { FileContext } from "../../context/file/FileContext";
 import LibrariesDocumentsComponent from "../../Library/LibrariesDocumentsComponent";
 import { LibraryContext } from "../../Library/LibraryContext";
 import CustomButton from "../../styled/components/CustomButton";
-const ShowLibraryDialog = () => {
+const ShowLibraryDialog = ({ fileIdPage, archiveIdPage }) => {
   const { sendData, selectedDoc, setArchive, setFile } =
     useContext(LibraryContext);
   const { fileStatistic, fileId } = useContext(FileContext);
   useEffect(() => {
-    setArchive(fileStatistic?.file?.archiveId);
-    setFile(fileId);
+    setArchive(archiveIdPage ? archiveIdPage : fileStatistic?.file?.archiveId);
+    setFile(fileIdPage ? fileIdPage : fileId);
   }, []);
   return (
     <Fragment>

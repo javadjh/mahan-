@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Col, Dropdown, Image, Menu, Row } from "antd";
+import { Button, Col, Dropdown, Image, Menu, Modal, Row } from "antd";
 import CustomDialog from "../../styled/components/CustomDialog";
 import CustomMediumButton from "../../styled/components/CustomMediumButton";
 import { AiOutlinePlus, AiOutlineShareAlt } from "react-icons/ai";
@@ -40,6 +40,7 @@ const FileGlobalActionsComponenets = ({ history }) => {
     downloadGroupDocuments,
     freshData,
   } = useContext(FileContext);
+  const [isShowLibraryDialog, setIsShowLibraryDialog] = useState(false);
   const menu = (
     <Menu>
       <Menu.Item>
@@ -65,16 +66,25 @@ const FileGlobalActionsComponenets = ({ history }) => {
         </label>
       </Menu.Item>
       <Menu.Item>
-        <CustomDialog
+        {/* <CustomDialog
           width={"80%"}
+          setIsShow={setIsShowLibraryDialog}
+          isShow={isShowLibraryDialog}
           title={"کازیو"}
           render={
-            <LibraryContextProvider>
-              <ShowLibraryDialog />
-            </LibraryContextProvider>
+            
           }
           actionRender={"کازیو"}
-        />
+        /> */}
+        <span
+          onClick={() => {
+            history.push({
+              pathname: `/file/library/${fileId}`,
+            });
+          }}
+        >
+          کازیو
+        </span>
       </Menu.Item>
       {/* <Menu.Item>
         <span
